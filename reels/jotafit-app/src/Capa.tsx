@@ -68,7 +68,6 @@ export const Capa: React.FC<{v: V}> = ({v}) => (
         <PhoneStatic x={480} y={560} s={0.72} r={12} ry={-18}>{vidFrame('t_treinos.mp4', 1)}</PhoneStatic>
         <PhoneStatic x={220} y={520} s={0.84} r={0} z={2}>{vidFrame('c_s3.mp4', 6)}</PhoneStatic>
         <Fade />
-        <Tag text="TOUR DO APP" />
         <Headline l1="A MÁGICA" l2="COMEÇA AQUI" />
       </>
     )}
@@ -89,7 +88,6 @@ export const Capa: React.FC<{v: V}> = ({v}) => (
         </div>
         <PhoneStatic x={470} y={560} s={0.7} r={8} z={2}>{vidFrame('c_s2.mp4', 7.5)}</PhoneStatic>
         <Fade />
-        <Tag text="TOUR COMPLETO" />
         <Headline l1="COMO FUNCIONA" l2="A CONSULTORIA" size={100} />
       </>
     )}
