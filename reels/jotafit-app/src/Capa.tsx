@@ -68,7 +68,8 @@ export const Capa: React.FC<{v: V}> = ({v}) => (
         <PhoneStatic x={480} y={560} s={0.72} r={12} ry={-18}>{vidFrame('t_treinos.mp4', 1)}</PhoneStatic>
         <PhoneStatic x={220} y={520} s={0.84} r={0} z={2}>{vidFrame('c_s3.mp4', 6)}</PhoneStatic>
         <Fade />
-        <Headline l1="TREINO EM PDF?" l2="OLHA ISSO" top={360} />
+        <Tag text="TOUR DO APP" />
+        <Headline l1="A MÁGICA" l2="COMEÇA AQUI" />
       </>
     )}
     {v === 'curto' && (
@@ -78,7 +79,7 @@ export const Capa: React.FC<{v: V}> = ({v}) => (
         <div style={{position: 'absolute', top: 1210, left: 0, right: 0, display: 'flex', justifyContent: 'center', zIndex: 5}}>
           <div style={{fontFamily: FONT, fontWeight: 900, fontSize: 60, color: '#111', background: '#3ddc84', padding: '18px 44px', borderRadius: 999, boxShadow: '0 20px 50px rgba(0,0,0,.7)', transform: 'rotate(-4deg)'}}>✓ Refeição concluída</div>
         </div>
-        <Headline l1="SEU PERSONAL SABE" l2="O QUE VOCÊ COMEU?" top={360} size={84} />
+        <Headline l1="SEU PERSONAL" l2="NO BOLSO" />
       </>
     )}
     {v === 'narrado' && (
@@ -88,7 +89,8 @@ export const Capa: React.FC<{v: V}> = ({v}) => (
         </div>
         <PhoneStatic x={470} y={560} s={0.7} r={8} z={2}>{vidFrame('c_s2.mp4', 7.5)}</PhoneStatic>
         <Fade />
-        <Headline l1="DEPOIS QUE VOCÊ" l2="FECHA COMIGO" top={360} size={104} />
+        <Tag text="TOUR COMPLETO" />
+        <Headline l1="COMO FUNCIONA" l2="A CONSULTORIA" size={100} />
       </>
     )}
     <Brand />
