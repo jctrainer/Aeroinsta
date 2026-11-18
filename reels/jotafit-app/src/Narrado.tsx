@@ -15,8 +15,8 @@ const V2_LEN = 1594; // app do aluno (vídeo 54 editado)
 export const COLD = 0;
 export const V1 = snap(COLD + COLD_LEN); // 75
 export const V2 = snap(V1 + V1_LEN); // 870
-const SLOT = 4 * BEAT; // 2s por tela na montagem
-const MONT = [
+export const SLOT = 4 * BEAT; // 2s por tela na montagem
+export const MONT = [
   {src: 'historico_v.mp4', cap: 'Histórico de *cada treino*', kick: 'ABA HISTÓRICO'},
   {src: 'recordes.mp4', cap: 'Seus *recordes* de carga', kick: 'RECORDES'},
   {src: 'chat_crop.jpg', cap: 'Chat *direto* comigo', kick: 'ABA CHAT'},
@@ -26,7 +26,7 @@ export const E = M + MONT.length * SLOT; // 2655
 export const TOTAL_NARRADO = E + 10 * BEAT; // 2805
 
 // ---------- legendas da fala (segundos locais do clipe) ----------
-type Sub = [number, number, string];
+export type Sub = [number, number, string];
 const SUBS_V1: Sub[] = [
   [0.0, 3.06, 'Vamos trabalhar agora na consultoria'],
   [3.06, 6.57, 'Atender online. Primeiro, ajustar os treinos'],
@@ -59,7 +59,7 @@ const SUBS_V2: Sub[] = [
   [50.19, 53.13, 'Assim que fica dentro do app'],
 ];
 
-const SubLine: React.FC<{text: string}> = ({text}) => {
+export const SubLine: React.FC<{text: string}> = ({text}) => {
   const s = useSpring(0, 13, 260);
   const big = text === text.toUpperCase();
   return (
@@ -73,13 +73,13 @@ const SubLine: React.FC<{text: string}> = ({text}) => {
     </div>
   );
 };
-const Subs: React.FC<{subs: Sub[]}> = ({subs}) => (
+export const Subs: React.FC<{subs: Sub[]}> = ({subs}) => (
   <>{subs.map(([a, b, t]) => (
     <Sequence key={a} from={s2f(a)} durationInFrames={Math.max(1, s2f(b) - s2f(a))} layout="none"><SubLine text={t} /></Sequence>
   ))}</>
 );
 
-const Title: React.FC<{from: number; to: number; text: string; kicker?: string; size?: number}> = ({from, to, text, kicker, size = 80}) => (
+export const Title: React.FC<{from: number; to: number; text: string; kicker?: string; size?: number}> = ({from, to, text, kicker, size = 80}) => (
   <Sequence from={from} durationInFrames={to - from} layout="none">
     {kicker && <Kicker text={kicker} />}
     <Caption text={text} top={180} size={size} />
@@ -87,13 +87,13 @@ const Title: React.FC<{from: number; to: number; text: string; kicker?: string; 
 );
 
 // pulso no kick (a cada 2 tempos), `offset` = início absoluto
-const usePulse = (offset: number, amt = 0.012) => {
+export const usePulse = (offset: number, amt = 0.012) => {
   const f = useCurrentFrame() + offset;
   return 1 + amt * Math.exp(-(f % (2 * BEAT)) / 6);
 };
 
 // chip que aponta a aba na barra inferior do app
-const TabChip: React.FC<{label: string; x: number}> = ({label, x}) => {
+export const TabChip: React.FC<{label: string; x: number}> = ({label, x}) => {
   const s = useSpring(0, 10, 240);
   return (
     <div style={{position: 'absolute', left: x, top: 1600, transform: `translateX(-50%) scale(${s})`, transformOrigin: 'bottom center'}}>
@@ -103,7 +103,7 @@ const TabChip: React.FC<{label: string; x: number}> = ({label, x}) => {
 };
 
 // ---------- cenas ----------
-const LaptopCard: React.FC<{src: string; offset: number; punchAt?: number[]}> = ({src, offset, punchAt = []}) => {
+export const LaptopCard: React.FC<{src: string; offset: number; punchAt?: number[]}> = ({src, offset, punchAt = []}) => {
   const f = useCurrentFrame();
   const s = useSpring(0, 16, 140);
   const pulse = usePulse(offset);
