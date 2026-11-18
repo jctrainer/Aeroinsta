@@ -5,10 +5,10 @@ import {
 } from 'remotion';
 
 // ---------- brand ----------
-const Y = '#FFB400';
-const BG = '#07080A';
-const FONT = "'Inter Display', 'Inter', sans-serif";
-const clamp = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
+export const Y = '#FFB400';
+export const BG = '#07080A';
+export const FONT = "'Inter Display', 'Inter', sans-serif";
+export const clamp = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
 
 // ---------- timeline (30fps, 120bpm => 15f/beat) ----------
 const S = {
@@ -24,13 +24,13 @@ const S = {
 export const TOTAL = 1020;
 
 // ---------- helpers ----------
-const useSpring = (delay = 0, damping = 14, stiffness = 160) => {
+export const useSpring = (delay = 0, damping = 14, stiffness = 160) => {
   const f = useCurrentFrame();
   const {fps} = useVideoConfig();
   return spring({frame: f - delay, fps, config: {damping, stiffness}});
 };
 
-const Background: React.FC = () => {
+export const Background: React.FC = () => {
   const f = useCurrentFrame();
   const a = f / 60;
   return (
@@ -57,7 +57,7 @@ const Background: React.FC = () => {
 };
 
 // kinetic caption: words pop in, words wrapped in *...* get yellow highlight
-const Caption: React.FC<{text: string; delay?: number; size?: number; top?: number; stagger?: number}> = ({
+export const Caption: React.FC<{text: string; delay?: number; size?: number; top?: number; stagger?: number}> = ({
   text, delay = 0, size = 92, top = 170, stagger = 3,
 }) => {
   const f = useCurrentFrame();
@@ -89,7 +89,7 @@ const Caption: React.FC<{text: string; delay?: number; size?: number; top?: numb
   );
 };
 
-const Kicker: React.FC<{text: string; delay?: number; top?: number}> = ({text, delay = 0, top = 100}) => {
+export const Kicker: React.FC<{text: string; delay?: number; top?: number}> = ({text, delay = 0, top = 100}) => {
   const s = useSpring(delay);
   return (
     <div style={{position: 'absolute', top, width: '100%', display: 'flex', justifyContent: 'center'}}>
@@ -103,7 +103,7 @@ const Kicker: React.FC<{text: string; delay?: number; top?: number}> = ({text, d
 };
 
 // phone mockup; children fill the screen
-const Phone: React.FC<{children: React.ReactNode; delay?: number; y?: number; scale?: number; tilt?: number}> = ({
+export const Phone: React.FC<{children: React.ReactNode; delay?: number; y?: number; scale?: number; tilt?: number}> = ({
   children, delay = 0, y = 640, scale = 1, tilt = 0,
 }) => {
   const f = useCurrentFrame();
@@ -127,7 +127,7 @@ const Phone: React.FC<{children: React.ReactNode; delay?: number; y?: number; sc
 };
 
 // image that slowly scrolls inside phone
-const ScrollShot: React.FC<{src: string; from?: number; to?: number; dur: number; startPct?: number}> = ({
+export const ScrollShot: React.FC<{src: string; from?: number; to?: number; dur: number; startPct?: number}> = ({
   src, from = 0, to = 0, dur,
 }) => {
   const f = useCurrentFrame();
@@ -135,7 +135,7 @@ const ScrollShot: React.FC<{src: string; from?: number; to?: number; dur: number
   return <Img src={staticFile(src)} style={{width: '100%', minHeight: '100%', objectFit: 'cover', objectPosition: 'top', position: 'absolute', top: 0, transform: `translateY(-${p}%)`}} />;
 };
 
-const Callout: React.FC<{text: string; x: number; y: number; delay: number; side?: 'l' | 'r'}> = ({text, x, y, delay, side = 'r'}) => {
+export const Callout: React.FC<{text: string; x: number; y: number; delay: number; side?: 'l' | 'r'}> = ({text, x, y, delay, side = 'r'}) => {
   const s = useSpring(delay, 11, 220);
   return (
     <div style={{
@@ -147,7 +147,7 @@ const Callout: React.FC<{text: string; x: number; y: number; delay: number; side
   );
 };
 
-const Flash: React.FC = () => {
+export const Flash: React.FC = () => {
   const f = useCurrentFrame();
   const o = interpolate(f, [0, 5], [0.55, 0], clamp);
   return <AbsoluteFill style={{background: 'white', opacity: o, pointerEvents: 'none'}} />;
@@ -259,7 +259,7 @@ const Home: React.FC = () => {
   );
 };
 
-const Counter: React.FC<{to: number; label: string; delay: number; x: number}> = ({to, label, delay, x}) => {
+export const Counter: React.FC<{to: number; label: string; delay: number; x: number}> = ({to, label, delay, x}) => {
   const f = useCurrentFrame();
   const s = useSpring(delay, 14, 160);
   const v = Math.round(interpolate(f, [delay, delay + 40], [0, to], {...clamp, easing: Easing.out(Easing.cubic)}));
@@ -333,7 +333,7 @@ const Chat: React.FC = () => {
   );
 };
 
-const CTA: React.FC = () => {
+export const CTA: React.FC = () => {
   const f = useCurrentFrame();
   const s = useSpring(0, 10, 160);
   const pulse = 1 + Math.sin(f / 5) * 0.03;
