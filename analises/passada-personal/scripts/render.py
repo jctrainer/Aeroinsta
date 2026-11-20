@@ -367,7 +367,7 @@ def s_context(t, d):
         dr.ellipse((hx - 9, hy - r - 19, hx + 9, hy - r - 1), fill=col + (int(255 * a),))
         pill(lay, lab, hx, ly, F('black', 36), col + (255,), fg, a)
     pill(lay, 'GRAVADO DURANTE A AULA', W / 2, 1290, F('xb', 32), (0, 0, 0, 190), WHITE, eo(prog(t, 0, 0.4)) * (1 - z))
-    words_in(lay, 'Passada (avanço caminhando) numa aula com personal.', W / 2, 1420, F('xb', 58), WHITE, t, 0.3, hi={'PERSONAL'}, hicol=YEL)
+    words_in(lay, 'Aula com personal. O exercício: passada.', W / 2, 1420, F('xb', 58), WHITE, t, 0.3, hi={'PERSONAL', 'PASSADA'}, hicol=YEL)
     return img, lay
 
 def s_bio(t, d):
@@ -398,10 +398,10 @@ def s_bio(t, d):
     text(dr, '| = largura do quadril (ideal)', (70, 500), F('med', 24), (200, 200, 210), 'lm', a)
     pill(lay, f'{rate:.2f}x  •  CÂMERA LENTA', W - 230, 268, F('xb', 28), (255, 255, 255, 230), DARK, a)
     ct = TL['bio_caps'] if TL else [0.0, 3.0, 6.0, 9.0]
-    caps = [(ct[0], 'Os joelhos fecham pra dentro a cada passada.', {'JOELHOS', 'DENTRO'}),
-            (ct[1], 'Pés na mesma linha, como quem anda num trilho.', {'TRILHO'}),
-            (ct[2], 'Braços abrindo pra não perder o equilíbrio.', {'EQUILÍBRIO'}),
-            (ct[3], 'Descida curta e apressada. Sem controle.', {'CONTROLE'})]
+    caps = [(ct[0], 'Olha o joelho: fecha pra dentro em toda passada.', {'JOELHO', 'DENTRO'}),
+            (ct[1], 'Um pé na frente do outro, tipo corda bamba.', {'CORDA', 'BAMBA'}),
+            (ct[2], 'Os braços abrem sozinhos pra ela não cair.', {'CAIR'}),
+            (ct[3], 'Desce pouco e desce rápido. Zero controle.', {'ZERO', 'CONTROLE'})]
     for k, (t0, cpt, hi) in enumerate(caps):
         t1 = caps[k + 1][0] if k + 1 < len(caps) else d + 1
         if t0 <= t < t1:
@@ -446,7 +446,7 @@ def s_f1(t, d):
             st = (kp[0] - dirx * 170, kp[1] - 20)
             arrow(dr, st, (st[0] + dirx * 110 * eo(pa), st[1]), RED, 12, eo(pa))
     pill(lay, '- - -  IDEAL: JOELHO ALINHADO COM O PÉ', W / 2, 610, F('bold', 30), (0, 0, 0, 200), GREEN, eo(prog(t, 0.6, .4)))
-    caption_box(lay, 'JOELHO PRA DENTRO', 'Valgo dinâmico: sobrecarrega LCA, menisco medial e a articulação da patela.', t, 0.5, y=250, num='1.')
+    caption_box(lay, 'JOELHO PRA DENTRO', 'É o tal do valgo. Repete isso toda semana e a conta chega no ligamento, no menisco e na patela.', t, 0.5, y=250, num='1.')
     return img, lay
 
 def s_f2(t, d):
@@ -473,7 +473,7 @@ def s_f2(t, d):
         dr.line([(a1[0], y + 50), (a2[0], y + 50)], fill=RED + (int(255 * pb),), width=8)
         text(dr, 'base ideal', ((h1[0] + h2[0]) / 2, y - 26), F('bold', 30), GREEN, alpha=pb, stroke=3)
         text(dr, 'base dela', ((a1[0] + a2[0]) / 2, y + 90), F('bold', 30), RED, alpha=pb, stroke=3)
-    caption_box(lay, 'BASE DE TRILHO', 'Pés na mesma linha, chegando a cruzar. Base instável: joelho e quadril pagam a conta.', t, 0.5, y=250, num='2.')
+    caption_box(lay, 'BASE DE TRILHO', 'Os pés chegam a cruzar. Sem base, quem segura o tranco é o joelho e o quadril.', t, 0.5, y=250, num='2.')
     return img, lay
 
 def s_f3(t, d):
@@ -500,7 +500,7 @@ def s_f3(t, d):
         dr.line([(x, kp[1]), kp], fill=RED + (int(160 * pb),), width=4)
         text(dr, 'joelho de trás', (x, (kp[1] + fy) / 2 - 22), F('bold', 30), WHITE, alpha=pb, stroke=4)
         text(dr, 'longe do chão', (x, (kp[1] + fy) / 2 + 18), F('bold', 30), WHITE, alpha=pb, stroke=4)
-    caption_box(lay, 'SEM CONTROLE', 'Braços abertos pra se equilibrar, descida curta e rápida. O corpo está se defendendo, não treinando.', t, 0.5, y=250, num='3.', col=YEL)
+    caption_box(lay, 'SEM CONTROLE', 'Braço aberto pra equilibrar, descida curtinha e apressada. Isso não é treino, é sobrevivência.', t, 0.5, y=250, num='3.', col=YEL)
     return img, lay
 
 def s_f4(t, d):
@@ -534,7 +534,7 @@ def s_f4(t, d):
     pill(lay, 'SÓ OBSERVA', 200, 250, F('black', 34), (0, 0, 0, 200), WHITE, eo(prog(t, 0.6, .3)))
     pill(lay, 'NENHUMA CORREÇÃO VISÍVEL', 330, 200 + ph + 70, F('black', 32), (0, 0, 0, 200), WHITE, eo(prog(t, 0.9, .3)))
     img = canvas
-    caption_box(lay, 'E A PERSONAL?', 'Erro repetido passada após passada e nenhuma correção visível em todo o trecho.', t, 1.1, y=1400, num='4.', col=YEL)
+    caption_box(lay, 'E A PERSONAL?', 'Fica só olhando. Em nenhum momento do vídeo dá pra ver uma correção, um toque, um ajuste.', t, 1.1, y=1400, num='4.', col=YEL)
     return img, lay
 
 def bgblur(t):
@@ -566,15 +566,15 @@ def s_sci(t, d):
             text(dr, ln, (x0 + 40, y + 125 + k * 48), fs, WHITE, 'lm', eo(prog(t, t0 + 0.2 + k * 0.1, 0.4)))
         text(dr, src, (x0 + 40, y + 268), F('med', 26), (170, 170, 180), 'lm', eo(prog(t, t0 + 0.6, 0.4)))
     # counter 1kg -> 4kg
-    card(540, 0.9, 'MAIS MASSA = MAIS CARGA', 'Cada 1 kg de peso corporal vira cerca de 4 kg de carga no joelho a cada passo, só caminhando. Na passada, a exigência é ainda maior.', 'Messier et al., Arthritis & Rheumatism, 2005', YEL)
-    card(880, 2.6, 'JOELHO PRA DENTRO = RISCO', 'Valgo dinâmico está associado a lesão de LCA e a dor patelofemoral. É o erro que a gente corrige primeiro.', 'Hewett et al., AJSM, 2005  •  Powers, JOSPT, 2010', RED)
+    card(540, 0.9, 'MAIS PESO, MAIS CARGA NO JOELHO', 'Cada 1 kg a mais no corpo vira uns 4 kg no joelho a cada passo. Isso só andando. Na passada é bem mais.', 'Messier et al., Arthritis & Rheumatism, 2005', YEL)
+    card(880, 2.6, 'JOELHO PRA DENTRO PESA MAIS', 'É um dos padrões mais ligados a lesão de LCA e dor na frente do joelho. É a primeira coisa que eu corrijo num aluno.', 'Hewett et al., AJSM, 2005  •  Powers, JOSPT, 2010', RED)
     p = prog(t, 4.6, 0.5)
     if p > 0:
         y = 1300
         parts = [('CARGA ALTA', WHITE), ('+', RED), ('JOELHO DESALINHADO', WHITE), ('+', RED), ('BASE INSTÁVEL', WHITE)]
         for k, (txt, c) in enumerate(parts):
             pop_text(lay, txt, W / 2, y + k * 56, F('anton', 54), c, t, 4.6 + k * 0.12, 0.3, 'back')
-        pop_text(lay, '= RISCO MULTIPLICADO', W / 2, y + 5 * 56 + 30, F('anton', 76), RED, t, 5.4, 0.35, 'stamp')
+        pop_text(lay, '= RISCO LÁ EM CIMA', W / 2, y + 5 * 56 + 30, F('anton', 76), RED, t, 5.4, 0.35, 'stamp')
     return img, lay
 
 # --- stick figure lunge (frontal) ---
@@ -636,7 +636,7 @@ def s_vs(t, d):
         stick(d2, 280, 1010, 1.0, (ph * 1.6) % 1, False, (255, 160, 170))
         stick(d2, 800, 1010, 1.0, ph % 1, True, (170, 255, 205))
     lay.alpha_composite(lay2)
-    items = ['Pés na largura do quadril', 'Joelho aponta pro 2º dedo do pé', 'Descida controlada, 2 a 3 segundos', 'Joelho de trás quase no chão', 'Tronco firme, braços parados']
+    items = ['Pés na largura do quadril', 'Joelho apontando pro 2º dedo', 'Desce devagar, 2 a 3 segundos', 'Joelho de trás quase no chão', 'Tronco firme, braço quieto']
     for k, it in enumerate(items):
         p = eo(prog(t, 1.2 + k * 0.45, 0.4))
         if p <= 0: continue
@@ -650,13 +650,13 @@ def s_vs(t, d):
 def s_fix(t, d):
     img = bgblur(t + 15)
     lay = Image.new('RGBA', (W, H)); dr = ImageDraw.Draw(lay)
-    pop_text(lay, 'O QUE A PERSONAL', W / 2, 300, F('anton', 88), WHITE, t, 0, 0.4)
-    ybox(lay, 'DEVERIA TER FEITO', W / 2, 410, F('anton', 104), t, 0.2)
-    items = [('REGREDIR', 'Afundo estático, com apoio no TRX ou na barra'),
-             ('TROCAR', 'Afundo reverso (passo pra trás): menos carga no joelho da frente'),
-             ('FORTALECER', 'Glúteo médio antes: abdução e ponte unilateral'),
-             ('CORRIGIR', 'Na hora: "joelho aponta pro 2º dedo", posicionado de frente'),
-             ('PROGREDIR', 'Passada caminhando só com controle total')]
+    pop_text(lay, 'O QUE EU FARIA', W / 2, 300, F('anton', 88), WHITE, t, 0, 0.4)
+    ybox(lay, 'NO LUGAR DELA', W / 2, 410, F('anton', 104), t, 0.2)
+    items = [('COMEÇAR MAIS FÁCIL', 'Afundo parado, segurando no TRX ou na barra'),
+             ('TROCAR O EXERCÍCIO', 'Afundo pra trás: tira carga do joelho da frente'),
+             ('FORTALECER ANTES', 'Glúteo médio: abdução e ponte com uma perna'),
+             ('CORRIGIR NA HORA', 'Ficar de frente e avisar: joelho pro 2º dedo'),
+             ('SÓ DEPOIS EVOLUIR', 'Passada andando só quando tiver controle')]
     for k, (a_, b_) in enumerate(items):
         t0 = 0.8 + k * 0.75
         p = eo(prog(t, t0, 0.45))
@@ -709,7 +709,6 @@ def s_cta(t, d):
                 text(dr, 'CONSULTORIA', (cx, cy + 25), F('anton', 104), DARK, alpha=clamp((p - .6) * 3))
         words_in(lay, 'que eu te chamo no direct.', W / 2, 1020, F('xb', 54), WHITE, u, 1.3)
         brand(lay, W / 2, 1200, eo(prog(u, 1.8, 0.4)), big=True)
-        text(ImageDraw.Draw(lay), '@juliojc_trainer', (W / 2, 1290), F('bold', 36), (220, 220, 225), alpha=eo(prog(u, 2.0, 0.4)))
     a = eo(prog(t, 1.8, 0.5))
     text(dr, 'Rostos e marcas desfocados de propósito. A crítica é ao método, não à aluna.', (W / 2, 1420), F('med', 26), (200, 200, 210), alpha=a)
     return img, lay
