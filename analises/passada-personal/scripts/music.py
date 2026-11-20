@@ -1,5 +1,7 @@
 import numpy as np, wave, sys
-SR=44100; T=57.0; n=int(SR*T); t=np.arange(n)/SR
+import json as _j
+TLJ=_j.load(open(sys.argv[2])) if len(sys.argv)>2 else None
+SR=44100; T=(TLJ['scenes'][-1][2] if TLJ else 57.0); n=int(SR*T); t=np.arange(n)/SR
 out=np.zeros(n)
 bpm=96; beat=60/bpm
 rng=np.random.default_rng(1)
@@ -38,8 +40,8 @@ b_,a_=butter(2,300/(SR/2)); drone=lfilter(b_,a_,drone)
 # pulse amplitude per beat
 pulse=0.6+0.4*np.exp(-((t%beat))/0.25)
 out+=drone*pulse
-scenes=[0,3.0,6.5,18.5,21.9,25.3,28.7,32.6,40.0,47.0,53.5]
-quiet=[(18.5,32.6)]  # freezes: no kick groove, just tension
+scenes=[x[1] for x in TLJ['scenes']] if TLJ else [0,3.0,6.5,18.5,21.9,25.3,28.7,32.6,40.0,47.0,53.5]
+quiet=[(scenes[3],scenes[7])]  # freezes: no kick groove, just tension
 b=0.0; k=0
 while b<T-0.1:
     inq=any(a<=b<c for a,c in quiet)
@@ -52,7 +54,7 @@ add(riser(1.2),0.0,1.0)
 for s in scenes[1:]:
     add(B,s,0.8); add(whoosh(0.5),s-0.4,1.0)
 add(B,1.2,1.0)
-for s in (19.4,22.8,26.2,29.6): add(B,s,0.35)  # hits when overlays land
+for s in scenes[3:7]: add(B,s+0.9,0.35)  # hits when overlays land
 # ending tail fade
 fade=np.clip((T-t)/2.0,0,1); out*=fade
 out=np.tanh(out*1.3)*0.85

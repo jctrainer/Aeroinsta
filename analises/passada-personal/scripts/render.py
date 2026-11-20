@@ -10,13 +10,15 @@ from keys import SUBJ, TRN, interp
 blur.load(W_DIR)
 
 W, H, FPS = 1080, 1920, 30
-RED = (255, 45, 70); GREEN = (40, 230, 120); YEL = (255, 210, 40); WHITE = (255, 255, 255); DARK = (12, 12, 16)
+RED = (255, 45, 70); GREEN = (61, 220, 132); YEL = (255, 180, 0); WHITE = (255, 255, 255); DARK = (7, 8, 10)
 INTER = '/usr/share/fonts/opentype/inter/'
 _fc = {}
 def F(name, size):
     k = (name, size)
     if k not in _fc:
-        path = {'anton': FONTS + '/Anton-Regular.ttf', 'bold': INTER + 'Inter-Bold.otf', 'xb': INTER + 'Inter-ExtraBold.otf',
+        if name == 'anton':
+            _fc[k] = ImageFont.truetype(INTER + 'InterDisplay-Black.otf', int(size * 0.74)); return _fc[k]
+        path = { 'bold': INTER + 'Inter-Bold.otf', 'xb': INTER + 'Inter-ExtraBold.otf',
                 'black': INTER + 'Inter-Black.otf', 'semi': INTER + 'Inter-SemiBold.otf', 'med': INTER + 'Inter-Medium.otf'}[name]
         _fc[k] = ImageFont.truetype(path, size)
     return _fc[k]
@@ -254,9 +256,72 @@ def brand(d, t):
     # progress bar on top + tag
     pass
 
+
+# ---------- JOTA FIT brand ----------
+_LOGO = Image.open(W_DIR + '/logo.png').convert('RGBA')
+_BGL = None
+def brand_bg(img):
+    global _BGL
+    if _BGL is None:
+        yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
+        r = np.sqrt((xx - W * 0.35) ** 2 + (yy - H * 0.62) ** 2) / 900
+        glow = np.clip(1 - r, 0, 1) ** 2 * 0.25
+        grid = (((xx % 90) < 1.5) | ((yy % 90) < 1.5)).astype(np.float32) * 0.04
+        rm = np.sqrt((xx - W / 2) ** 2 + (yy - H / 2) ** 2) / 900
+        grid *= np.clip(1.4 - rm, 0, 1)
+        _BGL = (glow, grid)
+    glow, grid = _BGL
+    out = img.astype(np.float32) * 0.85 + np.array([7, 8, 10], np.float32) * 0.15
+    out += glow[..., None] * np.array([0, 180, 255], np.float32)  # BGR amber
+    out += grid[..., None] * 255
+    return np.clip(out, 0, 255).astype(np.uint8)
+
+def tag(layer, txt, cx, cy, a):
+    if a <= 0: return
+    d = ImageDraw.Draw(layer); f = F('xb', 32)
+    tw = f.getlength(txt) + 8 * len(txt)
+    d.rounded_rectangle((cx - tw / 2 - 30, cy - 30, cx + tw / 2 + 30, cy + 30), 30, fill=(0, 0, 0, int(170 * a)), outline=YEL + (int(255 * a),), width=3)
+    x = cx - tw / 2
+    for ch in txt:
+        d.text((x, cy + 2), ch, font=f, fill=YEL + (int(255 * a),), anchor='lm'); x += f.getlength(ch) + 8
+
+def ybox(layer, txt, cx, cy, font, t, t0, dur=0.4):
+    p = prog(t, t0, dur)
+    if p <= 0: return
+    tw = font.getlength(txt); th = font.size
+    padx, pady = int(th * 0.32), int(th * 0.16)
+    im = Image.new('RGBA', (int(tw + padx * 2 + 40), int(th * 1.25 + pady * 2 + 40)), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im)
+    d.rounded_rectangle((20, 20, im.width - 20, im.height - 20), int(th * 0.22), fill=YEL + (255,))
+    d.text((im.width / 2, im.height / 2 + th * 0.02), txt, font=font, fill=(17, 17, 17, 255), anchor='mm')
+    im = im.rotate(2, resample=Image.BICUBIC, expand=True)
+    sc = 1 + 0.9 * (1 - eo(p)); al = clamp(p * 2)
+    if sc != 1: im = im.resize((int(im.width * sc), int(im.height * sc)), Image.BICUBIC)
+    if al < 1:
+        a_ = np.array(im); a_[..., 3] = (a_[..., 3] * al).astype(np.uint8); im = Image.fromarray(a_)
+    sh = Image.new('RGBA', im.size, (0, 0, 0, 0)); sh.paste((0, 0, 0, int(160 * al)), mask=im.split()[3])
+    layer.alpha_composite(sh.filter(ImageFilter.GaussianBlur(18)), (int(cx - im.width / 2), int(cy - im.height / 2 + 14)))
+    layer.alpha_composite(im, (int(cx - im.width / 2), int(cy - im.height / 2)))
+
+def brand(layer, cx, cy, a, big=False):
+    if a <= 0: return
+    sz = 96 if big else 54; f = F('black', 52 if big else 30)
+    lg = _LOGO.resize((sz, sz), Image.LANCZOS)
+    if a < 1:
+        x_ = np.array(lg); x_[..., 3] = (x_[..., 3] * a).astype(np.uint8); lg = Image.fromarray(x_)
+    tw = f.getlength('JOTA FIT'); gap = 18 if big else 12
+    x0 = cx - (sz + gap + tw) / 2
+    g = Image.new('RGBA', (W, H)); ImageDraw.Draw(g).ellipse((x0 - 6, cy - sz / 2 - 6, x0 + sz + 6, cy + sz / 2 + 6), fill=YEL + (int(110 * a),))
+    layer.alpha_composite(g.filter(ImageFilter.GaussianBlur(18)))
+    layer.alpha_composite(lg, (int(x0), int(cy - sz / 2)))
+    ImageDraw.Draw(layer).text((x0 + sz + gap, cy), 'JOTA FIT', font=f, fill=(255, 255, 255, int(255 * a)), anchor='lm', stroke_width=2, stroke_fill=(0, 0, 0, int(200 * a)))
+
 # ---------- scenes ----------
 SC = [('hook', 0, 3.0), ('context', 3.0, 6.5), ('bio', 6.5, 18.5), ('f1', 18.5, 21.9), ('f2', 21.9, 25.3),
-      ('f3', 25.3, 28.7), ('f4', 28.7, 32.6), ('sci', 32.6, 40.0), ('vs', 40.0, 47.0), ('fix', 47.0, 53.5), ('cta', 53.5, 57.0)]
+      ('f3', 25.3, 28.7), ('f4', 28.7, 32.6), ('sci', 32.6, 40.0), ('vs', 40.0, 47.0), ('fix', 47.0, 53.5), ('cta', 53.5, 61.5)]
+import os as _os
+TL = json.load(open(W_DIR + '/timeline.json')) if _os.path.exists(W_DIR + '/timeline.json') else None
+if TL: SC = [tuple(x) for x in TL['scenes']]
 TOTAL = SC[-1][2]
 
 K_VALG = 1114; K_BASE = 1125; K_CTRL = 920
@@ -278,11 +343,11 @@ def s_hook(t, d):
         q = mp(P[j, :2]); pr = (t * 1.6) % 1
         ring(dr, q, 50 + pr * 70, RED, 7, (1 - pr) * prog(t, 1.2, 0.2))
         ring(dr, q, 46, RED, 9, prog(t, 1.2, 0.2))
-    pill(lay, 'ANÁLISE BIOMECÂNICA', W / 2, 300, F('xb', 34), (255, 45, 70, 255), WHITE, eo(prog(t, 0, 0.4)))
+    tag(lay, 'ANÁLISE BIOMECÂNICA', W / 2, 300, eo(prog(t, 0, 0.4)))
     pop_text(lay, 'AULA DE PERSONAL.', W / 2, 520, F('anton', 118), WHITE, t, 0.1, 0.4, 'stamp', 4)
     pop_text(lay, 'E NINGUÉM CORRIGIU', W / 2, 660, F('anton', 96), WHITE, t, 0.75, 0.4, 'up', 4)
     j = (math.sin(t * 60) * 6 * (1 - prog(t, 1.25, 0.5))) if t > 1.2 else 0
-    pop_text(lay, 'ISSO?', W / 2 + j, 830, F('anton', 200), RED, t, 1.2, 0.35, 'stamp', 5)
+    ybox(lay, 'ISSO?', W / 2 + j, 830, F('anton', 190), t, 1.2)
     return img, lay
 
 def s_context(t, d):
@@ -306,7 +371,7 @@ def s_context(t, d):
     return img, lay
 
 def s_bio(t, d):
-    rate = 0.75
+    rate = min(0.75, 9.0 / d)
     si = 29.0 * 30 + t * 30 * rate
     i = int(si)
     img, mp, s = view(i, follow(i, 1.75))
@@ -332,10 +397,11 @@ def s_bio(t, d):
     bar(415, 'Largura da base (pés)', base)
     text(dr, '| = largura do quadril (ideal)', (70, 500), F('med', 24), (200, 200, 210), 'lm', a)
     pill(lay, f'{rate:.2f}x  •  CÂMERA LENTA', W - 230, 268, F('xb', 28), (255, 255, 255, 230), DARK, a)
-    caps = [(0.0, 'Os joelhos fecham pra dentro a cada passada.', {'JOELHOS', 'DENTRO'}),
-            (3.0, 'Pés na mesma linha, como quem anda num trilho.', {'TRILHO'}),
-            (6.0, 'Braços abrindo pra não perder o equilíbrio.', {'EQUILÍBRIO'}),
-            (9.0, 'Descida curta e apressada. Sem controle.', {'CONTROLE'})]
+    ct = TL['bio_caps'] if TL else [0.0, 3.0, 6.0, 9.0]
+    caps = [(ct[0], 'Os joelhos fecham pra dentro a cada passada.', {'JOELHOS', 'DENTRO'}),
+            (ct[1], 'Pés na mesma linha, como quem anda num trilho.', {'TRILHO'}),
+            (ct[2], 'Braços abrindo pra não perder o equilíbrio.', {'EQUILÍBRIO'}),
+            (ct[3], 'Descida curta e apressada. Sem controle.', {'CONTROLE'})]
     for k, (t0, cpt, hi) in enumerate(caps):
         t1 = caps[k + 1][0] if k + 1 < len(caps) else d + 1
         if t0 <= t < t1:
@@ -475,13 +541,14 @@ def bgblur(t):
     i = int(30.0 * 30 + (t * 30 * 0.5) % 180)
     img, mp, s = view(i, follow(i, 1.9))
     img = cv2.GaussianBlur(img, (0, 0), 28)
-    return grade(img, 0.72)
+    img = grade(img, 0.8)
+    return brand_bg(img)
 
 def s_sci(t, d):
     img = bgblur(t)
     lay = Image.new('RGBA', (W, H)); dr = ImageDraw.Draw(lay)
     pop_text(lay, 'POR QUE AQUI É', W / 2, 300, F('anton', 92), WHITE, t, 0.0, 0.4, 'up', 0)
-    pop_text(lay, 'MAIS GRAVE', W / 2, 410, F('anton', 120), RED, t, 0.25, 0.4, 'stamp', 0)
+    ybox(lay, 'MAIS GRAVE', W / 2, 420, F('anton', 120), t, 0.25)
     # card 1
     def card(y, t0, title, body, src, col):
         p = eo(prog(t, t0, 0.5))
@@ -584,7 +651,7 @@ def s_fix(t, d):
     img = bgblur(t + 15)
     lay = Image.new('RGBA', (W, H)); dr = ImageDraw.Draw(lay)
     pop_text(lay, 'O QUE A PERSONAL', W / 2, 300, F('anton', 88), WHITE, t, 0, 0.4)
-    pop_text(lay, 'DEVERIA TER FEITO', W / 2, 400, F('anton', 104), GREEN, t, 0.2, 0.4, 'stamp')
+    ybox(lay, 'DEVERIA TER FEITO', W / 2, 410, F('anton', 104), t, 0.2)
     items = [('REGREDIR', 'Afundo estático, com apoio no TRX ou na barra'),
              ('TROCAR', 'Afundo reverso (passo pra trás): menos carga no joelho da frente'),
              ('FORTALECER', 'Glúteo médio antes: abdução e ponte unilateral'),
@@ -615,12 +682,36 @@ def s_cta(t, d):
     img = bgblur(t + 22)
     img = grade(img, 0.3)
     lay = Image.new('RGBA', (W, H)); dr = ImageDraw.Draw(lay)
-    pop_text(lay, 'PERSONAL NÃO É', W / 2, 640, F('anton', 110), WHITE, t, 0, 0.4, 'up')
-    pop_text(lay, 'CONTADOR DE', W / 2, 770, F('anton', 130), WHITE, t, 0.25, 0.4, 'up')
-    pop_text(lay, 'REPETIÇÃO.', W / 2, 920, F('anton', 170), RED, t, 0.5, 0.35, 'stamp')
-    words_in(lay, 'Salva e manda pra quem treina com personal.', W / 2, 1150, F('xb', 50), WHITE, t, 1.2, hi={'SALVA', 'MANDA'}, hicol=YEL)
+    T2 = TL['cta_t2'] if TL else 3.0
+    if t < T2 + 0.4:
+        l1 = Image.new('RGBA', (W, H))
+        pop_text(l1, 'PERSONAL NÃO É', W / 2, 640, F('anton', 110), WHITE, t, 0, 0.4, 'up')
+        pop_text(l1, 'CONTADOR DE', W / 2, 770, F('anton', 130), WHITE, t, 0.25, 0.4, 'up')
+        ybox(l1, 'REPETIÇÃO.', W / 2, 930, F('anton', 160), t, 0.5)
+        out = eio(prog(t, T2, 0.4))
+        if out > 0:
+            a_ = np.array(l1); a_[..., 3] = (a_[..., 3] * (1 - out)).astype(np.uint8); l1 = Image.fromarray(a_)
+        lay.alpha_composite(l1, (0, int(-out * 200)))
+    if t >= T2:
+        u = t - T2
+        pop_text(lay, 'QUER TREINAR COM', W / 2, 520, F('anton', 96), WHITE, u, 0.1, 0.4, 'up')
+        ybox(lay, 'ANÁLISE DE VERDADE?', W / 2, 650, F('anton', 104), u, 0.3)
+        p = eback(prog(u, 0.8, 0.5))
+        if p > 0:
+            pul = 1 + 0.035 * math.sin(u * 6) if u > 1.4 else 1
+            bw, bh_ = 900 * p * pul, 190 * p * pul
+            cx, cy = W / 2, 860
+            gl = Image.new('RGBA', (W, H)); ImageDraw.Draw(gl).rounded_rectangle((cx - bw / 2, cy - bh_ / 2, cx + bw / 2, cy + bh_ / 2), int(40 * p), fill=YEL + (150,))
+            lay.alpha_composite(gl.filter(ImageFilter.GaussianBlur(40)))
+            dr.rounded_rectangle((cx - bw / 2, cy - bh_ / 2, cx + bw / 2, cy + bh_ / 2), int(40 * p), fill=YEL + (255,))
+            if p > 0.6:
+                text(dr, 'COMENTA', (cx, cy - 48), F('black', 40), DARK, alpha=clamp((p - .6) * 3))
+                text(dr, 'CONSULTORIA', (cx, cy + 25), F('anton', 104), DARK, alpha=clamp((p - .6) * 3))
+        words_in(lay, 'que eu te chamo no direct.', W / 2, 1020, F('xb', 54), WHITE, u, 1.3)
+        brand(lay, W / 2, 1200, eo(prog(u, 1.8, 0.4)), big=True)
+        text(ImageDraw.Draw(lay), '@juliojc_trainer', (W / 2, 1290), F('bold', 36), (220, 220, 225), alpha=eo(prog(u, 2.0, 0.4)))
     a = eo(prog(t, 1.8, 0.5))
-    text(dr, 'Rostos desfocados de propósito. A crítica é ao método, não à aluna.', (W / 2, 1420), F('med', 28), (200, 200, 210), alpha=a)
+    text(dr, 'Rostos e marcas desfocados de propósito. A crítica é ao método, não à aluna.', (W / 2, 1420), F('med', 26), (200, 200, 210), alpha=a)
     return img, lay
 
 FN = {'hook': s_hook, 'context': s_context, 'bio': s_bio, 'f1': s_f1, 'f2': s_f2, 'f3': s_f3, 'f4': s_f4,
@@ -629,7 +720,7 @@ FN = {'hook': s_hook, 'context': s_context, 'bio': s_bio, 'f1': s_f1, 'f2': s_f2
 def progress_bar(lay, T):
     dr = ImageDraw.Draw(lay)
     dr.rectangle((0, 0, W, 10), fill=(255, 255, 255, 50))
-    dr.rectangle((0, 0, W * T / TOTAL, 10), fill=RED + (255,))
+    dr.rectangle((0, 0, W * T / TOTAL, 10), fill=YEL + (255,))
 
 def render_frame(T):
     for name, a, b in SC:
@@ -644,10 +735,34 @@ def render_frame(T):
                 y0 = (img.shape[0] - H) // 2; x0 = (img.shape[1] - W) // 2
                 img = img[y0:y0 + H, x0:x0 + W]
                 img = cv2.addWeighted(img, 1, np.full_like(img, 255), 0.55 * k, 0)
+            if name != 'cta': brand(lay, 175, 160, 0.92)
             progress_bar(lay, T)
             return compose(finish(img), lay)
 
+def make_cover(path):
+    i = K_VALG
+    img, mp, s_ = view(i, lower_cam(i, 1.9, 0.5))
+    img = brand_bg(grade(img, 0.25))
+    lay = Image.new('RGBA', (W, H)); dr = ImageDraw.Draw(lay)
+    # dark fades top/bottom like previous covers
+    fade = np.zeros((H, W, 4), np.uint8); yy = np.arange(H)[:, None]
+    al = np.clip(np.maximum((900 - yy) / 900 * 1.1, (yy - 1250) / 670 * 1.2), 0, 0.93)
+    fade[..., :3] = (7, 8, 10); fade[..., 3] = (al * 255).astype(np.uint8)
+    lay.alpha_composite(Image.fromarray(fade))
+    P = L[i]
+    for j in (25, 26):
+        q = mp(P[j, :2]); ring(dr, q, 58, RED, 10); ring(dr, q, 80, RED, 4, 0.5)
+    tag(lay, 'ANÁLISE BIOMECÂNICA', W / 2, 330, 1)
+    f1 = F('anton', 150)
+    ImageDraw.Draw(lay).text((W / 2, 470), 'NINGUÉM CORRIGIU', font=F('anton', 128), fill=WHITE + (255,), anchor='mm', stroke_width=0)
+    ybox(lay, 'ESSA PASSADA', W / 2, 610, F('anton', 150), 1, 0)
+    brand(lay, W / 2, 1520, 1, big=True)
+    out = compose(img, lay); cv2.imwrite(path, out)
+
 if __name__ == '__main__':
+    import os
+    if os.environ.get('COVER'):
+        make_cover(os.environ['COVER']); sys.exit()
     if ONLY:
         for T in ONLY:
             cv2.imwrite(f'{OUT}_{T:05.2f}.jpg', render_frame(T))
