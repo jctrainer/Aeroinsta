@@ -412,6 +412,7 @@ def s_bio(t, d):
     return img, lay
 
 def freeze_base(i, cam, t, dark=0.25):
+    cam = (cam[0], cam[1], cam[2] * (1 - 0.06 * clamp(t / 8)))  # slow push-in keeps the freeze alive
     img, mp, s = view(i, cam)
     img = grade(img, dark)
     # subtle freeze flash
@@ -508,11 +509,11 @@ def s_f4(t, d):
     lay = Image.new('RGBA', (W, H)); dr = ImageDraw.Draw(lay)
     canvas = np.full((H, W, 3), 14, np.uint8)
     # panel A: moving clip 24.0 -> 27.4s (personal of back, observing)
-    ia = int(24.0 * 30 + t * 30)
+    ia = min(1190, int(24.0 * 30 + t * 30))
     hx, hy, hr = HEADS['trn'][ia]
     camA = (hx + 60, hy + 95, 560)
     imgA, mpA, sA = view(ia, camA)
-    ib = int(35.6 * 30 + t * 30 * 0.8)
+    ib = min(1190, int(35.6 * 30 + t * 30 * 0.8))
     hx2, hy2, _ = HEADS['trn'][ib]
     camB = (hx2 + 50, hy2 + 90, 440)
     imgB, mpB, sB = view(ib, camB)
@@ -531,7 +532,7 @@ def s_f4(t, d):
         x, y = mp(HEADS[trk][i][:2]); y = max(240, y + yoff); x = min(max(x, 170), W - 170)
         pill(lay, txt, x, y, F('black', 32), YEL + (255,), DARK, a)
     headtag('trn', ia, lambda p: (mpA(p)[0] + oa, mpA(p)[1] - (H - ph) // 2 + 200), -150, pa, 'PERSONAL')
-    pill(lay, 'SÓ OBSERVA', 200, 250, F('black', 34), (0, 0, 0, 200), WHITE, eo(prog(t, 0.6, .3)))
+    pill(lay, 'SÓ OBSERVA', W - 200, 250, F('black', 34), (0, 0, 0, 200), WHITE, eo(prog(t, 0.6, .3)))
     pill(lay, 'NENHUMA CORREÇÃO VISÍVEL', 330, 200 + ph + 70, F('black', 32), (0, 0, 0, 200), WHITE, eo(prog(t, 0.9, .3)))
     img = canvas
     caption_box(lay, 'E A PERSONAL?', 'Fica só olhando. Em nenhum momento do vídeo dá pra ver uma correção, um toque, um ajuste.', t, 1.1, y=1400, num='4.', col=YEL)
@@ -566,15 +567,16 @@ def s_sci(t, d):
             text(dr, ln, (x0 + 40, y + 125 + k * 48), fs, WHITE, 'lm', eo(prog(t, t0 + 0.2 + k * 0.1, 0.4)))
         text(dr, src, (x0 + 40, y + 268), F('med', 26), (170, 170, 180), 'lm', eo(prog(t, t0 + 0.6, 0.4)))
     # counter 1kg -> 4kg
+    TC2, TEQ = d * 0.40, d * 0.74
     card(540, 0.9, 'MAIS PESO, MAIS CARGA NO JOELHO', 'Cada 1 kg a mais no corpo vira uns 4 kg no joelho a cada passo. Isso só andando. Na passada é bem mais.', 'Messier et al., Arthritis & Rheumatism, 2005', YEL)
-    card(880, 2.6, 'JOELHO PRA DENTRO PESA MAIS', 'É um dos padrões mais ligados a lesão de LCA e dor na frente do joelho. É a primeira coisa que eu corrijo num aluno.', 'Hewett et al., AJSM, 2005  •  Powers, JOSPT, 2010', RED)
-    p = prog(t, 4.6, 0.5)
+    card(880, TC2, 'JOELHO PRA DENTRO PESA MAIS', 'É um dos padrões mais ligados a lesão de LCA e dor na frente do joelho. É a primeira coisa que eu corrijo num aluno.', 'Hewett et al., AJSM, 2005  •  Powers, JOSPT, 2010', RED)
+    p = prog(t, TEQ, 0.5)
     if p > 0:
         y = 1300
         parts = [('CARGA ALTA', WHITE), ('+', RED), ('JOELHO DESALINHADO', WHITE), ('+', RED), ('BASE INSTÁVEL', WHITE)]
         for k, (txt, c) in enumerate(parts):
-            pop_text(lay, txt, W / 2, y + k * 56, F('anton', 54), c, t, 4.6 + k * 0.12, 0.3, 'back')
-        pop_text(lay, '= RISCO LÁ EM CIMA', W / 2, y + 5 * 56 + 30, F('anton', 76), RED, t, 5.4, 0.35, 'stamp')
+            pop_text(lay, txt, W / 2, y + k * 56, F('anton', 54), c, t, TEQ + k * 0.25, 0.3, 'back')
+        pop_text(lay, '= RISCO LÁ EM CIMA', W / 2, y + 5 * 56 + 30, F('anton', 76), RED, t, TEQ + 1.4, 0.35, 'stamp')
     return img, lay
 
 # --- stick figure lunge (frontal) ---
@@ -638,7 +640,7 @@ def s_vs(t, d):
     lay.alpha_composite(lay2)
     items = ['Pés na largura do quadril', 'Joelho apontando pro 2º dedo', 'Desce devagar, 2 a 3 segundos', 'Joelho de trás quase no chão', 'Tronco firme, braço quieto']
     for k, it in enumerate(items):
-        p = eo(prog(t, 1.2 + k * 0.45, 0.4))
+        p = eo(prog(t, 1.5 + k * 1.3, 0.4))
         if p <= 0: continue
         y = 1260 + k * 64
         x = 110 + (1 - p) * 80
@@ -658,7 +660,7 @@ def s_fix(t, d):
              ('CORRIGIR NA HORA', 'Ficar de frente e avisar: joelho pro 2º dedo'),
              ('SÓ DEPOIS EVOLUIR', 'Passada andando só quando tiver controle')]
     for k, (a_, b_) in enumerate(items):
-        t0 = 0.8 + k * 0.75
+        t0 = 0.8 + k * 2.0
         p = eo(prog(t, t0, 0.45))
         if p <= 0: continue
         y = 540 + k * 175
