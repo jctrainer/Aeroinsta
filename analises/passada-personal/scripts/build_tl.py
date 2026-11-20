@@ -1,5 +1,5 @@
 import json, subprocess, sys, wave, numpy as np
-D = sys.argv[1]; W_ = sys.argv[2]; TEMPO = 1.08
+D = sys.argv[1]; W_ = sys.argv[2]; TEMPO = 1.0
 ids = [f"n{k:02d}" for k in range(16)]
 dur = {}
 for n in ids:
