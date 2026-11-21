@@ -244,6 +244,7 @@ def biomech(photo, spec):
         r = 4 * S; d.ellipse((x - r, y - r, x + r, y + r), fill=YEL + (255,))
     # 3) reference line (dashed green) e.g. neutral spine
     if 'ref' in spec: dashed(spec['ref'], GREEN + (235,), 3, 12, 9)
+    for (p0, p1, col) in spec.get('lines', []): dashed([p0, p1], col + (235,), 3, 12, 9)
     # 4) angle arc at a joint
     if 'angle' in spec:
         c, p1, p2 = spec['angle']; R = spec.get('arc_r', 62)
@@ -325,6 +326,48 @@ def cover_evolucao():
     chip(lay, 'Aluna Jota Fit', 760, 1585, 'dark', size=28, icon='✓')
     headline(lay, 'EVOLUÇÃO', 'DAS ALUNAS')
     brand(lay, 1740); save(base, lay, 'capa-evolucao-alunas.png')
+
+STIFF2 = dict(
+    bones=[[(191, 351), (376, 364)], [(376, 364), (301, 494), (274, 642)]],
+    angle=((376, 364), (191, 351), (301, 494)), arc_r=46,
+    arrow=[(278, 300), (372, 300)],
+    lines=[((274, 270), (274, 660), WHITE), ((110, 545), (440, 545), YEL)],
+    muscle=[(388, 330), (428, 372), (402, 432), (338, 502), (314, 494), (352, 420)],
+    labels=[(325, 268, 'QUADRIL PRA TRÁS', YEL, 21), (380, 528, 'SEU LIMITE', YEL, 20), (274, 690, 'PÉS', WHITE, 18)],
+)
+
+def mini_wrong(w=330, h=400):
+    im = Image.new('RGBA', (w, h), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
+    d.rounded_rectangle((0, 0, w - 1, h - 1), 40, fill=(20, 16, 18, 245), outline=RED + (255,), width=4)
+    gy = h - 96; col = RED + (255,); S = 3
+    big = Image.new('RGBA', (w * S, h * S), (0, 0, 0, 0)); b = ImageDraw.Draw(big)
+    pts = lambda L: [(x * S, y * S) for x, y in L]
+    b.line(pts([(30, gy), (w - 30, gy)]), fill=(110, 110, 120, 255), width=3 * S)
+    A, K, Hh = (205, gy - 26), (160, gy - 110), (215, gy - 175)
+    b.line(pts([(178, gy - 4), A, K, Hh]), fill=col, width=11 * S, joint='curve')
+    Sh = (95, gy - 120); C = (165, gy - 250)
+    cur = [((1 - u) ** 2 * Hh[0] + 2 * (1 - u) * u * C[0] + u ** 2 * Sh[0], (1 - u) ** 2 * Hh[1] + 2 * (1 - u) * u * C[1] + u ** 2 * Sh[1]) for u in np.linspace(0, 1, 20)]
+    b.line(pts(cur), fill=col, width=11 * S, joint='curve')
+    b.line(pts([Sh, (88, gy - 20)]), fill=col, width=9 * S)
+    hx, hy = 70, gy - 85; b.ellipse((hx * S - 24 * S, hy * S - 24 * S, hx * S + 24 * S, hy * S + 24 * S), fill=col)
+    b.ellipse(((88 - 20) * S, (gy - 40) * S, (88 + 20) * S, gy * S), outline=(225, 225, 230, 255), width=7 * S)
+    im.alpha_composite(big.resize((w, h), Image.LANCZOS))
+    d.text((w / 2, 46), 'MITO', font=F('black', 30), fill=RED + (255,), anchor='mm')
+    d.text((w / 2, h - 52), 'ATÉ O CHÃO ✗', font=F('black', 34), fill=WHITE + (255,), anchor='mm')
+    return im.rotate(6, resample=Image.BICUBIC, expand=True)
+
+def cover_stiff2():
+    base = background(27, 1080); lay = Image.new('RGBA', (W, H))
+    im = biomech(A + '/stiff2_bottom.png', STIFF2)
+    im = ImageEnhance.Brightness(im).enhance(1.08); im = ImageEnhance.Contrast(im).enhance(1.08)
+    cw, ch = 640, 900
+    hero = card(im, cw, ch, -3, rad=46, border=(90, 92, 100), bw=4, cx=0.5, cy=0.55)
+    hx, hy = 640, 1170
+    place(lay, hero, hx, hy, 190, glow=YEL, glow_a=70)
+    fades(lay, top=700, bottom=1640)
+    place(lay, mini_wrong(), 215, 1400, 200)
+    headline(lay, 'STIFF:', 'ATÉ ONDE DESCER?')
+    brand(lay, 1720); save(base, lay, 'capa-stiff-amplitude.png')
 
 for fn in sys.argv[4].split(','):
     globals()['cover_' + fn](); print('ok', fn)
