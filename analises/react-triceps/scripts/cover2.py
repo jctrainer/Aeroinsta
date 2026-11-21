@@ -59,15 +59,6 @@ lay.alpha_composite(Image.fromarray(fade))
 
 rc.pill(lay, 'PROFESSORA', 215, 1480, F('black', 28), (255, 255, 255, 240), DARK, 1, 16, 9)
 rc.pill(lay, '3 CABEÇAS', 865, 1480, F('black', 28), (255, 255, 255, 240), DARK, 1, 16, 9)
-# tag
-f_tag = F('black', 44); txt = 'REACT • ANÁLISE'; tr = 9
-tw = sum(f_tag.getlength(c) for c in txt) + tr * (len(txt) - 1)
-d = ImageDraw.Draw(lay)
-d.rounded_rectangle((W / 2 - tw / 2 - 40, 330, W / 2 + tw / 2 + 40, 400), 36, fill=(0, 0, 0, 200), outline=YEL + (255,), width=4)
-x = W / 2 - tw / 2
-for c in txt:
-    d.text((x, 367), c, font=f_tag, fill=YEL + (255,), anchor='lm'); x += f_tag.getlength(c) + tr
-
 # headline: white line + yellow tilted box, tight tracking
 l1 = tight('PEGADA MUDA', F('disp', 128), WHITE, -6)
 sh = Image.new('RGBA', (W, H)); sh.alpha_composite(l1, (int(W / 2 - l1.width / 2), 430 + 10))
