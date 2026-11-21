@@ -36,6 +36,12 @@ LOGO = Image.open(ASSETS + '/logo.png').convert('RGBA')
 CONSULT = Image.open(ASSETS + '/capa-narrado.png').convert('RGBA')
 SRC_END = 140.6
 TOTAL = 146.5
+CUTS = [(47.98, 49.58)]   # removed 'hum' + dead air
+TOTAL_OUT = TOTAL - sum(b - a for a, b in CUTS)
+def to_src(T):
+    for a, b in CUTS:
+        if T >= a: T += b - a
+    return T
 
 class Reader:
     def __init__(self, path):
@@ -54,7 +60,7 @@ RA = Reader(SRC); RB = Reader(SRC)
 CX0, CY0, R0 = 540, 1430, 140
 CAP_Y = 1190
 FACEOK = json.load(open(R + '/faceok.json'))['ok']
-LOOP = (48.35, 49.55)
+LOOP = 29.7
 def sidx(t): return int(round(t * SFPS))
 
 # ---------------- drawing helpers ----------------
@@ -86,7 +92,7 @@ def ybox(layer, s, cx, cy, font, t, t0, a=1.0, col=YEL, fg=(17, 17, 17), rot=2):
     im = im.rotate(rot, resample=Image.BICUBIC, expand=True)
     sc = 1 + .9 * (1 - eo(p))
     if sc != 1: im = im.resize((int(im.width * sc), int(im.height * sc)), Image.BICUBIC)
-    sh = Image.new('RGBA', im.size, (0, 0, 0, 0)); sh.paste((0, 0, 0, int(150 * a)), mask=im.split()[3])
+    sh = Image.new('RGBA', im.size, (0, 0, 0, 0)); sh.paste((0, 0, 0, int(150 * a * clamp(p * 2))), mask=im.split()[3])
     layer.alpha_composite(sh.filter(ImageFilter.GaussianBlur(16)), (int(cx - im.width / 2), int(cy - im.height / 2 + 12)))
     paste_a(layer, im, cx - im.width / 2, cy - im.height / 2, clamp(p * 2) * a)
 
@@ -156,7 +162,9 @@ def sharpen(img, k=0.5):
 
 # ---------------- face circle ----------------
 def face_crop(t, size, loop=None):
-    if loop:  # reaction loop (listening face) ping-pong
+    if loop is not None and not isinstance(loop, tuple):  # still reaction frame (mouth closed)
+        st = float(loop)
+    elif loop:
         a, b = loop; L = b - a; ph = (t * 0.8) % (2 * L); st = a + (ph if ph < L else 2 * L - ph)
     else:
         st = t
@@ -168,7 +176,12 @@ def face_crop(t, size, loop=None):
     x, y, s = FACE['cx'][i], FACE['cy'][i], FACE['sz'][i] * 1.75
     pad = cv2.copyMakeBorder(f, 700, 700, 700, 700, cv2.BORDER_REPLICATE)
     c = pad[int(y - s * .45 + 700):int(y + s * .55 + 700), int(x - s / 2 + 700):int(x + s / 2 + 700)]
-    return sharpen(cv2.resize(c, (size, size), interpolation=cv2.INTER_LANCZOS4), .4)
+    out = sharpen(cv2.resize(c, (size, size), interpolation=cv2.INTER_LANCZOS4), .4)
+    if loop is not None and not isinstance(loop, tuple):  # subtle head motion on stills
+        ang_ = 2.2 * math.sin(t * 1.7); sc_ = 1.04 + 0.02 * math.sin(t * 1.1)
+        M = cv2.getRotationMatrix2D((size / 2, size * 0.55), ang_, sc_)
+        out = cv2.warpAffine(out, M, (size, size), borderMode=cv2.BORDER_REFLECT)
+    return out
 RB_face = Reader(SRC)
 
 _MASK = {}
@@ -231,14 +244,14 @@ def captions(layer, t, y=None, maxw=900):
     # plate
     pad = 26
     d.rounded_rectangle((W / 2 - tot / 2 - pad, y - 44, W / 2 + tot / 2 + pad, y + 44), 26, fill=(0, 0, 0, 165))
-    if her: pill(layer, 'ELA', W / 2 - tot / 2 - pad + 40, y - 62, F('black', 22), (120, 220, 255, 255), DARK, 1, 14, 6)
+    if her: pill(layer, 'ELA', W / 2 - tot / 2 - pad + 40, y - 62, F('black', 22), (255, 255, 255, 255), DARK, 1, 14, 6)
     x = W / 2 - tot / 2
     for k, w_ in enumerate(words):
         ww = f.getlength(w_)
         st, en = ch[k][0], ch[k][1]
         active = st - 0.05 <= t <= en + 0.15
         said = t >= st
-        col = ((120, 220, 255) if her else YEL) if active else ((255, 255, 255) if said else (175, 175, 182))
+        col = YEL if active else ((255, 255, 255) if said else (175, 175, 182))
         d.text((x + ww / 2, y + 2), w_, font=f, fill=col + (255,), anchor='mm', stroke_width=4, stroke_fill=(0, 0, 0, 255))
         x += ww + sp
 
@@ -371,31 +384,59 @@ def img_card(layer, name, box, t, t0, a=1.0, rot=0.0, outline=YEL, zoom=0.04, co
     paste_a(layer, ci, cx - ci.width / 2, cy - ci.height / 2, a * clamp(p * 1.6))
 
 # ---------------- scenes ----------------
+def rounded_img(arr, w, h, rad):
+    im = Image.fromarray(cv2.cvtColor(arr, cv2.COLOR_BGR2RGB)).convert('RGBA')
+    mk = Image.new('L', (w, h), 0); ImageDraw.Draw(mk).rounded_rectangle((0, 0, w - 1, h - 1), max(0, int(rad)), fill=255); im.putalpha(mk)
+    return im
+
 def hook(t, base, lay):
     base[:] = brand_bg()
-    # card -> circle morph at the end of the hook
-    m = eio(prog(t, 5.5, 0.8))
-    card_w = 720 * (1 - m) + 2 * R0 * m
-    cx = W / 2; cy = 840 * (1 - m) + CY0 * m
-    sz = int(card_w)
+    m = eio(prog(t, 5.55, 0.75))           # morph into react layout
+    sp = eio(prog(t, 3.0, 0.7)) * (1 - m)  # split: you left, her right
+    # --- her teaser card (enters at "professora") -> becomes full screen
+    hp = eo(prog(t, 3.3, .6))
+    if hp > 0:
+        hw0, hh0 = 470, 720; hx0, hy0 = 820 + (1 - hp) * 500, 870
+        hw = hw0 + (W - hw0) * m; hh = hh0 + (H - hh0) * m
+        hx = hx0 + (W / 2 - hx0) * m; hy = hy0 + (H / 2 - hy0) * m
+        fh = her_full(6.8)
+        im = rounded_img(cover(fh, int(hw), int(hh), 0.5, 0.4), int(hw), int(hh), 36 * (1 - m))
+        if m < 1:
+            im = im.rotate(4 * (1 - m), resample=Image.BICUBIC, expand=True)
+            g = Image.new('RGBA', (W, H)); ImageDraw.Draw(g).rounded_rectangle((hx - hw / 2 - 10, hy - hh / 2 - 10, hx + hw / 2 + 10, hy + hh / 2 + 10), 40, fill=(255, 255, 255, int(90 * hp * (1 - m))))
+            lay.alpha_composite(g.filter(ImageFilter.GaussianBlur(20)))
+        paste_a(lay, im, hx - im.width / 2, hy - im.height / 2, hp)
+        if m < .3:
+            pill(lay, 'PROFESSORA', hx, hy - hh / 2 + 40, F('black', 30), (255, 255, 255, 240), DARK, eo(prog(t, 4.3, .3)) * (1 - m * 3))
+    # --- you: big card -> left card -> circle
+    base_sz = 720 - 230 * sp
+    sz = int(base_sz * (1 - m) + 2 * R0 * m)
+    cx = (W / 2 - 250 * sp) * (1 - m) + CX0 * m
+    cy = (840 + 20 * sp) * (1 - m) + CY0 * m
     i = sidx(t); f = RA.get(i)
     x, y, s_ = FACE['cx'][i], FACE['cy'][i], FACE['sz'][i] * 2.3
     pad = cv2.copyMakeBorder(f, 700, 700, 700, 700, cv2.BORDER_REPLICATE)
     c = pad[int(y - s_ * .42 + 700):int(y + s_ * .58 + 700), int(x - s_ / 2 + 700):int(x + s_ / 2 + 700)]
     c = sharpen(cv2.resize(c, (sz, sz), interpolation=cv2.INTER_LANCZOS4), .4)
-    im = Image.fromarray(cv2.cvtColor(c, cv2.COLOR_BGR2RGB)).convert('RGBA')
-    rad = int(48 * (1 - m) + sz / 2 * m)
-    mk = Image.new('L', (sz, sz), 0); ImageDraw.Draw(mk).rounded_rectangle((0, 0, sz - 1, sz - 1), rad, fill=255); im.putalpha(mk)
-    a0 = eo(prog(t, 0.05, .35))
-    g = Image.new('RGBA', (W, H)); ImageDraw.Draw(g).rounded_rectangle((cx - sz / 2 - 12, cy - sz / 2 - 12, cx + sz / 2 + 12, cy + sz / 2 + 12), rad + 12, fill=YEL + (int(120 * a0),))
+    pop_in = eback(prog(t, 0.15, .45))
+    rad = 44 * (1 - m) + sz / 2 * m
+    im = rounded_img(c, sz, sz, rad)
+    if pop_in < 1: im = im.resize((max(1, int(sz * (0.7 + 0.3 * pop_in))), max(1, int(sz * (0.7 + 0.3 * pop_in)))))
+    g = Image.new('RGBA', (W, H)); ImageDraw.Draw(g).rounded_rectangle((cx - sz / 2 - 12, cy - sz / 2 - 12, cx + sz / 2 + 12, cy + sz / 2 + 12), rad + 12, fill=YEL + (130,))
     lay.alpha_composite(g.filter(ImageFilter.GaussianBlur(26)))
-    paste_a(lay, im, cx - sz / 2, cy - sz / 2, a0)
-    ImageDraw.Draw(lay).rounded_rectangle((cx - sz / 2 - 3, cy - sz / 2 - 3, cx + sz / 2 + 3, cy + sz / 2 + 3), rad + 3, outline=YEL + (int(255 * a0),), width=7)
-    ha = 1 - eo(prog(t, 5.3, .5))
-    tag(lay, 'REACT • ANÁLISE', W / 2, 235, eo(prog(t, 0, .4)) * ha)
-    if ha > 0:
-        pop(lay, 'PEGADA MUDA A', W / 2, 330, F('disp', 74), WHITE, t, 0.6, ha, stroke=2)
-        ybox(lay, 'CABEÇA DO TRÍCEPS?', W / 2, 425, F('disp', 80), t, 0.9, ha)
+    paste_a(lay, im, cx - im.width / 2, cy - im.height / 2, clamp(pop_in * 2))
+    ImageDraw.Draw(lay).rounded_rectangle((cx - im.width / 2 - 3, cy - im.height / 2 - 3, cx + im.width / 2 + 3, cy + im.height / 2 + 3), rad + 3, outline=YEL + (255,), width=7)
+    if sp > .5 and m < .3: pill(lay, 'EU', cx, cy - sz / 2 + 40, F('black', 30), YEL + (255,), DARK, 1 - m * 3)
+    # --- headlines
+    ha = 1 - eo(prog(t, 5.3, .4))
+    tag(lay, 'REACT', W / 2, 235, eo(prog(t, 0, .4)) * ha)
+    h1 = 1 - eo(prog(t, 2.8, .3))
+    if h1 > 0:
+        pop(lay, 'BORA DE UM POUCO DE', W / 2, 330, F('disp', 66), WHITE, t, 0.4, h1 * ha)
+        ybox(lay, 'POLÊMICA', W / 2, 440, F('disp', 92), t, 1.8, h1 * ha, col=RED, fg=WHITE, rot=-3)
+    if t >= 2.9:
+        pop(lay, 'PEGADA MUDA A', W / 2, 330, F('disp', 70), WHITE, t, 2.9, ha)
+        ybox(lay, 'CABEÇA DO TRÍCEPS?', W / 2, 445, F('disp', 78), t, 3.1, ha)
 
 def her_scene(t, base, lay, t0):
     ts = clamp(t, 6.8, 12.9) if t < 16 else clamp(t, 21.6, 29.5)
@@ -405,16 +446,14 @@ def her_scene(t, base, lay, t0):
     shade = np.linspace(0, 1, H)[:, None, None]
     base[:] = (base * (1 - 0.55 * np.clip((shade - 0.55) / 0.45, 0, 1))).astype(np.uint8)
     a = eo(prog(t, t0, .4))
-    circle_face(lay, t, CX0, CY0, R0, a, loop=LOOP, label='REAGINDO')
-    # thought bubble
-    if int(t * 2) % 7 in (2, 3, 4):
-        pill(lay, 'HMMM...', CX0 + R0 + 70, CY0 - R0 + 10, F('black', 30), (255, 255, 255, 235), DARK, a * .95, 18, 10)
+    still = (29.7 if t < 10.0 else 87.5) if t < 16 else (87.5 if t < 27.4 else 76.0)
+    circle_face(lay, t, CX0, CY0, R0, a, loop=still, label='REAGINDO')
 
 def three_heads(t, base, lay, t0):
     base[:] = brand_bg()
     a = eo(prog(t, t0, .4))
-    pop(lay, 'O TRÍCEPS TEM', W / 2, 270, F('disp', 70), WHITE, t, t0 + .1)
-    ybox(lay, '3 CABEÇAS', W / 2, 370, F('disp', 96), t, t0 + .3)
+    pop(lay, 'O TRÍCEPS TEM', W / 2, 250, F('disp', 66), WHITE, t, t0 + .1)
+    ybox(lay, '3 CABEÇAS', W / 2, 365, F('disp', 88), t, t0 + .3)
     if os.path.exists(ASSETS + '/img_heads.png'):
         img_card(lay, 'img_heads.png', (170, 450, 910, 1010), t, t0 + .2, a)
         for k, (nm, colh, tt) in enumerate((('LATERAL', C_LAT, 17.1), ('MEDIAL', C_MED, 18.0), ('LONGA', C_LONG, 19.0))):
@@ -430,8 +469,8 @@ def her_claim(t, base, lay):
     her_scene(t, base, lay, 20.82)
     a = win(t, 23.5, 29.7)
     if a > 0:
-        card_bg(lay, (70, 230, 1010, 520), a, outline=(120, 220, 255))
-        text(ImageDraw.Draw(lay), 'A TESE DELA', (110, 290), F('black', 34), (120, 220, 255), 'lm', a)
+        card_bg(lay, (70, 230, 1010, 520), a, outline=WHITE)
+        text(ImageDraw.Draw(lay), 'A TESE DELA', (110, 290), F('black', 34), YEL, 'lm', a)
         for k, ln in enumerate(wrap('Mudar a pegada (corda, barra V, barra reta) trabalha cabeças diferentes do tríceps.', F('bold', 40), 860)):
             text(ImageDraw.Draw(lay), ln, (110, 360 + k * 52), F('bold', 40), WHITE, 'lm', a)
         if t > 27.6:
@@ -483,29 +522,27 @@ def critique(t, base, lay):
     circle_face(lay, t, CX0, CY0, R0, a, talking=True)
 
 def no_say(t, base, lay):
-    i = sidx(t); f = RA.get(i)
-    x, y, s = FACE['cx'][i], FACE['cy'][i], FACE['sz'][i] * 2.6
-    z = 1 + 0.08 * eo(prog(t, 49.7, 2.5))
-    pad = cv2.copyMakeBorder(f, 900, 900, 900, 900, cv2.BORDER_REPLICATE)
-    hh = s / z * 16 / 9; ww = s / z
-    crop = pad[int(y - hh * .38 + 900):int(y + hh * .62 + 900), int(x - ww / 2 + 900):int(x + ww / 2 + 900)]
-    base[:] = cv2.resize(crop, (W, H), interpolation=cv2.INTER_LANCZOS4)
-    if t < 49.7:  # silence before: freeze + "..."
-        base[:] = (base * 0.6).astype(np.uint8)
-        pop(lay, '...', W / 2, 900, F('disp', 160), WHITE, t, 48.4)
-        return
+    # her in the background (full screen), you in a big circle on top
+    ts = 25.2 + ((t - 49.58) % 4.0)
+    fh = her_full(clamp(ts, 21.6, 29.5))
+    z = 1.04 + 0.05 * eo(prog(t, 49.6, 3.0))
+    bg = cover(fh, W, H, 0.5, 0.4, z)
+    shade = np.linspace(0, 1, H)[:, None, None]
+    base[:] = (bg * (0.75 - 0.35 * np.clip((shade - 0.45) / 0.55, 0, 1))).astype(np.uint8)
+    pill(lay, 'ELA', 120, 300, F('black', 30), (255, 255, 255, 240), DARK, 1)
+    pill(lay, '"mudar a pegada muda a cabeça"', W / 2, 400, F('bold', 34), (0, 0, 0, 215), WHITE, eo(prog(t, 49.6, .3)))
     sh = (math.sin(t * 70) * 14 * (1 - prog(t, 50.0, .6))) if t > 50.0 else 0
-    vign = np.linspace(-1, 1, W)[None, :] ** 2 + np.linspace(-1, 1, H)[:, None] ** 2
-    base[:] = np.clip(base * (1 - 0.35 * np.clip(vign, 0, 1))[..., None], 0, 255).astype(np.uint8)
-    ybox(lay, 'PROFESSORA,', W / 2 + sh, 1180, F('disp', 92), t, 49.8, col=WHITE)
-    ybox(lay, 'NÃO DIGA ISSO!', W / 2 + sh, 1320, F('disp', 110), t, 50.3, col=RED, fg=WHITE, rot=-3)
+    r = int(R0 + (230 - R0) * eback(prog(t, 49.6, .45)))
+    circle_face(lay, t + 0.0, W / 2 + sh * .5, 1330, r, 1, talking=True)
+    ybox(lay, 'PROFESSORA,', W / 2 + sh, 900, F('disp', 84), t, 49.8, col=WHITE)
+    ybox(lay, 'NÃO DIGA ISSO!', W / 2 + sh, 1030, F('disp', 100), t, 50.3, col=RED, fg=WHITE, rot=-3)
 
 def verdict(t, base, lay):
     base[:] = brand_bg()
     a = eo(prog(t, 52.6, .5))
     tag(lay, 'O QUE A CIÊNCIA MOSTRA', W / 2, 250, a)
-    pop(lay, 'TROCAR A PEGADA', W / 2, 360, F('disp', 78), WHITE, t, 52.9)
-    ybox(lay, 'MUDA POUCO', W / 2, 470, F('disp', 96), t, 53.4)
+    pop(lay, 'TROCAR A PEGADA', W / 2, 335, F('disp', 72), WHITE, t, 52.9)
+    ybox(lay, 'MUDA POUCO', W / 2, 455, F('disp', 88), t, 53.4)
     # bars
     pb = eo(prog(t, 58.9, 1.0)); po = eo(prog(t, 65.6, 1.2))
     card_bg(lay, (70, 560, 1010, 1020), a)
@@ -521,7 +558,6 @@ def verdict(t, base, lay):
     text(d, 'GRANDE', (110 + 860 * 0.86 * po - 20, 925), F('black', 30), DARK, 'rm', po)
     if t > 71.6:
         pill(lay, 'quem manda na ênfase é o OMBRO', W / 2, 1075, F('black', 38), YEL + (255,), DARK, eo(prog(t, 71.6, .4)))
-    if 52.6 <= t <= 58: pill(lay, 'sem desmerecer ninguém', W / 2, 530, F('bold', 28), (0, 0, 0, 200), (200, 200, 210), win(t, 53.0, 58))
     circle_face(lay, t, CX0, CY0, R0, a, talking=True)
 
 def practice(t, base, lay):
@@ -539,7 +575,11 @@ def practice(t, base, lay):
     imgn = {'pushdown': 'img_push.png', 'overhead': 'img_over.png', 'lean': 'img_lean.png'}[mode]
     if os.path.exists(ASSETS + '/' + imgn):
         img_card(lay, imgn, (95, 505, 555, 1035), t, t0 + .15, a_st, outline=WHITE)
-        r = stick(lay, t, 790 + (40 if mode == 'lean' else 0), 1030, mode, a_st, 0.6 if mode != 'pushdown' else 0.66, hl)
+        sl = Image.new('RGBA', (W, H))
+        r = stick(sl, t, 800 + (25 if mode == 'lean' else 0), 1030 if mode == 'pushdown' else 1040, mode, a_st, {'pushdown': 0.62, 'overhead': 0.5, 'lean': 0.52}[mode], hl)
+        clipm = Image.new('L', (W, H), 0); ImageDraw.Draw(clipm).rounded_rectangle((572, 505, 995, 1035), 28, fill=255)
+        sl.putalpha(Image.fromarray(np.minimum(np.array(sl.split()[3]), np.array(clipm))))
+        lay.alpha_composite(sl)
     else:
         r = stick(lay, t, W / 2 + (70 if mode == 'lean' else (-40 if mode == 'pushdown' else 40)), 1060, mode, a, 0.8 if mode != 'pushdown' else 0.85, hl)
     d = ImageDraw.Draw(lay)
@@ -626,7 +666,8 @@ def finish(img):
     g = cv2.resize(np.random.default_rng().normal(0, 4, (H // 2, W // 2)).astype(np.float32), (W, H))[..., None]
     return np.clip(img.astype(np.float32) * VIG + g, 0, 255).astype(np.uint8)
 
-def render(T):
+def render(Tout):
+    T = to_src(Tout)
     base = np.zeros((H, W, 3), np.uint8); lay = Image.new('RGBA', (W, H))
     for a, b, fn in SCENES:
         if a <= T < b or (fn is outro_cta and T >= a):
@@ -639,7 +680,7 @@ def render(T):
             break
     if T < SRC_END and not (48.35 <= T < 52.6): captions(lay, T, 1295 if T < 5.6 else None)
     if T < SRC_END: brand(lay, 165, 150, .9)
-    d = ImageDraw.Draw(lay); d.rectangle((0, 0, W, 9), fill=(255, 255, 255, 45)); d.rectangle((0, 0, W * T / TOTAL, 9), fill=YEL + (255,))
+    d = ImageDraw.Draw(lay); d.rectangle((0, 0, W, 9), fill=(255, 255, 255, 45)); d.rectangle((0, 0, W * Tout / TOTAL_OUT, 9), fill=YEL + (255,))
     rgb = Image.fromarray(cv2.cvtColor(finish(base), cv2.COLOR_BGR2RGB)).convert('RGBA'); rgb.alpha_composite(lay)
     return cv2.cvtColor(np.array(rgb.convert('RGB')), cv2.COLOR_RGB2BGR)
 
@@ -647,7 +688,7 @@ if __name__ == '__main__':
     if ONLY:
         for T in ONLY: cv2.imwrite(f'{OUT}_{T:06.2f}.jpg', render(T))
         sys.exit()
-    nf = int(TOTAL * FPS); n0 = int(os.environ.get('N0', 0)); n1 = int(os.environ.get('N1', nf))
+    nf = int(TOTAL_OUT * FPS); n0 = int(os.environ.get('N0', 0)); n1 = int(os.environ.get('N1', nf))
     p = subprocess.Popen(['ffmpeg', '-y', '-v', 'error', '-f', 'rawvideo', '-pix_fmt', 'bgr24', '-s', f'{W}x{H}', '-r', str(FPS), '-i', '-',
                           '-c:v', 'libx264', '-preset', 'medium', '-crf', '19', '-pix_fmt', 'yuv420p', OUT], stdin=subprocess.PIPE)
     for n in range(n0, n1):
