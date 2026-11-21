@@ -219,7 +219,7 @@ def hip_back(layer, M, ts, t, a, trail=True):
     d = ImageDraw.Draw(layer)
     ax = tp(M, an)[0]; hp = tp(M, hip)
     dashed(d, (ax, hp[1] - 260), (ax, tp(M, an)[1] + 10), WHITE + (int(200 * a),), 4)
-    label(layer, 'PÉS', ax, tp(M, an)[1] + 50, 30, WHITE, a)
+    label(layer, 'LINHA DOS PÉS', ax, hp[1] - 290, 28, WHITE, a)
     if trail:
         pts = []
         for k in range(24, -1, -2):
@@ -305,8 +305,14 @@ def render(t):
     # ---- S1 hook 0-6.44
     if t < 6.6:
         a = win(t, 0, 6.6, 0.01, 0.3)
-        title(lay, 'STIFF', W / 2, 300, 170, WHITE, t, 0.0, a, 'stamp')
-        title(lay, 'ATÉ ONDE DESCER?', W / 2, 440, 104, YEL, t, 0.35, a)
+        h1 = win(t, 0, 2.1, 0.01, 0.2); h2 = win(t, 2.0, 6.6, 0.25, 0.3)
+        title(lay, 'VOCÊ DESCE', W / 2, 300, 130, WHITE, t, 0.0, h1, 'stamp')
+        title(lay, 'ATÉ O CHÃO?', W / 2, 440, 150, RED, t, 0.25, h1, 'stamp')
+        if t < 2.1:
+            fl = 1 - prog(t, 0, 0.2)
+            if fl > 0: lay.alpha_composite(Image.new('RGBA', (W, H), (255, 255, 255, int(160 * fl))))
+        title(lay, 'STIFF', W / 2, 300, 170, WHITE, t, 2.0, h2, 'stamp')
+        title(lay, 'ATÉ ONDE DESCER?', W / 2, 440, 104, YEL, t, 2.3, h2)
         ga = win(t, 1.9, 6.5, 0.5, 0.3)
         r = muscle_glow(lay, M, ts, ga, 1.0, t)
         if r:

@@ -365,8 +365,12 @@ def cover_stiff2():
     hx, hy = 640, 1170
     place(lay, hero, hx, hy, 190, glow=YEL, glow_a=70)
     fades(lay, top=700, bottom=1640)
-    place(lay, mini_wrong(), 215, 1400, 200)
-    headline(lay, 'STIFF:', 'ATÉ ONDE DESCER?')
+    place(lay, mini_wrong(360, 440), 230, 1390, 200)
+    d = ImageDraw.Draw(lay); cx, cy = 870, 800
+    d.ellipse((cx - 44, cy - 44, cx + 44, cy + 44), fill=GREEN + (255,), outline=(0, 0, 0, 255), width=4)
+    d.text((cx, cy + 2), '✓', font=F('black', 54), fill=DARK + (255,), anchor='mm')
+    label(lay, 'O CERTO', cx - 150, cy, 44, GREEN)
+    headline(lay, 'VOCÊ DESCE', 'ATÉ O CHÃO?')
     brand(lay, 1720); save(base, lay, 'capa-stiff-amplitude.png')
 
 for fn in sys.argv[4].split(','):
