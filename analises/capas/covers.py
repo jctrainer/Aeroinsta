@@ -69,22 +69,23 @@ def tight(text, font, fill, track):
     for c, w in zip(text, ws): d.text((x, im.height / 2), c, font=font, fill=fill + (255,), anchor='lm'); x += w + track
     return im.crop(im.getbbox())
 
-def headline(lay, l1, l2, y=400, s1=150, s2=124, maxw=900, box_col=YEL, fg2=(17, 17, 17)):
+def headline(lay, l1, l2, y=330, s1=140, s2=132, maxw=920, **_):
+    """Boxless: white line 1, amber line 2, soft depth shadow, thin accent rule."""
     a = tight(l1, F('disp', s1), WHITE, -7)
     if a.width > maxw: a = tight(l1, F('disp', int(s1 * maxw / a.width)), WHITE, -7)
-    lay.alpha_composite(a, (int(W / 2 - a.width / 2), y))
-    b = tight(l2, F('disp', s2), fg2, -6)
-    if b.width > maxw - 110: b = tight(l2, F('disp', int(s2 * (maxw - 110) / b.width)), fg2, -6)
-    bw, bh = b.width + 100, b.height + 64
-    box = Image.new('RGBA', (bw, bh), (0, 0, 0, 0)); ImageDraw.Draw(box).rounded_rectangle((0, 0, bw - 1, bh - 1), 44, fill=box_col + (255,))
-    box.alpha_composite(b, (50, 32)); box = box.rotate(2.5, resample=Image.BICUBIC, expand=True)
-    by = y + a.height + 40
-    g = Image.new('RGBA', (W, H)); t = Image.new('RGBA', box.size, box_col + (0,)); t.putalpha(box.split()[3].point(lambda v: v * 130 // 255))
-    g.alpha_composite(t, (int(W / 2 - box.width / 2), by)); lay.alpha_composite(g.filter(ImageFilter.GaussianBlur(40)))
-    sh = Image.new('RGBA', (W, H)); t = Image.new('RGBA', box.size, (0, 0, 0, 0)); t.putalpha(box.split()[3])
-    sh.alpha_composite(t, (int(W / 2 - box.width / 2), by + 24)); lay.alpha_composite(sh.filter(ImageFilter.GaussianBlur(22)))
-    lay.alpha_composite(box, (int(W / 2 - box.width / 2), by))
-    return by + box.height
+    b = tight(l2, F('disp', s2), YEL, -7)
+    if b.width > maxw: b = tight(l2, F('disp', int(s2 * maxw / b.width)), YEL, -7)
+    ax, bx = int(W / 2 - a.width / 2), int(W / 2 - b.width / 2); by = y + a.height + 26
+    sh = Image.new('RGBA', (W, H))
+    for im, x, yy in ((a, ax, y), (b, bx, by)):
+        t = Image.new('RGBA', im.size, (0, 0, 0, 0)); t.putalpha(im.split()[3].point(lambda v: v * 230 // 255)); sh.alpha_composite(t, (x, yy + 14))
+    lay.alpha_composite(sh.filter(ImageFilter.GaussianBlur(18)))
+    g = Image.new('RGBA', (W, H)); t = Image.new('RGBA', b.size, YEL + (0,)); t.putalpha(b.split()[3].point(lambda v: v * 90 // 255)); g.alpha_composite(t, (bx, by))
+    lay.alpha_composite(g.filter(ImageFilter.GaussianBlur(34)))
+    lay.alpha_composite(a, (ax, y)); lay.alpha_composite(b, (bx, by))
+    ry = by + b.height + 34
+    ImageDraw.Draw(lay).rounded_rectangle((W / 2 - 70, ry, W / 2 + 70, ry + 8), 4, fill=YEL + (255,))
+    return ry + 8
 
 def chip(lay, text, cx, cy, kind='white', rot=0, size=36, icon=None):
     bg = {'white': (255, 255, 255), 'yellow': YEL, 'green': GREEN, 'red': RED, 'dark': (22, 22, 26)}[kind]
@@ -213,30 +214,104 @@ def target_ring(lay, x, y, r=46):
     g = Image.new('RGBA', (W, H)); ImageDraw.Draw(g).ellipse((x - r - 20, y - r - 20, x + r + 20, y + r + 20), fill=YEL + (120,)); lay.alpha_composite(g.filter(ImageFilter.GaussianBlur(18)))
     ImageDraw.Draw(lay).ellipse((x - r, y - r, x + r, y + r), outline=YEL + (255,), width=6)
 
-def hero_exercise(photo, l1, l2, target, items, name, seed):
-    """photo: path; target: (fx, fy) muscle point in fraction of the hero card"""
+def biomech(photo, spec):
+    """Subtle biomech overlay drawn on the photo itself (crop pixel coords), 3x supersampled."""
+    im = Image.open(photo).convert('RGB'); w, h = im.size; S = 3
+    sc = lambda p: (p[0] * S, p[1] * S)
+    # 1) faint muscle highlight: soft amber glow + thin dashed contour
+    glow = Image.new('L', (w * S, h * S), 0); gd = ImageDraw.Draw(glow)
+    gd.polygon([sc(p) for p in spec['muscle']], fill=255)
+    glow = glow.filter(ImageFilter.GaussianBlur(14 * S))
+    base = im.convert('RGBA').resize((w * S, h * S), Image.LANCZOS)
+    tint = Image.new('RGBA', base.size, YEL + (0,)); tint.putalpha(glow.point(lambda v: v * 95 // 255))
+    base.alpha_composite(tint)
+    ov = Image.new('RGBA', base.size, (0, 0, 0, 0)); d = ImageDraw.Draw(ov)
+    def dashed(pts, col, wd, dash=14, gap=10, closed=False):
+        P = [sc(p) for p in pts] + ([sc(pts[0])] if closed else [])
+        for (x0, y0), (x1, y1) in zip(P, P[1:]):
+            L = math.hypot(x1 - x0, y1 - y0); n = max(1, int(L / ((dash + gap) * S)))
+            for k in range(n):
+                t0 = k / n; t1 = t0 + dash / (dash + gap) / n
+                d.line([(x0 + (x1 - x0) * t0, y0 + (y1 - y0) * t0), (x0 + (x1 - x0) * t1, y0 + (y1 - y0) * t1)], fill=col, width=wd * S)
+    dashed(spec['muscle'], YEL + (200,), 2, 8, 7, closed=True)
+    # 2) skeleton: thin white segments with soft dark outline, joint dots
+    for seg in spec['bones']:
+        d.line([sc(p) for p in seg], fill=(0, 0, 0, 110), width=9 * S, joint='curve')
+    for seg in spec['bones']:
+        d.line([sc(p) for p in seg], fill=(255, 255, 255, 235), width=4 * S, joint='curve')
+    for p in {tuple(p) for seg in spec['bones'] for p in seg}:
+        x, y = sc(p); r = 9 * S; d.ellipse((x - r, y - r, x + r, y + r), fill=(255, 255, 255, 255), outline=(0, 0, 0, 160), width=2 * S)
+        r = 4 * S; d.ellipse((x - r, y - r, x + r, y + r), fill=YEL + (255,))
+    # 3) reference line (dashed green) e.g. neutral spine
+    if 'ref' in spec: dashed(spec['ref'], GREEN + (235,), 3, 12, 9)
+    # 4) angle arc at a joint
+    if 'angle' in spec:
+        c, p1, p2 = spec['angle']; R = spec.get('arc_r', 62)
+        a1 = math.degrees(math.atan2(p1[1] - c[1], p1[0] - c[0])); a2 = math.degrees(math.atan2(p2[1] - c[1], p2[0] - c[0]))
+        if (a2 - a1) % 360 > 180: a1, a2 = a2, a1
+        cx, cy = sc(c); RR = R * S
+        d.pieslice((cx - RR, cy - RR, cx + RR, cy + RR), a1, a2, fill=YEL + (70,))
+        d.arc((cx - RR, cy - RR, cx + RR, cy + RR), a1, a2, fill=YEL + (255,), width=4 * S)
+    # 5) direction arrow (thin, amber)
+    if 'arrow' in spec:
+        (x0, y0), (x1, y1) = sc(spec['arrow'][0]), sc(spec['arrow'][1])
+        d.line([(x0, y0), (x1, y1)], fill=(0, 0, 0, 120), width=10 * S); d.line([(x0, y0), (x1, y1)], fill=YEL + (255,), width=5 * S)
+        ang = math.atan2(y1 - y0, x1 - x0); L = 24 * S
+        d.polygon([(x1 + 6 * S * math.cos(ang), y1 + 6 * S * math.sin(ang)), (x1 - L * math.cos(ang - .5), y1 - L * math.sin(ang - .5)), (x1 - L * math.cos(ang + .5), y1 - L * math.sin(ang + .5))], fill=YEL + (255,))
+    base.alpha_composite(ov)
+    base = base.resize((w, h), Image.LANCZOS); d2 = ImageDraw.Draw(base)
+    # 6) small text labels (no boxes): white text with dark stroke
+    for (x, y, txt, col, sz) in spec.get('labels', []):
+        d2.text((x, y), txt, font=F('black', sz), fill=col + (255,), anchor='mm', stroke_width=4, stroke_fill=(0, 0, 0, 230))
+    return base.convert('RGB')
+
+def label(lay, text, x, y, size=40, col=YEL, sub=None):
+    """Boxless label: text with soft shadow (+ optional small subline)."""
+    sh = Image.new('RGBA', (W, H)); ImageDraw.Draw(sh).text((x, y + 6), text, font=F('black', size), fill=(0, 0, 0, 230), anchor='mm')
+    if sub: ImageDraw.Draw(sh).text((x, y + size * 0.95 + 6), sub, font=F('bold', int(size * 0.6)), fill=(0, 0, 0, 230), anchor='mm')
+    lay.alpha_composite(sh.filter(ImageFilter.GaussianBlur(10)))
+    d = ImageDraw.Draw(lay); d.text((x, y), text, font=F('black', size), fill=col + (255,), anchor='mm')
+    if sub: d.text((x, y + size * 0.95), sub, font=F('bold', int(size * 0.6)), fill=(225, 225, 230, 255), anchor='mm')
+
+def hero_exercise(photo, spec, l1, l2, target, lab, items, name, seed):
+    """target: (fx, fy) point in fraction of the hero card; lab: (text, sub)"""
     base = background(seed, 1080); lay = Image.new('RGBA', (W, H))
-    im = load(photo, 1.12)
+    im = biomech(photo, spec)
+    im = ImageEnhance.Brightness(im).enhance(1.10); im = ImageEnhance.Contrast(im).enhance(1.06)
     cw, ch = 640, 900
-    hero = card(im, cw, ch, -3, rad=46, border=YEL, bw=5, cx=0.5, cy=0.3)
+    hero = card(im, cw, ch, -3, rad=46, border=(90, 92, 100), bw=4, cx=0.5, cy=0.3)
     hx, hy = 600, 1175
-    place(lay, hero, hx, hy, 190, glow=YEL, glow_a=110)
+    place(lay, hero, hx, hy, 190, glow=YEL, glow_a=70)
     fades(lay, top=700, bottom=1640)
-    # target marker + "trabalha aqui"
     tx = hx - cw / 2 + target[0] * cw; ty = hy - ch / 2 + target[1] * ch
-    target_ring(lay, tx, ty)
-    chip(lay, 'Trabalha aqui', 830, 800, 'yellow', rot=-4, size=34)
-    curved_arrow(lay, (820, 840), (tx + 40, ty - 40), bend=-0.3)
+    label(lay, lab[0], 790, 780, 34, YEL, lab[1])
+    curved_arrow(lay, (800, 835), (tx + 30, ty - 30), bend=-0.3, width=6)
     place(lay, plan_phone(items), 200, 1370, 200)
     headline(lay, l1, l2)
     brand(lay, 1720); save(base, lay, name)
 
+# crop-pixel coordinates (stiff_clean 630x920, costas_clean 605x770)
+STIFF = dict(
+    bones=[[(118, 150), (398, 282)], [(398, 282), (300, 600), (236, 800)]],
+    ref=[(70, 128), (470, 318)],
+    angle=((398, 282), (118, 150), (300, 600)), arc_r=70,
+    muscle=[(420, 250), (470, 290), (455, 420), (380, 600), (330, 610), (360, 470), (395, 330)],
+    labels=[(250, 108, 'COLUNA NEUTRA', GREEN, 24), (512, 228, 'QUADRIL', YEL, 24)],
+)
+COSTAS = dict(
+    bones=[[(205, 140), (290, 285)], [(160, 138), (120, 225), (78, 305)]],
+    angle=((160, 138), (78, 305), (290, 285)), arc_r=58,
+    arrow=[(70, 360), (150, 300)],
+    muscle=[(215, 150), (262, 170), (300, 260), (270, 280), (232, 230), (205, 185)],
+    labels=[(135, 92, 'OMBRO', YEL, 22), (385, 205, 'DORSAL', YEL, 24)],
+)
+
 def cover_stiff():
-    hero_exercise(A + '/stiff_crop.png', 'SEU STIFF', 'ERRADO?', (0.62, 0.25),
+    hero_exercise(A + '/stiff_clean.png', STIFF, 'SEU STIFF', 'ERRADO?', (0.66, 0.33), ('Posterior de coxa', 'e glúteo'),
                   [('POSTERIOR', 'Técnica do stiff', False), ('CARGA', 'Progressão semanal', False), ('FEEDBACK', 'Correção por vídeo', True)], 'capa-stiff.png', 21)
 
 def cover_costas():
-    hero_exercise(A + '/costas_crop.png', 'SUAS COSTAS', 'NÃO CRESCEM?', (0.40, 0.20),
+    hero_exercise(A + '/costas_clean.png', COSTAS, 'SUAS COSTAS', 'NÃO CRESCEM?', (0.42, 0.24), ('Puxe com o cotovelo', 'dorsal trabalhando'),
                   [('COSTAS', 'Remada guiada', False), ('TRAPÉZIO', 'Pegada aberta', False), ('EVOLUÇÃO', 'Histórico de cargas', True)], 'capa-costas.png', 33)
 
 def cover_evolucao():
