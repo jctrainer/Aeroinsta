@@ -179,5 +179,77 @@ def cover_passada():
     headline(lay, 'NINGUÉM CORRIGIU', 'ESSA PASSADA', s1=118, s2=116)
     brand(lay); save(base, lay, 'capa-passada.png')
 
+
+# ======================= shared extras =======================
+def plan_phone(items, title='Seu plano', sub='Treino pensado pra sua vida', w=330, h=560, rot=-6):
+    im = Image.new('RGBA', (w, h), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
+    d.rounded_rectangle((0, 0, w - 1, h - 1), 54, fill=(22, 23, 27, 255), outline=(80, 82, 90, 255), width=4)
+    d.rounded_rectangle((w / 2 - 50, 16, w / 2 + 50, 40), 12, fill=(8, 8, 10, 255))
+    d.text((28, 82), title, font=F('black', 30), fill=WHITE + (255,), anchor='lm')
+    d.text((28, 116), sub, font=F('bold', 17), fill=(170, 170, 178, 255), anchor='lm')
+    for k, (t1, t2, on) in enumerate(items):
+        y = 150 + k * 108
+        d.rounded_rectangle((20, y, w - 20, y + 92), 22, fill=(34, 35, 41, 255))
+        cx_, cy_ = 56, y + 46
+        d.ellipse((cx_ - 18, cy_ - 18, cx_ + 18, cy_ + 18), fill=(YEL if on else (225, 225, 230)) + (255,))
+        d.text((cx_, cy_ + 1), '✓', font=F('black', 22), fill=DARK + (255,), anchor='mm')
+        d.text((90, y + 32), t1, font=F('black', 24), fill=WHITE + (255,), anchor='lm')
+        d.text((90, y + 62), t2, font=F('bold', 17), fill=(170, 170, 178, 255), anchor='lm')
+    d.rounded_rectangle((26, h - 86, w - 26, h - 34), 26, fill=YEL + (255,))
+    d.text((w / 2, h - 60), 'TREINO DE HOJE', font=F('black', 22), fill=DARK + (255,), anchor='mm')
+    return im.rotate(rot, resample=Image.BICUBIC, expand=True)
+
+def curved_arrow(lay, p0, p1, bend=0.35, col=YEL, width=10):
+    (x0, y0), (x1, y1) = p0, p1
+    mx, my = (x0 + x1) / 2, (y0 + y1) / 2; dx, dy = x1 - x0, y1 - y0
+    cx_, cy_ = mx - dy * bend, my + dx * bend
+    pts = [((1 - t) ** 2 * x0 + 2 * (1 - t) * t * cx_ + t ** 2 * x1, (1 - t) ** 2 * y0 + 2 * (1 - t) * t * cy_ + t ** 2 * y1) for t in np.linspace(0, 1, 40)]
+    sh = Image.new('RGBA', (W, H)); ImageDraw.Draw(sh).line(pts, fill=(0, 0, 0, 170), width=width + 6, joint='curve'); lay.alpha_composite(sh.filter(ImageFilter.GaussianBlur(8)))
+    d = ImageDraw.Draw(lay); d.line(pts, fill=col + (255,), width=width, joint='curve')
+    ax, ay = pts[-1]; bx, by = pts[-4]; ang = math.atan2(ay - by, ax - bx); L = 38
+    d.polygon([(ax + 8 * math.cos(ang), ay + 8 * math.sin(ang)), (ax - L * math.cos(ang - .5), ay - L * math.sin(ang - .5)), (ax - L * math.cos(ang + .5), ay - L * math.sin(ang + .5))], fill=col + (255,))
+
+def target_ring(lay, x, y, r=46):
+    g = Image.new('RGBA', (W, H)); ImageDraw.Draw(g).ellipse((x - r - 20, y - r - 20, x + r + 20, y + r + 20), fill=YEL + (120,)); lay.alpha_composite(g.filter(ImageFilter.GaussianBlur(18)))
+    ImageDraw.Draw(lay).ellipse((x - r, y - r, x + r, y + r), outline=YEL + (255,), width=6)
+
+def hero_exercise(photo, l1, l2, target, items, name, seed):
+    """photo: path; target: (fx, fy) muscle point in fraction of the hero card"""
+    base = background(seed, 1080); lay = Image.new('RGBA', (W, H))
+    im = load(photo, 1.12)
+    cw, ch = 640, 900
+    hero = card(im, cw, ch, -3, rad=46, border=YEL, bw=5, cx=0.5, cy=0.3)
+    hx, hy = 600, 1175
+    place(lay, hero, hx, hy, 190, glow=YEL, glow_a=110)
+    fades(lay, top=700, bottom=1640)
+    # target marker + "trabalha aqui"
+    tx = hx - cw / 2 + target[0] * cw; ty = hy - ch / 2 + target[1] * ch
+    target_ring(lay, tx, ty)
+    chip(lay, 'Trabalha aqui', 830, 800, 'yellow', rot=-4, size=34)
+    curved_arrow(lay, (820, 840), (tx + 40, ty - 40), bend=-0.3)
+    place(lay, plan_phone(items), 200, 1370, 200)
+    headline(lay, l1, l2)
+    brand(lay, 1720); save(base, lay, name)
+
+def cover_stiff():
+    hero_exercise(A + '/stiff_crop.png', 'SEU STIFF', 'ERRADO?', (0.62, 0.25),
+                  [('POSTERIOR', 'Técnica do stiff', False), ('CARGA', 'Progressão semanal', False), ('FEEDBACK', 'Correção por vídeo', True)], 'capa-stiff.png', 21)
+
+def cover_costas():
+    hero_exercise(A + '/costas_crop.png', 'SUAS COSTAS', 'NÃO CRESCEM?', (0.40, 0.20),
+                  [('COSTAS', 'Remada guiada', False), ('TRAPÉZIO', 'Pegada aberta', False), ('EVOLUÇÃO', 'Histórico de cargas', True)], 'capa-costas.png', 33)
+
+def cover_evolucao():
+    base = background(41, 1100); lay = Image.new('RGBA', (W, H))
+    antes = card(load(A + '/antes.png', 1.0), 440, 620, 6, rad=40, blur=0.6, dim=0.82)
+    depois = card(load(A + '/depois.png', 1.12), 480, 680, -4, rad=40, border=YEL, bw=5)
+    place(lay, antes, 300, 1180); place(lay, depois, 760, 1210, 190, glow=YEL, glow_a=120)
+    fades(lay, top=740, bottom=1640)
+    chip(lay, 'ANTES', 300, 905, 'white', rot=6, size=40)
+    chip(lay, 'DEPOIS', 770, 905, 'yellow', rot=-4, size=40)
+    chip(lay, 'Aluna Jota Fit', 760, 1585, 'dark', size=28, icon='✓')
+    headline(lay, 'EVOLUÇÃO', 'DAS ALUNAS')
+    brand(lay, 1740); save(base, lay, 'capa-evolucao-alunas.png')
+
 for fn in sys.argv[4].split(','):
     globals()['cover_' + fn](); print('ok', fn)
