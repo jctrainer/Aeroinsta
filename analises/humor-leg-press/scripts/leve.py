@@ -196,11 +196,9 @@ def scene(lay, t, mp):
     arrow_to(lay, (700, 620), (hp[0] + 40, hp[1] - 80), PINK, t, 5.1, a)
     sweat(lay, hp, t, 5.2, a)
     # hydration
-    a = win(t, 12.9, 15.2)
-    pill(lay, 'hidratação estratégica', W / 2, 1380, 44, BLUE, WHITE, t, 12.95, a, '💧', rot=-3)
     # só mais 30s
-    a = win(t, 15.2, 17.6)
-    pill(lay, '"só mais 30 segundos"', W / 2, 1380, 44, WHITE, DARK, t, 15.25, a, '⏳', rot=3)
+    a = win(t, 13.2, 17.6)
+    pill(lay, '"só mais 30 segundos"', W / 2, 1380, 44, WHITE, DARK, t, 13.25, a, '⏳', rot=3)
     # battery
     a = win(t, 17.4, 20.6)
     if a > 0:
@@ -250,9 +248,8 @@ def laugh_circle(lay, t):
     a = win(t, SPL0, SPL1, 0.3, 0.3)
     if a <= 0: return
     p = eback(prog(t, SPL0, 0.4)); r = int(185 * max(0.05, p)); cx, cy = 790, 1260
-    g = RD2.get(min(int(round((25.9 + (t - SPL0)) * FPS)), 1091))
-    c = g[200:640, 760:1080]                      # his face region (320x440)
-    side = min(c.shape[:2]); c = c[:side, (c.shape[1] - side) // 2:(c.shape[1] - side) // 2 + side] if c.shape[1] > side else c[(c.shape[0] - side) // 2:(c.shape[0] - side) // 2 + side, :]
+    k_ = min(max(int(round((25.9 + (t - SPL0)) * FPS)), 619), 710)
+    c = cv2.imread(f'{V}/jcirc/{k_:05d}.png')       # AI-upscaled, face-centered
     R2 = 2 * r
     im = Image.fromarray(cv2.cvtColor(cv2.resize(c, (R2, R2), interpolation=cv2.INTER_CUBIC), cv2.COLOR_BGR2RGB)).convert('RGBA')
     if R2 not in _CM:
