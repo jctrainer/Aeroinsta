@@ -449,9 +449,9 @@ def fig_card(spec, lean, w=470, h=470):
 
 def cover_bulg(n):
     base = background(31 + n, 1080); lay = Image.new('RGBA', (W, H))
-    face = Image.open(A + f'/bulg_face{n}.jpg').convert('RGB').crop((0, 180, 1080, 1620) if n == 0 else (0, 250, 1080, 1700))
+    face = Image.open(A + f'/bulg_face{n}.jpg').convert('RGB').crop((0, 180, 1080, 1620))
     face = ImageEnhance.Contrast(face).enhance(1.06)
-    hero = card(face, 600, 800, -3, rad=46, border=(90, 92, 100), bw=4, cx=0.5, cy=0.0 if n == 0 else 0.1)
+    hero = card(face, 600, 800, -3, rad=46, border=(90, 92, 100), bw=4, cx=0.5, cy=0.0)
     place(lay, hero, 690, 1130, 190, glow=YEL, glow_a=70)
     fades(lay, top=700, bottom=1640)
     if n == 0:
