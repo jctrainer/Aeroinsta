@@ -100,3 +100,34 @@ Reto ou inclinado: qual você faz? 👇
 - **Estratégia A (alcance):** Parte 1 hoje → Parte 2 amanhã no mesmo horário. Reel único daqui a 3 a 4 semanas ou em anúncio.
 - **Estratégia B (rapidez):** só o Reel único.
 - **Não** poste os três na mesma semana: o conteúdo é o mesmo e um canibaliza o alcance do outro.
+
+---
+
+# TIKTOK
+
+No TikTok a legenda é curta, a busca conta muito e o vídeo é o mesmo arquivo.
+
+## Parte 1
+**Título/legenda:**
+Búlgaro inclinado trabalha posterior? 🤔 Parte 1/2. Ênfase não é exclusividade: inclinar dá + glúteo, o posterior só estabiliza. Quer posterior? Flexora. Comenta CONSULTORIA 👇 #agachamentobulgaro #treinodeperna #gluteos #biomecanica #personaltrainer
+
+**Texto de capa no app (opcional):** Búlgaro inclinado = posterior? ❌
+
+## Parte 2
+**Título/legenda:**
+Búlgaro reto pega reto femoral? 🤔 Parte 2/2. Ele é biarticular e quase não muda de comprimento no búlgaro. Quer reto femoral? Cadeira extensora. Comenta CONSULTORIA 👇 #agachamentobulgaro #quadriceps #treinodeperna #biomecanica #personaltrainer
+
+**Texto de capa no app (opcional):** Búlgaro reto = reto femoral? ❌
+
+## Reel único
+**Título/legenda:**
+Agachamento búlgaro: quadríceps ou glúteo? 🤔 Os dois trabalham. Inclinar só muda a ênfase. Posterior estabiliza, reto femoral quase não participa. Salva pro treino de perna e comenta CONSULTORIA 👇 #agachamentobulgaro #gluteos #quadriceps #treinodeperna #personaltrainer
+
+**Texto de capa no app (opcional):** Búlgaro: quadríceps ou glúteo?
+
+## Dicas TikTok
+- Use 3 a 5 hashtags. Mais que isso não ajuda.
+- Escreva "agachamento búlgaro" na legenda e no texto da capa: o TikTok funciona como busca.
+- Partes: poste a Parte 1, e quando a Parte 2 sair, fixe as duas no perfil ou crie uma **Playlist "Biomecânica"**.
+- Responda os comentários com **vídeo-resposta**: rende um vídeo novo com alcance próprio.
+- No TikTok o CTA vai para o **link da bio**; se não tiver, mantenha "comenta CONSULTORIA" e chame no direct.
