@@ -660,7 +660,7 @@ def s_fix(t, d):
              ('CORRIGIR NA HORA', 'Ficar de frente e avisar: joelho pro 2º dedo'),
              ('SÓ DEPOIS EVOLUIR', 'Passada andando só quando tiver controle')]
     for k, (a_, b_) in enumerate(items):
-        t0 = 0.8 + k * 2.0
+        t0 = (TL['fix_items'][k] - 0.2) if TL and 'fix_items' in TL else 0.8 + k * 2.0
         p = eo(prog(t, t0, 0.45))
         if p <= 0: continue
         y = 540 + k * 175
