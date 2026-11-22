@@ -641,14 +641,20 @@ def reel1(lay, t, body_only=False):
     a = win(t, o(156.10), o(161.50) + 0.2, 0.3, 0.25)
     if a > 0:
         title(lay, 'QUER POSTERIOR?', W / 2, 260, 110, YEL, t, o(156.16), a)
-        ia = a * eo(prog(t, o(156.10), 0.4))
-        photo(lay, 'flexora', (30, 880, 1050, 1600), (0, 0, 1280, 720), ia, GREEN, dy=(1 - ia) * 60)
-        for k, (txt, t0) in enumerate((('Cadeira flexora', o(157.32)), ('Mesa flexora', o(159.18)), ('Flexora em pé', o(160.58)))):
-            pp = eo(prog(t, t0, 0.3))
-            if pp <= 0: continue
-            d = ImageDraw.Draw(lay); f = F('black', 32); tw = f.getlength('✓ ' + txt); cx_ = 240 + k * 300; cy_ = 1400 - (1 - pp) * 30
-            d.rounded_rectangle((cx_ - tw / 2 - 18, cy_ - 30, cx_ + tw / 2 + 18, cy_ + 30), 30, fill=GREEN + (int(255 * a * pp),))
-            d.text((cx_, cy_ + 1), '✓ ' + txt, font=f, fill=DARK + (int(255 * a * pp),), anchor='mm')
+        seq = [('flexora_sent', 'CADEIRA FLEXORA', o(156.10), o(159.10)), ('flexora', 'MESA FLEXORA', o(159.10), o(160.50)), ('flexora_pe', 'FLEXORA EM PÉ', o(160.50), o(161.50) + 0.3)]
+        for k, (img_, nm, t0, t1) in enumerate(seq):
+            if not (t0 - 0.05 <= t < t1): continue
+            ia = a * eo(prog(t, t0, 0.3)) if k == 0 else a
+            ent = eo(prog(t, t0, 0.35))
+            mp_ = photo(lay, img_, (30, 880, 1050, 1600), (0, 0, 1280, 720), ia, GREEN, dy=(1 - ent) * 80 if k == 0 else 0)
+            if k > 0 and ent < 1:   # quick whip transition: white flash + slide
+                fl_ = Image.new('RGBA', (W, H)); ImageDraw.Draw(fl_).rounded_rectangle((30, 880, 1050, 1600), 36, fill=(255, 255, 255, int(120 * (1 - ent)))); lay.alpha_composite(fl_)
+            leader(lay, (540, 1250), (540, 960), nm, GREEN, t, t0 + 0.05, a, 44)
+            # counter chips 1/3, 2/3, 3/3
+            d = ImageDraw.Draw(lay)
+            for j in range(3):
+                cxj = 470 + j * 70
+                d.ellipse((cxj - 14, 1560 - 14, cxj + 14, 1560 + 14), fill=(GREEN if j <= k else (80, 80, 88)) + (int(255 * a),))
     if not body_only: cta(lay, t)
 
 def hook2(lay, t):
