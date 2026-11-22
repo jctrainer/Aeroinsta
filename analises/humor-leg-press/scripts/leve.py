@@ -191,16 +191,16 @@ def scene(lay, t, mp):
     a = win(t, 2.9, 4.7)
     sticker(lay, 'o intervalo entre as séries:', W / 2, 220, 62, WHITE, t, 2.9, a)
     # nasce pra sofrer
-    a = win(t, 4.8, 9.3)
+    a = win(t, 4.8, 9.35)
     pill(lay, 'ELA SOFRENDO', 720, 560, 52, PINK, WHITE, t, 5.0, a, '😩', rot=-5)
     arrow_to(lay, (700, 620), (hp[0] + 40, hp[1] - 80), PINK, t, 5.1, a)
     sweat(lay, hp, t, 5.2, a)
     # hydration
-    a = win(t, 11.4, 14.6)
-    pill(lay, 'hidratação estratégica', W / 2, 1380, 44, BLUE, WHITE, t, 11.5, a, '💧', rot=-3)
+    a = win(t, 12.9, 15.2)
+    pill(lay, 'hidratação estratégica', W / 2, 1380, 44, BLUE, WHITE, t, 12.95, a, '💧', rot=-3)
     # só mais 30s
-    a = win(t, 14.6, 17.6)
-    pill(lay, '"só mais 30 segundos"', W / 2, 1380, 44, WHITE, DARK, t, 14.7, a, '⏳', rot=3)
+    a = win(t, 15.2, 17.6)
+    pill(lay, '"só mais 30 segundos"', W / 2, 1380, 44, WHITE, DARK, t, 15.25, a, '⏳', rot=3)
     # battery
     a = win(t, 17.4, 20.6)
     if a > 0:
@@ -245,6 +245,25 @@ def split_overlay(lay, t):
             ph = ((t - SPL0) * 1.2 + j / 3) % 1
             paste_a(lay, emoji('😂', 70), 70 + j * 110 + 25 * math.sin(t * 3 + j), H - 380 - ph * 320, a * (1 - ph))
 
+_CM = {}
+def laugh_circle(lay, t):
+    a = win(t, SPL0, SPL1, 0.3, 0.3)
+    if a <= 0: return
+    p = eback(prog(t, SPL0, 0.4)); r = int(185 * max(0.05, p)); cx, cy = 790, 1260
+    g = RD2.get(min(int(round((25.9 + (t - SPL0)) * FPS)), 1091))
+    c = g[200:640, 760:1080]                      # his face region (320x440)
+    side = min(c.shape[:2]); c = c[:side, (c.shape[1] - side) // 2:(c.shape[1] - side) // 2 + side] if c.shape[1] > side else c[(c.shape[0] - side) // 2:(c.shape[0] - side) // 2 + side, :]
+    R2 = 2 * r
+    im = Image.fromarray(cv2.cvtColor(cv2.resize(c, (R2, R2), interpolation=cv2.INTER_CUBIC), cv2.COLOR_BGR2RGB)).convert('RGBA')
+    if R2 not in _CM:
+        m = Image.new('L', (R2 * 3, R2 * 3), 0); ImageDraw.Draw(m).ellipse((0, 0, R2 * 3 - 1, R2 * 3 - 1), fill=255); _CM[R2] = m.resize((R2, R2), Image.LANCZOS)
+    im.putalpha(_CM[R2])
+    gl = Image.new('RGBA', (W, H)); ImageDraw.Draw(gl).ellipse((cx - r - 16, cy - r - 16, cx + r + 16, cy + r + 16), fill=YEL + (int(130 * a),)); lay.alpha_composite(gl.filter(ImageFilter.GaussianBlur(24)))
+    paste_a(lay, im, cx - r, cy - r, a)
+    ImageDraw.Draw(lay).ellipse((cx - r - 4, cy - r - 4, cx + r + 4, cy + r + 4), outline=YEL + (int(255 * a),), width=9)
+    pill(lay, 'O PERSONAL RINDO', cx, cy + r + 60, 42, YEL, DARK, t, SPL0 + 0.5, a, '😂', rot=-3)
+    pill(lay, 'ELA SOFRENDO', 330, 640, 48, PINK, WHITE, t, SPL0 + 0.2, a, '😩', rot=4)
+
 def cta(lay, t):
     if t < CTA0: return
     a = eo(prog(t, CTA0, 0.4))
@@ -288,11 +307,8 @@ def split_frame(t):
         out[:H // 2] = top; out[H // 2:] = bot
     return out
 def render(t):
-    if SPL0 <= t < SPL1:
-        f = split_frame(t); mp = lambda p: (p[0] * W, p[1] * H)
-    else:
-        f = RD.get(min(int(round(t * FPS)), 1091))
-        f, mp = frame_xform(f, t)
+    f = RD.get(min(int(round(t * FPS)), 1091))
+    f, mp = frame_xform(f, t)
     if t >= CTA0:
         k = eo(prog(t, CTA0, 0.5)); f = cv2.addWeighted(cv2.GaussianBlur(f, (0, 0), 1 + 18 * k), 1, np.zeros_like(f), 0, -int(110 * k))
     base = Image.fromarray(cv2.cvtColor(f, cv2.COLOR_BGR2RGB)).convert('RGBA')
@@ -301,10 +317,10 @@ def render(t):
     al = np.clip(np.maximum((420 - yv) / 420, (yv - 1480) / 440), 0, 1) ** 1.4 * 0.6; vg[..., 3] = (al * 255).astype(np.uint8)
     lay.alpha_composite(Image.fromarray(vg))
     if t < CTA0:
-        if SPL0 <= t < SPL1: split_overlay(lay, t)
-        else: scene(lay, t, mp)
-        timer(lay, t); lyrics(lay, t); brand(lay, W / 2, 1830, 0.9)
-    else: cta(lay, t); lyrics(lay, t)
+        scene(lay, t, mp)
+        if SPL0 <= t < SPL1: laugh_circle(lay, t)
+        timer(lay, t); brand(lay, W / 2, 1830, 0.9)
+    else: cta(lay, t)
     base.alpha_composite(lay)
     return np.array(base.convert('RGB'))
 
