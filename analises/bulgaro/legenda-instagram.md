@@ -131,3 +131,30 @@ Agachamento búlgaro: quadríceps ou glúteo? 🤔 Os dois trabalham. Inclinar s
 - Partes: poste a Parte 1, e quando a Parte 2 sair, fixe as duas no perfil ou crie uma **Playlist "Biomecânica"**.
 - Responda os comentários com **vídeo-resposta**: rende um vídeo novo com alcance próprio.
 - No TikTok o CTA vai para o **link da bio**; se não tiver, mantenha "comenta CONSULTORIA" e chame no direct.
+
+---
+
+# YOUTUBE SHORTS
+
+Use os arquivos da pasta `tiktok-shorts/`: área segura para os botões e o texto do app.
+
+## Parte 1
+**Título (até 100 caracteres):** Agachamento búlgaro inclinado trabalha posterior? (Parte 1) #shorts
+**Descrição:** Inclinar o tronco no búlgaro dá mais ênfase no glúteo, mas o posterior só estabiliza. Quer posterior? Cadeira flexora, mesa flexora, flexora em pé. Parte 2: búlgaro reto pega reto femoral?
+#agachamentobulgaro #treinodeperna #biomecanica
+
+## Parte 2
+**Título:** Agachamento búlgaro reto pega reto femoral? (Parte 2) #shorts
+**Descrição:** O reto femoral é biarticular e quase não muda de comprimento no búlgaro: participa pouco. Quer reto femoral? Cadeira extensora. Quer resultado no búlgaro? Progressão de carga e amplitude.
+#agachamentobulgaro #quadriceps #biomecanica
+
+## Reel único
+**Título:** Agachamento búlgaro: quadríceps ou glúteo? Biomecânica explicada #shorts
+**Descrição:** Reto ou inclinado, quadríceps e glúteo trabalham. Inclinar só muda a ênfase. Posterior estabiliza e reto femoral quase não participa. O que fazer para cada músculo.
+#agachamentobulgaro #gluteos #biomecanica
+
+## Dicas Shorts
+- O título vale mais que as hashtags: comece pela palavra que a pessoa busca ("agachamento búlgaro").
+- No YouTube, o "comenta CONSULTORIA" funciona menos. Fixe um comentário com o link da consultoria ou do WhatsApp.
+- Junte as partes numa **playlist "Biomecânica do treino"**.
+- O Short tem até 3 min, então o Reel único (2:18) cabe. Para retenção, as partes rendem mais.
