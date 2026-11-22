@@ -518,5 +518,28 @@ def cover_humor1():
     lay.alpha_composite(emo_img('🫠', 110), (170, 1350)); lay.alpha_composite(emo_img('🦵', 100), (820, 1500))
     brand(lay, 1780); save(base, lay, 'capa-leg-press-sofrer.png')
 
+
+def cover_bv2_safe(n):
+    """TikTok/Shorts: keep everything out of bottom caption area (y>1520) and right buttons (x>930, y 800-1600)."""
+    base = background(41 + n, 950); lay = Image.new('RGBA', (W, H))
+    stage = Image.open(A + f'/bv2_stage{n}.png').convert('RGB')
+    col = [YEL, (90, 170, 255), RED][n]
+    st = card(stage, 900, 636, -2, rad=40, border=col, bw=5)
+    place(lay, st, 500, 930, 200, glow=col, glow_a=70)
+    fades(lay, top=600, bottom=1560)
+    face = Image.open(A + f'/bv2_face{n}.png').resize((300, 300), Image.LANCZOS)
+    cx, cy, r = 225, 1225, 150
+    g = Image.new('RGBA', (W, H)); ImageDraw.Draw(g).ellipse((cx - r - 16, cy - r - 16, cx + r + 16, cy + r + 16), fill=YEL + (140,)); lay.alpha_composite(g.filter(ImageFilter.GaussianBlur(24)))
+    lay.alpha_composite(face, (cx - r, cy - r)); ImageDraw.Draw(lay).ellipse((cx - r - 5, cy - r - 5, cx + r + 5, cy + r + 5), outline=YEL + (255,), width=10)
+    if n == 0: headline(lay, 'AGACHAMENTO BÚLGARO', 'QUADRÍCEPS OU GLÚTEO?', y=300, s1=96, s2=96, maxw=860)
+    elif n == 1: headline(lay, 'BÚLGARO INCLINADO', 'É PRA POSTERIOR?', y=300, s1=110, s2=110, maxw=860)
+    else: headline(lay, 'BÚLGARO RETO', 'PEGA RETO FEMORAL?', y=300, s1=120, s2=104, maxw=860)
+    if n: part_badge(lay, f'PARTE {n}', 640, 1290)
+    brand(lay, 1470)
+    save(base, lay, ['capa-bulgaro-tiktok-shorts.png', 'capa-bulgaro-parte1-tiktok-shorts.png', 'capa-bulgaro-parte2-tiktok-shorts.png'][n])
+def cover_bvs0(): cover_bv2_safe(0)
+def cover_bvs1(): cover_bv2_safe(1)
+def cover_bvs2(): cover_bv2_safe(2)
+
 for fn in sys.argv[4].split(','):
     globals()['cover_' + fn](); print('ok', fn)
