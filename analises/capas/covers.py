@@ -373,5 +373,105 @@ def cover_stiff2():
     headline(lay, 'VOCÊ DESCE', 'ATÉ O CHÃO?')
     brand(lay, 1720); save(base, lay, 'capa-stiff-amplitude.png')
 
+BLUE = (90, 170, 255)
+def ik(a, b, l1, l2, bend):
+    """2-link IK from a to b; bend=+1/-1 chooses side. returns joint."""
+    a = np.array(a, float); b = np.array(b, float); d = np.linalg.norm(b - a); d = min(d, l1 + l2 - 1e-3)
+    x = (l1 ** 2 - l2 ** 2 + d ** 2) / (2 * d); h = math.sqrt(max(0, l1 ** 2 - x ** 2))
+    u = (b - a) / (np.linalg.norm(b - a) + 1e-9); n = np.array([-u[1], u[0]]) * bend
+    return a + u * x + n * h
+def bulg(layer, cx, gy, lean, ph, a, sc=1.0, hl=None, col=WHITE, show_bench=True):
+    """side view facing left. lean: trunk angle from vertical (rad). ph: 0 top, 1 bottom. hl: dict muscle->(color, alpha, style)"""
+    if a <= 0: return
+    hl = hl or {}
+    d = ImageDraw.Draw(layer); S_ = sc
+    A = np.array([cx - 70 * S_, gy - 8 * S_])                        # front ankle
+    B = np.array([cx + 190 * S_, gy - 112 * S_])                     # rear foot on bench
+    Hh = np.array([cx + (40 + 25 * lean) * S_, gy - (250 - 105 * ph) * S_])
+    K = ik(A, Hh, 128 * S_, 132 * S_, -1)                            # front knee (forward/left)
+    RK = ik(Hh, B, 132 * S_, 128 * S_, -1)                           # rear knee (down)
+    Sh = Hh + np.array([-math.sin(lean), -math.cos(lean)]) * 160 * S_
+    hd = Sh + np.array([-math.sin(lean), -math.cos(lean)]) * 52 * S_
+    hand = Sh + np.array([0, 125 * S_])
+    w = int(12 * S_); c = col + (int(255 * a),)
+    if show_bench:
+        d.rounded_rectangle((cx + 150 * S_, gy - 104 * S_, cx + 290 * S_, gy - 80 * S_), 8, fill=(90, 92, 100, int(255 * a)))
+        d.rectangle((cx + 165 * S_, gy - 80 * S_, cx + 178 * S_, gy), fill=(90, 92, 100, int(255 * a)))
+        d.rectangle((cx + 262 * S_, gy - 80 * S_, cx + 275 * S_, gy), fill=(90, 92, 100, int(255 * a)))
+    d.line([(cx - 220 * S_, gy), (cx + 320 * S_, gy)], fill=(110, 110, 120, int(255 * a)), width=4)
+    # muscles (drawn under bones)
+    def band(p0, p1, off, colr, al, style='solid', wd=26):
+        if al <= 0: return
+        v = np.array(p1) - np.array(p0); n = np.array([-v[1], v[0]]) / (np.linalg.norm(v) + 1e-9)
+        q0 = np.array(p0) + n * off * S_ + v * 0.08; q1 = np.array(p1) + n * off * S_ - v * 0.12
+        g = Image.new('RGBA', (W, H))
+        if style == 'dash':
+            L = 10
+            for k_ in range(L):
+                if k_ % 2: continue
+                u0, u1 = k_ / L, (k_ + 1) / L
+                ImageDraw.Draw(g).line([tuple(q0 + (q1 - q0) * u0), tuple(q0 + (q1 - q0) * u1)], fill=colr + (int(200 * al),), width=int(wd * S_ * 0.5))
+        else:
+            ImageDraw.Draw(g).line([tuple(q0), tuple(q1)], fill=colr + (int(235 * al),), width=int(wd * S_))
+            layer.alpha_composite(g.filter(ImageFilter.GaussianBlur(10)))
+        layer.alpha_composite(g)
+    if 'quad' in hl: band(Hh, K, -16, *hl['quad'])
+    if 'ham' in hl: band(Hh, K, 16, *hl['ham'])
+    if 'rf' in hl: band(Hh + np.array([-14 * S_, -18 * S_]), K, -8, *hl['rf'], wd=14)
+    if 'glute' in hl:
+        colr, al = hl['glute'][:2]
+        if al > 0:
+            g = Image.new('RGBA', (W, H)); gc = Hh + np.array([30 * S_ + 10 * lean * S_, -6 * S_]); r = 34 * S_
+            ImageDraw.Draw(g).ellipse((gc[0] - r, gc[1] - r, gc[0] + r, gc[1] + r), fill=colr + (int(235 * al),))
+            layer.alpha_composite(g.filter(ImageFilter.GaussianBlur(6)))
+    d = ImageDraw.Draw(layer)
+    d.line([(A[0] - 40 * S_, gy - 2), tuple(A), tuple(K), tuple(Hh)], fill=c, width=w, joint='curve')
+    d.line([tuple(Hh), tuple(RK), tuple(B), (B[0] + 34 * S_, B[1] - 6 * S_)], fill=c, width=w, joint='curve')
+    d.line([tuple(Hh), tuple(Sh)], fill=c, width=w)
+    d.line([tuple(Sh), tuple(hand)], fill=c, width=int(w * .8))
+    d.ellipse((hd[0] - 30 * S_, hd[1] - 30 * S_, hd[0] + 30 * S_, hd[1] + 30 * S_), fill=c)
+    d.rounded_rectangle((hand[0] - 30 * S_, hand[1] - 9 * S_, hand[0] + 30 * S_, hand[1] + 9 * S_), 6, fill=(200, 200, 205, int(255 * a)))
+    return dict(H=Hh, K=K, S=Sh, A=A)
+
+
+def part_badge(lay, txt, cx, cy):
+    f = F('black', 40); tw = f.getlength(txt)
+    im = Image.new('RGBA', (int(tw + 140), 120), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
+    d.rounded_rectangle((20, 20, tw + 120, 100), 40, fill=(10, 10, 12, 240), outline=YEL + (255,), width=4)
+    d.text((70 + tw / 2, 61), txt, font=f, fill=YEL + (255,), anchor='mm')
+    im = im.rotate(4, resample=Image.BICUBIC, expand=True); lay.alpha_composite(im, (int(cx - im.width / 2), int(cy - im.height / 2)))
+
+def fig_card(spec, lean, w=470, h=470):
+    im = Image.new('RGBA', (W, H), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im); d.rounded_rectangle((0, 0, w - 1, h - 1), 40, fill=(14, 14, 18, 245), outline=(90, 92, 100, 255), width=4)
+    bulg(im, w * 0.42, h - 70, lean, 0.85, 1.0, 0.95, spec)
+    return im.crop((0, 0, w, h))
+
+def cover_bulg(n):
+    base = background(31 + n, 1080); lay = Image.new('RGBA', (W, H))
+    face = Image.open(A + f'/bulg_face{n}.jpg').convert('RGB').crop((0, 180, 1080, 1620) if n == 0 else (0, 250, 1080, 1700))
+    face = ImageEnhance.Contrast(face).enhance(1.06)
+    hero = card(face, 600, 800, -3, rad=46, border=(90, 92, 100), bw=4, cx=0.5, cy=0.0 if n == 0 else 0.1)
+    place(lay, hero, 690, 1130, 190, glow=YEL, glow_a=70)
+    fades(lay, top=700, bottom=1640)
+    if n == 0:
+        headline(lay, 'AGACHAMENTO BÚLGARO', 'QUADRÍCEPS OU GLÚTEO?', s1=104, s2=104)
+        im = Image.open(A + '/bulg_card1.png').convert('RGB'); f1 = card(im, 700, 328, 4, rad=34, border=YEL, bw=4)
+        place(lay, f1, 430, 1450, 200)
+    elif n == 1:
+        headline(lay, 'BÚLGARO INCLINADO', 'É PRA POSTERIOR?', s1=120, s2=120)
+        im = Image.open(A + '/bulg_card1.png').convert('RGB'); f1 = card(im, 700, 328, 4, rad=34, border=YEL, bw=4)
+        place(lay, f1, 430, 1450, 200)
+    else:
+        headline(lay, 'BÚLGARO RETO', 'PEGA RETO FEMORAL?', s1=130, s2=112)
+        im = Image.open(A + '/bulg_card2.png').convert('RGB'); f1 = card(im, 470, 384, 4, rad=34, border=RED, bw=4)
+        place(lay, f1, 300, 1420, 200)
+    if n: part_badge(lay, f'PARTE {n}', 860, 760)
+    brand(lay, 1790); save(base, lay, f'capa-bulgaro-parte{n}.png')
+
+def cover_bulg0(): cover_bulg(0)
+def cover_bulg1(): cover_bulg(1)
+def cover_bulg2(): cover_bulg(2)
+
 for fn in sys.argv[4].split(','):
     globals()['cover_' + fn](); print('ok', fn)
