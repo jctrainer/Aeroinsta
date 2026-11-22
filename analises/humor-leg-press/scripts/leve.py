@@ -192,8 +192,8 @@ def scene(lay, t, mp):
     sticker(lay, 'o intervalo entre as séries:', W / 2, 220, 62, WHITE, t, 2.9, a)
     # nasce pra sofrer
     a = win(t, 4.8, 9.3)
-    pill(lay, 'ELA SOFRENDO', hp[0] - 260, hp[1] - 300, 52, PINK, WHITE, t, 5.0, a, '😩', rot=-6)
-    arrow_to(lay, (hp[0] - 220, hp[1] - 240), (hp[0] - 30, hp[1] - 70), PINK, t, 5.1, a)
+    pill(lay, 'ELA SOFRENDO', 720, 560, 52, PINK, WHITE, t, 5.0, a, '😩', rot=-5)
+    arrow_to(lay, (700, 620), (hp[0] + 40, hp[1] - 80), PINK, t, 5.1, a)
     sweat(lay, hp, t, 5.2, a)
     # hydration
     a = win(t, 11.4, 14.6)
@@ -205,7 +205,7 @@ def scene(lay, t, mp):
     a = win(t, 17.4, 20.6)
     if a > 0:
         lvl = 0.35 * (1 - prog(t, 17.5, 2.5)); battery(lay, W / 2 - 120, 1360, lvl, a)
-        sticker(lay, 'modo economia', W / 2 + 140, 1360, 46, WHITE, t, 17.6, a)
+        sticker(lay, 'modo economia', W / 2 + 200, 1360, 46, WHITE, t, 17.6, a)
     # colega passando
     a = win(t, 18.6, 21.2)
     pill(lay, 'o colega querendo o leg', 360, 760, 40, DARK, WHITE, t, 18.8, a, '👀', rot=-4)
@@ -219,8 +219,8 @@ def scene(lay, t, mp):
         fl = 1 - prog(t, 24.3, 0.25)
         if 0 < fl < 1: lay.alpha_composite(Image.new('RGBA', (W, H), (255, 255, 255, int(150 * fl))))
         sticker(lay, 'ELE CHEGOU', W / 2, 260, 110, RED, t, 24.4, a, '😈', rot=-3)
-        pill(lay, 'O OUTRO QUE RI', jp[0] - 330, jp[1] + 120, 46, YEL, DARK, t, 25.2, a, '😂', rot=-4)
-        arrow_to(lay, (jp[0] - 230, jp[1] + 70), (jp[0] - 70, jp[1] + 10), YEL, t, 25.4, a)
+        pill(lay, 'O OUTRO QUE RI', 560, 720, 46, YEL, DARK, t, 25.2, a, '😂', rot=-4)
+        arrow_to(lay, (640, 670), (jp[0] - 70, jp[1] + 10), YEL, t, 25.4, a)
     # bora
     a = win(t, 29.0, 31.6)
     sticker(lay, 'ÚLTIMA SÉRIE', W / 2, 260, 100, GREEN, t, 29.1, a, '💪', rot=-2)
@@ -228,7 +228,8 @@ def scene(lay, t, mp):
     # procurar razão
     a = win(t, 31.7, 39.8)
     pill(lay, 'ELA', hp[0] - 200, hp[1] + 150, 50, PINK, WHITE, t, 31.8, a, '😩', rot=-4)
-    pill(lay, 'O PERSONAL', jp[0] - 300, jp[1] - 40, 46, YEL, DARK, t, 32.3, a, '😂', rot=4)
+    pill(lay, 'O PERSONAL', 640, 720, 46, YEL, DARK, t, 32.3, a, '😂', rot=4)
+    arrow_to(lay, (700, 670), (jp[0] - 40, jp[1] + 40), YEL, t, 32.5, a, 7)
     a = win(t, 39.9, 42.4)
     sticker(lay, 'A RAZÃO PRA VIVER:', W / 2, 220, 70, WHITE, t, 39.95, a)
     sticker(lay, 'O RESULTADO', W / 2, 330, 96, YEL, t, 40.4, a, '🍑', rot=-2)
@@ -242,7 +243,7 @@ def split_overlay(lay, t):
     if t > SPL0 + 1.6:
         for j in range(3):
             ph = ((t - SPL0) * 1.2 + j / 3) % 1
-            paste_a(lay, emoji('😂', 70), 120 + j * 300 + 40 * math.sin(t * 3 + j), H - 400 - ph * 300, a * (1 - ph))
+            paste_a(lay, emoji('😂', 70), 70 + j * 110 + 25 * math.sin(t * 3 + j), H - 380 - ph * 320, a * (1 - ph))
 
 def cta(lay, t):
     if t < CTA0: return
