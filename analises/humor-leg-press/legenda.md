@@ -1,39 +1,40 @@
-# Bastidores: "Um nasce pra sofrer" (leg press)
+# Bastidores 🎬: "Um nasce pra sofrer" (leg press)
 
-Categoria nova: **BASTIDORES 🎬**. Posts leves e engraçados do dia a dia do treino, para gerar identificação e compartilhamento.
+## REELS (Instagram)
 
-## Instagram
-**Título:** Um nasce pra sofrer e o outro ri 😂
+**Título:** Um nasce pra sofrer… e o outro ri 😂
 
 **Legenda:**
-Um nasce pra sofrer... e o outro ri 😂🎵
+Um nasce pra sofrer… e o outro ri 😂🎵
 
-O intervalo entre as séries no dia de perna:
-⏱️ "só mais 30 segundos"
-💧 hidratação estratégica
-🔋 modo economia
-✈️ modo avião
+Dia de perna, versão bastidores:
+⏱️ descanso de "só 30 segundos" que virou 12 minutos
+🔋 bateria em 1%
+✈️ modo avião ativado
+😈 até o personal chegar
 
-Até o personal chegar. 😈
+Sofrer faz parte. Mas sofrer COM PROPÓSITO é outra coisa: a razão pra viver é o resultado 🍑
 
-Mas a razão pra viver tá aí: o RESULTADO 🍑
+Marca aquela amiga que descansa 12 minutos entre as séries 👇😂
 
-Marca aquela amiga que descansa 12 minutos entre as séries 👇
+👉 Quer um treino que vale cada gota de suor? Comenta CONSULTORIA que eu te chamo no direct.
 
-👉 Quer sofrer com propósito? Comenta CONSULTORIA que eu te chamo no direct.
-
-#diadeperna #legpress #academia #humorfitness #treinofeminino #personaltrainer #bastidores #jotafit
+#diadeperna #legpress #humorfitness #bastidores #treinofeminino #academia #personaltrainer #jotafit
 
 **Comentário fixado:** Quanto tempo VOCÊ descansa entre as séries? Sem mentir 😂👇
 
-## TikTok
-Um nasce pra sofrer e o outro ri 😂 dia de perna com o personal. Marca a amiga que descansa 12 min 👇 #diadeperna #legpress #humorfitness #academia #treinofeminino
+---
 
-## YouTube Shorts
-**Título:** Dia de perna: um nasce pra sofrer e o outro ri 😂 #shorts
-**Descrição:** O intervalo entre as séries no leg press até o personal chegar. #diadeperna #legpress #humorfitness
+## TIKTOK
+
+**Título (texto da capa no app):** Um nasce pra sofrer… 😂
+
+**Legenda:**
+Dia de perna: um nasce pra sofrer e o outro ri 😂 Marca a amiga que descansa 12 min entre as séries 👇 #diadeperna #legpress #humorfitness #academia #treinofeminino
+
+---
 
 ## Dicas
-- Esse tipo de post vive de **compartilhamento** ("marca a amiga"). Responda os comentários com emoji e marque de volta.
-- A música é parte da piada: no Instagram/TikTok, se o áudio for bloqueado, use o próprio áudio "Azul da cor do mar" da biblioteca do app.
-- Confirme que a aluna autorizou a postagem: ela é o centro da piada.
+- Esse post vive de compartilhamento: responda os comentários marcando de volta e com emoji.
+- Se o áudio for bloqueado por direitos autorais, poste sem som e adicione "Azul da cor do mar" (Tim Maia) pela biblioteca do app.
+- Confirme que a aluna autorizou: ela é o centro da piada (e marque ela no post, isso aumenta o alcance).
