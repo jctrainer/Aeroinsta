@@ -65,16 +65,16 @@ def place(lay, im, cx, cy, shadow=170, glow=None, glow_a=120):
 
 def tight(text, font, fill, track):
     ws = [font.getlength(c) for c in text]
-    im = Image.new('RGBA', (int(sum(ws) + track * (len(text) - 1) + 40), int(font.size * 1.4 + 40)), (0, 0, 0, 0)); d = ImageDraw.Draw(im); x = 20
-    for c, w in zip(text, ws): d.text((x, im.height / 2), c, font=font, fill=fill + (255,), anchor='lm'); x += w + track
+    im = Image.new('RGBA', (int(sum(ws) + track * (len(text) - 1) + 40 + font.size * 0.08 * text.count(' ')), int(font.size * 1.4 + 40)), (0, 0, 0, 0)); d = ImageDraw.Draw(im); x = 20
+    for c, w in zip(text, ws): d.text((x, im.height / 2), c, font=font, fill=fill + (255,), anchor='lm'); x += w + track + (font.size * 0.08 if c == ' ' else 0)
     return im.crop(im.getbbox())
 
 def headline(lay, l1, l2, y=330, s1=140, s2=132, maxw=920, **_):
     """Boxless: white line 1, amber line 2, soft depth shadow, thin accent rule."""
-    a = tight(l1, F('disp', s1), WHITE, -7)
-    if a.width > maxw: a = tight(l1, F('disp', int(s1 * maxw / a.width)), WHITE, -7)
-    b = tight(l2, F('disp', s2), YEL, -7)
-    if b.width > maxw: b = tight(l2, F('disp', int(s2 * maxw / b.width)), YEL, -7)
+    a = tight(l1, F('disp', s1), WHITE, 3)
+    if a.width > maxw: a = tight(l1, F('disp', int(s1 * maxw / a.width)), WHITE, 3)
+    b = tight(l2, F('disp', s2), YEL, 3)
+    if b.width > maxw: b = tight(l2, F('disp', int(s2 * maxw / b.width)), YEL, 3)
     ax, bx = int(W / 2 - a.width / 2), int(W / 2 - b.width / 2); by = y + a.height + 26
     sh = Image.new('RGBA', (W, H))
     for im, x, yy in ((a, ax, y), (b, bx, by)):
