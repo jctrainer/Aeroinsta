@@ -495,5 +495,28 @@ def cover_bv20(): cover_bv2(0)
 def cover_bv21(): cover_bv2(1)
 def cover_bv22(): cover_bv2(2)
 
+
+EMOF = ImageFont.truetype('/usr/share/fonts/truetype/noto/NotoColorEmoji.ttf', 109)
+def emo_img(e, size):
+    im = Image.new('RGBA', (160, 160), (0, 0, 0, 0)); ImageDraw.Draw(im).text((10, 10), e, font=EMOF, embedded_color=True)
+    im = im.crop(im.getbbox()); s_ = size / max(im.size); return im.resize((int(im.width * s_), int(im.height * s_)), Image.LANCZOS)
+def cover_humor1():
+    base = background(55, 1000); lay = Image.new('RGBA', (W, H))
+    ph = Image.open(A + '/humor1.png').convert('RGB')
+    hero = card(ph, 700, 1000, 3, rad=46, border=YEL, bw=5, cx=0.75, cy=0.25)
+    place(lay, hero, 560, 1150, 200, glow=YEL, glow_a=70)
+    fades(lay, top=640, bottom=1700)
+    headline(lay, 'UM NASCE PRA SOFRER', 'E O OUTRO RI', s1=100, s2=108)
+    e = emo_img('😂', 105); lay.alpha_composite(e, (925, 482))
+    # category badge
+    f = F('black', 40); txt = 'BASTIDORES'; tw = f.getlength(txt)
+    b = Image.new('RGBA', (int(tw + 170), 110), (0, 0, 0, 0)); d = ImageDraw.Draw(b)
+    d.rounded_rectangle((10, 10, tw + 160, 100), 45, fill=(255, 255, 255, 245)); d.text((80, 56), txt, font=f, fill=DARK + (255,), anchor='lm')
+    b.alpha_composite(emo_img('🎬', 50), (24, 30)); b = b.rotate(-5, resample=Image.BICUBIC, expand=True)
+    lay.alpha_composite(b, (60, 760))
+    # stickers on photo
+    lay.alpha_composite(emo_img('🫠', 110), (170, 1350)); lay.alpha_composite(emo_img('🦵', 100), (820, 1500))
+    brand(lay, 1780); save(base, lay, 'capa-leg-press-sofrer.png')
+
 for fn in sys.argv[4].split(','):
     globals()['cover_' + fn](); print('ok', fn)
