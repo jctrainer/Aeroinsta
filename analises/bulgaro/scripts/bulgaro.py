@@ -87,7 +87,7 @@ def person_mask(img, s):
     r = _SEG.segment(mp.Image(image_format=mp.ImageFormat.SRGB, data=cv2.cvtColor(small, cv2.COLOR_BGR2RGB)))
     m = 1 - np.squeeze(r.confidence_masks[0].numpy_view())
     m = np.clip((m - 0.18) / 0.32, 0, 1)
-    if _PM['i'] is not None and abs(i - _PM['i']) == 1 and _PM['raw'] is not None:
+    if _PM['i'] is not None and abs(i - _PM['i']) == 1 and _PM['raw'] is not None and _PM['raw'].shape == m.shape:
         m = 0.6 * m + 0.4 * _PM['raw']
     raw = m
     m = cv2.resize((m * 255).astype(np.uint8), (img.shape[1], img.shape[0]), interpolation=cv2.INTER_LINEAR)
@@ -479,7 +479,7 @@ if REEL == '1':
     CARDW += [(0.0, o(17.12) + 0.3), (o(39.26), o(86.34) + 0.1), (o(96.02), o(112.46) + 0.2), (o(156.10), o(161.50) + 0.2)]
     PUNCH += [(o(3.66), 0.9), (o(16.26), 0.8), (o(48.82), 0.6), (o(65.50), 1.0), (o(103.32), 0.7), (o(104.10), 1.4), (o(110.98), 1.2)]
 elif REEL == '2':
-    CARDW += [(o(7.42), o(25.02) + 0.3), (o(117.60), o(155.94) + 0.2), (o(170.30), o(188.94) + 0.1)]
+    CARDW += [(0.0, o(25.02) + 0.3), (o(117.60), o(155.94) + 0.2), (o(170.30), o(188.94) + 0.1)]
     PUNCH += [(o(23.90), 0.9), (o(121.00), 0.8), (o(135.10), 1.2), (o(148.14), 0.9), (o(187.94), 0.9)]
 else:
     CARDW += [(0.0, o(25.02) + 0.3), (o(39.26), o(86.34) + 0.1), (o(96.02), o(112.46) + 0.2), (o(117.60), o(161.50) + 0.2), (o(170.30), o(188.94) + 0.1)]
@@ -504,8 +504,8 @@ def hook0(lay, t):
         title(lay, 'TRONCO RETO', W / 2, 360, 120, YEL, t, o(114.80), ba, 'stamp')
 
 def scene(lay, t):
-    if REEL == '1': reel1(lay, t)
-    elif REEL == '2': reel2(lay, t)
+    if REEL == '1': hook1(lay, t); reel1(lay, t, True)
+    elif REEL == '2': hook2(lay, t); reel2(lay, t, True)
     else:
         hook0(lay, t); reel1(lay, t, True); reel2(lay, t, True)
 
@@ -800,6 +800,13 @@ def reel2(lay, t, body_only=False):
             check_list(lay, t, [('Progressão de carga', o(183.80)), ('Halter pesado', o(184.1)), ('Amplitude completa', o(184.4)), ('No seu ritmo', o(185.26))], 170, 1080, a3, gap=100, size=46)
     if not body_only: cta(lay, t)
 
+def part_badge(lay, t):
+    if t >= CTA0: return
+    f = F('black', 30); txt = f'PARTE {REEL}/2'; tw = f.getlength(txt)
+    d = ImageDraw.Draw(lay); x1 = W - 40; x0 = x1 - tw - 44
+    d.rounded_rectangle((x0, 30, x1, 86), 28, fill=(10, 10, 12, 230), outline=YEL + (255,), width=3)
+    d.text(((x0 + x1) / 2, 59), txt, font=f, fill=YEL + (255,), anchor='mm')
+
 def cta(lay, t):
     if t < CTA0: return
     a = eo(prog(t, CTA0, 0.4))
@@ -812,6 +819,13 @@ def cta(lay, t):
     g = Image.new('RGBA', (W, H)); ImageDraw.Draw(g).rounded_rectangle((W / 2 - cw / 2 - 20, 860, W / 2 + cw / 2 + 20, 860 + ch_ + 40), 50, fill=YEL + (int(110 * p),)); lay.alpha_composite(g.filter(ImageFilter.GaussianBlur(40)))
     paste_a(lay, im, W / 2 - im.width / 2, 880 + (1 - p) * 120, p)
     title(lay, 'Comenta CONSULTORIA', W / 2, 1600, 70, WHITE, t, CTA0 + 0.8, a)
+    if REEL in '12':
+        ta = eo(prog(t, CTA0 + 1.2, 0.4)); f = F('black', 34)
+        txt = 'PARTE 2: BÚLGARO RETO PEGA RETO FEMORAL? 👀' if REEL == '1' else 'NÃO VIU? PARTE 1: INCLINADO É PRA POSTERIOR?'
+        txt = txt.replace(' 👀', '')
+        tw = f.getlength(txt); d = ImageDraw.Draw(lay); y = 800
+        d.rounded_rectangle((W / 2 - tw / 2 - 30, y - 34, W / 2 + tw / 2 + 30, y + 34), 34, fill=YEL + (int(255 * ta),))
+        d.text((W / 2, y + 1), txt, font=f, fill=DARK + (int(255 * ta),), anchor='mm')
     brand(lay, W / 2, 1760, eo(prog(t, CTA0 + 1.0, 0.4)), big=True)
 
 # ---------------- render ----------------
@@ -833,14 +847,15 @@ def render(t):
     scene(st, t)
     TLAY[0] = None
     lay.alpha_composite(st.crop((0, SHIFT, W, H + SHIFT)))
-    if t < CTA0 + 0.3:
+    if t < CTA0 + 0.3 and not os.environ.get('NOCIRC'):
         ca = 1 - eo(prog(t, CTA0 - 0.1, 0.4))
         cl = Image.new('RGBA', (W, H)); circle_face(cl, t)
         if ca < 1:
             arr = np.array(cl); arr[..., 3] = (arr[..., 3] * ca).astype(np.uint8); cl = Image.fromarray(arr)
         lay.alpha_composite(cl)
     lay.alpha_composite(tl_)
-    if REEL == '0' or True: cta(lay, t) if REEL == '0' else None
+    cta(lay, t)
+    if REEL in '12': part_badge(lay, t)
     if t < CTA0:
         captions(lay, t); brand(lay, W / 2, 1850, 0.9)
     ImageDraw.Draw(lay).rectangle((0, 0, int(W * t / TOTAL_OUT), 8), fill=YEL + (255,))

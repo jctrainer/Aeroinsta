@@ -473,5 +473,27 @@ def cover_bulg0(): cover_bulg(0)
 def cover_bulg1(): cover_bulg(1)
 def cover_bulg2(): cover_bulg(2)
 
+
+def cover_bv2(n):
+    base = background(41 + n, 1000); lay = Image.new('RGBA', (W, H))
+    stage = Image.open(A + f'/bv2_stage{n}.png').convert('RGB')
+    col = [YEL, (90, 170, 255), RED][n]
+    st = card(stage, 1000, 706, -2, rad=40, border=col, bw=5)
+    place(lay, st, W / 2, 1010, 200, glow=col, glow_a=70)
+    fades(lay, top=640, bottom=1700)
+    face = Image.open(A + f'/bv2_face{n}.png').resize((400, 400), Image.LANCZOS)
+    cx, cy, r = (820, 1380, 200) if n != 1 else (260, 1380, 200)
+    g = Image.new('RGBA', (W, H)); ImageDraw.Draw(g).ellipse((cx - r - 18, cy - r - 18, cx + r + 18, cy + r + 18), fill=YEL + (140,)); lay.alpha_composite(g.filter(ImageFilter.GaussianBlur(26)))
+    lay.alpha_composite(face, (cx - r, cy - r)); ImageDraw.Draw(lay).ellipse((cx - r - 5, cy - r - 5, cx + r + 5, cy + r + 5), outline=YEL + (255,), width=11)
+    if n == 0: headline(lay, 'AGACHAMENTO BÚLGARO', 'QUADRÍCEPS OU GLÚTEO?', s1=104, s2=104)
+    elif n == 1: headline(lay, 'BÚLGARO INCLINADO', 'É PRA POSTERIOR?', s1=120, s2=120)
+    else: headline(lay, 'BÚLGARO RETO', 'PEGA RETO FEMORAL?', s1=130, s2=112)
+    if n: part_badge(lay, f'PARTE {n}', 300 if n == 2 else 820, 1380 if n == 2 else 1380)
+    brand(lay, 1760)
+    save(base, lay, ['capa-bulgaro-v2.png', 'capa-bulgaro-parte1-v2.png', 'capa-bulgaro-parte2-v2.png'][n])
+def cover_bv20(): cover_bv2(0)
+def cover_bv21(): cover_bv2(1)
+def cover_bv22(): cover_bv2(2)
+
 for fn in sys.argv[4].split(','):
     globals()['cover_' + fn](); print('ok', fn)
