@@ -72,6 +72,17 @@ def person_mask(img, s):
         _SEG = vision.ImageSegmenter.create_from_options(vision.ImageSegmenterOptions(base_options=BaseOptions(model_asset_path=os.path.dirname(V) + '/models/selfie_mc.tflite'), output_confidence_masks=True))
     i = int(round(s * FPS))
     if _PM['i'] == i: return _PM['m']
+    mf = f'{V}/matte/{i:05d}.png'
+    if os.path.exists(mf):
+        m = cv2.imread(mf, 0).astype(np.float32) / 255
+        m = np.clip((m - 0.06) / 0.86, 0, 1)
+        if _PM['i'] is not None and abs(i - _PM['i']) == 1 and _PM['raw'] is not None and _PM['raw'].shape == m.shape:
+            m = 0.7 * m + 0.3 * _PM['raw']
+        raw = m
+        m = cv2.resize((m * 255).astype(np.uint8), (img.shape[1], img.shape[0]), interpolation=cv2.INTER_CUBIC)
+        m = cv2.erode(m, np.ones((3, 3), np.uint8))
+        _PM.update(i=i, m=m, raw=raw)
+        return m
     small = cv2.resize(img, (540, 1164), interpolation=cv2.INTER_AREA)
     r = _SEG.segment(mp.Image(image_format=mp.ImageFormat.SRGB, data=cv2.cvtColor(small, cv2.COLOR_BGR2RGB)))
     m = 1 - np.squeeze(r.confidence_masks[0].numpy_view())
@@ -89,35 +100,57 @@ def bg_plate(t):
         g = cv2.imread(V + '/img/bggym.png')          # 1280x720
         c = g[:, 340:340 + 405]                       # vertical slice (405x720)
         c = cv2.resize(c, (1215, 2160), interpolation=cv2.INTER_CUBIC)
-        c = cv2.GaussianBlur(c, (0, 0), 6)
-        c = cv2.convertScaleAbs(c, alpha=0.78, beta=0)
+        c = cv2.GaussianBlur(c, (0, 0), 9)
+        c = cv2.convertScaleAbs(c, alpha=0.72, beta=0)
         _BGP = c
     dx = int(60 + 40 * math.sin(t * 0.12)); dy = int(110 + 60 * math.sin(t * 0.09))
     return _BGP[dy:dy + H, dx:dx + W]
 def card_w(t):
     return max([win(t, a_, b_, 0.45, 0.4) for a_, b_ in CARDW] + [0])
 def frame_at(t):
-    img, s, seg_t0 = src_frame(t)
-    k = seg_index(t)
-    wc = eio(card_w(t))
-    z = (0.82 if k % 2 == 0 else 0.88) * (1 - wc) + 0.60 * wc
-    for pt, pd in PUNCH:
-        if pt - 0.05 <= t <= pt + pd: z *= 1 + 0.10 * (1 - wc) * eo(prog(t, pt - 0.05, 0.14)) * (1 - eio(prog(t, pt + pd - 0.25, 0.25)))
-    # anchor: face center (540, 940 in SR frame) -> screen
-    fy = 940; sy = (330 + (fy - 420) * 0.82) * (1 - wc) + (330 + (fy - 420) * 0.60) * wc
-    M = np.array([[z, 0, 540 - z * 540], [0, z, sy - z * fy]], np.float32)
-    fg = cv2.warpAffine(img, M, (W, H), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_CONSTANT, borderValue=(0, 0, 0))
-    mk = cv2.warpAffine(np.full(img.shape[:2], 255, np.uint8), M, (W, H), flags=cv2.INTER_LINEAR, borderValue=0)
+    return bg_plate(t).copy()
+
+SHIFT = 420
+CIRC_BIG = (540, 880, 360); CIRC_SMALL_Y, CIRC_SMALL_R = 1215, 165
+def card_index(t):
+    best, bi = 0, 0
+    for k, (a_, b_) in enumerate(CARDW):
+        w_ = win(t, a_, b_, 0.45, 0.4)
+        if w_ > best: best, bi = w_, k
+    return bi
+_DISC = {}
+def circle_face(lay, t):
+    img, s, _ = src_frame(t)
     pm = person_mask(img, s)
-    fgm = cv2.warpAffine(pm, M, (W, H), flags=cv2.INTER_LINEAR, borderValue=0)
-    m = (cv2.GaussianBlur(fgm, (0, 0), 1.6).astype(np.float32) / 255 * (mk.astype(np.float32) / 255))[..., None]
-    bg = bg_plate(t)
-    # soft amber rim light on the subject edge
-    edge = np.clip(cv2.GaussianBlur(fgm, (0, 0), 9).astype(np.float32) / 255 - m[..., 0], 0, 1)[..., None]
-    out = fg.astype(np.float32) * m + bg.astype(np.float32) * (1 - m)
-    out = np.clip(out + edge * np.array([0, 140, 255], np.float32) * 0.35, 0, 255).astype(np.uint8)
-    out = cv2.convertScaleAbs(out, alpha=1.05, beta=-4)
-    return out
+    wc = eio(card_w(t)); k = card_index(t)
+    xs = [870, 210][k % 2]
+    cx = CIRC_BIG[0] * (1 - wc) + xs * wc; cy = CIRC_BIG[1] * (1 - wc) + CIRC_SMALL_Y * wc
+    r = CIRC_BIG[2] * (1 - wc) + CIRC_SMALL_R * wc
+    pz = 1.0
+    for pt, pd in PUNCH:
+        if pt - 0.05 <= t <= pt + pd: pz *= 1 + 0.07 * eo(prog(t, pt - 0.05, 0.14)) * (1 - eio(prog(t, pt + pd - 0.25, 0.25)))
+    r *= pz
+    seg = seg_index(t); zc = 1.0 if seg % 2 == 0 else 0.92            # alternate framing per cut
+    side = int(1040 * zc); fx, fy = 540, 930
+    x0, y0 = int(fx - side / 2), int(fy - side / 2)
+    crop = img[max(0, y0):y0 + side, max(0, x0):x0 + side]; mcrop = pm[max(0, y0):y0 + side, max(0, x0):x0 + side]
+    R2 = int(2 * r)
+    if R2 < 20: return
+    face = cv2.resize(crop, (R2, R2), interpolation=cv2.INTER_AREA).astype(np.float32)
+    mm = cv2.resize(mcrop, (R2, R2), interpolation=cv2.INTER_AREA).astype(np.float32)[..., None] / 255
+    if R2 not in _DISC:
+        yy, xx = np.mgrid[0:R2, 0:R2].astype(np.float32); d_ = np.sqrt((xx - R2 / 2) ** 2 + (yy - R2 * 0.42) ** 2) / (R2 / 2)
+        g = np.clip(1 - d_, 0, 1)[..., None]
+        _DISC[R2] = (np.array([18, 16, 14], np.float32) * (1 - g) + np.array([30, 120, 200], np.float32) * g * 0.75 + np.array([14, 12, 10], np.float32) * g * 0.25)
+    face = (face - 128) * 1.06 + 124
+    face = face * mm + _DISC[R2] * (1 - mm)
+    face = np.clip(face, 0, 255).astype(np.uint8)
+    im = Image.fromarray(cv2.cvtColor(face, cv2.COLOR_BGR2RGB)).convert('RGBA')
+    mk = Image.new('L', (R2 * 3, R2 * 3), 0); ImageDraw.Draw(mk).ellipse((0, 0, R2 * 3 - 1, R2 * 3 - 1), fill=255); im.putalpha(mk.resize((R2, R2), Image.LANCZOS))
+    g = Image.new('RGBA', (W, H)); ImageDraw.Draw(g).ellipse((cx - r - 16, cy - r - 16, cx + r + 16, cy + r + 16), fill=YEL + (130,)); lay.alpha_composite(g.filter(ImageFilter.GaussianBlur(24)))
+    sh = Image.new('RGBA', (W, H)); ImageDraw.Draw(sh).ellipse((cx - r, cy - r + 24, cx + r, cy + r + 24), fill=(0, 0, 0, 170)); lay.alpha_composite(sh.filter(ImageFilter.GaussianBlur(20)))
+    lay.alpha_composite(im, (int(cx - r), int(cy - r)))
+    ImageDraw.Draw(lay).ellipse((cx - r - 4, cy - r - 4, cx + r + 4, cy + r + 4), outline=YEL + (255,), width=9)
 
 # ---------------- helpers ----------------
 def paste_a(layer, im, x, y, a=1.0):
@@ -131,6 +164,7 @@ def tight(text, font, fill, track):
     for c, w in zip(text, ws): d.text((x, im.height / 2), c, font=font, fill=fill + (255,), anchor='lm'); x += w + track
     return im.crop(im.getbbox())
 _TC = {}
+TLAY = [None]
 def title_img(s, size, col, maxw=980):
     k = (s, size, col)
     if k not in _TC:
@@ -147,7 +181,9 @@ def title(layer, s, cx, cy, size, col, t, t0, a=1.0, mode='up'):
     if mode == 'stamp':
         sc = 1 + 0.8 * (1 - eo(p)); im = im.resize((max(1, int(im.width * sc)), max(1, int(im.height * sc))), Image.BICUBIC); dy = 0
     else: dy = (1 - eo(p)) * 50
-    if cy < 450: cy -= 80
+    if cy < 450:
+        cy -= 80
+        if TLAY[0] is not None: layer = TLAY[0]
     paste_a(layer, im, cx - im.width / 2, cy - im.height / 2 + dy, clamp(p * 2.2) * a)
 def label(layer, s, x, y, size, col, a, anchor='mm', font='black'):
     if a <= 0: return
@@ -262,6 +298,7 @@ def check_list(layer, t, items, x, y, a, col=GREEN, gap=92, size=44, mark='✓')
 
 # ---------------- photo cards with biomechanics ----------------
 IMGS = {}
+TNOW = [0.0]
 JN = {'ereto': dict(sh=(548, 200), hip=(573, 422), knee=(379, 424), ank=(411, 602), wr=(534, 444)),
       'inclinado': dict(sh=(407, 190), hip=(589, 355), knee=(376, 395), ank=(394, 591), wr=(455, 450)),
       'retofemoral': dict(hip=(516, 92), knee=(670, 482))}
@@ -271,10 +308,25 @@ def photo(lay, name, box, crop, a, outline=YEL, dy=0):
     if name not in IMGS: IMGS[name] = Image.open(V + '/img/' + name + '.png').convert('RGB')
     x0, y0, x1, y1 = box; y0 += dy; y1 += dy
     cx0, cy0, cx1, cy1 = crop; bw, bh = int(x1 - x0), int(y1 - y0)
+    IW, IH = IMGS[name].size; asp = bw / bh; mxc, myc = (cx0 + cx1) / 2, (cy0 + cy1) / 2
+    ch_ = min(IH, max(cy1 - cy0, (cx1 - cx0) / asp)); cw_ = ch_ * asp
+    if cw_ > IW: cw_ = IW; ch_ = cw_ / asp
+    mxc = min(max(mxc, cw_ / 2), IW - cw_ / 2); myc = min(max(myc, ch_ / 2), IH - ch_ / 2)
+    cx0, cy0, cx1, cy1 = mxc - cw_ / 2, myc - ch_ / 2, mxc + cw_ / 2, myc + ch_ / 2
+    kb = 1.0 + 0.035 * (0.5 + 0.5 * math.sin(TNOW[0] * 0.45 + (0 if name in ('ereto', 'inclinado') else len(name))))
+    mx, my = (cx0 + cx1) / 2, (cy0 + cy1) / 2; hw, hh = (cx1 - cx0) / 2 / kb, (cy1 - cy0) / 2 / kb
+    cx0, cy0, cx1, cy1 = mx - hw, my - hh, mx + hw, my + hh
     im = IMGS[name].crop((cx0, cy0, cx1, cy1)).resize((bw, bh), Image.LANCZOS).convert('RGBA')
     mk = Image.new('L', (bw, bh), 0); ImageDraw.Draw(mk).rounded_rectangle((0, 0, bw - 1, bh - 1), 36, fill=int(255 * a)); im.putalpha(mk)
     sh = Image.new('RGBA', (W, H)); ImageDraw.Draw(sh).rounded_rectangle((x0, y0 + 18, x1, y1 + 18), 36, fill=(0, 0, 0, int(160 * a))); lay.alpha_composite(sh.filter(ImageFilter.GaussianBlur(22)))
     lay.alpha_composite(im, (int(x0), int(y0)))
+    if dy > 0.5:   # entering: light sweep across the card
+        pp = 1 - dy / 80.0
+        sw = Image.new('RGBA', (bw, bh), (0, 0, 0, 0)); sd = ImageDraw.Draw(sw); bx = -200 + pp * (bw + 400)
+        for k_ in range(18):
+            sd.line([(bx + k_ * 6 - 300, bh), (bx + k_ * 6, 0)], fill=(255, 255, 255, int(10 * (1 - abs(k_ - 9) / 9) * 9)), width=6)
+        sw.putalpha(Image.fromarray(np.minimum(np.array(sw.split()[3]), np.array(mk))))
+        lay.alpha_composite(sw.filter(ImageFilter.GaussianBlur(6)), (int(x0), int(y0)))
     ImageDraw.Draw(lay).rounded_rectangle((x0, y0, x1, y1), 36, outline=outline + (int(255 * a),), width=4)
     sx = bw / (cx1 - cx0); sy = bh / (cy1 - cy0)
     return lambda p: (x0 + (p[0] - cx0) * sx, y0 + (p[1] - cy0) * sy)
@@ -295,7 +347,7 @@ def muscles(lay, name, mp_, a, quad=0, glute=0, ham=0):
         for k in range(0, 10, 2):
             u0, u1 = k / 10, (k + 1) / 10
             d.line([tuple(p0 + (p1 - p0) * u0), tuple(p0 + (p1 - p0) * u1)], fill=BLUE + (int(255 * a * ham),), width=max(4, int(10 * sc)))
-    if glute: glow_dot(lay, (hip[0] + 22 * sc, hip[1] - 4 * sc), 44 * sc, YEL, a * glute)
+    if glute: glow_line(lay, (hip[0] + 10 * sc, hip[1] - 40 * sc), (hip[0] + 30 * sc, hip[1] + 20 * sc), YEL, a * glute * 0.8, int(40 * sc))
 def moment(lay, name, mp_, t, t0, a, show=('knee', 'hip')):
     """vertical load line through dumbbells + horizontal moment arms to knee/hip"""
     if a <= 0: return
@@ -318,11 +370,11 @@ def moment(lay, name, mp_, t, t0, a, show=('knee', 'hip')):
         d.ellipse((jp[0] - 11, jp[1] - 11, jp[0] + 11, jp[1] + 11), fill=col + (int(255 * a * q),), outline=(0, 0, 0, int(200 * a)), width=3)
         label(lay, 'joelho' if j == 'knee' else 'quadril', (fx + jp[0]) / 2, jp[1] + (30 if j == 'knee' else -28), 24, col, a * q)
 CROP_W = (170, 110, 1010, 667)     # wide card crop (aspect ~1.5)
-CROP_S = (300, 120, 900, 680)      # side-by-side crop (aspect ~1.07)
+CROP_S = (330, 110, 850, 670)      # side-by-side crop (aspect ~1.07)
 def two_up(lay, t, t0, a, mode):
     """side by side ereto | inclinado with moment arms"""
     for k, nm in enumerate(('ereto', 'inclinado')):
-        box = (70 + k * 480, 990, 530 + k * 480, 1420)
+        box = (30 + k * 515, 880, 535 + k * 515, 1600)
         mp_ = photo(lay, nm, box, CROP_S, a, YEL)
         if not mp_: continue
         swap = clamp((t - t0 - 1.8) / 0.3) if mode != 'quad' else 0
@@ -335,10 +387,55 @@ def two_up(lay, t, t0, a, mode):
             ea = a * clamp((t - t0 - 1.8) / 0.4)
             label(lay, '+ QUADRÍCEPS' if k == 0 else '+ GLÚTEO', (box[0] + box[2]) / 2, box[1] + 36, 38, YEL if k == 0 else BLUE, ea)
 
+
+# ---------------- motion helpers ----------------
+def rings(lay, p, col, t, t0, a, r0=40, n=3, period=1.2, maxr=150):
+    if a <= 0 or t < t0: return
+    d = ImageDraw.Draw(lay)
+    for k in range(n):
+        ph = ((t - t0) / period + k / n) % 1.0
+        r = r0 + (maxr - r0) * ph; al = a * (1 - ph) ** 1.5
+        d.ellipse((p[0] - r, p[1] - r, p[0] + r, p[1] + r), outline=col + (int(230 * al),), width=max(2, int(7 * (1 - ph))))
+def leader(lay, p0, p1, text, col, t, t0, a, size=36, sub=None):
+    """animated leader line from point p0 (muscle) to p1 (label) + label pop"""
+    if a <= 0 or t < t0: return
+    q = eo(prog(t, t0, 0.35)); d = ImageDraw.Draw(lay)
+    px = p0[0] + (p1[0] - p0[0]) * q; py = p0[1] + (p1[1] - p0[1]) * q
+    d.line([p0, (px, py)], fill=(0, 0, 0, int(160 * a)), width=7); d.line([p0, (px, py)], fill=col + (int(255 * a),), width=4)
+    d.ellipse((p0[0] - 9, p0[1] - 9, p0[0] + 9, p0[1] + 9), fill=col + (int(255 * a),), outline=(0, 0, 0, int(200 * a)), width=2)
+    la = a * clamp((t - t0 - 0.25) / 0.25)
+    if la > 0:
+        f = F('black', size); tw = f.getlength(text); sc = 1 + 0.25 * (1 - eo(prog(t, t0 + 0.25, 0.3)))
+        bx0, by0 = p1[0] - tw / 2 - 18, p1[1] - size * 0.75; bx1, by1 = p1[0] + tw / 2 + 18, p1[1] + size * 0.75 + (size * 0.8 if sub else 0)
+        d.rounded_rectangle((bx0, by0, bx1, by1), 16, fill=(8, 8, 10, int(215 * la)), outline=col + (int(255 * la),), width=3)
+        label(lay, text, p1[0], p1[1], int(size * sc), col, la)
+        if sub: label(lay, sub, p1[0], p1[1] + size * 0.9, int(size * 0.62), WHITE, la, font='bold')
+def flow_line(lay, p0, p1, col, t, a, w=5, dash=14, gap=10, speed=60):
+    if a <= 0: return
+    d = ImageDraw.Draw(lay); L = math.hypot(p1[0] - p0[0], p1[1] - p0[1]); 
+    if L < 1: return
+    ux, uy = (p1[0] - p0[0]) / L, (p1[1] - p0[1]) / L; off = (t * speed) % (dash + gap); pos = -dash + off
+    while pos < L:
+        s0 = max(0, pos); s1 = min(L, pos + dash)
+        if s1 > s0: d.line([(p0[0] + ux * s0, p0[1] + uy * s0), (p0[0] + ux * s1, p0[1] + uy * s1)], fill=col + (int(255 * a),), width=w)
+        pos += dash + gap
+def torque_arc(lay, c, r, span, col, t, a, cw=True):
+    """curved arrow around a joint; span in degrees ~ moment size; rotates gently"""
+    if a <= 0 or span < 5: return
+    d = ImageDraw.Draw(lay); st = (t * 90) % 360 if cw else -(t * 90) % 360
+    a0, a1 = st, st + span
+    d.arc((c[0] - r, c[1] - r, c[0] + r, c[1] + r), a0, a1, fill=(0, 0, 0, int(150 * a)), width=11)
+    d.arc((c[0] - r, c[1] - r, c[0] + r, c[1] + r), a0, a1, fill=col + (int(255 * a),), width=7)
+    ang = math.radians(a1); hx, hy = c[0] + r * math.cos(ang), c[1] + r * math.sin(ang); tg = ang + math.pi / 2
+    d.polygon([(hx + 16 * math.cos(tg), hy + 16 * math.sin(tg)), (hx - 13 * math.cos(ang), hy - 13 * math.sin(ang)), (hx + 13 * math.cos(ang), hy + 13 * math.sin(ang))], fill=col + (int(255 * a),))
+def shake(t, t0, amp=14, dur=0.35):
+    if t < t0 or t > t0 + dur: return 0, 0
+    k = 1 - (t - t0) / dur; return amp * k * math.sin(t * 90), amp * k * math.cos(t * 77)
+
 # ---------------- captions ----------------
-ASR = json.load(open(V + '/asr.json'))
+ASR = json.load(open(V + '/asr_final.json'))
 FIX = {'quadrícipes': 'quadríceps', 'quadrícipe': 'quadríceps', 'quadrícipes.': 'quadríceps.', 'quadrícipes,': 'quadríceps,', 'relevante.': 'irrelevante.',
-       'alter': 'halter', 'axismo,': 'achismo,', 'J,': 'Jota,', 'j,': 'Jota', 'jfit.': 'Fit.', '-se': '', 'cai': 'cai'}
+       'alter': 'halter', 'altar': 'halter', 'vem': 'vi', 'saído': 'sendo', 'Estender': 'Estendeu', 'ai': 'aí', 'Você': 'você', 'axismo,': 'achismo,', 'J,': 'Jota,', 'j,': 'Jota', 'jfit.': 'Fit.', '-se': '', 'cai': 'cai'}
 WORDS = []
 for s_ in ASR:
     for w in s_['words']:
@@ -356,7 +453,7 @@ if cur: CHUNKS.append(cur)
 CH = []
 for k, c in enumerate(CHUNKS):
     nxt = CHUNKS[k + 1][0][1] if k + 1 < len(CHUNKS) else c[-1][2] + 0.5
-    CH.append((c, c[0][1] - 0.04, min(nxt, c[-1][2] + 0.5)))
+    CH.append((c, c[0][1] - 0.10, min(nxt - 0.06, c[-1][2] + 0.5)))
 CAP_Y = 1560
 def captions(layer, t, y=CAP_Y):
     ch = None
@@ -370,7 +467,7 @@ def captions(layer, t, y=CAP_Y):
     x = W / 2 - tot / 2; yy = y + (1 - p) * 18
     for k, w_ in enumerate(words):
         ww = f.getlength(w_); st, en = ch[k][1], ch[k][2]
-        col = YEL if st - 0.04 <= t <= en + 0.1 else (WHITE if t >= st else (205, 205, 210))
+        col = YEL if st - 0.06 <= t <= en + 0.08 else (WHITE if t >= st else (205, 205, 210))
         d.text((x + ww / 2, yy), w_, font=f, fill=col + (int(255 * p),), anchor='mm', stroke_width=7, stroke_fill=(0, 0, 0, int(255 * p)))
         x += ww + sp
 
@@ -379,16 +476,17 @@ o = s2o
 END = TOTAL_OUT
 CTA0 = o(196.70)
 if REEL == '1':
-    CARDW += [(o(7.42), o(17.12) + 0.3), (o(39.26), o(86.34) + 0.1), (o(106.44), o(112.46) + 0.2), (o(156.10), o(161.50) + 0.2)]
+    CARDW += [(0.0, o(17.12) + 0.3), (o(39.26), o(86.34) + 0.1), (o(96.02), o(112.46) + 0.2), (o(156.10), o(161.50) + 0.2)]
     PUNCH += [(o(3.66), 0.9), (o(16.26), 0.8), (o(48.82), 0.6), (o(65.50), 1.0), (o(103.32), 0.7), (o(104.10), 1.4), (o(110.98), 1.2)]
 elif REEL == '2':
     CARDW += [(o(7.42), o(25.02) + 0.3), (o(117.60), o(155.94) + 0.2), (o(170.30), o(188.94) + 0.1)]
     PUNCH += [(o(23.90), 0.9), (o(121.00), 0.8), (o(135.10), 1.2), (o(148.14), 0.9), (o(187.94), 0.9)]
 else:
-    CARDW += [(o(7.42), o(25.02) + 0.3), (o(39.26), o(86.34) + 0.1), (o(106.44), o(112.46) + 0.2), (o(117.60), o(161.50) + 0.2), (o(170.30), o(188.94) + 0.1)]
+    CARDW += [(0.0, o(25.02) + 0.3), (o(39.26), o(86.34) + 0.1), (o(96.02), o(112.46) + 0.2), (o(117.60), o(161.50) + 0.2), (o(170.30), o(188.94) + 0.1)]
     PUNCH += [(o(3.66), 0.9), (o(16.26), 0.8), (o(23.90), 0.9), (o(65.50), 1.0), (o(103.32), 0.7), (o(104.10), 1.4), (o(114.80), 1.2), (o(121.00), 0.8), (o(135.10), 1.2), (o(148.14), 0.9), (o(187.94), 0.9)]
 
 def hook0(lay, t):
+    hook_split(lay, t, o(6.02))
     a = win(t, 0, o(25.02) + 0.2, 0.01, 0.3)
     title(lay, 'AGACHAMENTO BÚLGARO', W / 2, 250, 104, WHITE, t, 0.0, a, 'stamp')
     title(lay, 'QUADRÍCEPS OU GLÚTEO?', W / 2, 372, 104, YEL, t, 0.35, a)
@@ -397,8 +495,8 @@ def hook0(lay, t):
     pa = win(t, o(33.58), o(38.02), 0.3, 0.3)
     if pa > 0:
         d = ImageDraw.Draw(lay); f = F('black', 40); s_ = 'FATOS, NÃO PESSOAS'; tw = f.getlength(s_)
-        d.rounded_rectangle((W / 2 - tw / 2 - 36, 1180 - 44, W / 2 + tw / 2 + 36, 1180 + 44), 44, fill=(0, 0, 0, int(200 * pa)), outline=YEL + (int(255 * pa),), width=3)
-        d.text((W / 2, 1182), s_, font=f, fill=WHITE + (int(255 * pa),), anchor='mm')
+        d.rounded_rectangle((W / 2 - tw / 2 - 36, 1720 - 44, W / 2 + tw / 2 + 36, 1720 + 44), 44, fill=(0, 0, 0, int(200 * pa)), outline=YEL + (int(255 * pa),), width=3)
+        d.text((W / 2, 1722), s_, font=f, fill=WHITE + (int(255 * pa),), anchor='mm')
     # bridge to part 2
     ba = win(t, o(112.92), o(116.44) + 0.1, 0.3, 0.3)
     if ba > 0:
@@ -409,7 +507,7 @@ def scene(lay, t):
     if REEL == '1': reel1(lay, t)
     elif REEL == '2': reel2(lay, t)
     else:
-        hook0(lay, t); reel1(lay, t, True); reel2(lay, t, True); cta(lay, t)
+        hook0(lay, t); reel1(lay, t, True); reel2(lay, t, True)
 
 def claim_card(lay, t, a0, a1, rows, head='O POST DIZIA:'):
     a = win(t, a0, a1, 0.35, 0.3)
@@ -422,7 +520,19 @@ def claim_card(lay, t, a0, a1, rows, head='O POST DIZIA:'):
     for k, (txt, col, t0) in enumerate(rows):
         label(lay, txt, 110, y0 + 135 + gp * k, fs, col, a * clamp((t - t0) / 0.3), 'lm')
 
+def hook_split(lay, t, t1):
+    a = win(t, 0.15, t1, 0.3, 0.3)
+    if a <= 0: return
+    for k, (nm, lab, col) in enumerate((('ereto', 'QUADRÍCEPS?', YEL), ('inclinado', 'GLÚTEO?', BLUE))):
+        box = (30 + k * 515, 880, 535 + k * 515, 1600)
+        ak = a * eo(prog(t, 0.15 + 0.5 * k, 0.4))
+        mp_ = photo(lay, nm, box, CROP_S, ak, col, dy=(1 - ak) * 80)
+        if mp_:
+            muscles(lay, nm, mp_, ak * clamp((t - 1.2 - 0.6 * k) / 0.4), quad=1 if k == 0 else 0, glute=1 if k == 1 else 0)
+            label(lay, lab, (box[0] + box[2]) / 2, box[1] + 40, 44, col, ak)
+
 def hook1(lay, t):
+    hook_split(lay, t, o(6.02))
     a = win(t, 0, o(17.12) + 0.2, 0.01, 0.3)
     title(lay, 'BÚLGARO INCLINADO', W / 2, 250, 112, WHITE, t, 0.0, a, 'stamp')
     title(lay, 'É PRA POSTERIOR?', W / 2, 375, 120, YEL, t, 0.35, a)
@@ -431,25 +541,54 @@ def hook1(lay, t):
     pa = win(t, o(33.58), o(38.02), 0.3, 0.3)
     if pa > 0:
         d = ImageDraw.Draw(lay); f = F('black', 40); s = 'FATOS, NÃO PESSOAS'; tw = f.getlength(s)
-        d.rounded_rectangle((W / 2 - tw / 2 - 36, 1180 - 44, W / 2 + tw / 2 + 36, 1180 + 44), 44, fill=(0, 0, 0, int(200 * pa)), outline=YEL + (int(255 * pa),), width=3)
-        d.text((W / 2, 1182), s, font=f, fill=WHITE + (int(255 * pa),), anchor='mm')
+        d.rounded_rectangle((W / 2 - tw / 2 - 36, 1720 - 44, W / 2 + tw / 2 + 36, 1720 + 44), 44, fill=(0, 0, 0, int(200 * pa)), outline=YEL + (int(255 * pa),), width=3)
+        d.text((W / 2, 1722), s, font=f, fill=WHITE + (int(255 * pa),), anchor='mm')
 
 def reel1(lay, t, body_only=False):
     if not body_only: hook1(lay, t)
-    # both work
+    # both work (anatomy)
     a = win(t, o(39.26), o(52.04), 0.35, 0.25)
     if a > 0:
         title(lay, 'TRABALHA OS DOIS', W / 2, 260, 100, YEL, t, o(47.32), a)
-        mp_ = photo(lay, 'inclinado', (90, 990, 990, 1450), (150, 80, 1090, 560), a)
-        muscles(lay, 'inclinado', mp_, a * clamp((t - o(47.32)) / 0.4), quad=1, glute=1)
-        qa = a * clamp((t - o(47.32)) / 0.4)
-        label(lay, 'QUADRÍCEPS', mp_(JN['inclinado']['knee'])[0] + 40, mp_(JN['inclinado']['knee'])[1] - 70, 34, YEL, qa)
-        label(lay, 'GLÚTEO', mp_(JN['inclinado']['hip'])[0] + 60, mp_(JN['inclinado']['hip'])[1] - 70, 34, YEL, a * clamp((t - o(48.18)) / 0.4))
-    # moment arms: inclined -> more hip; upright -> more knee
-    a = win(t, o(52.04), o(64.60), 0.35, 0.3)
+        ia = a * eo(prog(t, o(39.26), 0.4))
+        mp_ = photo(lay, 'anat_quadglut', (30, 880, 1050, 1600), (120, 40, 1100, 570), ia, YEL, dy=(1 - ia) * 80)
+        pul = 0.5 + 0.5 * math.sin(t * 5)
+        qa = a * clamp((t - o(47.32)) / 0.4); ga = a * clamp((t - o(48.18)) / 0.4)
+        qp, gp = mp_((784, 384)), mp_((616, 376))
+        leader(lay, qp, (qp[0] + 120, qp[1] - 190), 'QUADRÍCEPS', YEL, t, o(47.32), a, 36)
+        leader(lay, gp, (gp[0] - 170, gp[1] - 170), 'GLÚTEO', (255, 150, 40), t, o(48.18), a, 36)
+    # morph: upright -> inclined with live moment arms
+    a = win(t, o(52.04), o(59.50), 0.35, 0.3)
     if a > 0:
-        two_up(lay, t, o(52.04), a, 'moment')
-        title(lay, 'INCLINOU: + GLÚTEO', W / 2, 260, 92, YEL, t, o(53.68), a * (1 - prog(t, o(62.2), 0.2)))
+        title(lay, 'INCLINOU O TRONCO...', W / 2, 250, 90, WHITE, t, o(52.04), a)
+        title(lay, '+ GLÚTEO', W / 2, 365, 120, BLUE, t, o(57.32), a, 'stamp')
+        p = eio(prog(t, o(53.0), 1.8))
+        box = (30, 880, 1050, 1600); crop = (150, 60, 1130, 590)
+        m1 = photo(lay, 'ereto', box, crop, a, YEL)
+        m2 = photo(lay, 'inclinado', box, crop, a * p, YEL)
+        mp_ = m1 or m2
+        J = {k: tuple((1 - p) * np.array(JN['ereto'][k]) + p * np.array(JN['inclinado'][k])) for k in JN['ereto']}
+        fx = mp_(J['wr'])[0]; top = mp_((0, J['sh'][1] - 30))[1]; bot = mp_((0, J['ank'][1] + 20))[1]
+        d = ImageDraw.Draw(lay)
+        flow_line(lay, (fx, top), (fx, bot), GREEN, t, a, 6, 16, 10, 90)
+        d.polygon([(fx, bot + 10), (fx - 14, bot - 14), (fx + 14, bot - 14)], fill=GREEN + (int(255 * a),))
+        label(lay, 'CARGA', fx + 16, bot - 20, 24, GREEN, a, 'lm')
+        kl0 = abs(fx - mp_(J['knee'])[0]); hl0 = abs(mp_(J['hip'])[0] - fx)
+        for j, col, ln in (('knee', YEL, kl0), ('hip', BLUE, hl0)):
+            jp = mp_(J[j]); d.line([(fx, jp[1]), (jp[0], jp[1])], fill=(0, 0, 0, int(160 * a)), width=11); d.line([(fx, jp[1]), (jp[0], jp[1])], fill=col + (int(255 * a),), width=6)
+            torque_arc(lay, jp, 46, min(300, 40 + ln * 1.1), col, t, a * 0.95, j == 'hip')
+            d.ellipse((jp[0] - 12, jp[1] - 12, jp[0] + 12, jp[1] + 12), fill=col + (int(255 * a),), outline=(0, 0, 0, int(200 * a)), width=3)
+        # meters
+        kl = abs(fx - mp_(J['knee'])[0]); hl = abs(mp_(J['hip'])[0] - fx); mx = max(kl, hl, 1)
+        card(lay, (610, 1300, 1010, 1470), a, (60, 60, 70), (8, 8, 10), 210)
+        for r, (nm, val, col) in enumerate((('JOELHO', kl, YEL), ('QUADRIL', hl, BLUE))):
+            yy = 1345 + r * 75; label(lay, nm, 630, yy, 26, col, a, 'lm')
+            d.rounded_rectangle((770, yy - 14, 990, yy + 14), 10, fill=(40, 40, 46, int(200 * a)))
+            d.rounded_rectangle((770, yy - 14, 770 + 220 * val / mx, yy + 14), 10, fill=col + (int(255 * a),))
+    # emphasis != exclusivity (side by side)
+    a = win(t, o(59.72), o(64.60), 0.3, 0.3)
+    if a > 0:
+        two_up(lay, t, o(59.72) - 1.8, a, 'moment')
         title(lay, 'ÊNFASE ≠ EXCLUSIVIDADE', W / 2, 260, 84, YEL, t, o(62.44), a)
     # toggle
     a = win(t, o(64.90), o(68.96) + 0.1, 0.3, 0.3)
@@ -457,29 +596,45 @@ def reel1(lay, t, body_only=False):
         card(lay, (190, 990, 890, 1400), a)
         toggle(lay, W / 2, 1220, 'QUADRÍCEPS', t, o(65.60), a)
         title(lay, 'NÃO EXISTE', W / 2, 1340, 64, RED, t, o(68.42), a, 'stamp')
-    # posterior = stabilizer
+    # posterior = stabilizer (anatomy)
     a = win(t, o(74.54), o(86.34) + 0.1, 0.35, 0.3)
     if a > 0:
         title(lay, 'E O POSTERIOR?', W / 2, 260, 104, WHITE, t, o(74.60), a)
-        mp_ = photo(lay, 'inclinado', (90, 990, 990, 1450), (150, 80, 1090, 560), a)
-        muscles(lay, 'inclinado', mp_, a, quad=0.45, glute=0.45, ham=a * clamp((t - o(77.92)) / 0.4))
+        ia = a * eo(prog(t, o(74.54), 0.4))
+        mp_ = photo(lay, 'anat_post', (30, 880, 1050, 1600), (100, 20, 1080, 550), ia, BLUE, dy=(1 - ia) * 80)
+        ha = a * clamp((t - o(77.92)) / 0.4); pul = 0.5 + 0.5 * math.sin(t * 5)
+        hp_ = mp_((568, 464))
+        leader(lay, hp_, (hp_[0] - 60, hp_[1] + 170), 'POSTERIOR', BLUE, t, o(77.92), a, 36)
         sa = a * clamp((t - o(82.38)) / 0.35)
-        hk = mp_(((JN['inclinado']['hip'][0] + JN['inclinado']['knee'][0]) / 2 + 60, (JN['inclinado']['hip'][1] + JN['inclinado']['knee'][1]) / 2 + 60))
-        label(lay, 'POSTERIOR: ESTABILIZA', 540, 1395, 40, BLUE, sa)
-        label(lay, 'participa pouco, não é o alvo', 540, 1440 - 4, 28, WHITE, sa, font='bold')
+        if sa > 0:
+            d = ImageDraw.Draw(lay); wob = math.sin(t * 7) * 18
+            for sgn in (-1, 1):
+                cx_ = hp_[0] + sgn * 110 + wob * sgn * 0.3; cy_ = hp_[1] - 40
+                d.line([(cx_ - 26 * sgn, cy_), (cx_ + 26 * sgn, cy_)], fill=BLUE + (int(255 * sa),), width=7)
+                d.polygon([(cx_ - 34 * sgn, cy_), (cx_ - 14 * sgn, cy_ - 14), (cx_ - 14 * sgn, cy_ + 14)], fill=BLUE + (int(255 * sa),))
+            leader(lay, (hp_[0], hp_[1] - 40), (300, 1010), 'ESTABILIZA', BLUE, t, o(82.38), a, 42, 'participa pouco, não é o alvo')
     # burn != growth
     a = win(t, o(96.02), o(112.46) + 0.2, 0.3, 0.3)
     if a > 0:
         if t < o(103.32):
             title(lay, '"SINTO QUEIMAR..."', W / 2, 270, 96, WHITE, t, o(97.68), a)
             title(lay, 'TÁ CRESCENDO?', W / 2, 390, 104, YEL, t, o(100.48), a)
+        if t < o(106.44):
+            ia = win(t, o(96.30), o(106.44), 0.4, 0.3)
+            photo(lay, 'queimar', (30, 880, 1050, 1600), (0, 0, 1280, 720), ia, RED, dy=(1 - eo(prog(t, o(96.30), 0.4))) * 80)
+            if t >= o(103.32):
+                sx_, sy_ = shake(t, o(103.32) + 0.1, 22, 0.4)
+                title(lay, 'NÃO!', W / 2 + sx_, 1225 + sy_, 200, RED, t, o(103.32), ia, 'stamp')
+                fl = 1 - prog(t, o(103.32), 0.25)
+                if 0 < fl < 1:
+                    fl_ = Image.new('RGBA', (W, H)); ImageDraw.Draw(fl_).rounded_rectangle((30, 880, 1050, 1600), 36, fill=RED + (int(110 * fl),)); lay.alpha_composite(fl_)
         else:
             title(lay, 'QUEIMAR ≠ CRESCER', W / 2, 300, 104, YEL, t, o(103.32), a, 'stamp')
         if o(104.04) <= t < o(105.80):
-            title(lay, 'MEU CARO GAFANHOTO 🦗', W / 2, 1200, 70, WHITE, t, o(104.10), 1, 'stamp') if False else title(lay, 'MEU CARO GAFANHOTO', W / 2, 1200, 74, WHITE, t, o(104.10), 1, 'stamp')
+            title(lay, 'MEU CARO GAFANHOTO 🦗', W / 2, 1200, 70, WHITE, t, o(104.10), 1, 'stamp') if False else title(lay, 'MEU CARO GAFANHOTO', 430, 1470, 62, WHITE, t, o(104.10), 1, 'stamp')
         if t >= o(106.44):
             ia = a * eo(prog(t, o(106.44), 0.4))
-            photo(lay, 'fibra', (90, 990, 990, 1450), (0, 0, 1280, 720), ia, YEL, dy=(1 - ia) * 60)
+            photo(lay, 'fibra', (30, 880, 1050, 1600), (0, 0, 1280, 720), ia, YEL, dy=(1 - ia) * 60)
             label(lay, 'QUEIMAÇÃO', 315, 1040, 40, RED, ia); label(lay, 'HIPERTROFIA', 765, 1040, 40, GREEN, a * clamp((t - o(108.64)) / 0.3))
             label(lay, 'sensação', 315, 1405, 30, WHITE, ia, font='bold'); label(lay, 'tensão + progressão de carga', 765, 1405, 28, WHITE, a * clamp((t - o(110.98)) / 0.3), font='bold')
     # answer: hamstring exercises
@@ -487,7 +642,7 @@ def reel1(lay, t, body_only=False):
     if a > 0:
         title(lay, 'QUER POSTERIOR?', W / 2, 260, 110, YEL, t, o(156.16), a)
         ia = a * eo(prog(t, o(156.10), 0.4))
-        photo(lay, 'flexora', (90, 990, 990, 1450), (0, 0, 1280, 720), ia, GREEN, dy=(1 - ia) * 60)
+        photo(lay, 'flexora', (30, 880, 1050, 1600), (0, 0, 1280, 720), ia, GREEN, dy=(1 - ia) * 60)
         for k, (txt, t0) in enumerate((('Cadeira flexora', o(157.32)), ('Mesa flexora', o(159.18)), ('Flexora em pé', o(160.58)))):
             pp = eo(prog(t, t0, 0.3))
             if pp <= 0: continue
@@ -504,8 +659,8 @@ def hook2(lay, t):
     pa = win(t, o(33.58), o(38.02), 0.3, 0.3)
     if pa > 0:
         d = ImageDraw.Draw(lay); f = F('black', 40); s = 'FATOS, NÃO PESSOAS'; tw = f.getlength(s)
-        d.rounded_rectangle((W / 2 - tw / 2 - 36, 1180 - 44, W / 2 + tw / 2 + 36, 1180 + 44), 44, fill=(0, 0, 0, int(200 * pa)), outline=YEL + (int(255 * pa),), width=3)
-        d.text((W / 2, 1182), s, font=f, fill=WHITE + (int(255 * pa),), anchor='mm')
+        d.rounded_rectangle((W / 2 - tw / 2 - 36, 1720 - 44, W / 2 + tw / 2 + 36, 1720 + 44), 44, fill=(0, 0, 0, int(200 * pa)), outline=YEL + (int(255 * pa),), width=3)
+        d.text((W / 2, 1722), s, font=f, fill=WHITE + (int(255 * pa),), anchor='mm')
 
 def reel2(lay, t, body_only=False):
     if not body_only: hook2(lay, t)
@@ -524,16 +679,24 @@ def reel2(lay, t, body_only=False):
     a = win(t, o(132.10), o(147.04) + 0.1, 0.35, 0.3)
     if a > 0:
         title(lay, 'E O RETO FEMORAL?', W / 2, 260, 104, WHITE, t, o(132.70), a)
-        mp_ = photo(lay, 'retofemoral', (210, 965, 870, 1500), (225, 0, 1113, 720), a, RED)
+        mp_ = photo(lay, 'retofemoral', (130, 880, 950, 1600), (225, 0, 1113, 720), a, RED)
         ba = a * clamp((t - o(136.82)) / 0.4)
         if ba > 0:
             d = ImageDraw.Draw(lay)
             for nm, txt, side in (('hip', 'QUADRIL', -1), ('knee', 'JOELHO', 1)):
                 p_ = mp_(JN['retofemoral'][nm]); pul = 1 + 0.15 * math.sin(t * 6)
-                d.ellipse((p_[0] - 26 * pul, p_[1] - 26 * pul, p_[0] + 26 * pul, p_[1] + 26 * pul), outline=YEL + (int(255 * ba),), width=5)
                 label(lay, txt, p_[0] + 135, p_[1], 34, YEL, ba)
-            label(lay, 'BIARTICULAR', 720, 1180, 40, RED, ba)
-            label(lay, 'cruza 2 articulações', 720, 1226, 26, WHITE, ba, font='bold')
+            hp1, kp1 = mp_(JN['retofemoral']['hip']), mp_(JN['retofemoral']['knee'])
+            flow_line(lay, hp1, kp1, (255, 230, 230), t, ba * 0.9, 4, 12, 10, 120)
+            leader(lay, ((hp1[0] + kp1[0]) / 2, (hp1[1] + kp1[1]) / 2), (760, 1180), 'BIARTICULAR', RED, t, o(137.64), a, 40, 'cruza quadril e joelho')
+        la_ = a * clamp((t - o(140.80)) / 0.4)
+        if la_ > 0:
+            d = ImageDraw.Draw(lay); hp1, kp1 = mp_(JN['retofemoral']['hip']), mp_(JN['retofemoral']['knee']); osc = math.sin(t * 3)
+            # hip flexes -> shortens (arrows in), knee flexes -> lengthens (arrows out)
+            for p_, sgn, txt in ((hp1, -1, 'encurta'), (kp1, 1, 'alonga')):
+                off = 26 + 10 * osc * sgn
+                d.line([(p_[0] - 70, p_[1] + 60), (p_[0] - 70, p_[1] + 60 + sgn * off)], fill=WHITE + (int(255 * la_),), width=5)
+                label(lay, txt, p_[0] - 150, p_[1] + 60, 26, WHITE, la_, font='bold')
         ea = a * clamp((t - o(145.02)) / 0.4)
         if ea > 0:
             card(lay, (150, 1380, 930, 1490), ea, RED)
@@ -546,24 +709,89 @@ def reel2(lay, t, body_only=False):
         title(lay, '...E QUASE NÃO DANÇOU', W / 2, 380, 84, YEL, t, o(149.26), a)
         ia = a * eo(prog(t, o(147.22), 0.4)); zz = 1 + 0.04 * prog(t, o(147.22), 4.4)
         cw_ = 1280 / zz; ch_ = 720 / zz
-        photo(lay, 'festa', (90, 990, 990, 1450), (1280 - cw_, (720 - ch_) / 2, 1280, (720 + ch_) / 2), ia, YEL, dy=(1 - ia) * 60)
+        mp_ = photo(lay, 'festa', (30, 880, 1050, 1600), (229, 0, 1280, 720), ia, YEL, dy=(1 - ia) * 60)
         pa = a * clamp((t - o(149.42)) / 0.3)
-        if pa > 0:
-            d = ImageDraw.Draw(lay); d.line([(880, 1072), (915, 1150)], fill=RED + (int(255 * pa),), width=6)
-            label(lay, 'RETO FEMORAL', 800, 1030, 34, RED, pa); label(lay, 'no cantinho', 800, 1066, 24, WHITE, pa, font='bold')
+        if pa > 0 and mp_:
+            cp = mp_((1170, 400)); top_ = mp_((1170, 160)); bot_ = mp_((1170, 640)); d = ImageDraw.Draw(lay)
+            d.ellipse((cp[0] - 75, top_[1], cp[0] + 75, bot_[1]), outline=RED + (int(255 * pa),), width=6)
+            label(lay, 'RETO FEMORAL', cp[0] - 250, cp[1] - 40, 38, RED, pa); label(lay, 'no cantinho', cp[0] - 250, cp[1] + 2, 28, WHITE, pa, font='bold')
     a = win(t, o(153.40), o(155.94) + 0.2, 0.3, 0.25)
     if a > 0:
         title(lay, 'QUER RETO FEMORAL?', W / 2, 260, 100, YEL, t, o(153.46), a)
         ia = a * eo(prog(t, o(153.40), 0.4))
-        photo(lay, 'extensora', (90, 990, 990, 1450), (0, 0, 1280, 720), ia, GREEN, dy=(1 - ia) * 60)
+        photo(lay, 'extensora', (30, 880, 1050, 1600), (0, 0, 1280, 720), ia, GREEN, dy=(1 - ia) * 60)
         check_list(lay, t, [('Cadeira extensora', o(154.64))], 150, 1395, a, size=46)
     # results recipe
     a = win(t, o(170.30), o(188.94) + 0.1, 0.35, 0.3)
     if a > 0:
-        title(lay, 'QUER RESULTADO?', W / 2, 260, 110, YEL, t, o(170.36), a)
-        card(lay, (90, 960, 990, 1450), a, GREEN)
-        check_list(lay, t, [('Progressão de carga', o(172.72)), ('Halter pesado', o(175.60)), ('Amplitude completa', o(177.08)), ('Joelho de trás perto do chão', o(178.76)), ('No seu ritmo', o(183.86))], 160, 1040, a, gap=92, size=42)
-        if t >= o(187.88): title(lay, 'NÃO TEM SEGREDO', W / 2, 400, 86, WHITE, t, o(187.94), a, 'stamp')
+        title(lay, 'QUER RESULTADO?', W / 2, 260, 110, YEL, t, o(170.36), a * (1 - prog(t, o(187.7), 0.2)))
+        if t >= o(187.88): title(lay, 'NÃO TEM SEGREDO', W / 2, 260, 96, WHITE, t, o(187.94), a, 'stamp')
+        box = (30, 880, 1050, 1600)
+        # 1) progression of load: animated chart
+        a1 = a * win(t, o(170.30), o(175.75), 0.35, 0.3)
+        if a1 > 0:
+            dyc = (1 - eo(prog(t, o(170.30), 0.4))) * 80
+            card(lay, (30, 880 + dyc, 1050, 1600 + dyc), a1, GREEN, (10, 12, 12), 240)
+            label(lay, 'PROGRESSÃO DE CARGA', 540, 940 + dyc, 46, GREEN, a1 * clamp((t - o(172.72)) / 0.3))
+            d = ImageDraw.Draw(lay)
+            gx0, gx1, gy0, gy1 = 150, 990, 1520 + dyc, 1010 + dyc      # plot area (y0 bottom)
+            for k in range(5):     # grid
+                yy = gy0 + (gy1 - gy0) * k / 4
+                d.line([(gx0, yy), (gx1, yy)], fill=(70, 72, 80, int(150 * a1)), width=2)
+                label(lay, f'{k * 5} kg', gx0 - 60, yy, 22, GREY, a1, font='bold')
+            wk = [10, 10, 12, 12, 14, 15, 16, 18]
+            X = [gx0 + (gx1 - gx0) * i / 7 for i in range(8)]; Y = [gy0 + (gy1 - gy0) * v / 20 for v in wk]
+            for i in range(8): label(lay, f'S{i + 1}', X[i], gy0 + 30, 22, GREY, a1, font='bold')
+            # flat line (no progression)
+            q0 = eo(prog(t, o(172.72), 1.2)); yf = gy0 + (gy1 - gy0) * 10 / 20
+            if q0 > 0:
+                xe = gx0 + (gx1 - gx0) * q0
+                for xx in np.arange(gx0, xe, 26): d.line([(xx, yf), (min(xx + 14, xe), yf)], fill=(150, 150, 158, int(220 * a1)), width=5)
+                if q0 > 0.95: label(lay, 'sem progressão: estagna', gx1 - 150, yf + 34, 24, GREY, a1, font='bold')
+            # progression line drawn over time
+            q = clamp((t - o(172.9)) / 2.4) * 7
+            if q > 0:
+                n = int(q); fr = q - n; pts = [(X[i], Y[i]) for i in range(min(n + 1, 8))]
+                if n < 7: pts.append((X[n] + (X[n + 1] - X[n]) * fr, Y[n] + (Y[n + 1] - Y[n]) * fr))
+                if len(pts) >= 2:
+                    area = Image.new('RGBA', (W, H)); ad = ImageDraw.Draw(area)
+                    ad.polygon(pts + [(pts[-1][0], gy0), (pts[0][0], gy0)], fill=YEL + (int(70 * a1),)); lay.alpha_composite(area)
+                    g = Image.new('RGBA', (W, H)); ImageDraw.Draw(g).line(pts, fill=YEL + (int(200 * a1),), width=18, joint='curve'); lay.alpha_composite(g.filter(ImageFilter.GaussianBlur(10)))
+                    d.line(pts, fill=YEL + (int(255 * a1),), width=7, joint='curve')
+                for i in range(min(n + 1, 8)):
+                    pp = eo(prog(t, o(172.9) + 2.4 * i / 7, 0.25)); r_ = 11 * (1 + 0.5 * (1 - pp))
+                    d.ellipse((X[i] - r_, Y[i] - r_, X[i] + r_, Y[i] + r_), fill=(255, 255, 255, int(255 * a1 * pp)), outline=YEL + (int(255 * a1),), width=4)
+                    label(lay, f'{wk[i]}', X[i], Y[i] - 36, 26, WHITE, a1 * pp)
+            ba_ = a1 * clamp((t - o(175.30)) / 0.25)
+            if ba_ > 0:
+                sc_ = 1 + 0.4 * (1 - eo(prog(t, o(175.30), 0.3)))
+                d.rounded_rectangle((760, 1080 + dyc, 960, 1160 + dyc), 30, fill=GREEN + (int(255 * ba_),))
+                label(lay, '+80%', 860, 1120 + dyc, int(44 * sc_), DARK, ba_)
+        # 1b) heavy dumbbell
+        a1b = a * win(t, o(175.60), o(177.64), 0.3, 0.3)
+        if a1b > 0:
+            mp_ = photo(lay, 'halteres', box, (0, 60, 1280, 720), a1b, YEL, dy=(1 - eo(prog(t, o(175.60), 0.35))) * 80)
+            sweep = clamp((t - o(175.8)) / 1.2)
+            if mp_ and 0 < sweep < 1:
+                xs_ = mp_((100 + 1100 * sweep, 0))[0]; g = Image.new('RGBA', (W, H))
+                ImageDraw.Draw(g).ellipse((xs_ - 120, 1150, xs_ + 120, 1450), fill=YEL + (int(110 * a1b),)); lay.alpha_composite(g.filter(ImageFilter.GaussianBlur(40)))
+            leader(lay, (900, 1260), (760, 1000), 'HALTER PESADO', YEL, t, o(175.75), a1b, 42)
+        # 2) full range of motion
+        a2 = a * win(t, o(177.08), o(183.80) + 0.2, 0.35, 0.3)
+        if a2 > 0:
+            mp_ = photo(lay, 'amplitude', box, (120, 60, 1160, 720), a2, YEL, dy=(1 - eo(prog(t, o(177.08), 0.4))) * 80)
+            label(lay, 'AMPLITUDE COMPLETA', 540, 1005, 44, YEL, a2)
+            kp = mp_((790, 520)); fl = mp_((790, 620)); d = ImageDraw.Draw(lay); q = eo(prog(t, o(178.76), 0.6))
+            yy = kp[1] + (fl[1] - kp[1]) * q
+            for k in range(int((yy - kp[1]) / 18)): d.line([(kp[0], kp[1] + k * 18), (kp[0], kp[1] + k * 18 + 10)], fill=YEL + (int(255 * a2),), width=6)
+            if q > 0.9:
+                d.polygon([(kp[0], fl[1] + 8), (kp[0] - 14, fl[1] - 16), (kp[0] + 14, fl[1] - 16)], fill=YEL + (int(255 * a2),))
+                label(lay, 'joelho de trás perto do chão', kp[0] - 300, fl[1] + 20, 30, WHITE, a2, font='bold')
+        # 3) recap
+        a3 = a * win(t, o(183.80), o(188.94) + 0.1, 0.35, 0.3)
+        if a3 > 0:
+            card(lay, (90, 990, 990, 1450), a3, GREEN)
+            check_list(lay, t, [('Progressão de carga', o(183.80)), ('Halter pesado', o(184.1)), ('Amplitude completa', o(184.4)), ('No seu ritmo', o(185.26))], 170, 1080, a3, gap=100, size=46)
     if not body_only: cta(lay, t)
 
 def cta(lay, t):
@@ -584,20 +812,31 @@ def cta(lay, t):
 VG = None
 def render(t):
     global VG
+    TNOW[0] = t
     img = frame_at(t)
     if t >= CTA0:
-        k = eo(prog(t, CTA0, 0.5)); img = cv2.addWeighted(cv2.GaussianBlur(img, (0, 0), 1 + 16 * k), 1, np.zeros_like(img), 0, -int(120 * k))
+        k = eo(prog(t, CTA0, 0.5)); img = cv2.addWeighted(img, 1, np.zeros_like(img), 0, -int(90 * k))
     base = Image.fromarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB)).convert('RGBA')
     lay = Image.new('RGBA', (W, H), (0, 0, 0, 0))
     if VG is None:
         vg = np.zeros((H, W, 4), np.uint8); yv = np.arange(H)[:, None]
-        al = np.clip(np.maximum((520 - yv) / 520, (yv - 1300) / 620), 0, 1) ** 1.3 * 0.80
+        al = np.clip(np.maximum((420 - yv) / 420, (yv - 1500) / 420), 0, 1) ** 1.3 * 0.75
         vg[..., 3] = (al * 255).astype(np.uint8); VG = Image.fromarray(vg)
     lay.alpha_composite(VG)
-    scene(lay, t)
+    st = Image.new('RGBA', (W, H + SHIFT), (0, 0, 0, 0)); tl_ = Image.new('RGBA', (W, H), (0, 0, 0, 0)); TLAY[0] = tl_
+    scene(st, t)
+    TLAY[0] = None
+    lay.alpha_composite(st.crop((0, SHIFT, W, H + SHIFT)))
+    if t < CTA0 + 0.3:
+        ca = 1 - eo(prog(t, CTA0 - 0.1, 0.4))
+        cl = Image.new('RGBA', (W, H)); circle_face(cl, t)
+        if ca < 1:
+            arr = np.array(cl); arr[..., 3] = (arr[..., 3] * ca).astype(np.uint8); cl = Image.fromarray(arr)
+        lay.alpha_composite(cl)
+    lay.alpha_composite(tl_)
+    if REEL == '0' or True: cta(lay, t) if REEL == '0' else None
     if t < CTA0:
-        captions(lay, t); brand(lay, W / 2, 1830, 0.9)
-    # progress bar
+        captions(lay, t); brand(lay, W / 2, 1850, 0.9)
     ImageDraw.Draw(lay).rectangle((0, 0, int(W * t / TOTAL_OUT), 8), fill=YEL + (255,))
     base.alpha_composite(lay)
     return np.array(base.convert('RGB'))
