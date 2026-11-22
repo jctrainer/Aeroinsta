@@ -111,7 +111,8 @@ def frame_at(t):
     return bg_plate(t).copy()
 
 SHIFT = 420
-CIRC_BIG = (540, 880, 360); CIRC_SMALL_Y, CIRC_SMALL_R = 1215, 165
+SHORT = bool(os.environ.get('SHORT'))
+CIRC_BIG = (540, 850, 330); CIRC_SMALL_Y, CIRC_SMALL_R = (1315, 115) if os.environ.get('SHORT') else (1355, 140)
 def card_index(t):
     best, bi = 0, 0
     for k, (a_, b_) in enumerate(CARDW):
@@ -123,7 +124,7 @@ def circle_face(lay, t):
     img, s, _ = src_frame(t)
     pm = person_mask(img, s)
     wc = eio(card_w(t)); k = card_index(t)
-    xs = [870, 210][k % 2]
+    xs = 210 if SHORT else [870, 210][k % 2]
     cx = CIRC_BIG[0] * (1 - wc) + xs * wc; cy = CIRC_BIG[1] * (1 - wc) + CIRC_SMALL_Y * wc
     r = CIRC_BIG[2] * (1 - wc) + CIRC_SMALL_R * wc
     pz = 1.0
@@ -182,7 +183,7 @@ def title(layer, s, cx, cy, size, col, t, t0, a=1.0, mode='up'):
         sc = 1 + 0.8 * (1 - eo(p)); im = im.resize((max(1, int(im.width * sc)), max(1, int(im.height * sc))), Image.BICUBIC); dy = 0
     else: dy = (1 - eo(p)) * 50
     if cy < 450:
-        cy -= 80
+        cy -= 80 - (70 if SHORT else 0)
         if TLAY[0] is not None: layer = TLAY[0]
     paste_a(layer, im, cx - im.width / 2, cy - im.height / 2 + dy, clamp(p * 2.2) * a)
 def label(layer, s, x, y, size, col, a, anchor='mm', font='black'):
@@ -454,7 +455,7 @@ CH = []
 for k, c in enumerate(CHUNKS):
     nxt = CHUNKS[k + 1][0][1] if k + 1 < len(CHUNKS) else c[-1][2] + 0.5
     CH.append((c, c[0][1] - 0.10, min(nxt - 0.06, c[-1][2] + 0.5)))
-CAP_Y = 1560
+CAP_Y = 1470 if os.environ.get('SHORT') else 1580
 def captions(layer, t, y=CAP_Y):
     ch = None
     for c, a, b in CH:
@@ -495,8 +496,8 @@ def hook0(lay, t):
     pa = win(t, o(33.58), o(38.02), 0.3, 0.3)
     if pa > 0:
         d = ImageDraw.Draw(lay); f = F('black', 40); s_ = 'FATOS, NÃO PESSOAS'; tw = f.getlength(s_)
-        d.rounded_rectangle((W / 2 - tw / 2 - 36, 1720 - 44, W / 2 + tw / 2 + 36, 1720 + 44), 44, fill=(0, 0, 0, int(200 * pa)), outline=YEL + (int(255 * pa),), width=3)
-        d.text((W / 2, 1722), s_, font=f, fill=WHITE + (int(255 * pa),), anchor='mm')
+        d.rounded_rectangle((W / 2 - tw / 2 - 36, 1740 - 44, W / 2 + tw / 2 + 36, 1740 + 44), 44, fill=(0, 0, 0, int(200 * pa)), outline=YEL + (int(255 * pa),), width=3)
+        d.text((W / 2, 1742), s_, font=f, fill=WHITE + (int(255 * pa),), anchor='mm')
     # bridge to part 2
     ba = win(t, o(112.92), o(116.44) + 0.1, 0.3, 0.3)
     if ba > 0:
@@ -541,8 +542,8 @@ def hook1(lay, t):
     pa = win(t, o(33.58), o(38.02), 0.3, 0.3)
     if pa > 0:
         d = ImageDraw.Draw(lay); f = F('black', 40); s = 'FATOS, NÃO PESSOAS'; tw = f.getlength(s)
-        d.rounded_rectangle((W / 2 - tw / 2 - 36, 1720 - 44, W / 2 + tw / 2 + 36, 1720 + 44), 44, fill=(0, 0, 0, int(200 * pa)), outline=YEL + (int(255 * pa),), width=3)
-        d.text((W / 2, 1722), s, font=f, fill=WHITE + (int(255 * pa),), anchor='mm')
+        d.rounded_rectangle((W / 2 - tw / 2 - 36, 1740 - 44, W / 2 + tw / 2 + 36, 1740 + 44), 44, fill=(0, 0, 0, int(200 * pa)), outline=YEL + (int(255 * pa),), width=3)
+        d.text((W / 2, 1742), s, font=f, fill=WHITE + (int(255 * pa),), anchor='mm')
 
 def reel1(lay, t, body_only=False):
     if not body_only: hook1(lay, t)
@@ -665,8 +666,8 @@ def hook2(lay, t):
     pa = win(t, o(33.58), o(38.02), 0.3, 0.3)
     if pa > 0:
         d = ImageDraw.Draw(lay); f = F('black', 40); s = 'FATOS, NÃO PESSOAS'; tw = f.getlength(s)
-        d.rounded_rectangle((W / 2 - tw / 2 - 36, 1720 - 44, W / 2 + tw / 2 + 36, 1720 + 44), 44, fill=(0, 0, 0, int(200 * pa)), outline=YEL + (int(255 * pa),), width=3)
-        d.text((W / 2, 1722), s, font=f, fill=WHITE + (int(255 * pa),), anchor='mm')
+        d.rounded_rectangle((W / 2 - tw / 2 - 36, 1740 - 44, W / 2 + tw / 2 + 36, 1740 + 44), 44, fill=(0, 0, 0, int(200 * pa)), outline=YEL + (int(255 * pa),), width=3)
+        d.text((W / 2, 1742), s, font=f, fill=WHITE + (int(255 * pa),), anchor='mm')
 
 def reel2(lay, t, body_only=False):
     if not body_only: hook2(lay, t)
@@ -857,7 +858,8 @@ def render(t):
     cta(lay, t)
     if REEL in '12': part_badge(lay, t)
     if t < CTA0:
-        captions(lay, t); brand(lay, W / 2, 1850, 0.9)
+        captions(lay, t)
+        if not SHORT: brand(lay, W / 2, 1850, 0.9)
     ImageDraw.Draw(lay).rectangle((0, 0, int(W * t / TOTAL_OUT), 8), fill=YEL + (255,))
     base.alpha_composite(lay)
     return np.array(base.convert('RGB'))
