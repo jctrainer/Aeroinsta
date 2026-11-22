@@ -192,13 +192,9 @@ def scene(lay, t, mp):
     sticker(lay, 'o intervalo entre as séries:', W / 2, 220, 62, WHITE, t, 2.9, a)
     # nasce pra sofrer
     a = win(t, 4.8, 9.3)
-    pill(lay, 'ELA', hp[0] - 260, hp[1] - 300, 52, PINK, WHITE, t, 5.0, a, '🫠', rot=-6)
+    pill(lay, 'ELA SOFRENDO', hp[0] - 260, hp[1] - 300, 52, PINK, WHITE, t, 5.0, a, '😩', rot=-6)
     arrow_to(lay, (hp[0] - 220, hp[1] - 240), (hp[0] - 30, hp[1] - 70), PINK, t, 5.1, a)
     sweat(lay, hp, t, 5.2, a)
-    # enquanto o outro ri (personal not yet in frame)
-    a = win(t, 9.3, 12.8)
-    pill(lay, 'o personal:', 300, 520, 48, WHITE, DARK, t, 9.5, a, '😂', rot=5)
-    sticker(lay, '(ainda nem chegou)', 300, 625, 34, WHITE, t, 10.3, a)
     # hydration
     a = win(t, 11.4, 14.6)
     pill(lay, 'hidratação estratégica', W / 2, 1380, 44, BLUE, WHITE, t, 11.5, a, '💧', rot=-3)
@@ -230,11 +226,23 @@ def scene(lay, t, mp):
     sticker(lay, 'ÚLTIMA SÉRIE', W / 2, 260, 100, GREEN, t, 29.1, a, '💪', rot=-2)
     sticker(lay, '(nunca é a última)', W / 2, 370, 44, WHITE, t, 29.8, a)
     # procurar razão
-    a = win(t, 33.2, 39.8)
-    pill(lay, 'procurar o quê?', 330, 560, 46, WHITE, DARK, t, 33.4, a, '🤔', rot=4)
+    a = win(t, 31.7, 39.8)
+    pill(lay, 'ELA', hp[0] - 200, hp[1] + 150, 50, PINK, WHITE, t, 31.8, a, '😩', rot=-4)
+    pill(lay, 'O PERSONAL', jp[0] - 300, jp[1] - 40, 46, YEL, DARK, t, 32.3, a, '😂', rot=4)
     a = win(t, 39.9, 42.4)
     sticker(lay, 'A RAZÃO PRA VIVER:', W / 2, 220, 70, WHITE, t, 39.95, a)
     sticker(lay, 'O RESULTADO', W / 2, 330, 96, YEL, t, 40.4, a, '🍑', rot=-2)
+
+def split_overlay(lay, t):
+    a = win(t, SPL0, SPL1, 0.25, 0.25); k = eo(prog(t, SPL0, 0.3)) * (1 - eo(prog(t, SPL1 - 0.3, 0.3)))
+    d = ImageDraw.Draw(lay); y = H // 2
+    if k > 0.98: d.rectangle((0, y - 6, W, y + 6), fill=YEL + (255,))
+    pill(lay, 'ELA SOFRENDO', 300, 300, 54, PINK, WHITE, t, SPL0 + 0.2, a, '😩', rot=-4)
+    pill(lay, 'O PERSONAL RINDO', 700, H // 2 + 130, 54, YEL, DARK, t, SPL0 + 0.9, a, '😂', rot=4)
+    if t > SPL0 + 1.6:
+        for j in range(3):
+            ph = ((t - SPL0) * 1.2 + j / 3) % 1
+            paste_a(lay, emoji('😂', 70), 120 + j * 300 + 40 * math.sin(t * 3 + j), H - 400 - ph * 300, a * (1 - ph))
 
 def cta(lay, t):
     if t < CTA0: return
@@ -259,10 +267,31 @@ class Reader:
             ok, f = self.cap.read(); self.i += 1
             if ok: self.f = f
         return self.f
-RD = Reader(SRC)
-def render(t):
+RD = Reader(SRC); RD2 = Reader(SRC)
+SPL0, SPL1 = 9.25, 12.85
+def split_frame(t):
     f = RD.get(min(int(round(t * FPS)), 1091))
-    f, mp = frame_xform(f, t)
+    hx, hy = lerp_track(HER, t); z = 1.35; vw, vh = W / z, (H / 2) / z
+    x0 = min(max(hx * W - vw / 2, 0), W - vw); y0 = min(max(hy * H - vh / 2, 0), H - vh)
+    top = cv2.resize(f[int(y0):int(y0 + vh), int(x0):int(x0 + vw)], (W, H // 2), interpolation=cv2.INTER_CUBIC)
+    g = RD2.get(min(int(round((25.9 + (t - SPL0)) * FPS)), 1091))
+    bot = cv2.resize(g[245:565, 720:1080], (W, H // 2), interpolation=cv2.INTER_CUBIC)
+    b2 = cv2.GaussianBlur(bot, (0, 0), 1.5); bot = cv2.addWeighted(bot, 1.4, b2, -0.4, 0)
+    p = eo(prog(t, SPL0, 0.3)); q = eo(prog(t, SPL1 - 0.3, 0.3))
+    out = f.copy()
+    if p < 1 or q > 0:
+        k = p * (1 - q); yb = int(H - (H // 2) * k)
+        out = cv2.resize(f, (W, H)); out[:H // 2] = cv2.addWeighted(top, k, out[:H // 2], 1 - k, 0)
+        if yb < H: out[yb:] = bot[:H - yb]
+    else:
+        out[:H // 2] = top; out[H // 2:] = bot
+    return out
+def render(t):
+    if SPL0 <= t < SPL1:
+        f = split_frame(t); mp = lambda p: (p[0] * W, p[1] * H)
+    else:
+        f = RD.get(min(int(round(t * FPS)), 1091))
+        f, mp = frame_xform(f, t)
     if t >= CTA0:
         k = eo(prog(t, CTA0, 0.5)); f = cv2.addWeighted(cv2.GaussianBlur(f, (0, 0), 1 + 18 * k), 1, np.zeros_like(f), 0, -int(110 * k))
     base = Image.fromarray(cv2.cvtColor(f, cv2.COLOR_BGR2RGB)).convert('RGBA')
@@ -270,7 +299,10 @@ def render(t):
     vg = np.zeros((H, W, 4), np.uint8); yv = np.arange(H)[:, None]
     al = np.clip(np.maximum((420 - yv) / 420, (yv - 1480) / 440), 0, 1) ** 1.4 * 0.6; vg[..., 3] = (al * 255).astype(np.uint8)
     lay.alpha_composite(Image.fromarray(vg))
-    if t < CTA0: scene(lay, t, mp); timer(lay, t); lyrics(lay, t); brand(lay, W / 2, 1830, 0.9)
+    if t < CTA0:
+        if SPL0 <= t < SPL1: split_overlay(lay, t)
+        else: scene(lay, t, mp)
+        timer(lay, t); lyrics(lay, t); brand(lay, W / 2, 1830, 0.9)
     else: cta(lay, t); lyrics(lay, t)
     base.alpha_composite(lay)
     return np.array(base.convert('RGB'))
