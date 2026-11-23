@@ -598,5 +598,31 @@ def cover_receita_anim(safe=False):
 def cover_ranim(): cover_receita_anim(False)
 def cover_ranimt(): cover_receita_anim(True)
 
+def _tri_labels(lay, cx, cy, w, h):
+    chip(lay, 'ELA', cx - w / 4, cy - h / 2 + 70, 'white', -2, 30)
+    chip(lay, '3 CABEÇAS', cx + w / 4, cy - h / 2 + 70, 'dark', -2, 30)
+def cover_triceps(safe=False):
+    base = background(61, 950 if safe else 1000); lay = Image.new('RGBA', (W, H))
+    stage = Image.open(A + '/tri_stage.png').convert('RGB')
+    if not safe:
+        sw, sh_, sx, sy = 1000, 706, W / 2, 1075
+    else:
+        sw, sh_, sx, sy = 900, 636, 500, 975
+    st = card(stage, sw, sh_, -2, rad=40, border=YEL, bw=5)
+    place(lay, st, sx, sy, 200, glow=YEL, glow_a=70)
+    fades(lay, top=600 if safe else 640, bottom=1560 if safe else 1700)
+    _tri_labels(lay, sx, sy, sw, sh_)
+    cx, cy, r = (820, 1440, 200) if not safe else (225, 1270, 150)
+    face = Image.open(A + '/tri_face.png').resize((2 * r, 2 * r), Image.LANCZOS)
+    g = Image.new('RGBA', (W, H)); ImageDraw.Draw(g).ellipse((cx - r - 18, cy - r - 18, cx + r + 18, cy + r + 18), fill=YEL + (140,)); lay.alpha_composite(g.filter(ImageFilter.GaussianBlur(26)))
+    lay.alpha_composite(face, (cx - r, cy - r)); ImageDraw.Draw(lay).ellipse((cx - r - 5, cy - r - 5, cx + r + 5, cy + r + 5), outline=YEL + (255,), width=11 if not safe else 10)
+    if not safe: headline(lay, 'PEGADA MUDA', 'O TRÍCEPS?', y=310, s1=130, s2=140)
+    else: headline(lay, 'PEGADA MUDA', 'O TRÍCEPS?', y=280, s1=112, s2=120, maxw=860)
+    part_badge(lay, 'REACT', 300 if not safe else 640, 1440 if not safe else 1320)
+    brand(lay, 1780 if not safe else 1475)
+    save(base, lay, 'capa-react-triceps-v2.png' if not safe else 'capa-react-triceps-tiktok-shorts.png')
+def cover_tri(): cover_triceps(False)
+def cover_tris(): cover_triceps(True)
+
 for fn in sys.argv[4].split(','):
     globals()['cover_' + fn](); print('ok', fn)
