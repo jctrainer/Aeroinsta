@@ -187,6 +187,16 @@ def scene(lay, t):
     # warning
     a = win(t, 51.5, 54.2)
     if a > 0: step_chip(lay, '!', 'Cuidado pra não queimar', W / 2, 1140, t, 51.6, a, RED, '🔥')
+    # engagement stickers (in place of the old fake likes)
+    for t0, t1, txt, e, cx, cy, rot in ((9.8, 12.6, 'SALVA ESSA RECEITA', '💾', 760, 470, 4), (39.5, 43.5, 'MANDA PRA QUEM TREINA', '📤', 690, 470, -4)):
+        a = win(t, t0, t1, 0.3, 0.3)
+        if a <= 0: continue
+        p = prog(t, t0, 0.4); sc = eback(p) * (1 + 0.04 * math.sin(t * 6)); f = F('black', 36); tw = f.getlength(txt)
+        im = Image.new('RGBA', (int(tw + 150), 120), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
+        d.rounded_rectangle((10, 14, tw + 140, 106), 46, fill=(255, 255, 255, 245)); im.alpha_composite(emoji(e, 52), (28, 34))
+        d.text((92, 61), txt, font=f, fill=DARK + (255,), anchor='lm')
+        im = im.rotate(rot, resample=Image.BICUBIC, expand=True); im = im.resize((max(1, int(im.width * sc)), max(1, int(im.height * sc))), Image.BICUBIC)
+        paste_a(lay, im, cx - im.width / 2, cy - im.height / 2, a * clamp(p * 3))
     # final tip
     a = win(t, 54.1, 58.8)
     if a > 0: step_chip(lay, '✓', 'Mais saborosa que na água', W / 2, 1140, t, 54.2, a, GREEN, '😋')
