@@ -563,5 +563,40 @@ def cover_receita1():
     lay.alpha_composite(emo_img('🍠', 120), (110, 1420)); lay.alpha_composite(emo_img('🥚', 90), (250, 1460))
     brand(lay, 1780); save(base, lay, 'capa-pos-treino-batata-doce.png')
 
+
+def _badge_receita(lay, x, y):
+    f = F('black', 40); txt = 'RECEITA FIT'; tw = f.getlength(txt)
+    b = Image.new('RGBA', (int(tw + 170), 110), (0, 0, 0, 0)); d = ImageDraw.Draw(b)
+    d.rounded_rectangle((10, 10, tw + 160, 100), 45, fill=(255, 255, 255, 245)); d.text((80, 56), txt, font=f, fill=DARK + (255,), anchor='lm')
+    b.alpha_composite(emo_img('🍳', 50), (24, 30)); b = b.rotate(-5, resample=Image.BICUBIC, expand=True)
+    lay.alpha_composite(b, (int(x), int(y)))
+def _badge_time(lay, x, y, size=300):
+    t_ = Image.new('RGBA', (size, size), (0, 0, 0, 0)); d = ImageDraw.Draw(t_); s_ = size / 300
+    d.ellipse((10, 10, size - 10, size - 10), fill=(10, 10, 12, 240), outline=YEL + (255,), width=int(10 * s_))
+    d.text((size / 2, size * 0.45), '7 MIN', font=F('disp', 76 * s_), fill=WHITE + (255,), anchor='mm')
+    d.text((size / 2, size * 0.68), 'no micro-ondas', font=F('bold', 26 * s_), fill=YEL + (255,), anchor='mm')
+    t_ = t_.rotate(8, resample=Image.BICUBIC, expand=True); lay.alpha_composite(t_, (int(x), int(y)))
+def cover_receita_anim(safe=False):
+    base = background(63, 980); lay = Image.new('RGBA', (W, H))
+    ph = Image.open(A + '/rc_final.png').convert('RGB')
+    if not safe:
+        hero = card(ph, 960, 760, -3, rad=46, border=YEL, bw=5, cx=0.5, cy=0.5)
+        place(lay, hero, W / 2, 1110, 200, glow=YEL, glow_a=90)
+        fades(lay, top=640, bottom=1700)
+        headline(lay, 'BATATA-DOCE', 'NO MICRO-ONDAS', s1=140, s2=104)
+        _badge_receita(lay, 60, 690); _badge_time(lay, 730, 1300)
+        lay.alpha_composite(emo_img('🥚', 90), (90, 1410)); lay.alpha_composite(emo_img('💪', 90), (200, 1440))
+        brand(lay, 1780); save(base, lay, 'capa-receita-batata-animada.png')
+    else:
+        hero = card(ph, 860, 640, -3, rad=46, border=YEL, bw=5, cx=0.5, cy=0.5)
+        place(lay, hero, 480, 960, 200, glow=YEL, glow_a=90)
+        fades(lay, top=600, bottom=1560)
+        headline(lay, 'BATATA-DOCE', 'NO MICRO-ONDAS', y=300, s1=130, s2=96, maxw=860)
+        _badge_receita(lay, 50, 610); _badge_time(lay, 600, 1160, 250)
+        lay.alpha_composite(emo_img('🥚', 80), (110, 1290)); lay.alpha_composite(emo_img('💪', 80), (210, 1310))
+        brand(lay, 1470); save(base, lay, 'capa-receita-batata-animada-tiktok.png')
+def cover_ranim(): cover_receita_anim(False)
+def cover_ranimt(): cover_receita_anim(True)
+
 for fn in sys.argv[4].split(','):
     globals()['cover_' + fn](); print('ok', fn)
