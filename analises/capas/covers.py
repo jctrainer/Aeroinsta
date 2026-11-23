@@ -624,5 +624,31 @@ def cover_triceps(safe=False):
 def cover_tri(): cover_triceps(False)
 def cover_tris(): cover_triceps(True)
 
+def _reps_badge(w=560):
+    h = 160; im = Image.new('RGBA', (w, h), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
+    d.rounded_rectangle((0, 0, w - 1, h - 1), 44, fill=(16, 16, 20, 240), outline=YEL + (255,), width=4)
+    d.text((95, 66), '5', font=F('disp', 90), fill=(160, 160, 168, 255), anchor='mm'); d.text((95, 128), 'REPS', font=F('black', 24), fill=(160, 160, 168, 255), anchor='mm')
+    d.text((200, 72), '→', font=F('black', 70), fill=YEL + (255,), anchor='mm')
+    d.text((305, 66), '8', font=F('disp', 90), fill=GREEN + (255,), anchor='mm'); d.text((305, 128), 'REPS', font=F('black', 24), fill=GREEN + (255,), anchor='mm')
+    d.rounded_rectangle((w - 150, h / 2 - 38, w - 30, h / 2 + 38), 38, fill=GREEN + (255,))
+    d.text((w - 90, h / 2 + 1), '+3', font=F('disp', 50), fill=DARK + (255,), anchor='mm')
+    return im.rotate(3, resample=Image.BICUBIC, expand=True)
+def cover_supino(safe=False):
+    base = background(71, 950 if safe else 1000); lay = Image.new('RGBA', (W, H))
+    ph = Image.open(A + '/supino_hero.png').convert('RGB')
+    if not safe: hero = card(ph, 820, 1000, -2, rad=46, border=YEL, bw=5, cx=0.5, cy=0.6); hx, hy = W / 2, 1140
+    else: hero = card(ph, 720, 860, -2, rad=46, border=YEL, bw=5, cx=0.5, cy=0.6); hx, hy = 490, 1010
+    place(lay, hero, hx, hy, 200, glow=YEL, glow_a=70)
+    fades(lay, top=600 if safe else 640, bottom=1560 if safe else 1700)
+    if not safe: headline(lay, 'AUMENTAR A CARGA?', 'FAZ ISSO ANTES', s1=112, s2=124)
+    else: headline(lay, 'AUMENTAR A CARGA?', 'FAZ ISSO ANTES', y=290, s1=100, s2=110, maxw=860)
+    rb = _reps_badge(540 if not safe else 500)
+    place(lay, rb, 330 if not safe else 330, 760 if not safe else 660, 180)
+    chip(lay, 'MESMA CARGA: 140 KG', 760 if not safe else 640, 1580 if not safe else 1345, 'dark', -3, 32)
+    brand(lay, 1790 if not safe else 1475)
+    save(base, lay, 'capa-supino-reps.png' if not safe else 'capa-supino-reps-tiktok-shorts.png')
+def cover_sup(): cover_supino(False)
+def cover_sups(): cover_supino(True)
+
 for fn in sys.argv[4].split(','):
     globals()['cover_' + fn](); print('ok', fn)
