@@ -18,7 +18,7 @@ Meu treino real, supino máquina, última série:
 📅 Terça (B1): 140 kg × 5 reps, perto da falha
 📅 Sexta (B2): mesma carga, 140 kg × 8 reps
 
-Não coloquei 1 kg a mais. Fiz +3 repetições. O volume dessa série subiu 60% (700 → 1.120 kg).
+Não coloquei 1 kg a mais. Fiz +3 repetições. Minha força estimada subiu de ~163 para ~177 kg (+9%), sem mexer no peso.
 
 🔹 Anota a carga e as reps de cada série.
 🔹 No próximo treino, tenta 1 rep a mais com a mesma carga.

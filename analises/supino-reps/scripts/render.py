@@ -300,9 +300,10 @@ def compare_card(lay, t):
     u = eout((t - 36.0) / 0.6)
     if u > 0:
         d.line((40, 318, w - 40, 318), fill=(60, 60, 66, 255), width=2)
-        d.text((40, 378), 'VOLUME', font=F('black', 30), fill=(200, 200, 205, int(255 * u)), anchor='lm')
-        d.text((210, 378), '700 → 1.120 KG', font=F('disp', 50), fill=WHITE + (int(255 * u),), anchor='lm')
-        badge = chip('+60%', 'green', 40); bb = scaled(badge, eback((t - 36.4) / 0.4))
+        d.text((40, 366), 'FORÇA', font=F('black', 28), fill=(200, 200, 205, int(255 * u)), anchor='lm')
+        d.text((40, 398), 'ESTIMADA', font=F('black', 22), fill=(160, 160, 168, int(255 * u)), anchor='lm')
+        d.text((210, 378), '163 → 177 KG', font=F('disp', 50), fill=WHITE + (int(255 * u),), anchor='lm')
+        badge = chip('+9%', 'green', 40); bb = scaled(badge, eback((t - 36.4) / 0.4))
         if t > 36.4: im.alpha_composite(fade_im(bb, clamp(u)), (int(w - 40 - bb.width), int(378 - bb.height / 2)))
     cy = 560 if not SAFE else 560
     put(lay, im, W / 2 if not SAFE else 500, cy, a, 0.75 + 0.25 * eback((t - 33.8) / 0.35), 220)
