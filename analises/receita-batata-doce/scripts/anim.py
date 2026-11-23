@@ -136,29 +136,33 @@ def captions(lay, t, y=1620):
         d.text((x + ww / 2, yy), w_, font=f, fill=col + (int(255 * p),), anchor='mm', stroke_width=7, stroke_fill=(0, 0, 0, int(255 * p))); x += ww + sp
 
 # ---------- motion graphics ----------
+def fit_text(d, xy, s, maxw, size, col, a, font='black', anchor='lm'):
+    f = F(font, size)
+    while f.getlength(s) > maxw and size > 14: size -= 1; f = F(font, size)
+    d.text(xy, s, font=f, fill=col + (int(255 * a),), anchor=anchor)
 def fuel_gauge(lay, t, t0, a):
     if a <= 0: return
     q = eio(prog(t, t0 + 0.3, 1.6)); lvl = 0.12 + 0.88 * q
-    x0, y0, w_, h_ = 190, 1110, 640, 96
+    card(lay, (130, 1050, 950, 1290), a)
     d = ImageDraw.Draw(lay)
-    card(lay, (130, 1060, 950, 1260), a)
-    paste_a(lay, emoji('⛽', 64), 160, y0 + 14, a)
-    d.rounded_rectangle((x0 + 60, y0, x0 + 60 + w_, y0 + h_), 24, outline=WHITE + (int(255 * a),), width=5)
+    paste_a(lay, emoji('⛽', 64), 165, 1090, a)
+    x0, y0, w_, h_ = 250, 1085, 660, 90
+    d.rounded_rectangle((x0, y0, x0 + w_, y0 + h_), 24, outline=WHITE + (int(255 * a),), width=5)
     col = tuple(int(RED[i] * (1 - q) + GREEN[i] * q) for i in range(3))
-    d.rounded_rectangle((x0 + 72, y0 + 12, x0 + 72 + (w_ - 24) * lvl, y0 + h_ - 12), 16, fill=col + (int(255 * a),))
-    d.text((x0 + 60 + w_ / 2, y0 + h_ / 2), f'{int(lvl * 100)}%', font=F('disp', 54), fill=DARK + (int(255 * a),) if lvl > 0.55 else WHITE + (int(255 * a),), anchor='mm')
-    d.text((540, 1225), 'abastecendo a carcaça', font=F('black', 34), fill=YEL + (int(255 * a),), anchor='mm')
+    d.rounded_rectangle((x0 + 12, y0 + 12, x0 + 12 + (w_ - 24) * lvl, y0 + h_ - 12), 16, fill=col + (int(255 * a),))
+    d.text((x0 + w_ / 2, y0 + h_ / 2), f'{int(lvl * 100)}%', font=F('disp', 52), fill=(DARK if lvl > 0.55 else WHITE) + (int(255 * a),), anchor='mm')
+    fit_text(d, (540, 1235), 'abastecendo a carcaça', 700, 36, YEL, a, anchor='mm')
 def macro_cards(lay, t, a):
     if a <= 0: return
     for k, (e, nm, sub, t0, col) in enumerate((('🍠', 'CARBOIDRATO', 'repõe a energia', 7.46, YEL), ('🥚', 'PROTEÍNA', 'ajuda na recuperação', 8.7, GREEN))):
         p = eo(prog(t, t0, 0.45))
         if p <= 0: continue
-        x0 = 70 + k * 480 - (1 - p) * 120 * (1 if k == 0 else -1); y0 = 1060
-        card(lay, (x0, y0, x0 + 460, y0 + 230), a * p, col)
-        paste_a(lay, emoji(e, 90), x0 + 28, y0 + 30, a * p)
-        d = ImageDraw.Draw(lay); d.text((x0 + 140, y0 + 70), nm, font=F('black', 40), fill=col + (int(255 * a * p),), anchor='lm')
-        d.text((x0 + 140, y0 + 125), sub, font=F('bold', 28), fill=WHITE + (int(255 * a * p),), anchor='lm')
-        d.text((x0 + 230, y0 + 190), '+', font=F('disp', 1), fill=(0, 0, 0, 0))
+        x0 = 60 + k * 490 - (1 - p) * 120 * (1 if k == 0 else -1); y0 = 1060
+        card(lay, (x0, y0, x0 + 470, y0 + 220), a * p, col)
+        paste_a(lay, emoji(e, 80), x0 + 26, y0 + 70, a * p)
+        d = ImageDraw.Draw(lay)
+        fit_text(d, (x0 + 126, y0 + 85), nm, 320, 38, col, a * p)
+        fit_text(d, (x0 + 126, y0 + 140), sub, 320, 28, WHITE, a * p, 'bold')
 def water_drops(lay, t, a):
     if a <= 0: return
     rng = np.random.RandomState(7)
@@ -179,15 +183,15 @@ def big_timer(lay, t, t0, t1, a):
     paste_a(lay, emoji('⏲️', 70), cx + r - 10, cy - r - 10, a)
 def size_compare(lay, t, t0, a):
     if a <= 0: return
-    card(lay, (90, 1160, 990, 1400), a)
+    card(lay, (90, 1160, 990, 1410), a)
     d = ImageDraw.Draw(lay)
-    for k, (sz, lab, mins, col) in enumerate(((70, 'pequena', '≈ 5 min', GREEN), (110, 'grande', 'até 10 min', YEL))):
-        p = eo(prog(t, t0 + 0.4 * k, 0.4)); y = 1220 + k * 110
-        paste_a(lay, emoji('🍠', sz * (0.6 + 0.4 * p)), 140, y - sz * 0.35, a * p)
-        d.text((300, y + 10), lab, font=F('black', 38), fill=WHITE + (int(255 * a * p),), anchor='lm')
-        bw = 280 * (0.5 if k == 0 else 1.0) * eo(prog(t, t0 + 0.4 * k + 0.2, 0.6))
-        d.rounded_rectangle((500, y - 8, 500 + bw, y + 28), 14, fill=col + (int(255 * a * p),))
-        d.text((520 + bw, y + 10), mins, font=F('black', 32), fill=col + (int(255 * a * p),), anchor='lm')
+    for k, (sz, lab, mins, col) in enumerate(((60, 'pequena', '≈ 5 min', GREEN), (80, 'grande', 'até 10 min', YEL))):
+        p = eo(prog(t, t0 + 0.4 * k, 0.4)); y = 1235 + k * 105
+        e = emoji('🍠', sz); paste_a(lay, e, 175 - e.width / 2, y - e.height / 2, a * p)
+        fit_text(d, (250, y), lab, 170, 38, WHITE, a * p)
+        bw = 220 * (0.5 if k == 0 else 1.0) * eo(prog(t, t0 + 0.4 * k + 0.2, 0.6))
+        d.rounded_rectangle((440, y - 18, 440 + bw, y + 18), 14, fill=col + (int(255 * a * p),))
+        fit_text(d, (680, y), mins, 280, 34, col, a * p)
 def steam(lay, t, a, cx=540, cy=820, n=10):
     if a <= 0: return
     g = Image.new('RGBA', (W, H)); d = ImageDraw.Draw(g)
@@ -203,9 +207,9 @@ def compare_water(lay, t, t0, a):
         x0 = 90 + k * 470; y0 = 1170
         im = Image.new('RGBA', (430, 230), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
         d.rounded_rectangle((0, 0, 429, 229), 34, fill=(10, 10, 12, 238), outline=col + (255,), width=5)
-        im.alpha_composite(emoji(e, 96), (30, 66)); d.text((150, 95), lab, font=F('black', 38), fill=WHITE + (255,), anchor='lm')
-        d.text((150, 150), 'mais saborosa' if ok else 'perde sabor', font=F('bold', 28), fill=col + (255,), anchor='lm')
-        im.alpha_composite(emoji('✅' if ok else '❌', 60), (350, 10))
+        im.alpha_composite(emoji(e, 86), (26, 72)); fit_text(d, (130, 105), lab, 230, 38, WHITE, 1.0)
+        fit_text(d, (130, 158), 'mais saborosa' if ok else 'perde sabor', 270, 28, col, 1.0, 'bold')
+        im.alpha_composite(emoji('✅' if ok else '❌', 46), (366, 18))
         im = im.resize((max(1, int(430 * p)), max(1, int(230 * p))), Image.BICUBIC)
         paste_a(lay, im, x0 + 215 - im.width / 2, y0 + 115 - im.height / 2, a * clamp(prog(t, t0 + 0.4 * k, 0.45) * 3))
 
