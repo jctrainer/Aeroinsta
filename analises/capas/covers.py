@@ -541,5 +541,27 @@ def cover_bvs0(): cover_bv2_safe(0)
 def cover_bvs1(): cover_bv2_safe(1)
 def cover_bvs2(): cover_bv2_safe(2)
 
+
+def cover_receita1():
+    base = background(61, 1000); lay = Image.new('RGBA', (W, H))
+    ph = Image.open(A + '/receita1.png').convert('RGB')
+    ph = ImageEnhance.Color(ph).enhance(1.15); ph = ImageEnhance.Contrast(ph).enhance(1.08)
+    hero = card(ph, 860, 760, -3, rad=46, border=YEL, bw=5, cx=0.5, cy=0.5)
+    place(lay, hero, W / 2, 1120, 200, glow=YEL, glow_a=80)
+    fades(lay, top=640, bottom=1700)
+    headline(lay, 'PÓS-TREINO', 'BATATA-DOCE NO MICRO', s1=140, s2=96)
+    f = F('black', 40); txt = 'RECEITA FIT'; tw = f.getlength(txt)
+    b = Image.new('RGBA', (int(tw + 170), 110), (0, 0, 0, 0)); d = ImageDraw.Draw(b)
+    d.rounded_rectangle((10, 10, tw + 160, 100), 45, fill=(255, 255, 255, 245)); d.text((80, 56), txt, font=f, fill=DARK + (255,), anchor='lm')
+    b.alpha_composite(emo_img('🍳', 50), (24, 30)); b = b.rotate(-5, resample=Image.BICUBIC, expand=True)
+    lay.alpha_composite(b, (70, 700))
+    # time badge
+    t_ = Image.new('RGBA', (300, 300), (0, 0, 0, 0)); d = ImageDraw.Draw(t_)
+    d.ellipse((10, 10, 290, 290), fill=(10, 10, 12, 240), outline=YEL + (255,), width=10)
+    d.text((150, 135), '7 MIN', font=F('disp', 76), fill=WHITE + (255,), anchor='mm'); d.text((150, 205), 'no micro-ondas', font=F('bold', 26), fill=YEL + (255,), anchor='mm')
+    t_ = t_.rotate(8, resample=Image.BICUBIC, expand=True); lay.alpha_composite(t_, (720, 1330))
+    lay.alpha_composite(emo_img('🍠', 120), (110, 1420)); lay.alpha_composite(emo_img('🥚', 90), (250, 1460))
+    brand(lay, 1780); save(base, lay, 'capa-pos-treino-batata-doce.png')
+
 for fn in sys.argv[4].split(','):
     globals()['cover_' + fn](); print('ok', fn)
