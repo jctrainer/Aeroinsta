@@ -56,7 +56,15 @@ def clean(f, t):
     bright = (g > 215).astype(np.uint8); dark = (g < 70).astype(np.uint8)
     txt = bright & cv2.dilate(dark, np.ones((5, 5), np.uint8)); txt = cv2.dilate(txt, np.ones((3, 3), np.uint8))
     m = np.zeros(f.shape[:2], np.uint8); m[365:455] = cv2.dilate(txt | (dark & cv2.dilate(txt, np.ones((7, 7), np.uint8))), np.ones((5, 5), np.uint8)) * 255
-    f = cv2.inpaint(f, m, 5, cv2.INPAINT_TELEA)
+    if t < 3.9:   # old animated yellow 'Pós Treino' letters (fly-in + hold)
+        hsv = cv2.cvtColor(f, cv2.COLOR_BGR2HSV)
+        yel = cv2.inRange(hsv, (16, 110, 140), (40, 255, 255))
+        yel = cv2.morphologyEx(yel, cv2.MORPH_OPEN, np.ones((2, 2), np.uint8))
+        gry = cv2.cvtColor(f, cv2.COLOR_BGR2GRAY)
+        dk = ((gry < 95) & (hsv[..., 1] < 120)).astype(np.uint8) * 255    # dark, low-saturation outline
+        ring = cv2.dilate(yel, np.ones((17, 17), np.uint8))
+        m |= cv2.dilate(yel | (dk & ring), np.ones((9, 9), np.uint8))
+    f = cv2.inpaint(f, m, 6, cv2.INPAINT_TELEA)
     return f[:CROP_Y1]
 
 # ---------- layout ----------
@@ -66,7 +74,7 @@ def stage_frame(t):
     f = clean(RD.get(i), t)
     sw, sh = STAGE[2] - STAGE[0], STAGE[3] - STAGE[1]
     # first 3.6 s: punch-in on the lower part (hides the old burned-in title)
-    k = 1 - eo(prog(t, 3.3, 0.5))
+    k = 1 - eo(prog(t, 3.8, 0.6))
     z = (1.0 + 0.03 * math.sin(t * 0.35)) * (1 + 0.72 * k)
     cw, ch = 576 / z, 505 / z; cx = 288; cy = 252 + (505 - ch / 2 - 252) * k
     x0 = int(max(0, cx - cw / 2)); y0 = int(max(0, min(505 - ch, cy - ch / 2)))
