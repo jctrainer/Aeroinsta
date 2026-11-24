@@ -108,8 +108,13 @@ def callout(im, p0, p1, text, align='l', col=(225, 225, 230)):
     for i, ln in enumerate(lines):
         d.text((p1[0] + (8 if align == 'l' else -8), p1[1] + i * 30 - (len(lines) - 1) * 15), ln, font=f, fill=col, anchor='lm' if align == 'l' else 'rm')
 
-def foot(im, text, y=1128):
-    ImageDraw.Draw(im).text((70, y), text, font=P('Regular', 19), fill=(110, 110, 118), anchor='lm')
+def foot(im, text, y=1128, maxw=940):
+    d = ImageDraw.Draw(im); f = P('Regular', 19); lines = ['']
+    for w in text.split(' '):
+        t = (lines[-1] + ' ' + w).strip()
+        if f.getlength(t) > maxw and lines[-1]: lines.append(w)
+        else: lines[-1] = t
+    for i, ln in enumerate(lines): d.text((70, y + i * 24), ln, font=f, fill=(110, 110, 118), anchor='lm')
 
 def save(im, name): im.convert('RGB').save(OUT + '/' + name, quality=95)
 

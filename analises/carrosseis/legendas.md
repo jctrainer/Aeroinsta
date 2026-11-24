@@ -10,11 +10,11 @@ Os cortes de coxa são **ilustrações educativas**, não fotos de peças anatô
 ### Legenda
 Mesma idade. Corpos diferentes. 🔬
 
-Vermelho é músculo, amarelo é gordura. E a diferença entre os dois cortes não é genética: é estímulo.
+Vermelho é músculo, amarelo é gordura. Genética conta, mas grande parte dessa diferença vem do estímulo: treino.
 
-🔹 Músculo funciona como órgão: libera miocinas, guarda glicose, protege ossos e articulações.
+🔹 Músculo funciona como órgão: libera miocinas que conversam com outros órgãos, é o principal tecido que capta glicose sob ação da insulina e é a grande reserva de proteína do corpo.
 🔹 Depois dos 30, sem treino, a perda pode chegar a 3–8% por década e acelera depois dos 60.
-🔹 Aos 70, quem treina força conserva muito mais músculo. As ressonâncias de atletas master mostram isso (Wroblewski et al., 2011).
+🔹 Em atletas master de 40 a 81 anos que treinavam 4 a 5x por semana, a área muscular da coxa não caiu com a idade (Wroblewski et al., 2011). Boa parte da perda que chamamos de "idade" é falta de uso.
 
 ✅ Musculação 2 a 3x por semana
 ✅ Progressão: mais reps, depois mais carga
@@ -38,16 +38,16 @@ Você já treina força ou ainda está no "depois eu começo"? 👇
 Menopausa não é sentença. É o momento de treinar mais forte. 💪
 
 Quando o estrogênio cai, o corpo sente:
-🔹 a perda de músculo acelera
-🔹 os ossos perdem densidade mais rápido
-🔹 a gordura migra pra barriga
-🔹 a glicose fica mais difícil de controlar
+🔹 a massa magra começa a cair e o ganho de gordura dobra de ritmo
+🔹 a gordura visceral (da barriga) sobe 6 a 8% ao ano perto da menopausa
+🔹 a perda óssea acelera no fim da transição
+🔹 a balança quase não muda, mas a composição do corpo muda
 
 O estrogênio protegia. Agora quem protege é o músculo.
 
 ❌ "Só caminhada resolve"
 ❌ "Peso é perigoso nessa fase"
-✅ Treino de força com carga progressiva e supervisionada melhora massa óssea, força e equilíbrio. No estudo LIFTMOR, o treino intenso foi seguro para mulheres pós-menopausa com baixa massa óssea.
+✅ Treino de força com carga progressiva e supervisionada melhora massa óssea, força e função. No estudo LIFTMOR, 101 mulheres pós-menopausa com baixa massa óssea treinaram pesado (5×5 acima de 85% da carga máxima), 2x por semana, com supervisão: a densidade óssea melhorou e o treino foi seguro.
 
 O plano:
 ✅ Força 2 a 3x por semana
@@ -64,6 +64,8 @@ O plano:
 Você está na menopausa ou perto dela? O que mais mudou no seu corpo? 👇
 
 ---
+
+Fontes completas com DOI: `fontes.md`.
 
 ## Ordem e cuidados
 - Poste o **Músculo e longevidade** primeiro. O de **Menopausa** sai 2 a 3 dias depois, e o slide 3 dele conversa com o primeiro.

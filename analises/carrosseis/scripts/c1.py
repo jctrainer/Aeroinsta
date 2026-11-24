@@ -34,8 +34,8 @@ title(im, ['O tempo passa.', 'A diferença cresce.'], 375, 70)
 put_slice(im, I + 'sed_sq.png', 290, 770, 400)
 put_slice(im, I + 't70_sq.png', 790, 770, 400, Y)
 tag(im, 'NÃO TREINA', 290, 1000, 'd', 28); tag(im, 'TREINA', 790, 1000, 'y', 28)
-foot(im, 'Ilustração inspirada nas ressonâncias de Wroblewski et al., 2011 (Phys Sportsmed).', 1070)
-statement(im, ['Envelhecer é inevitável. Perder músculo, não.'], 1125, Y, 32)
+foot(im, 'Ilustração. Base: atletas master de 40 a 81 anos mantiveram a área muscular da coxa (Wroblewski et al., 2011).', 1050)
+statement(im, ['Envelhecer é inevitável. Perder tanto músculo, não.'], 1125, Y, 32)
 progress(im, 3, T, '70 anos')
 save(im, 'musculo-03.png')
 
@@ -43,11 +43,12 @@ save(im, 'musculo-03.png')
 im = base(4, T, mark='M')
 kicker(im, 'POR QUE ÓRGÃO?')
 title(im, ['Músculo trabalha', 'pela sua saúde'], 375, 76)
-bullets(im, [('Libera miocinas:', 'mensageiros anti-inflamatórios'),
-             ('Guarda glicose:', 'principal destino do açúcar no sangue'),
+bullets(im, [('Libera miocinas:', 'mensageiros para outros órgãos'),
+             ('Capta glicose:', 'principal tecido sob ação da insulina'),
              ('Protege:', 'ossos, articulações e equilíbrio'),
              ('Reserva:', 'proteína para doenças e cirurgias')], 600, 92, 32)
 statement(im, ['Massa magra é poupança de saúde.'], 1020, Y, 42)
+foot(im, 'Pedersen & Febbraio, 2012 (Nat Rev Endocrinol); DeFronzo & Tripathy, 2009 (Diabetes Care); Wolfe, 2006 (AJCN).', 1128)
 progress(im, 4, T, 'Órgão de saúde')
 save(im, 'musculo-04.png')
 
@@ -62,6 +63,7 @@ chart(im, (70, 650, 1010, 1130), [
     ([0.95, 0.93, 0.88, 0.80, 0.66, 0.50], (120, 120, 128), 6, ('não treina', 70, 40, 'd'), False),
     ([0.95, 0.95, 0.93, 0.90, 0.85, 0.80], Y, 8, ('treina', 70, -45, 'y'), True)],
     ['30', '40', '50', '60', '70', '80'], 'massa muscular (ilustrativo)')
+foot(im, 'Volpi et al., 2004 (Curr Opin Clin Nutr Metab Care).', 1158)
 progress(im, 5, T, 'A conta da idade')
 save(im, 'musculo-05.png')
 
@@ -74,7 +76,8 @@ bullets(im, [('Musculação', '2 a 3x por semana'),
              ('Perto da falha:', 'sobrando 1 a 3 reps'),
              ('Proteína:', '1,2 a 1,6 g/kg por dia'),
              ('Constância', 'vale mais que intensidade')], 600, 84, 34)
-statement(im, ['Nunca é tarde para começar.'], 1050, Y, 42)
+statement(im, ['Nunca é tarde para começar.'], 1030, Y, 42)
+foot(im, 'Robinson et al., 2024 (Sports Med); Morton et al., 2018 (BJSM); Bauer et al., 2013 (JAMDA).', 1110)
 progress(im, 6, T, 'O que fazer')
 save(im, 'musculo-06.png')
 

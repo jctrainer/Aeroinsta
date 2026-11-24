@@ -27,12 +27,13 @@ save(im, 'menopausa-01.png')
 im = base(2, T, HDR, mark='E')
 kicker(im, 'O QUE MUDA NO CORPO')
 title(im, ['O estrogênio cai.', 'O corpo sente.'], 375, 76)
-bullets(im, [('Músculo:', 'a perda acelera'),
-             ('Ossos:', 'a densidade cai mais rápido'),
-             ('Barriga:', 'a gordura migra para o abdômen'),
-             ('Glicose:', 'o corpo responde pior à insulina'),
-             ('Força:', 'tarefas do dia a dia pesam mais')], 600, 84, 34)
-statement(im, ['O estrogênio protegia. Agora quem', 'protege é o músculo.'], 1030, Y, 38)
+bullets(im, [('Músculo:', 'a massa magra começa a cair'),
+             ('Gordura:', 'o ritmo de ganho dobra'),
+             ('Barriga:', 'gordura visceral sobe 6 a 8% ao ano'),
+             ('Ossos:', 'a perda acelera no fim da transição'),
+             ('Balança:', 'quase igual, mas o corpo muda')], 600, 82, 34)
+statement(im, ['O estrogênio protegia. Agora quem', 'protege é o músculo.'], 1010, Y, 38)
+foot(im, 'Greendale et al., 2019 (JCI Insight); Samargandy et al., 2021 (Menopause); Finkelstein et al., 2008 (JCEM).', 1128)
 progress(im, 2, T, 'O que muda')
 save(im, 'menopausa-02.png')
 
@@ -59,7 +60,8 @@ chart(im, (70, 650, 1010, 1130), [
     ([0.92, 0.90, 0.86, 0.72, 0.60, 0.48], (120, 120, 128), 6, ('sem treino', 85, 40, 'd'), False),
     ([0.92, 0.90, 0.86, 0.84, 0.82, 0.79], Y, 8, ('com força', 85, -45, 'y'), True)],
     ['35', '45', '50', '55', '65', '75'], None, marks=[(0.4, 'menopausa')])
-ImageDraw.Draw(im).text((1010, 1158), 'gráfico ilustrativo', font=P('Regular', 20), fill=(110, 110, 118), anchor='rm')
+foot(im, 'Greendale et al., 2019. Ilustrativo.', 1158)
+if False: ImageDraw.Draw(im).text((1010, 1158), 'gráfico ilustrativo', font=P('Regular', 20), fill=(110, 110, 118), anchor='rm')
 progress(im, 4, T, 'A virada')
 save(im, 'menopausa-04.png')
 
@@ -74,8 +76,8 @@ d.line((70, 795, 1010, 795), fill=(46, 46, 52), width=2)
 tracked(d, (70, 840), 'VERDADE', P('Bold', 24), GRN, 5)
 bullets(im, [('Força com carga', 'progressiva e supervisionada'),
              ('Melhora', 'massa óssea, força e equilíbrio'),
-             ('Estudo LIFTMOR:', 'treino intenso foi seguro')], 895, 66, 32)
-foot(im, 'Watson et al., 2018 (J Bone Miner Res): mulheres pós-menopausa com baixa massa óssea.', 1105)
+             ('Estudo LIFTMOR:', 'intenso e supervisionado, foi seguro')], 895, 66, 32)
+foot(im, 'Watson et al., 2018 (J Bone Miner Res): 101 mulheres pós-menopausa com baixa massa óssea, 5×5 acima de 85% de 1RM, 2x/semana.', 1095)
 progress(im, 5, T, 'Mito × verdade')
 save(im, 'menopausa-05.png')
 
@@ -88,7 +90,8 @@ bullets(im, [('Força', '2 a 3x por semana'),
              ('Progressão', 'de carga, com técnica'),
              ('Proteína:', '1,2 a 1,6 g/kg + 25–30 g por refeição'),
              ('Sono e caminhada', 'todos os dias')], 600, 84, 32)
-statement(im, ['Exames em dia e conversa com seu médico.'], 1050, (200, 200, 205), 30)
+statement(im, ['Exames em dia e conversa com seu médico.'], 1020, (200, 200, 205), 30)
+foot(im, 'Bauer et al., 2013 (JAMDA); Morton et al., 2018 (BJSM); Paddon-Jones & Rasmussen, 2009.', 1100)
 progress(im, 6, T, 'O plano')
 save(im, 'menopausa-06.png')
 

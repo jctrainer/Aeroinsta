@@ -24,6 +24,7 @@ Copie um deles, troque o conteúdo e rode `python3 cX.py <pasta_saida>`.
 **Conteúdo: base científica obrigatória**
 - Fundamentar em **cinesiologia/biomecânica, fisiologia do exercício e educação física**, com linguagem simples para mulheres leigas.
 - Todo número ou afirmação forte precisa ter base na literatura; citar o estudo no slide com `foot()` (autor, ano, revista) quando for o argumento central.
+- **Checar cada dado no PubMed antes de entregar** (ferramenta PubMed): registrar autor, ano, revista e DOI em `fontes.md` da pasta do carrossel; o que não for confirmado sai do post ou é suavizado.
 - Nunca inventar dado. Gráficos esquemáticos levam a marca **"ilustrativo"**.
 - Imagens geradas por IA ou montadas são marcadas como **"ilustração educativa"**; nunca "imagem real".
 - Corrigir mitos com contraponto (slide "Mito × Verdade" quando couber).
