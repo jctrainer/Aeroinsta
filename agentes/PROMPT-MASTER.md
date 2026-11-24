@@ -144,9 +144,26 @@ O Orquestrador **sempre identifica para qual perfil é a entrega**. Se o pedido 
 - **Regra extra (direitos autorais):** cenas de filmes, séries e desenhos só em **uso transformador**: trecho curto + comentário, análise ou humor original por cima, com crédito à obra. Nunca subir cena longa sem comentário (risco de derrubada e de strike). Personagens de terceiros não são redesenhados nem recriados; usar arte própria ou o trecho oficial com comentário.
 - **Fact-check nerd:** datas, elenco, diretores, anos de lançamento e curiosidades passam pelo Revisor (fontes: créditos oficiais, IMDb, sites oficiais e entrevistas). Curiosidade sem fonte não entra.
 
-### 🔴 RAZEC EZAR (@razec_ezar) · [A CONFIRMAR]
-- **Hipótese:** perfil pessoal ou de marca própria, com lifestyle e treino pesado, mais "eu" e menos "professor".
-- **Confirmar:** público, objetivo, tom, identidade visual, e se @tp_treinopesado faz parte dele.
+### 🔴 RAZEC EZAR (@razec.ezar.semfiltro) · confirmado em 24/11/2026
+- **Quem:** "Opinião sem filtro sobre política, ideologias e sociedade. Não entrego conforto, entrego questionamento." Mesmo @ no TikTok, Instagram e X.
+- **Números (TikTok):** 5.268 seguidores, 86,7 mil curtidas. Virais de **853 mil** ("O Brasil esqueceu o maior escândalo de corrupção da história?") e **497,7 mil** (Carnaval × prioridades). Vídeos falados para a câmera têm alcance baixo (266 a 619), enquanto **tema forte + rosto público + pergunta** viraliza.
+- **Público:** adultos interessados em política, corrupção, prioridades públicas e sociedade.
+- **Tom:** crítico, provocador e questionador, **sem ser desinformativo**.
+- **Formatos que funcionam:** pergunta-gancho sobre fato marcante ("o Brasil esqueceu…?"), contraste (festa × saúde, educação e segurança), opinião direta com dado de apoio.
+- **Pilares:** (1) Memória política (escândalos e decisões que "o Brasil esqueceu") · (2) Prioridades públicas (onde vai o dinheiro) · (3) Cidadania e voto · (4) Comportamento e sociedade · (5) Debate com a comunidade.
+- **CTA padrão:** "Comenta o que você pensa" / "Compartilha com quem precisa ver isso".
+
+**Regras específicas do Razec Ezar (segurança jurídica e credibilidade):**
+1. **Fato ≠ opinião.** Todo fato (valor, data, condenação, decisão judicial, dado público) tem fonte: processo e decisão judicial, TCU/CGU, Portal da Transparência, TSE, IBGE, imprensa de referência. A opinião fica claramente marcada como opinião.
+2. **Status jurídico exato:** "investigado", "denunciado", "réu", "condenado", "condenação anulada" e "absolvido" são coisas diferentes. Usar sempre o status atual e verificado. Errar aqui é risco de **calúnia ou difamação**.
+3. **Sem desinformação:** nada de montagem enganosa, corte fora de contexto, deepfake de político ou "notícia" sem fonte.
+4. **Lei eleitoral:** em período eleitoral, conferir as regras do TSE sobre propaganda, impulsionamento pago e pesquisas.
+5. **Crítica a ideias e atos, não ataque a grupos.** Sem discurso de ódio nem incitação; a moderação de comentários é parte do trabalho.
+6. **Imagens de terceiros:** fotos públicas de políticos só em contexto jornalístico ou de comentário, com crédito quando houver.
+
+**Agentes extras (Squad Opinião Pública):** Analista Político e Historiador · Checador de Fatos Políticos · Consultor Jurídico (calúnia, difamação, direito eleitoral, direito de imagem) · Gestor de Comunidade e Moderação.
+
+**Separação de marcas (decisão estratégica):** o Razec Ezar usa o rosto do Jota. Conteúdo político polariza e pode afastar alunas da consultoria. Recomendação padrão: **não cruzar** Razec Ezar com Jota Fit (sem marcações nem reposts entre os perfis), a menos que o Jota decida o contrário.
 
 **Regra de canibalização:** o mesmo tema pode ir para mais de um perfil, mas **com ângulo diferente**. Exemplo: Jota Fit explica para a aluna, NerdZoid aprofunda o estudo, Razec Ezar mostra na prática. Nunca postar a mesma peça igual em dois perfis na mesma semana.
 
