@@ -2,206 +2,247 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<title>Jota Fit · Menopausa e Músculo</title>
+<title>Método Jota Fit · Menopausa</title>
 <style>
-  :root{
-    --bg:#0A0A0A; --panel:#161616; --line:#2E2E2E;
-    --text:#F6F1EC; --muted:#A39BA5; --rose:#D6D6D6; --rose-soft:#D6D6D622;
-    --bone:#EADBC4; --fat:#C9B07A; --muscle:#8E2B33; --muscle-dark:#7E1F2B;
-    --W:1080px; --H:1350px;
-  }
+  @font-face{font-family:Poppins;font-weight:400;src:url(assets/fonts/Poppins-Regular.ttf)}
+  @font-face{font-family:Poppins;font-weight:500;src:url(assets/fonts/Poppins-Medium.ttf)}
+  @font-face{font-family:Poppins;font-weight:600;src:url(assets/fonts/Poppins-SemiBold.ttf)}
+  @font-face{font-family:Poppins;font-weight:700;src:url(assets/fonts/Poppins-Bold.ttf)}
+  @font-face{font-family:Poppins;font-weight:800;src:url(assets/fonts/Poppins-ExtraBold.ttf)}
+  @font-face{font-family:Exo2;font-style:italic;font-weight:100 900;src:url(assets/fonts/Exo2-Italic.ttf)}
+  :root{--y:#F5C518;--bg:#0E0E0E;--card:#15161A;--cardline:#2A2B30;--gray:#8A8A8A;--soft:#CFCFCF}
   *{box-sizing:border-box;margin:0;padding:0}
-  body{background:var(--bg);font-family:Inter, sans-serif;color:var(--text)}
-  #stage{position:relative;width:calc(var(--W)*6);height:var(--H);overflow:hidden;
-    background:
-      radial-gradient(1000px 800px at 540px 380px,#2b2b2b 0%,transparent 70%),
-      radial-gradient(1000px 800px at 2160px 520px,#242424 0%,transparent 70%),
-      radial-gradient(1000px 800px at 3780px 380px,#262626 0%,transparent 70%),
-      radial-gradient(1000px 800px at 5940px 420px,#2b2b2b 0%,transparent 70%),
-      var(--bg);}
+  body{background:var(--bg);font-family:Poppins,sans-serif;color:#fff}
+  #stage{position:relative;width:6480px;height:1440px;overflow:hidden;
+    background:linear-gradient(180deg,#121212 0%,#0C0C0C 100%)}
   .abs{position:absolute}
-  .slide{position:absolute;top:0;width:var(--W);height:var(--H);padding:96px 88px}
-  .brand{position:absolute;top:46px;left:88px;height:62px}
-  .count{position:absolute;top:58px;right:88px;font-family:"JetBrains Mono";font-size:22px;color:var(--muted)}
-  .src{position:absolute;left:88px;right:88px;bottom:46px;font-size:19px;color:var(--muted);line-height:1.35}
-  .kicker{font-family:"JetBrains Mono";font-size:24px;letter-spacing:.14em;color:#9E9E9E;text-transform:uppercase;margin-top:70px}
-  h1,h2{font-family:"Inter Display";font-weight:900;line-height:1.02;letter-spacing:-.02em}
-  h1{font-size:92px;margin-top:22px}
-  h2{font-size:72px;margin-top:22px}
-  .rose,.big{background:linear-gradient(180deg,#FFFFFF 0%,#D9D9D9 45%,#8F8F8F 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
-  p.lead{font-size:36px;line-height:1.35;color:#E4DCD6;margin-top:30px;max-width:900px}
-  p.body{font-size:31px;line-height:1.42;color:#D8CFC9;margin-top:24px;max-width:900px}
-  .big{font-family:"Inter Display";font-weight:900;font-size:230px;line-height:.9;letter-spacing:-.04em;}
-  .tag{display:inline-block;border:2px solid #6A6A6A;color:#E6E6E6;border-radius:999px;
-    padding:8px 22px;font-size:24px;font-weight:700;margin-top:26px}
-  .card{background:var(--panel);border:1px solid var(--line);border-radius:28px;padding:34px 38px}
-  .check{display:flex;gap:24px;align-items:flex-start;margin-top:30px}
-  .check i{flex:0 0 52px;height:52px;border-radius:14px;background:linear-gradient(180deg,#F2F2F2,#9A9A9A);color:#0A0A0A;
-    font-style:normal;font-weight:900;font-size:32px;display:flex;align-items:center;justify-content:center}
-  .check div{font-size:31px;line-height:1.35}
-  .check small{display:block;font-size:23px;color:var(--muted);margin-top:4px}
-  .swipe{font-family:"JetBrains Mono";font-size:24px;color:var(--muted)}
+  .slide{position:absolute;top:0;width:1080px;height:1440px}
+  .head{position:absolute;top:116px;left:70px;font-weight:700;font-size:22px;letter-spacing:.36em;color:var(--gray)}
+  .count{position:absolute;top:116px;right:70px;font-weight:700;font-size:22px;color:#9A9A9A}
+  .wm{position:absolute;font-weight:700;color:rgba(255,255,255,.035);line-height:1;pointer-events:none}
+  .content{position:absolute;left:70px;right:70px;top:300px;bottom:250px;display:flex;flex-direction:column}
+  .kicker{font-weight:700;font-size:30px;letter-spacing:.14em;color:var(--y)}
+  .title{font-weight:700;font-size:74px;line-height:1.12;margin-top:22px;letter-spacing:-.005em}
+  ul{list-style:none;margin-top:44px}
+  li{display:flex;align-items:center;gap:22px;font-size:33px;line-height:1.3;margin-bottom:28px}
+  li svg{flex:0 0 30px}
+  li b{font-weight:700;color:var(--y)}
+  .card{margin-top:auto;background:var(--card);border:2px solid var(--cardline);border-radius:30px;padding:34px 40px}
+  .lab{position:absolute;top:1292px;width:1080px;text-align:center;font-weight:700;font-size:28px}
+  .src{position:absolute;top:1372px;left:70px;right:70px;text-align:center;font-size:17px;color:#5E5E5E;line-height:1.35}
+  .disp{font-family:Exo2;font-style:italic;font-weight:900;text-transform:uppercase;letter-spacing:.01em;line-height:1;
+    text-shadow:0 6px 18px rgba(0,0,0,.6)}
 </style>
 </head>
 <body>
 <div id="stage">
 
-  <!-- ===== CAMADA CONTÍNUA (atravessa todos os slides) ===== -->
-  <svg class="abs" style="left:0;top:0" width="6480" height="1350" id="flow">
-    <!-- linha-fio contínua no rodapé -->
-    <path d="M0 1232 C 1080 1200, 2160 1262, 3240 1232 S 5400 1200, 6480 1232"
-          fill="none" stroke="#D6D6D6" stroke-width="4" stroke-linecap="round" opacity=".9"/>
+  <!-- marcas d'água -->
+  <svg class="abs" style="left:0;top:0" width="6480" height="1440">
+    <circle cx="980" cy="760" r="560" fill="none" stroke="rgba(255,255,255,.03)" stroke-width="120"/>
+    <circle cx="5960" cy="820" r="600" fill="none" stroke="rgba(255,255,255,.03)" stroke-width="130"/>
   </svg>
+  <div class="wm" style="left:1840px;top:330px;font-size:900px">1</div>
+  <div class="wm" style="left:2810px;top:330px;font-size:900px">2</div>
+  <div class="wm" style="left:3880px;top:330px;font-size:900px">3</div>
+  <div class="wm" style="left:4950px;top:330px;font-size:900px">4</div>
 
-  <!-- ===== SLIDE 1 · GANCHO ===== -->
+  <!-- linha do tempo contínua (efeito infinito) -->
+  <svg class="abs" style="left:0;top:1200px" width="6480" height="90" id="timeline"></svg>
+
+  <!-- ===== 1 · CAPA ===== -->
   <section class="slide" style="left:0">
-    <div class="kicker">Mulheres 45+ · Menopausa</div>
-    <h1>A menopausa não leva <span class="rose">só o estrogênio.</span></h1>
-    <p class="lead">Leva músculo e osso junto, se você deixar.</p>
-    <svg class="abs" style="left:60px;top:590px" width="960" height="510" id="xsec"></svg>
-    <div class="abs" style="left:88px;top:1122px;width:440px;text-align:center;font-size:26px;font-weight:700">Sem treino de força</div>
-    <div class="abs" style="left:552px;top:1122px;width:440px;text-align:center;font-size:26px;font-weight:700;color:var(--rose)">Com treino de força</div>
-    <div class="src">Ilustração esquemática de corte transversal da coxa.</div>
-    <div class="swipe abs" style="right:88px;bottom:46px">ARRASTA →</div>
+    <div class="abs disp" style="left:70px;top:190px;font-size:104px;color:#fff">A menopausa</div>
+    <div class="abs disp" style="left:70px;top:305px;font-size:104px;color:#fff">não leva só o</div>
+    <div class="abs disp" style="left:70px;top:420px;font-size:122px;color:var(--y)">estrogênio</div>
+    <div class="abs" style="left:70px;top:578px;font-weight:700;font-size:36px;color:var(--soft)">Leva músculo e osso junto, se você deixar.</div>
+    <div class="abs" style="left:70px;top:672px;width:940px;height:470px;background:var(--card);border:2px solid var(--cardline);border-radius:30px"></div>
+    <svg class="abs" style="left:70px;top:672px" width="940" height="470" id="xsec"></svg>
+    <div class="abs" style="left:70px;top:1078px;width:470px;text-align:center;font-weight:700;font-size:26px;color:var(--soft)">Sem treino de força</div>
+    <div class="abs" style="left:540px;top:1078px;width:470px;text-align:center;font-weight:700;font-size:26px;color:var(--y)">Com treino de força</div>
+    <div class="abs" style="right:70px;top:1150px;font-weight:700;font-size:24px;letter-spacing:.3em;color:var(--y)">ARRASTE
+      <svg width="96" height="34" style="vertical-align:middle;margin-left:6px"><path d="M6 4 L22 17 L6 30 M36 4 L52 17 L36 30 M66 4 L82 17 L66 30" stroke="#F5C518" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="src">Ilustração esquemática do corte transversal da coxa.</div>
   </section>
 
-  <!-- ===== SLIDE 2 · MECANISMO ===== -->
+  <!-- ===== 2 · FATO 1 ===== -->
   <section class="slide" style="left:1080px">
-    <div class="kicker">Menopausa · O que muda por dentro</div>
-    <h2>O estrogênio é um <span class="rose">escudo</span> para osso e músculo.</h2>
-    <p class="body">Quando ele cai, a proteção vai junto. Não é preguiça nem falta de força de vontade. <b>É fisiologia.</b></p>
-  </section>
-
-  <!-- ===== SLIDE 3 · OSSO ===== -->
-  <section class="slide" style="left:2160px">
-    <div class="kicker">O dado que ninguém conta</div>
-    <div class="big" style="margin-top:26px">−7,4%</div>
-    <p class="lead" style="margin-top:18px">de densidade óssea da coluna em <b>cerca de 3 anos</b> de transição.</p>
-    <p class="body">Ao mesmo tempo, a <b>gordura acelera</b> e a <b>massa magra cai</b>. Quem perde mais músculo tem até <b class="rose">63% mais risco de fratura</b>.</p>
-    <div class="src">Estudo SWAN: Greendale et al., JBMR 2012 e JCI Insight 2019 · Shieh et al., JBMR 2023. Gráfico esquemático.</div>
-  </section>
-
-  <!-- gráfico contínuo slides 2 → 3 (o corte entre os slides = última menstruação) -->
-  <svg class="abs" style="left:1080px;top:0" width="2160" height="1350" id="chart"></svg>
-
-  <!-- ===== SLIDE 4 · A VIRADA (LIFTMOR) ===== -->
-  <section class="slide" style="left:3240px">
-    <div class="kicker">A virada · Treino de força</div>
-    <h2>Musculação <span class="rose">pesada</span> fortaleceu osso já fragilizado.</h2>
-    <p class="body" style="font-size:28px">101 mulheres na pós-menopausa com osteopenia ou osteoporose · 65 anos em média</p>
-    <svg class="abs" style="left:88px;top:640px" width="904" height="420" id="bars"></svg>
-    <div class="abs" style="left:88px;top:1070px;font-size:25px;color:#D8CFC9;width:904px;line-height:1.4">
-      8 meses · 2x por semana · 30 min · cargas acima de 85% do máximo · <b>supervisionado</b>.
-    </div>
-    <div class="src">Watson et al., J Bone Miner Res, 2018 (ensaio LIFTMOR).</div>
-  </section>
-
-  <!-- ===== SLIDE 5 · CALORÃO ===== -->
-  <section class="slide" style="left:4320px">
-    <div class="kicker">Bônus · Sintomas da menopausa</div>
-    <div class="big" style="margin-top:26px">−44%</div>
-    <p class="lead" style="margin-top:18px">nas <b>ondas de calor</b> moderadas a intensas.</p>
-    <p class="body">15 semanas de musculação, 3x por semana. O grupo sem treino caiu só 2%. E o <b>sono melhorou</b>.</p>
-    <div class="tag">Músculo é órgão: ele conversa com osso, cérebro e metabolismo</div>
-    <div class="src">Berin et al., Maturitas, 2019 · Berin et al., Climacteric, 2022 · Severinsen &amp; Pedersen, Endocr Rev, 2020.</div>
-  </section>
-
-  <!-- ===== SLIDE 6 · CHECKLIST + CTA ===== -->
-  <section class="slide" style="left:5400px">
-    <div class="kicker">Salve e comece esta semana</div>
-    <h2 style="font-size:64px">Envelhecer é inevitável. <span class="rose">Perder força, não.</span></h2>
-    <div class="check"><i>1</i><div>Musculação 2 a 3x por semana<small>Com carga que desafia e sobe ao longo das semanas.</small></div></div>
-    <div class="check"><i>2</i><div>Proteína: 1,0 a 1,2 g/kg/dia<small>Referência PROT-AGE. Ajuste com nutricionista.</small></div></div>
-    <div class="check"><i>3</i><div>Liberação médica e supervisão<small>Essencial com osteopenia ou osteoporose.</small></div></div>
-    <div class="card abs" style="left:88px;top:880px;width:904px;display:flex;align-items:center;gap:34px;padding:26px 34px">
-      <img src="assets/jota.png" style="width:180px;height:180px;border-radius:50%;object-fit:cover;object-position:50% 18%;border:3px solid #8F8F8F">
-      <div>
-        <div style="font-size:30px">Comente <span class="rose" style="font-family:'Inter Display';font-weight:900;font-size:66px;letter-spacing:.04em">FORTE</span></div>
-        <div style="font-size:27px;color:#CFCFCF;margin-top:4px">e eu te mando por direct como começar.</div>
-        <div style="font-size:22px;color:#8C8C8C;margin-top:10px;font-family:'JetBrains Mono';letter-spacing:.08em">JOTA · PERSONAL TRAINER</div>
+    <div class="content">
+      <div class="kicker">FATO 1</div>
+      <div class="title">O escudo caiu</div>
+      <ul>
+        <li>CHECK O estrogênio protege osso e músculo</li>
+        <li>CHECK Na menopausa, ele despenca</li>
+        <li>CHECK Não é preguiça: <b>é fisiologia</b></li>
+      </ul>
+      <div class="card" style="padding:26px 30px 18px">
+        <svg width="876" height="330" id="chart"></svg>
       </div>
     </div>
-    <div class="src">Bauer et al., J Am Med Dir Assoc, 2013. Conteúdo educativo, não substitui avaliação médica.</div>
+    <div class="lab">Estrogênio</div>
+    <div class="src">Estudo SWAN: Greendale et al., J Bone Miner Res 2012. Gráfico esquemático.</div>
   </section>
 
+  <!-- ===== 3 · FATO 2 ===== -->
+  <section class="slide" style="left:2160px">
+    <div class="content">
+      <div class="kicker">FATO 2</div>
+      <div class="title">Osso e músculo<br>em queda</div>
+      <ul>
+        <li>CHECK A gordura <b>acelera</b></li>
+        <li>CHECK A massa magra <b>cai</b></li>
+        <li>CHECK A balança nem mexe</li>
+      </ul>
+      <div class="card" style="display:flex;gap:30px;padding:34px 36px">
+        <div style="flex:1">
+          <div style="font-weight:800;font-size:96px;line-height:1;color:var(--y)">−7,4%</div>
+          <div style="font-size:25px;color:var(--soft);margin-top:12px;line-height:1.35">de densidade óssea da coluna em ~3 anos de transição</div>
+        </div>
+        <div style="width:2px;background:var(--cardline)"></div>
+        <div style="flex:1">
+          <div style="font-weight:800;font-size:96px;line-height:1;color:#fff">+63%</div>
+          <div style="font-size:25px;color:var(--soft);margin-top:12px;line-height:1.35">de risco de fratura em quem perde mais massa magra</div>
+        </div>
+      </div>
+    </div>
+    <div class="lab">Osso e músculo</div>
+    <div class="src">Estudo SWAN: Greendale et al., JBMR 2012 e JCI Insight 2019 · Shieh et al., JBMR 2023.</div>
+  </section>
+
+  <!-- ===== 4 · A VIRADA ===== -->
+  <section class="slide" style="left:3240px">
+    <div class="content">
+      <div class="kicker">A VIRADA</div>
+      <div class="title">Musculação pesada<br>fortalece o osso</div>
+      <ul>
+        <li>CHECK Mulheres com osteopenia e osteoporose</li>
+        <li>CHECK 2x por semana, 30 minutos</li>
+        <li>CHECK Carga alta e <b>supervisionada</b></li>
+      </ul>
+      <div class="card" style="padding:26px 30px 18px">
+        <svg width="876" height="300" id="bars"></svg>
+      </div>
+    </div>
+    <div class="lab">Musculação</div>
+    <div class="src">Ensaio LIFTMOR: Watson et al., J Bone Miner Res 2018 (101 mulheres, 65 anos em média).</div>
+  </section>
+
+  <!-- ===== 5 · BÔNUS ===== -->
+  <section class="slide" style="left:4320px">
+    <div class="content">
+      <div class="kicker">BÔNUS</div>
+      <div class="title">Menos calorão,<br>sono melhor</div>
+      <ul>
+        <li>CHECK 15 semanas de musculação</li>
+        <li>CHECK 3x por semana, carga progressiva</li>
+        <li>CHECK Músculo é órgão: <b>conversa com o corpo</b></li>
+      </ul>
+      <div class="card" style="padding:34px 40px">
+        <div style="font-size:25px;color:var(--soft)">Ondas de calor moderadas a intensas</div>
+        <div style="display:flex;align-items:center;gap:22px;margin-top:22px">
+          <div style="width:220px;font-weight:700;font-size:26px">Musculação</div>
+          <div style="height:54px;width:470px;background:var(--y);border-radius:14px"></div>
+          <div style="font-weight:800;font-size:48px;color:var(--y)">−44%</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:22px;margin-top:18px">
+          <div style="width:220px;font-weight:700;font-size:26px;color:var(--soft)">Sem treino</div>
+          <div style="height:54px;width:22px;background:#3A3B40;border-radius:8px"></div>
+          <div style="font-weight:800;font-size:48px;color:#9A9A9A">−2%</div>
+        </div>
+      </div>
+    </div>
+    <div class="lab">Sintomas</div>
+    <div class="src">Berin et al., Maturitas 2019 e Climacteric 2022 · Severinsen &amp; Pedersen, Endocr Rev 2020.</div>
+  </section>
+
+  <!-- ===== 6 · CTA ===== -->
+  <section class="slide" style="left:5400px">
+    <img src="assets/jota-rosto.png" class="abs" style="left:445px;top:150px;width:190px;height:190px;border-radius:50%;object-fit:cover;border:4px solid var(--y)">
+    <div class="abs" style="left:60px;top:356px;width:960px;height:470px;background:var(--card);border:2px solid var(--cardline);border-radius:30px;
+         display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;font-weight:700;font-size:44px;letter-spacing:.01em">
+      <div>MUSCULAÇÃO</div><div>+ CARGA PROGRESSIVA</div><div>+ PROTEÍNA</div><div>+ ACOMPANHAMENTO</div>
+      <div style="font-size:70px;color:var(--y);margin-top:6px">= FORÇA</div>
+    </div>
+    <div class="abs" style="left:90px;top:900px;width:900px;height:120px;background:var(--y);border-radius:60px;color:#111;
+         display:flex;flex-direction:column;align-items:center;justify-content:center">
+      <div style="font-weight:700;font-size:36px;letter-spacing:.06em">COMENTE FORTE</div>
+      <div style="font-weight:700;font-size:28px">que eu te chamo no direct</div>
+    </div>
+    <div class="abs" style="left:0;top:1062px;width:1080px;text-align:center;font-weight:700;font-size:34px;color:var(--soft)">Envelhecer é inevitável. Perder força, não.</div>
+    <div class="src">Proteína: Bauer et al., JAMDA 2013 (PROT-AGE). Conteúdo educativo: procure liberação médica.</div>
+  </section>
 </div>
 
 <script>
 const NS="http://www.w3.org/2000/svg";
-const el=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent&&parent.appendChild(e);return e;};
+const el=(t,a,p)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p&&p.appendChild(e);return e};
+const CHECK='<svg width="30" height="30" viewBox="0 0 30 30"><circle cx="15" cy="15" r="15" fill="#F5C518"/><path d="M8.5 15.5 L13 20 L21.5 10.5" stroke="#111" stroke-width="3.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+document.querySelectorAll('li').forEach(li=>li.innerHTML=li.innerHTML.replace('CHECK',CHECK+'<span>')+'</span>');
 
-/* marcas e contadores em todos os slides */
 const stage=document.getElementById('stage');
 for(let i=0;i<6;i++){
-  const b=document.createElement('img');b.className='brand';b.src='assets/logo.png';b.style.left=(i*1080+88)+'px';stage.appendChild(b);
-  const c=document.createElement('div');c.className='count';c.style.right='auto';c.style.left=(i*1080+1080-88-90)+'px';c.style.top='66px';c.textContent=String(i+1).padStart(2,'0')+'/06';stage.appendChild(c);
+  const h=document.createElement('div');h.className='head';h.style.left=(i*1080+70)+'px';h.textContent='MÉTODO JOTA FIT';stage.appendChild(h);
+  const c=document.createElement('div');c.className='count';c.style.right='auto';c.style.left=(i*1080+1080-70-44)+'px';c.textContent=(i+1)+'/6';stage.appendChild(c);
 }
-/* nós da linha contínua */
-const flow=document.getElementById('flow');
-for(let i=0;i<6;i++){ el('circle',{cx:i*1080+540,cy:1232,r:9,fill:'#111014',stroke:'#D6D6D6','stroke-width':4},flow); }
 
-/* ---- cortes de coxa (ilustração) ---- */
-function crossSection(svg,cx,cy,R,fatRatio,muscleScale){
+/* linha do tempo: cinza nas pontas, amarela entre a etapa 1 e a 4 */
+const tl=document.getElementById('timeline'), Y=40;
+el('line',{x1:0,y1:Y,x2:6480,y2:Y,stroke:'#2E2F35','stroke-width':6},tl);
+el('line',{x1:1620,y1:Y,x2:4860,y2:Y,stroke:'#F5C518','stroke-width':6},tl);
+[1,2,3,4].forEach(n=>{const cx=n*1080+540;
+  el('circle',{cx,cy:Y,r:34,fill:'#F5C518'},tl);
+  const t=el('text',{x:cx,y:Y+12,'text-anchor':'middle','font-family':'Poppins','font-weight':700,'font-size':34,fill:'#111'},tl);t.textContent=n;});
+
+/* cortes da coxa (ilustração) */
+function crossSection(svg,cx,cy,R,fatRatio,ms){
   const g=el('g',{},svg);
-  el('ellipse',{cx,cy,rx:R,ry:R*0.94,fill:'#5a3a2e'},g);                 // pele
-  el('ellipse',{cx,cy,rx:R-6,ry:R*0.94-6,fill:'var(--fat)'},g);          // gordura
-  // textura de gordura
-  for(let k=0;k<140;k++){const a=Math.random()*Math.PI*2,r=(R-14)*Math.sqrt(Math.random());
-    el('circle',{cx:cx+Math.cos(a)*r,cy:cy+Math.sin(a)*r*0.94,r:6+Math.random()*7,fill:'none',stroke:'#d6ad4f','stroke-width':1.4,opacity:.55},g);}
+  el('ellipse',{cx,cy,rx:R,ry:R*.94,fill:'#4a3a30'},g);
+  el('ellipse',{cx,cy,rx:R-6,ry:R*.94-6,fill:'#D9C08A'},g);
+  for(let k=0;k<120;k++){const a=Math.random()*Math.PI*2,r=(R-14)*Math.sqrt(Math.random());
+    el('circle',{cx:cx+Math.cos(a)*r,cy:cy+Math.sin(a)*r*.94,r:5+Math.random()*7,fill:'none',stroke:'#bfa46a','stroke-width':1.3,opacity:.55},g);}
   const inner=R*(1-fatRatio);
-  el('ellipse',{cx,cy,rx:inner,ry:inner*0.94,fill:'#3a1a20',opacity:.35},g);
-  const groups=[[0,.62,.42],[50,.6,.36],[105,.58,.34],[160,.6,.38],[215,.62,.4],[270,.6,.38],[320,.6,.36]];
-  groups.forEach(([deg,dist,size])=>{
-    const a=deg*Math.PI/180, r=inner*dist, s=inner*size*muscleScale;
-    el('ellipse',{cx:cx+Math.cos(a)*r,cy:cy+Math.sin(a)*r*0.94,rx:s,ry:s*0.82,
-      transform:`rotate(${deg} ${cx+Math.cos(a)*r} ${cy+Math.sin(a)*r*0.94})`,
-      fill:'var(--muscle)',stroke:'#f0d9c9','stroke-width':3},g);
-    for(let k=0;k<6;k++){const x=cx+Math.cos(a)*r+(Math.random()-.5)*s, y=cy+Math.sin(a)*r*0.94+(Math.random()-.5)*s*.7;
-      el('path',{d:`M${x-s*.25} ${y} q ${s*.15} ${-s*.1} ${s*.4} 0`,stroke:'#e7a3a8','stroke-width':1.6,fill:'none',opacity:.5},g);}
+  el('ellipse',{cx,cy,rx:inner,ry:inner*.94,fill:'#3a1a20',opacity:.3},g);
+  [[0,.62,.42],[50,.6,.36],[105,.58,.34],[160,.6,.38],[215,.62,.4],[270,.6,.38],[320,.6,.36]].forEach(([d,dist,sz])=>{
+    const a=d*Math.PI/180,r=inner*dist,s=inner*sz*ms,x=cx+Math.cos(a)*r,y=cy+Math.sin(a)*r*.94;
+    el('ellipse',{cx:x,cy:y,rx:s,ry:s*.82,transform:`rotate(${d} ${x} ${y})`,fill:'#9E2A35',stroke:'#efd8c6','stroke-width':3},g);
+    for(let k=0;k<5;k++){const px=x+(Math.random()-.5)*s,py=y+(Math.random()-.5)*s*.7;
+      el('path',{d:`M${px-s*.25} ${py} q ${s*.15} ${-s*.1} ${s*.4} 0`,stroke:'#e7a3a8','stroke-width':1.5,fill:'none',opacity:.5},g);}
   });
-  el('circle',{cx,cy,r:R*0.17,fill:'var(--bone)',stroke:'#c9b79c','stroke-width':3},g);   // osso
-  el('circle',{cx,cy,r:R*0.09,fill:'#7a6a3c'},g);                                         // medula
+  el('circle',{cx,cy,r:R*.17,fill:'#EADBC4',stroke:'#c9b79c','stroke-width':3},g);
+  el('circle',{cx,cy,r:R*.09,fill:'#7a6a3c'},g);
 }
 const xs=document.getElementById('xsec');
-crossSection(xs,245,250,232,0.36,0.62);
-crossSection(xs,718,250,232,0.10,1.04);
+crossSection(xs,235,205,180,.36,.62);
+crossSection(xs,705,205,180,.10,1.04);
 
-/* ---- gráfico contínuo 2→3: o corte entre os slides é a última menstruação ---- */
+/* gráfico estrogênio x densidade óssea */
 const ch=document.getElementById('chart');
-const X=y=>1080+y*200;           // ano → px (ano 0 = x 1080 = corte entre slides)
-const cTop=860, bot=1150;
-el('rect',{x:X(-1),y:cTop-20,width:X(2)-X(-1),height:bot-cTop+40,fill:'#FFFFFF',opacity:.06,rx:18},ch);
-el('text',{x:X(0.5),y:cTop-34,'text-anchor':'middle','font-family':'JetBrains Mono','font-size':22,fill:'#D6D6D6'},ch).textContent='TRANSMENOPAUSA';
-el('line',{x1:X(-5)+40,y1:bot,x2:X(5)-40,y2:bot,stroke:'#3a3640','stroke-width':2},ch);
-el('line',{x1:X(0),y1:cTop-10,x2:X(0),y2:bot+10,stroke:'#F6F1EC','stroke-width':2,'stroke-dasharray':'6 8',opacity:.6},ch);
-el('text',{x:X(0)-14,y:bot+42,'text-anchor':'end','font-size':22,fill:'#A39BA5','font-family':'Inter'},ch).textContent='última menstruação';
-el('text',{x:X(0)+14,y:bot+42,'font-size':22,fill:'#A39BA5','font-family':'Inter'},ch).textContent='anos depois →';
-function curve(pts,color,dash){
-  const P=pts.map(([a,b])=>[X(a),b]);let d=`M${P[0][0]} ${P[0][1]}`;
+const X=y=>438+y*82, T=50, B=270;
+el('rect',{x:X(-1),y:T-10,width:X(2)-X(-1),height:B-T+20,fill:'#F5C518',opacity:.07,rx:12},ch);
+const tm=el('text',{x:X(.5),y:28,'text-anchor':'middle','font-family':'Poppins','font-weight':700,'font-size':18,fill:'#F5C518','letter-spacing':'2'},ch);tm.textContent='TRANSMENOPAUSA';
+el('line',{x1:20,y1:B+6,x2:856,y2:B+6,stroke:'#2E2F35','stroke-width':2},ch);
+el('line',{x1:X(0),y1:T-6,x2:X(0),y2:B+6,stroke:'#fff','stroke-width':2,'stroke-dasharray':'5 7',opacity:.5},ch);
+const l1=el('text',{x:X(0),y:B+40,'text-anchor':'middle','font-family':'Poppins','font-size':19,fill:'#8A8A8A'},ch);l1.textContent='última menstruação';
+function curve(pts,color,w){const P=pts.map(([a,b])=>[X(a),b]);let d=`M${P[0][0]} ${P[0][1]}`;
   for(let i=0;i<P.length-1;i++){const p0=P[i-1]||P[i],p1=P[i],p2=P[i+1],p3=P[i+2]||p2;
     d+=` C ${p1[0]+(p2[0]-p0[0])/6} ${p1[1]+(p2[1]-p0[1])/6}, ${p2[0]-(p3[0]-p1[0])/6} ${p2[1]-(p3[1]-p1[1])/6}, ${p2[0]} ${p2[1]}`;}
-  el('path',{d,fill:'none',stroke:color,'stroke-width':8,'stroke-linecap':'round','stroke-dasharray':dash||''},ch);
-}
-curve([[-4.6,880],[-2,892],[-1,930],[0,1030],[1,1090],[2.5,1108],[4.6,1112]],'#FFFFFF');
-curve([[-4.6,920],[-1.2,926],[0,975],[2,1060],[3.5,1080],[4.6,1088]],'#8C8C8C','2 0');
-el('circle',{cx:X(-4.6),cy:880,r:9,fill:'#D6D6D6'},ch);
-el('text',{x:X(-4.6)+20,y:868,'font-size':26,'font-weight':800,fill:'#D6D6D6','font-family':'Inter'},ch).textContent='Estrogênio';
-el('circle',{cx:X(4.6),cy:1088,r:9,fill:'#8C8C8C'},ch);
-el('text',{x:X(4.6)-20,y:1074,'text-anchor':'end','font-size':26,'font-weight':800,fill:'#A8A8A8','font-family':'Inter'},ch).textContent='Densidade óssea';
+  el('path',{d,fill:'none',stroke:color,'stroke-width':w,'stroke-linecap':'round'},ch);}
+curve([[-5,70],[-2,80],[-1,110],[0,180],[1,228],[2.5,242],[5,246]],'#F5C518',7);
+curve([[-5,100],[-1.2,104],[0,140],[2,206],[3.5,220],[5,226]],'#E6E6E6',5);
+const a1=el('text',{x:X(-5),y:52,'font-family':'Poppins','font-weight':700,'font-size':22,fill:'#F5C518'},ch);a1.textContent='Estrogênio';
+const a2=el('text',{x:X(5),y:204,'text-anchor':'end','font-family':'Poppins','font-weight':700,'font-size':22,fill:'#E6E6E6'},ch);a2.textContent='Densidade óssea';
 
-/* ---- barras LIFTMOR ---- */
-const bs=document.getElementById('bars');
-const base=260, scale=55;
-el('line',{x1:0,y1:base,x2:904,y2:base,stroke:'#3a3640','stroke-width':3},bs);
-[[ 'Treino pesado',2.9,'#D6D6D6',120],['Exercício leve em casa',-1.2,'#3E3E3E',520]].forEach(([lab,v,c,x])=>{
-  const h=Math.abs(v)*scale; const y=v>0?base-h:base;
-  el('rect',{x,y,width:260,height:h,rx:14,fill:c},bs);
-  const t=el('text',{x:x+130,y:v>0?y-22:y+h+60,'text-anchor':'middle','font-family':'Inter Display','font-weight':900,'font-size':64,fill:c==='#D6D6D6'?'#FFFFFF':'#8C8C8C'},bs);
-  t.textContent=(v>0?'+':'−')+String(Math.abs(v)).replace('.',',')+'%';
-  el('text',{x:x+130,y:v>0?base+44:base-22,'text-anchor':'middle','font-size':26,'font-weight':700,fill:'#F6F1EC','font-family':'Inter'},bs).textContent=lab;
+/* barras LIFTMOR */
+const bs=document.getElementById('bars'), base=205, sc=38;
+const tt=el('text',{x:0,y:24,'font-family':'Poppins','font-size':22,fill:'#CFCFCF'},bs);tt.textContent='Densidade óssea da coluna em 8 meses';
+el('line',{x1:0,y1:base,x2:876,y2:base,stroke:'#2E2F35','stroke-width':3},bs);
+[['Treino pesado',2.9,'#F5C518',110],['Exercício leve',-1.2,'#3A3B40',510]].forEach(([lab,v,c,x])=>{
+  const h=Math.abs(v)*sc,y=v>0?base-h:base;
+  el('rect',{x,y,width:250,height:h,rx:12,fill:c},bs);
+  const n=el('text',{x:x+125,y:v>0?y-14:y+h+48,'text-anchor':'middle','font-family':'Poppins','font-weight':800,'font-size':44,fill:v>0?'#F5C518':'#9A9A9A'},bs);
+  n.textContent=(v>0?'+':'−')+String(Math.abs(v)).replace('.',',')+'%';
+  const L=el('text',{x:x+125,y:v>0?base+38:base-16,'text-anchor':'middle','font-family':'Poppins','font-weight':700,'font-size':24,fill:'#fff'},bs);L.textContent=lab;
 });
-el('text',{x:0,y:30,'font-size':24,fill:'#A39BA5','font-family':'JetBrains Mono'},bs).textContent='DENSIDADE ÓSSEA DA COLUNA';
-
 </script>
 </body>
 </html>
