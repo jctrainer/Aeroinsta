@@ -3,6 +3,9 @@
 Personal trainer, público majoritariamente feminino. Marca: amarelo sobre grafite, logo JF.
 Todo conteúdo termina com o CTA da consultoria: **"Comenta CONSULTORIA que eu te chamo no direct"**.
 
+## Equipe de agentes
+O prompt master da equipe (agentes, perfis Jota Fit / NerdZoid / Razec Ezar, fluxo e comandos) está em `agentes/PROMPT-MASTER.md`. Siga-o em toda tarefa de conteúdo, marketing, vendas, site ou ciência do treino.
+
 ## REGRA Nº 1: base científica, sem erro, sempre revisada
 
 Vale para TUDO: vídeos, legendas, títulos, capas, carrosséis, stories, roteiros, respostas e análises de treino.
