@@ -3,6 +3,20 @@
 Personal trainer, público majoritariamente feminino. Marca: amarelo sobre grafite, logo JF.
 Todo conteúdo termina com o CTA da consultoria: **"Comenta CONSULTORIA que eu te chamo no direct"**.
 
+## REGRA Nº 1: base científica, sem erro, sempre revisada
+
+Vale para TUDO: vídeos, legendas, títulos, capas, carrosséis, stories, roteiros, respostas e análises de treino.
+
+1. **Buscar a base científica antes de escrever.** Todo dado, número, percentual, mecanismo ou recomendação de biomecânica, cinesiologia, fisiologia do exercício, nutrição esportiva ou saúde da mulher deve ser conferido no **PubMed** (ferramenta PubMed). Preferir meta-análises, revisões sistemáticas, ensaios randomizados e posicionamentos oficiais (ACSM, ISSN, PROT-AGE etc.).
+2. **Sem erro.** Só entra o que a fonte realmente diz. Não confirmou? Sai do conteúdo ou é suavizado ("pode", "em média", "a pesquisa sugere"). Nunca inventar número, estudo, autor ou DOI. Não exagerar ("nunca", "sempre", "é genético/não é") além do que o estudo mostra.
+3. **Revisão dupla obrigatória antes de entregar:**
+   - Revisão 1, ciência: cada afirmação confrontada com a fonte (população do estudo, protocolo, tamanho do efeito, limites). Conferir se o estudo era com mulheres, idosos, treinadas etc. antes de generalizar.
+   - Revisão 2, conteúdo: português correto, números consistentes entre slide/vídeo/legenda, textos dentro da área segura, nada cortado ou sobreposto, CTA presente.
+4. **Registrar as fontes:** autor, ano, revista e DOI em `fontes.md` na pasta do projeto; no slide ou vídeo, citar no rodapé quando for o argumento central.
+5. **Transparência:** imagens de IA ou montadas são "ilustração educativa"; gráficos esquemáticos são "ilustrativo"; temas clínicos levam "converse com seu médico".
+6. **Ao entregar**, informar ao Jota o que foi conferido, o que foi corrigido e o que ficou de fora por falta de comprovação.
+7. **Conteúdo de terceiros** (posts de referência, vídeos de outras professoras): analisar criticamente e apontar erros ou exageros com base na literatura, sem ataque pessoal.
+
 ## Carrossel JOTA FIT (padrão fixo)
 
 Quando o Jota pedir "carrossel" (ou "carrossel JOTA FIT"), use SEMPRE este padrão, sem perguntar.
