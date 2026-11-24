@@ -2,12 +2,13 @@
 import sys, math, numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
-S = '/tmp/claude-0/-home-user-Aeroinsta/c420820b-36e3-51ea-8a35-aafe0a6365f8/scratchpad/'
-M = S + 'musculo/'
+import os
+R = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/'   # analises/carrosseis/
+M = R
 OUT = sys.argv[1]
 W, H = 1080, 1350
 Y = (245, 197, 24); WH = (255, 255, 255); GR = (154, 157, 163); BG = (12, 12, 12); DK = (14, 14, 16); RED = (235, 87, 87); GRN = (61, 200, 120)
-PF = S + 'fonts/poppins/Poppins-'
+PF = R + 'fonts/Poppins-'
 def P(w, s): return ImageFont.truetype(PF + w + '.ttf', s)
 
 def tracked(d, xy, text, font, fill, track, anchor='l'):

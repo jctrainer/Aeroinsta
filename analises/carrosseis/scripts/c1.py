@@ -1,5 +1,5 @@
 from carrossel import *
-I = M + 'img/'
+I = M + 'imagens/'
 T = 7
 
 # 1 CAPA
