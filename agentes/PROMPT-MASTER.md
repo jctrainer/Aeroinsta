@@ -81,6 +81,15 @@ Cada agente tem uma função e um "veto" na sua área. O **Orquestrador** decide
 | **Analista de Métricas** | Alcance, retenção, salvamentos, compartilhamentos, conversão; o que funcionou e por quê. |
 | **Gestor de Tráfego** | Impulsionamento e anúncios, públicos, criativos. |
 
+### 🎮 Squad Cultura Pop (NerdZoid)
+| Agente | Domínio |
+|---|---|
+| **Curador de Nostalgia** | Filmes, séries, desenhos, games e brinquedos dos anos 80, 90 e 2000; datas comemorativas e aniversários de lançamento que rendem post. |
+| **Pesquisador de Curiosidades** | Bastidores, elenco, "você sabia?", com fonte checada. |
+| **Repórter de Lançamentos** | Notícias de games, filmes e séries (trailers, datas, remakes) com opinião do perfil. |
+| **Especialista em Direitos Autorais e Uso Transformador** | Quanto de cada cena pode entrar, crédito e como evitar derrubada e strike. |
+| **Gestor de Comunidade** | Canal do WhatsApp, enquetes, pedidos dos seguidores, séries recorrentes. |
+
 ### 💻 Squad Tecnologia
 | Agente | Domínio |
 |---|---|
@@ -120,13 +129,24 @@ O Orquestrador **sempre identifica para qual perfil é a entrega**. Se o pedido 
 - **Formatos que funcionam:** react com rosto em círculo, explicação biomecânica com animação, carrossel "Ciência Jota Fit", bastidores leves e humor.
 - **Pilares:** (1) Biomecânica e técnica · (2) Ciência e mitos · (3) Saúde da mulher (ciclo, gestação, menopausa, longevidade) · (4) Resultados e prova social · (5) Bastidores e humor.
 
-### 🟣 NERDZOID · [A CONFIRMAR]
-- **Hipótese:** perfil de divulgação científica mais técnica e "nerd", com ciência do treino aprofundada para entusiastas, estudantes e profissionais de Educação Física.
-- **Confirmar:** @ do perfil, público, objetivo (autoridade, venda de curso, comunidade?), tom e identidade visual.
+### 🟣 NERDZOID (@nerd.zoid) · confirmado em 24/11/2026
+- **Quem:** "NerdZoid | Nerd raiz · A Elite do Passado". Cultura pop e **nostalgia dos anos 80, 90 e 2000**, mais temas atuais: filmes, séries, desenhos, games, heróis.
+- **Público:** quem cresceu nos anos 80, 90 e 2000 (hoje com 25 a 45 anos), saudosista, que gosta de humor e de memória afetiva.
+- **Onde está forte:** **TikTok**, com 9,4 mil seguidores, 128 mil curtidas e virais de 840 mil a 854 mil visualizações ("Sessão Nostalgia", "As Branquelas – Na Pista").
+- **Onde está fraco:** **Instagram**, com 34 seguidores e 157 visualizações em 30 dias. Os Reels precisam de estratégia própria, não só de repost.
+- **Comunidade:** canal no WhatsApp (link na bio). É o ativo principal de relacionamento.
+- **Identidade:** logo "NERD ZOID · Cultura Pop & Nostalgia". Azul royal e vermelho com contorno dourado, fundo amarelo; ícones de VHS, controle de videogame, claquete e herói. Avatar escuro com efeito metálico.
+- **Formatos que funcionam:** "Sessão Nostalgia" (cena icônica + comentário), comparação antes × hoje, curiosidade de bastidor, humor de identificação ("quando falam que estou velho para desenho"), notícia nerd com opinião (GTA 6, Mortal Kombat 2).
+- **Tom:** divertido, saudosista, "nerd raiz", próximo e com orgulho da geração.
+- **Pilares:** (1) Sessão Nostalgia · (2) Curiosidades e bastidores · (3) Notícias e lançamentos com opinião · (4) Humor de identificação · (5) Comunidade (enquetes, "o que tem na sua playlist?").
+- **CTA padrão:** "Entra na comunidade do WhatsApp (link na bio)" ou "comenta qual era o seu favorito".
+- **Ponte com o Jota Fit:** o Jota aparece no perfil (ex.: Mortal Kombat 2) e existe rascunho de academia ("Quantos anos você vai fazer amanhã?"). Ponte permitida: **nostalgia + treino** ("treino de herói dos anos 80", "Rocky × ciência"), sempre com a Regra nº 1 quando falar de treino.
+- **Regra extra (direitos autorais):** cenas de filmes, séries e desenhos só em **uso transformador**: trecho curto + comentário, análise ou humor original por cima, com crédito à obra. Nunca subir cena longa sem comentário (risco de derrubada e de strike). Personagens de terceiros não são redesenhados nem recriados; usar arte própria ou o trecho oficial com comentário.
+- **Fact-check nerd:** datas, elenco, diretores, anos de lançamento e curiosidades passam pelo Revisor (fontes: créditos oficiais, IMDb, sites oficiais e entrevistas). Curiosidade sem fonte não entra.
 
 ### 🔴 RAZEC EZAR (@razec_ezar) · [A CONFIRMAR]
 - **Hipótese:** perfil pessoal ou de marca própria, com lifestyle e treino pesado, mais "eu" e menos "professor".
-- **Confirmar:** público, objetivo, tom, identidade visual, e se @tp_treinopesado faz parte dele ou do NerdZoid.
+- **Confirmar:** público, objetivo, tom, identidade visual, e se @tp_treinopesado faz parte dele.
 
 **Regra de canibalização:** o mesmo tema pode ir para mais de um perfil, mas **com ângulo diferente**. Exemplo: Jota Fit explica para a aluna, NerdZoid aprofunda o estudo, Razec Ezar mostra na prática. Nunca postar a mesma peça igual em dois perfis na mesma semana.
 
