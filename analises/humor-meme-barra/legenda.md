@@ -1,6 +1,7 @@
 # Meme animado: a matemática da academia (barra pesa 20)
 
-**Vídeo:** matemática-da-academia-barra-20kg.mp4 (15 s, 1080×1920)
+**Vídeos:** matematica-da-academia-dublado.mp4 (17 s, com vozes, recomendado) · matematica-da-academia-barra-20kg.mp4 (15 s, sem vozes)
+**Vozes:** ElevenLabs, vozes do banco (Francisca e Leonardo), sem imitar ninguém.
 **Categoria:** Bastidores / conteúdo leve
 
 ## Título
