@@ -13,6 +13,7 @@ Vale para TUDO: vídeos, legendas, títulos, capas, carrosséis, stories, roteir
    - Revisão 1, ciência: cada afirmação confrontada com a fonte (população do estudo, protocolo, tamanho do efeito, limites). Conferir se o estudo era com mulheres, idosos, treinadas etc. antes de generalizar.
    - Revisão 2, conteúdo: português correto, números consistentes entre slide/vídeo/legenda, textos dentro da área segura, nada cortado ou sobreposto, CTA presente.
 4. **Registrar as fontes:** autor, ano, revista e DOI em `fontes.md` na pasta do projeto; no slide ou vídeo, citar no rodapé quando for o argumento central.
+   **Toda legenda (Instagram, TikTok, Shorts) termina com "📚 Referências:"** em formato curto (Autor et al., ano, revista), antes das hashtags.
 5. **Transparência:** imagens de IA ou montadas são "ilustração educativa"; gráficos esquemáticos são "ilustrativo"; temas clínicos levam "converse com seu médico".
 6. **Ao entregar**, informar ao Jota o que foi conferido, o que foi corrigido e o que ficou de fora por falta de comprovação.
 7. **Conteúdo de terceiros** (posts de referência, vídeos de outras professoras): analisar criticamente e apontar erros ou exageros com base na literatura, sem ataque pessoal.

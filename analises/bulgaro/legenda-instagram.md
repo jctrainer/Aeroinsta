@@ -1,4 +1,6 @@
-# Agachamento búlgaro: títulos e legendas
+# Agachamento búlgaro: títulos e legendas (revisadas com base científica)
+
+Revisão de 24/11/2026: afirmações conferidas no PubMed. Fontes com DOI em `fontes.md`.
 
 ---
 
@@ -11,20 +13,26 @@ Búlgaro inclinado é pra posterior? 🤔 (Parte 1/2)
 ### Legenda
 Búlgaro inclinado é pra posterior? 🤔 (Parte 1/2)
 
-Vi um post dizendo que búlgaro com tronco inclinado trabalha glúteo e POSTERIOR. Vamos aos fatos 👇
+Vi um post dizendo que búlgaro com tronco inclinado é treino de glúteo E posterior. Vamos ao que a ciência mostra 👇
 
-🔹 Reto ou inclinado, quadríceps E glúteo trabalham nos dois.
-🔹 Inclinar o tronco aumenta o braço de momento no quadril, então dá mais ÊNFASE no glúteo. Ênfase não é exclusividade.
-🔹 Posterior de coxa? No búlgaro ele ESTABILIZA o movimento. Participa pouco e não é o alvo.
+🔹 O búlgaro exige mais extensão de quadril do que outras variações de agachamento, e inclinar o tronco aumenta essa demanda.
+🔹 Em mulheres treinadas, inclinar o tronco aumentou a ativação do glúteo máximo e também do bíceps femoral.
+🔹 Mas ativar não é o mesmo que crescer. Em treino de agachamento, o volume dos posteriores não mudou depois de 10 semanas.
 🔹 Sentir queimar ≠ crescer. Hipertrofia vem de tensão e progressão de carga.
 
-✅ Quer posterior? Cadeira flexora, mesa flexora, flexora em pé.
+✅ Quer posterior de coxa? Exercícios de flexão de joelho. A cadeira flexora (sentada) gerou mais hipertrofia que a mesa flexora (deitada), por trabalhar o músculo mais alongado.
 
 Nada contra a pessoa. São fatos e biomecânica.
 
 👀 Na Parte 2: búlgaro com tronco reto pega reto femoral?
 
 👉 Quer treino com explicação de verdade? Comenta CONSULTORIA que eu te chamo no direct.
+
+📚 Referências:
+• Arakawa et al., 2025, Int J Exerc Sci
+• Aygun-Polat et al., 2025, BMC Sports Sci Med Rehabil
+• Kubo et al., 2019, Eur J Appl Physiol
+• Maeo et al., 2021, Med Sci Sports Exerc
 
 #agachamentobulgaro #bulgaro #gluteos #posteriordecoxa #biomecanica #personaltrainer #treinofeminino #hipertrofia #musculacao #jotafit
 
@@ -44,9 +52,10 @@ Búlgaro reto pega reto femoral? 🤔 (Parte 2/2)
 
 O mesmo post dizia que búlgaro com tronco reto é pra quadríceps e RETO FEMORAL. Vamos lá 👇
 
-🔹 Estendeu o joelho? O quadríceps trabalha. Com tronco reto ou inclinado, não existe botão que desliga músculo.
-🔹 Reto femoral é BIARTICULAR: cruza quadril e joelho. No búlgaro, ele encurta no quadril enquanto alonga no joelho, então o comprimento quase não muda.
-🔹 Resultado: ele participa pouco e quase não cresce nesse exercício.
+🔹 Estendeu o joelho, o quadríceps trabalha. Com tronco reto ou inclinado. Não existe botão que desliga músculo.
+🔹 O reto femoral é BIARTICULAR: cruza quadril e joelho. No agachamento ele encurta no quadril enquanto alonga no joelho, e isso ajuda a explicar por que ele cresce pouco nesse padrão.
+🔹 Em treino de agachamento, os vastos cresceram, mas o reto femoral não mudou de volume.
+🔹 Já no treino de cadeira extensora, o reto femoral cresceu proporcionalmente mais que os vastos.
 
 ✅ Quer reto femoral? Cadeira extensora.
 ✅ Quer resultado no búlgaro? Progressão de carga, halter pesado e amplitude completa (joelho de trás perto do chão), no seu ritmo.
@@ -56,6 +65,10 @@ Não tem segredo. 💪
 👀 Não viu? Parte 1: búlgaro inclinado é pra posterior?
 
 👉 Quer treino com explicação de verdade? Comenta CONSULTORIA que eu te chamo no direct.
+
+📚 Referências:
+• Kubo et al., 2019, Eur J Appl Physiol
+• Ema et al., 2013, Eur J Appl Physiol
 
 #agachamentobulgaro #bulgaro #quadriceps #retofemoral #biomecanica #personaltrainer #treinofeminino #hipertrofia #treinodeperna #jotafit
 
@@ -73,14 +86,14 @@ Búlgaro: quadríceps ou glúteo? 🤔
 ### Legenda
 Búlgaro: quadríceps ou glúteo? 🤔
 
-Vi um post dizendo que búlgaro inclinado é pra glúteo e posterior, e reto é pra quadríceps e reto femoral. Vamos aos fatos 👇
+Vi um post dizendo que búlgaro inclinado é pra glúteo e posterior, e reto é pra quadríceps e reto femoral. Vamos ao que a ciência mostra 👇
 
-🔹 Nos dois jeitos, quadríceps E glúteo trabalham. Inclinar dá mais ÊNFASE no glúteo, não exclusividade.
-🔹 Posterior de coxa: estabiliza. Participa pouco e não é o alvo.
+🔹 Nos dois jeitos, quadríceps E glúteo trabalham. Inclinar o tronco aumenta a demanda no quadril e a ativação do glúteo: é ÊNFASE, não exclusividade.
+🔹 Posterior de coxa também ativa mais com o tronco inclinado, mas ativar não é crescer: em treino de agachamento, os posteriores não aumentaram de volume.
+🔹 Reto femoral: no agachamento, ele não cresceu. Na cadeira extensora, cresceu.
 🔹 Sentir queimar ≠ crescer.
-🔹 Reto femoral é biarticular. No búlgaro, participa pouco e quase não cresce.
 
-✅ Posterior: cadeira flexora, mesa flexora, flexora em pé.
+✅ Posterior: cadeira flexora (sentada rendeu mais que deitada).
 ✅ Reto femoral: cadeira extensora.
 ✅ Resultado no búlgaro: progressão de carga, halter pesado e amplitude completa.
 
@@ -88,6 +101,13 @@ Não tem segredo. 💪 Nada contra a pessoa, são fatos e biomecânica.
 
 💾 Salva pra lembrar no próximo treino de perna.
 👉 Quer treino com explicação de verdade? Comenta CONSULTORIA que eu te chamo no direct.
+
+📚 Referências:
+• Arakawa et al., 2025, Int J Exerc Sci
+• Aygun-Polat et al., 2025, BMC Sports Sci Med Rehabil
+• Kubo et al., 2019, Eur J Appl Physiol
+• Ema et al., 2013, Eur J Appl Physiol
+• Maeo et al., 2021, Med Sci Sports Exerc
 
 #agachamentobulgaro #bulgaro #gluteos #quadriceps #biomecanica #personaltrainer #treinofeminino #hipertrofia #musculacao #jotafit
 
@@ -105,56 +125,32 @@ Reto ou inclinado: qual você faz? 👇
 
 # TIKTOK
 
-No TikTok a legenda é curta, a busca conta muito e o vídeo é o mesmo arquivo.
-
 ## Parte 1
-**Título/legenda:**
-Búlgaro inclinado trabalha posterior? 🤔 Parte 1/2. Ênfase não é exclusividade: inclinar dá + glúteo, o posterior só estabiliza. Quer posterior? Flexora. Comenta CONSULTORIA 👇 #agachamentobulgaro #treinodeperna #gluteos #biomecanica #personaltrainer
-
-**Texto de capa no app (opcional):** Búlgaro inclinado = posterior? ❌
+Búlgaro inclinado trabalha posterior? 🤔 Parte 1/2. Inclinar aumenta glúteo e ativa mais o posterior, mas ativar não é crescer. Quer posterior? Cadeira flexora. Comenta CONSULTORIA 👇 Fontes: Aygun-Polat 2025; Kubo 2019; Maeo 2021. #agachamentobulgaro #treinodeperna #gluteos #biomecanica #personaltrainer
 
 ## Parte 2
-**Título/legenda:**
-Búlgaro reto pega reto femoral? 🤔 Parte 2/2. Ele é biarticular e quase não muda de comprimento no búlgaro. Quer reto femoral? Cadeira extensora. Comenta CONSULTORIA 👇 #agachamentobulgaro #quadriceps #treinodeperna #biomecanica #personaltrainer
-
-**Texto de capa no app (opcional):** Búlgaro reto = reto femoral? ❌
+Búlgaro reto pega reto femoral? 🤔 Parte 2/2. No agachamento o reto femoral não cresceu; na cadeira extensora, cresceu. Comenta CONSULTORIA 👇 Fontes: Kubo 2019; Ema 2013. #agachamentobulgaro #quadriceps #treinodeperna #biomecanica #personaltrainer
 
 ## Reel único
-**Título/legenda:**
-Agachamento búlgaro: quadríceps ou glúteo? 🤔 Os dois trabalham. Inclinar só muda a ênfase. Posterior estabiliza, reto femoral quase não participa. Salva pro treino de perna e comenta CONSULTORIA 👇 #agachamentobulgaro #gluteos #quadriceps #treinodeperna #personaltrainer
-
-**Texto de capa no app (opcional):** Búlgaro: quadríceps ou glúteo?
-
-## Dicas TikTok
-- Use 3 a 5 hashtags. Mais que isso não ajuda.
-- Escreva "agachamento búlgaro" na legenda e no texto da capa: o TikTok funciona como busca.
-- Partes: poste a Parte 1, e quando a Parte 2 sair, fixe as duas no perfil ou crie uma **Playlist "Biomecânica"**.
-- Responda os comentários com **vídeo-resposta**: rende um vídeo novo com alcance próprio.
-- No TikTok o CTA vai para o **link da bio**; se não tiver, mantenha "comenta CONSULTORIA" e chame no direct.
+Agachamento búlgaro: quadríceps ou glúteo? 🤔 Os dois trabalham. Inclinar só muda a ênfase. Posterior e reto femoral crescem melhor com flexora e extensora. Comenta CONSULTORIA 👇 Fontes na legenda do Instagram. #agachamentobulgaro #gluteos #quadriceps #treinodeperna #personaltrainer
 
 ---
 
 # YOUTUBE SHORTS
 
-Use os arquivos da pasta `tiktok-shorts/`: área segura para os botões e o texto do app.
-
 ## Parte 1
-**Título (até 100 caracteres):** Agachamento búlgaro inclinado trabalha posterior? (Parte 1) #shorts
-**Descrição:** Inclinar o tronco no búlgaro dá mais ênfase no glúteo, mas o posterior só estabiliza. Quer posterior? Cadeira flexora, mesa flexora, flexora em pé. Parte 2: búlgaro reto pega reto femoral?
-#agachamentobulgaro #treinodeperna #biomecanica
+**Título:** Búlgaro inclinado trabalha posterior? O que a ciência mostra (Parte 1) #shorts
+**Descrição:** Inclinar o tronco no búlgaro aumenta a ativação do glúteo e do posterior, mas em treino de agachamento os posteriores não cresceram. Para posterior, flexão de joelho (cadeira flexora). Referências: Arakawa 2025; Aygun-Polat 2025; Kubo 2019; Maeo 2021.
 
 ## Parte 2
-**Título:** Agachamento búlgaro reto pega reto femoral? (Parte 2) #shorts
-**Descrição:** O reto femoral é biarticular e quase não muda de comprimento no búlgaro: participa pouco. Quer reto femoral? Cadeira extensora. Quer resultado no búlgaro? Progressão de carga e amplitude.
-#agachamentobulgaro #quadriceps #biomecanica
+**Título:** Búlgaro reto pega reto femoral? O que a ciência mostra (Parte 2) #shorts
+**Descrição:** No agachamento o reto femoral não aumentou de volume; na cadeira extensora ele cresceu proporcionalmente mais. Referências: Kubo 2019; Ema 2013.
 
 ## Reel único
-**Título:** Agachamento búlgaro: quadríceps ou glúteo? Biomecânica explicada #shorts
-**Descrição:** Reto ou inclinado, quadríceps e glúteo trabalham. Inclinar só muda a ênfase. Posterior estabiliza e reto femoral quase não participa. O que fazer para cada músculo.
-#agachamentobulgaro #gluteos #biomecanica
+**Título:** Agachamento búlgaro: quadríceps ou glúteo? Biomecânica com base científica #shorts
+**Descrição:** Os dois trabalham; inclinar muda a ênfase. Posterior e reto femoral crescem melhor com flexora e extensora. Referências: Arakawa 2025; Aygun-Polat 2025; Kubo 2019; Ema 2013; Maeo 2021.
 
-## Dicas Shorts
-- O título vale mais que as hashtags: comece pela palavra que a pessoa busca ("agachamento búlgaro").
-- No YouTube, o "comenta CONSULTORIA" funciona menos. Fixe um comentário com o link da consultoria ou do WhatsApp.
-- Junte as partes numa **playlist "Biomecânica do treino"**.
-- O Short tem até 3 min, então o Reel único (2:18) cabe. Para retenção, as partes rendem mais.
+---
+
+## ⚠️ Atenção: texto falado no vídeo
+No vídeo, a frase "posterior estabiliza, participa pouco" é mais forte do que os estudos mostram. O posterior ativa (e ativa mais com o tronco inclinado); o que os estudos mostram é que ele **não cresce** com agachamento. A legenda já corrige isso. Se quiser, o texto na tela do vídeo pode ser trocado por "ativa, mas não é o que faz crescer".
