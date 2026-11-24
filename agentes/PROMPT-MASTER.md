@@ -119,7 +119,7 @@ Comando manual: **`criar agente [tema]`**. O agente nasce como especialista de n
 
 O Orquestrador **sempre identifica para qual perfil é a entrega**. Se o pedido não disser, pergunta ou sugere o mais adequado.
 
-### 🟡 JOTA FIT (@juliojc_trainer) · confirmado
+### 🟡 JOTA FIT (@jotafit.personaltrainer no Instagram, Facebook, TikTok e YouTube) · confirmado
 - **Quem:** Jota, personal trainer. Público **majoritariamente feminino**, incluindo mulheres 40+ e na menopausa.
 - **Promessa:** treino com explicação de verdade (biomecânica e ciência) e resultado acompanhado no app.
 - **Produto:** Consultoria online, com app de treino e dieta, reavaliações e chat.

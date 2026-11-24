@@ -3,6 +3,11 @@
 Personal trainer, público majoritariamente feminino. Marca: amarelo sobre grafite, logo JF.
 Todo conteúdo termina com o CTA da consultoria: **"Comenta CONSULTORIA que eu te chamo no direct"**.
 
+## Organização do projeto
+- `perfis/<perfil>/<nn-pilar>/<conteúdo>/`: todo conteúdo fica no perfil e no pilar certo (jotafit, nerdzoid, razec-ezar). Cada perfil tem `00-PERFIL.md` com a ficha da marca.
+- `agentes/`: prompt master + fichas de cada agente por squad.
+- `ferramentas/`: motores reutilizáveis (carrossel, capas).
+
 ## Equipe de agentes
 O prompt master da equipe (agentes, perfis Jota Fit / NerdZoid / Razec Ezar, fluxo e comandos) está em `agentes/PROMPT-MASTER.md`. Siga-o em toda tarefa de conteúdo, marketing, vendas, site ou ciência do treino.
 
@@ -25,7 +30,7 @@ Vale para TUDO: vídeos, legendas, títulos, capas, carrosséis, stories, roteir
 
 Quando o Jota pedir "carrossel" (ou "carrossel JOTA FIT"), use SEMPRE este padrão, sem perguntar.
 
-**Motor pronto:** `analises/carrosseis/scripts/carrossel.py` (fontes em `analises/carrosseis/fonts/`).
+**Motor pronto:** `ferramentas/carrossel/scripts/carrossel.py` (fontes em `ferramentas/carrossel/fonts/`, imagens base em `ferramentas/carrossel/imagens/`).
 Exemplos completos: `scripts/c1.py` (músculo e longevidade) e `scripts/c2.py` (menopausa).
 Copie um deles, troque o conteúdo e rode `python3 cX.py <pasta_saida>`.
 
@@ -50,9 +55,9 @@ Copie um deles, troque o conteúdo e rode `python3 cX.py <pasta_saida>`.
 - Para temas clínicos (osteoporose, menopausa, doenças), incluir "converse com seu médico".
 
 **Entrega**
-- Salvar em `analises/carrosseis/<tema>/` + `legendas.md` (legenda Instagram com hashtags, comentário fixado e ordem de postagem).
+- Salvar em `perfis/<perfil>/<pilar>/carrossel-<tema>/` (slides + .zip em ordem) + `legendas.md` + `fontes.md` (legenda Instagram com hashtags, comentário fixado e ordem de postagem).
 - Commit e push no branch de trabalho; enviar os PNGs ao Jota.
 
 ## Outros padrões já estabelecidos
-- Capas de Reels/vídeo: `analises/capas/covers.py` (título sem caixa, branco + amarelo, espaço entre palavras e linhas; versão TikTok/Shorts com área segura).
+- Capas de Reels/vídeo: `ferramentas/capas/covers.py` (título sem caixa, branco + amarelo, espaço entre palavras e linhas; versão TikTok/Shorts com área segura).
 - Vídeos: legendas sincronizadas palavra a palavra, círculo de rosto estilo react sem cobrir legenda/conteúdo, CTA da consultoria no fim, versões TikTok/Shorts com área segura.
