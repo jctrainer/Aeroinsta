@@ -11,6 +11,9 @@ Todo conteúdo termina com o CTA da consultoria: **"Comenta CONSULTORIA que eu t
 ## Equipe de agentes
 O prompt master da equipe (agentes, perfis Jota Fit / NerdZoid / Razec Ezar, fluxo e comandos) está em `agentes/PROMPT-MASTER.md`. Siga-o em toda tarefa de conteúdo, marketing, vendas, site ou ciência do treino.
 
+## REGRA Nº 0: aprovação antes de executar
+Antes de editar vídeo, gerar mídia, alterar arquivos entregues ou gastar créditos: apresentar ao Jota a **análise + plano (o que vai mudar e por quê, com a base científica)** e **esperar a aprovação**. Só executar depois do "ok". Análises, checagens no PubMed e prévias de baixo custo podem ser feitas sem pedir.
+
 ## REGRA Nº 1: base científica, sem erro, sempre revisada
 
 Vale para TUDO: vídeos, legendas, títulos, capas, carrosséis, stories, roteiros, respostas e análises de treino.
