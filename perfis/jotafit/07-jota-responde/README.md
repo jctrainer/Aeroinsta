@@ -12,3 +12,8 @@ Padrão: fundo grafite com brilho amarelo (recorte por IA), botão "JOTA RESPOND
 
 Ordem sugerida: #01 → (2 dias) #02 → (2 dias) #04 → (2 dias) #03.
 Motor: `scripts/jr.py` (série) e `scripts/mixjr.py` (áudio).
+
+## Padrão de edição a partir do ep05 (aprovado pelo Jota em 25/11/2026)
+- A-roll + B-roll: gancho em A-roll → B-roll real cobrindo a explicação (troca a cada 2–4 s) → A-roll na frase-chave e no CTA.
+- B-roll vem de `ferramentas/broll/`; cada episódio lista os clipes usados.
+- ep01–ep04 ficam como foram entregues (sem reedição).
