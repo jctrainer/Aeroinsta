@@ -59,3 +59,10 @@ Regras do Google: não oferecer desconto nem brinde em troca e não pedir só pa
 - 1 post por semana no Google, reaproveitando o Reels da semana, com botão "Ligar".
 - Responder toda avaliação em até 48 h.
 - Medir de novo em 30 dias: aparições, cliques e número de avaliações.
+
+## Aplicado em 25/11/2026 (aprovado pelo Jota)
+- Descrição nova publicada. A primeira frase ficou: "Personal trainer presencial em Guarulhos (SP) e consultoria online para todo o Brasil e exterior…"
+- Serviços: 11 itens. Saíram "consultoria nutricional" e "crianças com sobrepeso". Entraram "Consultoria online", "Treino para mulheres 40+", "Treino na menopausa", "Avaliação física" e "Personal presencial em Guarulhos".
+- Horário: de segunda a sexta das 7h às 21h e sábado das 8h às 12h.
+- O Google pode revisar as mudanças antes de publicar (de algumas horas a alguns dias).
+- Próxima medição: 25/12/2026.
