@@ -61,6 +61,13 @@ Copie um deles, troque o conteúdo e rode `python3 cX.py <pasta_saida>`.
 - Salvar em `perfis/<perfil>/<pilar>/carrossel-<tema>/` (slides + .zip em ordem) + `legendas.md` + `fontes.md` (legenda Instagram com hashtags, comentário fixado e ordem de postagem).
 - Commit e push no branch de trabalho; enviar os PNGs ao Jota.
 
+## Edição de vídeo: A-roll + B-roll (padrão pedido pelo Jota)
+- **A-roll** = Jota falando para a câmera (gancho, opinião, ironia, CTA). Sempre no 1º segundo e no final.
+- **B-roll** = imagens de apoio por cima da voz dele: **prioridade para filmagem real** (treino dele, alunas com autorização escrita, execução de exercícios, tela do app, comida/prato, academia, rua de Guarulhos). Imagem de IA só em exceção (marcada "ilustração educativa"); motion/gráfico para dados científicos.
+- Ritmo: troca de plano a cada 2–4 s; B-roll cobre a explicação, A-roll volta nas frases-chave.
+- Banco de B-roll em `ferramentas/broll/` (clipes organizados por tema); cada edição informa quais clipes usou.
+- Edição leve (dados do público, 24/11/2026): sem superprodução; B-roll real > efeitos.
+
 ## Outros padrões já estabelecidos
 - Capas de Reels/vídeo: `ferramentas/capas/covers.py` (título sem caixa, branco + amarelo, espaço entre palavras e linhas; versão TikTok/Shorts com área segura).
 - Vídeos: legendas sincronizadas palavra a palavra, círculo de rosto estilo react sem cobrir legenda/conteúdo, CTA da consultoria no fim, versões TikTok/Shorts com área segura.
