@@ -65,3 +65,9 @@ Personal trainer em Guarulhos e online. Treino para mulheres 35+: menos barriga,
 
 ### Destaques
 CONSULTORIA · RESULTADOS (só com autorização) · JOTA RESPONDE · MENOPAUSA · GUARULHOS (atendimento presencial)
+
+## Endereços oficiais (25/11/2026)
+- Instagram: @jotafit.personaltrainer
+- Site: **jotafitpersonal.com.br**, ainda a construir. O Google Meu Negócio apontava para jotafit.com.br, que não é o domínio oficial.
+- Telefone/WhatsApp: (11) 94282-5776
+- Atendimento: presencial em Guarulhos (SP) e online para todo o Brasil e exterior.
