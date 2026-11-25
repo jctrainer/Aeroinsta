@@ -20,47 +20,48 @@ Instagram · Facebook · TikTok · YouTube
 
 ---
 
-## Bio otimizada (atualizada em 24/11/2026)
+## Dados reais do público (Instagram via Windsor.ai, 24/11/2026)
+- **1.098 seguidores.** 61% mulheres; núcleo: **mulheres 35–44 (202) e 45–54 (125)**, depois 25–34 (165).
+- **Local:** **Guarulhos 534 (49%)**, São Paulo capital 109 (10%). Público majoritariamente da sua região.
+- **Desempenho (últimos 30 dias, 8 posts):**
+  - Melhor alcance: **humor/bastidores** (leg press: 632 de alcance, menor taxa de pulo, 51%).
+  - Maior tempo assistido: **react com polêmica** (tríceps: 18 s em média).
+  - Pior: **posts de venda do app** (71% pulam nos 3 s) e **conteúdo técnico superproduzido** (búlgaro: 55 a 76 de alcance).
+  - Salvamentos quase zero → faltam conteúdos "salva pra usar".
+
+## Regras de conteúdo (a partir dos dados)
+1. **Objetivo nº 1: vender a consultoria para mulheres 35–54, principalmente de Guarulhos e região.**
+2. **Edição leve** nas respostas de caixinha (JOTA RESPONDE): pergunta no 1º frame, legenda, 1 card de ciência, CTA. Sem superprodução.
+3. **Gancho nos 3 primeiros segundos:** pergunta/dor da mulher 35+ logo na abertura.
+4. **Venda dentro do conteúdo útil**, nunca post só de anúncio. O app aparece "em uso" dentro das respostas.
+5. **1 humor/bastidores por semana** (maior alcance).
+6. **Checklist "salva pra usar"** no fim dos conteúdos úteis.
+7. **SEO local em todo post:** localização "Guarulhos, SP" marcada + "Guarulhos" na legenda + #guarulhos #personalguarulhos #personaltrainerguarulhos.
+
+## Bio (atualizada com SEO local)
 
 ### Instagram
-**Nome (campo pesquisável, 32/64):** `Jota | Personal Trainer Feminino`
+**Nome (campo pesquisável):** `Jota | Personal Trainer Guarulhos`
 
-**Bio (142/150):**
+**Bio:**
 ```
-Treino com ciência para mulheres 💪
-Glúteo, força e menopausa sem mito 🔬
-Consultoria online com app 📲
-CREF 000000-G/UF
-👇 Comece sua consultoria
+Personal Trainer | Guarulhos e online
+Mulheres 35+: menos barriga, corpo firme
+e saúde na menopausa 💪
++10 anos | CREF 000000-G/SP
+👇 Chama no WhatsApp
 ```
+(Troque 000000-G pelo seu número de CREF.)
 
-### TikTok (55/80)
+### TikTok
 ```
-Treino com ciência para mulheres 💪 Consultoria online 👇
-```
-
-### X e Facebook (80/101, cabe nos dois)
-```
-Personal trainer. Treino com ciência para mulheres. Consultoria online com app 👇
+Personal em Guarulhos e online 💪 Mulheres 35+ 👇
 ```
 
-### YouTube (descrição do canal)
+### Facebook / YouTube
 ```
-Treino com ciência para mulheres: biomecânica, glúteo, força, gestação e menopausa, sem mito e com referência em cada vídeo. Sou o Jota, personal trainer. Quer um treino montado para você e acompanhado no app? Link da consultoria abaixo.
+Personal trainer em Guarulhos e online. Treino para mulheres 35+: menos barriga, corpo firme e saúde na menopausa.
 ```
 
-### Links da bio (ordem)
-1. Consultoria (WhatsApp ou página de venda)
-2. App / avaliação gratuita (se houver)
-3. YouTube
-
-### Destaques (stories fixos)
-CONSULTORIA (como funciona) · RESULTADOS (só com autorização) · APP (tour) · GLÚTEO · MENOPAUSA · DÚVIDAS
-
-### Posts fixados
-1. Búlgaro: quadríceps ou glúteo?
-2. Supino: aumente as reps antes da carga
-3. Carrossel: Músculo é órgão de longevidade
-
-### Observação
-Coloque o número real do CREF: além de dar autoridade, o CONFEF exige a identificação do registro do profissional na divulgação. Use o mesmo nome e a mesma foto (rosto + logo JF) nas 4 redes.
+### Destaques
+CONSULTORIA · RESULTADOS (só com autorização) · JOTA RESPONDE · MENOPAUSA · GUARULHOS (atendimento presencial)
