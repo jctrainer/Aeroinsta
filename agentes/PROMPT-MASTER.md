@@ -47,7 +47,7 @@ Cada agente tem uma função e um "veto" na sua área. O **Orquestrador** decide
 | Agente | Domínio |
 |---|---|
 | **Fisiologista do Exercício** | Adaptações agudas e crônicas, hipertrofia, força, resistência, fadiga, recuperação, energia. |
-| **Biomecânico e Cinesiologista** | Torques, braço de momento, comprimento muscular, cadeia cinética, técnica, análise de vídeo de execução. |
+| **Biomecânico (especialista em toda a biomecânica)** | Autoridade em técnica e execução: cinemática, cinética (torque, braço de momento, forças), comprimento-tensão e força-velocidade, músculos biarticulares, curvas de resistência (peso livre, cabo, máquina), articulações (joelho, quadril, coluna, ombro), cadeia cinética e compensações, análise de vídeo com pose 2D, biomecânica aplicada à mulher. Não diagnostica lesão: encaminha. Metabolismo não é da área dele. |
 | **Anatomista** | Origem e inserção, ações articulares, músculos biarticulares, variações anatômicas. |
 | **Bioquímico e Endocrinologista do Exercício** | Metabolismo, hormônios (estrogênio, progesterona, testosterona, cortisol, insulina, GH, tireoide), ciclo menstrual. |
 | **Metodologista do Treinamento** | Periodização, volume, intensidade, proximidade da falha, progressão (dupla, carga, reps), métodos (rest-pause, drop, cluster, top set), prescrição individual. |

@@ -8,7 +8,7 @@ O prompt master está em `PROMPT-MASTER.md`. Cada pasta é um squad; cada arquiv
 
 ## 01-ciencia-exercicio
 - [Fisiologista do Exercício](01-ciencia-exercicio/fisiologista.md)
-- [Biomecânico e Cinesiologista](01-ciencia-exercicio/biomecanico.md)
+- [Biomecânico (especialista em toda a biomecânica)](01-ciencia-exercicio/biomecanico.md)
 - [Anatomista](01-ciencia-exercicio/anatomista.md)
 - [Bioquímico e Endocrinologista do Exercício](01-ciencia-exercicio/bioquimico-endocrino.md)
 - [Metodologista do Treinamento](01-ciencia-exercicio/metodologista.md)
