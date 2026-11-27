@@ -33,7 +33,6 @@ Jota Fit: treino com ciência para mulheres 35+.
 • Lovejoy et al., 2008, Int J Obes
 • Cruz-Jentoft et al., 2019, Age Ageing
 
-Foto: aluna Jota Fit, treino real. Cortes da coxa: ilustração educativa. Gráfico: ilustrativo.
 
 #metabolismo #menopausa #sarcopenia #musculacao #treinofeminino #mulheres40mais #personaltrainer #guarulhos #personalguarulhos #jotafit
 
