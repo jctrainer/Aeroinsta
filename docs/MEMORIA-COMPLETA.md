@@ -240,7 +240,7 @@ A personagem "Carla" e a versão #01-B com motion 2.5D. As 2 imagens de IA já f
 - Gravar os clipes de B-roll (pelo menos 20, na vertical, de 5 a 10 s; a lista está em `ferramentas/broll/README.md`).
 - Mandar o próximo vídeo (ep05) para o primeiro corte no padrão A-roll + B-roll.
 - Pedir avaliações no Google às alunas, com meta de 10 em 30 dias. Mensagem e link estão no diagnóstico do Google.
-- Responder se o link "Site" do Google pode ser trocado pelo WhatsApp (wa.me/5511942825776) até o site ficar pronto.
+- Responder se o link "Site" do Google pode ser trocado pelo WhatsApp (wa.me/5511989195208) até o site ficar pronto.
 - Informar o número do CREF.
 - Definir o preço da consultoria. Faltam 4 dados: preço atual, quantas alunas ele consegue atender, meta de faturamento e o que entra (sem prescrição de dieta).
 - Para o site: dizer onde estão o domínio e a hospedagem (autorizar a Hostinger, se for o caso) e enviar de 3 a 5 fotos e depoimentos autorizados.
