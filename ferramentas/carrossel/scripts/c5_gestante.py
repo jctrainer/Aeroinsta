@@ -34,6 +34,18 @@ def bgphoto(im, name, crop, dark=0.28):
     ov = Image.fromarray(a.clip(0, 255).astype(np.uint8)).convert('RGBA')
     base_ = im.copy(); im.paste(ov, (0, 0)); im.alpha_composite(Image.blend(base_, im, 1.0))
 
+def bgside(im, name, crop, page, left=0.18, right=0.62):
+    src = Image.open(IMG + name).convert('RGB').crop(crop)
+    sc = max(W / src.width, H / src.height); src = src.resize((int(src.width * sc) + 1, int(src.height * sc) + 1), Image.LANCZOS)
+    l, t = (src.width - W) // 2, (src.height - H) // 2; src = src.crop((l, t, l + W, t + H))
+    a = np.asarray(src).astype(np.float32)
+    xx = np.linspace(0, 1, W)[None, :, None]; yy = np.linspace(0, 1, H)[:, None, None]
+    k = left + (right - left) * np.clip((xx - 0.25) / 0.5, 0, 1)      # escuro à esquerda (texto), claro à direita (gestante)
+    k = k * (0.7 + 0.3 * np.clip(yy * 3, 0, 1)) * (1 - 0.45 * np.clip((yy - 0.8) / 0.2, 0, 1))  # topo e rodapé mais escuros
+    im.paste(Image.fromarray((a * k).clip(0, 255).astype(np.uint8)).convert('RGBA'), (0, 0))
+    d = ImageDraw.Draw(im); tracked(d, (70, 87), HDR, P('Bold', 25), GR, 7.5)
+    d.text((1010, 87), f'{page}/{T}', font=P('SemiBold', 25), fill=GR, anchor='rm')
+
 def stat(im, cx, cy, big, small, col=Y, bs=64):
     d = ImageDraw.Draw(im)
     d.text((cx, cy), big, font=P('ExtraBold', bs), fill=col, anchor='mm')
@@ -53,9 +65,10 @@ def rows(im, items, y, gap=86, size=31):
 
 # 1 CAPA
 im = base(1, T, HDR)
+bgside(im, 'img_sumo_halter.jpg', (300, 0, 914, 768), 1)
 kicker(im, 'MITO × VERDADE', 260)
 title(im, ['Grávida', 'precisa', 'treinar', 'leve?'], 350, 92)
-card(im, 'img_sumo_halter.jpg', (470, 0, 950, 768), (600, 250, 1030, 1110))
+
 text(im, (70, 860), 'O que os estudos mais', 34, WH, 'SemiBold')
 text(im, (70, 905), 'recentes mostram.', 34, Y, 'SemiBold')
 swipe(im, 'Arrasta e entenda')
@@ -139,10 +152,11 @@ save(im, 'gestante-06.png')
 
 # 7 CTA
 im = base(7, T, HDR, mark='J')
+bgside(im, 'img_desenvolvimento.jpg', (250, 0, 864, 768), 7)
 kicker(im, 'SEU PRÓXIMO PASSO')
 title(im, ['Gestante treina', 'com quem entende.'], 375, 58)
 bullets(im, ['Treino ajustado a cada fase', 'Reavaliação a cada 15 dias', 'Junto com o seu obstetra'], 560, 70, 30)
-card(im, 'img_desenvolvimento.jpg', (430, 60, 900, 768), (740, 470, 1030, 1120))
+
 panel(im, (70, 860, 680, 1060), 40)
 d = ImageDraw.Draw(im)
 d.text((375, 915), 'Comenta', font=P('SemiBold', 32), fill=WH, anchor='mm')
