@@ -15,6 +15,25 @@ def aluna(im, cx, top, hgt):
     im.alpha_composite(sh.filter(ImageFilter.GaussianBlur(14)))
     im.alpha_composite(a, (int(cx - a.width / 2), int(top)))
 
+def card(im, name, crop, box, r=34):
+    x0, y0, x1, y1 = box; w, h = x1 - x0, y1 - y0
+    src = Image.open(IMG + name).convert('RGB').crop(crop)
+    sc = max(w / src.width, h / src.height); src = src.resize((int(src.width * sc) + 1, int(src.height * sc) + 1), Image.LANCZOS)
+    l, t = (src.width - w) // 2, (src.height - h) // 2; src = src.crop((l, t, l + w, t + h)).convert('RGBA')
+    mk = Image.new('L', (w, h), 0); ImageDraw.Draw(mk).rounded_rectangle((0, 0, w - 1, h - 1), r, fill=255); src.putalpha(mk)
+    g = Image.new('RGBA', (W, H)); ImageDraw.Draw(g).rounded_rectangle((x0 - 14, y0 - 14, x1 + 14, y1 + 14), r + 10, fill=Y + (60,))
+    im.alpha_composite(g.filter(ImageFilter.GaussianBlur(30))); im.alpha_composite(src, (x0, y0))
+    ImageDraw.Draw(im).rounded_rectangle(box, r, outline=Y, width=4)
+
+def bgphoto(im, name, crop, dark=0.28):
+    src = Image.open(IMG + name).convert('RGB').crop(crop)
+    sc = max(W / src.width, H / src.height); src = src.resize((int(src.width * sc) + 1, int(src.height * sc) + 1), Image.LANCZOS)
+    l, t = (src.width - W) // 2, (src.height - H) // 2; src = src.crop((l, t, l + W, t + H))
+    a = np.asarray(src).astype(np.float32) * dark
+    yy = np.linspace(0, 1, H)[:, None, None]; a *= (0.55 + 0.45 * yy)  # mais escuro no topo, onde fica o texto
+    ov = Image.fromarray(a.clip(0, 255).astype(np.uint8)).convert('RGBA')
+    base_ = im.copy(); im.paste(ov, (0, 0)); im.alpha_composite(Image.blend(base_, im, 1.0))
+
 def stat(im, cx, cy, big, small, col=Y, bs=64):
     d = ImageDraw.Draw(im)
     d.text((cx, cy), big, font=P('ExtraBold', bs), fill=col, anchor='mm')
@@ -36,7 +55,7 @@ def rows(im, items, y, gap=86, size=31):
 im = base(1, T, HDR)
 kicker(im, 'MITO × VERDADE', 260)
 title(im, ['Grávida', 'precisa', 'treinar', 'leve?'], 350, 92)
-aluna(im, 790, 300, 860)
+card(im, 'img_sumo_halter.jpg', (470, 0, 950, 768), (600, 250, 1030, 1110))
 text(im, (70, 860), 'O que os estudos mais', 34, WH, 'SemiBold')
 text(im, (70, 905), 'recentes mostram.', 34, Y, 'SemiBold')
 swipe(im, 'Arrasta e entenda')
@@ -61,6 +80,8 @@ save(im, 'gestante-02.png')
 
 # 3 CARGA ALTA TESTADA
 im = base(3, T, HDR)
+bgphoto(im, 'img_agacha_barra.jpg', (420, 0, 1000, 640), 0.30)
+tracked(ImageDraw.Draw(im), (70, 87), HDR, P('Bold', 25), GR, 7.5); ImageDraw.Draw(im).text((1010, 87), '3/7', font=P('SemiBold', 25), fill=GR, anchor='rm')
 kicker(im, 'E CARGA ALTA?')
 title(im, ['Já foi testada.'], 375, 80)
 text(im, (70, 490), '10 gestantes saudáveis, ~26 semanas: agachamento,', 30)
@@ -119,9 +140,9 @@ save(im, 'gestante-06.png')
 # 7 CTA
 im = base(7, T, HDR, mark='J')
 kicker(im, 'SEU PRÓXIMO PASSO')
-title(im, ['Gestante treina', 'com quem entende.'], 375, 66)
+title(im, ['Gestante treina', 'com quem entende.'], 375, 58)
 bullets(im, ['Treino ajustado a cada fase', 'Reavaliação a cada 15 dias', 'Junto com o seu obstetra'], 560, 70, 30)
-aluna(im, 870, 430, 640)
+card(im, 'img_desenvolvimento.jpg', (430, 60, 900, 768), (740, 470, 1030, 1120))
 panel(im, (70, 860, 680, 1060), 40)
 d = ImageDraw.Draw(im)
 d.text((375, 915), 'Comenta', font=P('SemiBold', 32), fill=WH, anchor='mm')
