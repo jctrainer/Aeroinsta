@@ -69,6 +69,6 @@ CONSULTORIA · RESULTADOS (só com autorização) · JOTA RESPONDE · MENOPAUSA 
 ## Endereços oficiais (25/11/2026)
 - Instagram: @jotafit.personaltrainer
 - Site: **jotafitpersonal.com.br**, ainda a construir. O Google Meu Negócio apontava para jotafit.com.br, que não é o domínio oficial.
-- WhatsApp: (11) 98919-5208 (corrigido em 27/11/2026). Telefone do Google Meu Negócio: (11) 94282-5776
+- WhatsApp: (11) 98919-5208 (corrigido em 27/11/2026). Também é o telefone principal do Google Meu Negócio desde 27/11/2026.
 - Atendimento: presencial em Guarulhos (SP) e online para todo o Brasil e exterior.
 - Reavaliação da consultoria: **a cada 15 dias**, com fotos e medidas (confirmado pelo Jota em 27/11/2026). Google Meu Negócio atualizado para 15 dias e link do site trocado pelo WhatsApp (27/11/2026).

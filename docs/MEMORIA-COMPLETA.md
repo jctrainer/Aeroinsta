@@ -27,7 +27,7 @@ O Jota tem três perfis:
 
 Endereços oficiais da Jota Fit:
 - Instagram @jotafit.personaltrainer.
-- WhatsApp (11) 98919-5208. Telefone cadastrado no Google: (11) 94282-5776.
+- WhatsApp (11) 98919-5208. Também é o telefone do Google Meu Negócio.
 - Site oficial **jotafitpersonal.com.br**, ainda a construir. O Google Meu Negócio apontava para jotafit.com.br, que não é o domínio oficial.
 
 ## 2. Dados reais do público (Windsor.ai, 24 e 25/11/2026)
@@ -719,7 +719,7 @@ CONSULTORIA · RESULTADOS (só com autorização) · JOTA RESPONDE · MENOPAUSA 
 ### Endereços oficiais (25/11/2026)
 - Instagram: @jotafit.personaltrainer
 - Site: **jotafitpersonal.com.br**, ainda a construir. O Google Meu Negócio apontava para jotafit.com.br, que não é o domínio oficial.
-- WhatsApp: (11) 98919-5208. Telefone do Google: (11) 94282-5776
+- WhatsApp: (11) 98919-5208. (também no Google)
 - Atendimento: presencial em Guarulhos (SP) e online para todo o Brasil e exterior.
 
 
