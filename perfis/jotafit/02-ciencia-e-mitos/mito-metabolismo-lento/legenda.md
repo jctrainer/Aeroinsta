@@ -49,3 +49,10 @@ Compartilhe o post publicado no story (avião de papel → Adicionar ao story) e
 - Localização: "Guarulhos, SP".
 - Sair 2 a 3 dias antes ou depois do carrossel da balança.
 - **Antes de postar:** confirmar a autorização por escrito da aluna para o uso da imagem. As pessoas ao fundo estão desfocadas.
+
+---
+# Reels (reels-metabolismo-nao-quebrou.mp4, 55 s)
+Use a mesma legenda do carrossel, trocando a primeira linha por:
+"Seu metabolismo não quebrou aos 40. Assiste até o fim 👇"
+Na capa do Reels, use o slide metabolismo-01.png ou o primeiro frame.
+O áudio é a narração enviada pelo Jota (JOTA_MT.mp3), com uma trilha leve gerada aqui, sem direitos autorais.
