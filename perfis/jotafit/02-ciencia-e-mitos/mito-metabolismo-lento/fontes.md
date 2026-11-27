@@ -26,3 +26,9 @@
 
 ## Fica de fora por falta de confirmação no resumo
 - O percentual exato de queda anual depois dos 60 no estudo de Pontzer: o número não está no resumo. Usar só "cai depois dos 60".
+
+## Revisão do carrossel final (27/11/2026)
+- **Conferido:** estabilidade do gasto dos 20 aos 60 e queda depois dos 60 (Pontzer 2021); queda de ~15% da massa livre de gordura entre a 3ª e a 8ª década (Evans 1995); queda de atividade a partir de 2 anos antes da menopausa, mais gordura visceral e queda maior do gasto no sono (Lovejoy 2008); definição de sarcopenia (Cruz-Jentoft 2019).
+- **Corrigido:** "o músculo é o que mais gasta energia" virou "o músculo é o que mais define o gasto" (Evans fala de determinante do gasto em sedentários).
+- **Fora:** o número de participantes do Pontzer e o ganho de ~96 kcal/dia com treino de força (meta-análise sem mulheres pós-menopausa).
+- **Imagens:** foto real de aluna com fundo desfocado (privacidade de terceiros), cortes de coxa marcados como ilustração educativa e gráfico marcado como ilustrativo.
