@@ -12,3 +12,11 @@
 4. **Greendale GA et al., 2019, JCI Insight (SWAN)**, já usado no carrossel da menopausa: na transição, a composição corporal muda mesmo quando o peso muda pouco.
 
 **Limites:** os estudos 1 e 2 são retrospectivos, com mulheres mais velhas (~69 anos) e iniciantes. Para o público de 35 a 54, usar "mesmo em mulheres de quase 70" como argumento de força, sem prometer números.
+5. **Kanellakis S et al., 2023, Am J Hum Biol.** Changes in body weight and body composition during the menstrual cycle. DOI: 10.1002/ajhb.23951
+   - 42 mulheres medidas 2 vezes por semana ao longo do ciclo. Na menstruação, o peso ficou ~0,45 kg maior que na 1ª semana do ciclo, quase todo por água extracelular (+0,47 kg).
+
+## Revisão do texto final (27/11/2026)
+- **Conferido:** recomposição em mulheres (Ribeiro 2022), números de +2,3% a +5,4% de músculo e de −1,7% a −3,7% de gordura, ~0,5 kg de água na menstruação (Kanellakis 2023) e a cintura como sinal vital (Ross 2020).
+- **Corrigido:** "se funciona aos 70, funciona aos 40" virou "se acontece aos 70, pode acontecer aos 40".
+- **Fora por falta de checagem:** sal, estresse, treino novo e sono como causa de peso travado.
+- **Ilustrativo:** a barra "antes × depois" do slide 3.
