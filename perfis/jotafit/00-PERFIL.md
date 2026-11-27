@@ -71,3 +71,4 @@ CONSULTORIA · RESULTADOS (só com autorização) · JOTA RESPONDE · MENOPAUSA 
 - Site: **jotafitpersonal.com.br**, ainda a construir. O Google Meu Negócio apontava para jotafit.com.br, que não é o domínio oficial.
 - Telefone/WhatsApp: (11) 94282-5776
 - Atendimento: presencial em Guarulhos (SP) e online para todo o Brasil e exterior.
+- Reavaliação da consultoria: **a cada 15 dias**, com fotos e medidas (confirmado pelo Jota em 27/11/2026). A descrição do Google Meu Negócio ainda diz "15 a 20 dias".

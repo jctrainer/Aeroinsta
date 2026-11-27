@@ -13,7 +13,7 @@ Observação: não existe um arquivo AGENTS.md no projeto. Os arquivos de instru
 O Jota é personal trainer em Guarulhos (SP), com mais de 10 anos de profissão. Atende presencialmente em Guarulhos e online para todo o Brasil e o exterior. O produto principal é a **Consultoria Jota Fit**. Funciona assim:
 - avaliação completa no início (rotina, nível, objetivos);
 - treino sob medida entregue pelo aplicativo (Treinei);
-- reavaliação a cada 15 a 20 dias, com fotos e medidas;
+- reavaliação a cada 15 dias, com fotos e medidas;
 - suporte direto durante todo o acompanhamento.
 
 O **objetivo de negócio número 1** é vender mais consultoria para **mulheres de 35 a 54 anos, principalmente de Guarulhos e região**. Todo conteúdo existe para servir a esse objetivo.
