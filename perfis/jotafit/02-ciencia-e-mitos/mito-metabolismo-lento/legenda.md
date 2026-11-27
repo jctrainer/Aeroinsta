@@ -56,3 +56,6 @@ Use a mesma legenda do carrossel, trocando a primeira linha por:
 "Seu metabolismo não quebrou aos 40. Assiste até o fim 👇"
 Na capa do Reels, use o slide metabolismo-01.png ou o primeiro frame.
 O áudio é a narração enviada pelo Jota (JOTA_MT.mp3), com uma trilha leve gerada aqui, sem direitos autorais.
+
+## Reels v2, tema MOTOR (reels-metabolismo-motor-v2.mp4): versão recomendada
+100% animação (velocímetro, chat, carimbos, contador de idade, músculo encolhendo, barras e ícones), sem foto da aluna e com legenda viral. Mesma legenda de post.
