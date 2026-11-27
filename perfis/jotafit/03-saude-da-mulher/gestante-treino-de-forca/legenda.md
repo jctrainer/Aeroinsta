@@ -43,5 +43,5 @@ Jota Fit: treino com ciência para mulheres 35+.
 Você treinou (ou treina) na gravidez? Conta como foi 👇
 
 ## Antes de postar
-- Autorização por escrito da aluna para uso da imagem.
+- Imagem: ilustração desenhada (sem foto de aluna).
 - Localização: "Guarulhos, SP". Postar os slides gestante-01 a 07 em ordem.
