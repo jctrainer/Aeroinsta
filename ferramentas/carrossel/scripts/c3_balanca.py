@@ -101,7 +101,7 @@ stacked(im, 640, 640, 1010, 270, [(36, Y, 'MÚSCULO'), (12, (120, 170, 220), 'Á
 d = ImageDraw.Draw(im)
 d.line((470, 820, 610, 820), fill=Y, width=5); d.polygon([(620, 820), (600, 808), (600, 832)], fill=Y)
 tag(im, 'mesmo peso', 540, 700, 'd', 24)
-foot(im, 'Ilustrativo. Mais músculo e menos gordura podem deixar o peso quase igual.', 1110)
+foot(im, 'Mais músculo e menos gordura podem deixar o peso quase igual.', 1110)
 progress(im, 3, T, 'O que ela soma')
 save(im, 'balanca-03.png')
 

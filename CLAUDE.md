@@ -26,7 +26,7 @@ Vale para TUDO: vídeos, legendas, títulos, capas, carrosséis, stories, roteir
 4. **Registrar as fontes:** autor, ano, revista e DOI em `fontes.md` na pasta do projeto; no slide ou vídeo, citar no rodapé quando for o argumento central.
    **Toda legenda (Instagram, TikTok, Shorts) termina com "📚 Referências:"** em formato curto (Autor et al., ano, revista), antes das hashtags.
 5. **Transparência:** imagens de IA ou montadas são "ilustração educativa"; gráficos esquemáticos são "ilustrativo"; temas clínicos levam "converse com seu médico".
-   **As marcas "ilustrativo" e "ilustração educativa" ficam SÓ na imagem/vídeo** (rodapé, junto da fonte do estudo). **Não escrever essas marcas no texto da legenda** (pedido do Jota, 27/11/2026). As referências continuam no fim da legenda.
+   **Decisão do Jota (27/11/2026): não usar as marcas "ilustrativo" / "ilustração educativa" nem na legenda nem na imagem/vídeo** (fica feio). Na imagem vai só o rodapé com a referência do estudo; na legenda, só o bloco "📚 Referências". Limite que continua: nunca afirmar que uma imagem montada ou de IA é "imagem real" ou "exame real", e "converse com seu médico" segue nos temas clínicos.
 6. **Ao entregar**, informar ao Jota o que foi conferido, o que foi corrigido e o que ficou de fora por falta de comprovação.
 7. **Conteúdo de terceiros** (posts de referência, vídeos de outras professoras): analisar criticamente e apontar erros ou exageros com base na literatura, sem ataque pessoal.
 
@@ -52,8 +52,8 @@ Copie um deles, troque o conteúdo e rode `python3 cX.py <pasta_saida>`.
 - Fundamentar em **cinesiologia/biomecânica, fisiologia do exercício e educação física**, com linguagem simples para mulheres leigas.
 - Todo número ou afirmação forte precisa ter base na literatura; citar o estudo no slide com `foot()` (autor, ano, revista) quando for o argumento central.
 - **Checar cada dado no PubMed antes de entregar** (ferramenta PubMed): registrar autor, ano, revista e DOI em `fontes.md` da pasta do carrossel; o que não for confirmado sai do post ou é suavizado.
-- Nunca inventar dado. Gráficos esquemáticos levam a marca **"ilustrativo"**.
-- Imagens geradas por IA ou montadas são marcadas como **"ilustração educativa"**; nunca "imagem real".
+- Nunca inventar dado. (Sem marca "ilustrativo" nos slides: decisão do Jota de 27/11/2026.)
+- Imagens geradas por IA ou montadas: nunca apresentar como "imagem real" (sem marca "ilustração educativa": decisão do Jota de 27/11/2026).
 - Corrigir mitos com contraponto (slide "Mito × Verdade" quando couber).
 - Público feminino: priorizar exemplos de mulheres (inclusive 40+, menopausa) e linguagem de autonomia/saúde, não só estética.
 - Para temas clínicos (osteoporose, menopausa, doenças), incluir "converse com seu médico".

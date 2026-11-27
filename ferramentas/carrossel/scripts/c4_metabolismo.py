@@ -56,7 +56,7 @@ for p in (pts[0], pts[1]):
 cd.ellipse((pts[-1][0] - 16, pts[-1][1] - 16, pts[-1][0] + 16, pts[-1][1] + 16), fill=Y)
 cd.text((X(20) + 10, 795), 'estável dos 20 aos 60', font=P('SemiBold', 26), fill=Y, anchor='lm')
 cd.text((X(70), 1012), 'cai depois dos 60', font=P('SemiBold', 24), fill=LG, anchor='mm')
-cd.text((gx0 - 20, gy_top - 42), 'gasto de energia ajustado pela massa magra (ilustrativo)', font=P('Regular', 20), fill=GR, anchor='lm')
+cd.text((gx0 - 20, gy_top - 42), 'gasto de energia ajustado pela massa magra', font=P('Regular', 20), fill=GR, anchor='lm')
 # 6 -> 7: foto real (enquadramento fechado) atravessando a divisa
 photo(ALUNA, (300, 560, 1124, 1700), (5 * W + 690, 560, 6 * W + 200, 1120))
 
@@ -105,7 +105,7 @@ text(im, (70, 646), '15% ao longo da vida adulta. Nome: sarcopenia.', 31, WH, 'S
 put_slice(im, I + 't30_sq.png', 520, 880, 300, Y)
 put_slice(im, I + 'sed_sq.png', 860, 880, 300)
 tag(im, 'TREINA', 520, 1055, 'y', 24); tag(im, 'NÃO TREINA', 860, 1055, 'd', 24)
-foot(im, 'Evans, 1995 (J Gerontol). Cortes da coxa: ilustração educativa.', 1128)
+foot(im, 'Evans, 1995 (J Gerontol).', 1128)
 progress(im, 4, T, 'O culpado')
 
 # 5 MENOPAUSA

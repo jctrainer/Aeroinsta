@@ -215,7 +215,7 @@ def scene(fr, now):
             gauge(fr, 900, 610, 110, 0.72 - 0.3 * v2 ** 1.3, p, '', True)
             if u >= 1: pop(fr, now, a2, box('ESTÁVEL', 44), X(40), lev - 75, 'm', 0.3)
             if v2 >= 1: pop(fr, now, b2, box('CAI DEPOIS DOS 60', 36, WH, (200, 70, 50)), X(75), 1115, 'm', 0.3)
-        foot(fr, 'Pontzer et al., 2021, Science · gráfico ilustrativo', 1335)
+        foot(fr, 'Pontzer et al., 2021, Science', 1335)
     elif now < T5:                                       # 4 músculo encolhendo
         tm = wt('músculo', T4)
         pop(fr, now, tm, box('O MÚSCULO', 96), 540, 420, 'm', 0.35)
@@ -234,7 +234,7 @@ def scene(fr, now):
             paste(fr, timg('da vida adulta', 30, 'Medium', GR), 230, 1150, p)
         tsar = wt('sarcopenia', T4); dx, dy = shake(now, tsar + 0.1, 16)
         pop(fr, now, tsar, stamp('SARCOPENIA', RED, 84), 540 + dx, 1290 + dy, 'm', 0.25, rot=-6)
-        foot(fr, 'Evans, 1995 · corte da coxa: ilustração educativa', 1385)
+        foot(fr, 'Evans, 1995, J Gerontol', 1385)
     elif now < T6:                                       # 5 menopausa
         pop(fr, now, T5 + 0.05, box('E A MENOPAUSA?', 74), 540, 400, 'm', 0.35)
         rows = (('flame', 'gasto', 'cai um pouco', 0.90, wt('gasto', T5)),
@@ -251,7 +251,7 @@ def scene(fr, now):
             d.rounded_rectangle((250, y + 10, 250 + L, y + 44), 17, fill=Y if i == 0 else (230, 120, 60))
         tm = wt('isso', T5 + 5)
         pop(fr, now, tm, box('ISSO DÁ PRA MUDAR', 70), 540, 1230, 'm', 0.35)
-        foot(fr, 'Lovejoy et al., 2008 · barras ilustrativas', 1335)
+        foot(fr, 'Lovejoy et al., 2008, Int J Obes', 1335)
     elif now < T7:                                       # 6 a virada
         pop(fr, now, T6 + 0.05, box('A BOA NOTÍCIA', 70), 540, 380, 'm', 0.35)
         tmot = wt('motor', T6)
