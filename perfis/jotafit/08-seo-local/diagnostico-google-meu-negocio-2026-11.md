@@ -66,3 +66,7 @@ Regras do Google: não oferecer desconto nem brinde em troca e não pedir só pa
 - Horário: de segunda a sexta das 7h às 21h e sábado das 8h às 12h.
 - O Google pode revisar as mudanças antes de publicar (de algumas horas a alguns dias).
 - Próxima medição: 25/12/2026.
+
+## Aplicado em 27/11/2026 (aprovado pelo Jota)
+- A descrição agora diz "A cada 15 dias, reavalio com fotos e medidas".
+- O link "Site" passou a ser o WhatsApp (https://wa.me/5511942825776), até o jotafitpersonal.com.br ficar pronto.
