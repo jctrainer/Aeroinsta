@@ -11,3 +11,9 @@ Chat com agente de IA no site: só depois que o site estiver no ar e com roteiro
 
 ## Pendências
 Onde o domínio está registrado e onde hospedar (se Hostinger, o Jota precisa autorizar o conector nas configurações do claude.ai); 3 a 5 fotos do Jota; depoimentos autorizados. **CREF já informado: 162847-G/SP** (entra em "Quem é o Jota" e no rodapé). O link "Site" do Google hoje aponta para o WhatsApp; trocar quando o site entrar no ar.
+
+## Decisão de estrutura (28/11/2026)
+Dois sites no mesmo domínio: **jotafitpersonal.com.br** (apresentação, SEO, confiança) e **consultoria.jotafitpersonal.com.br** (venda e link da bio: planos, pagamento, WhatsApp, cadastro no app). Ordem pedida pelo Jota: **primeiro o de apresentação**, depois o de venda. O subdomínio não custa nada e roda na mesma hospedagem.
+
+## Versão 1 do site de apresentação
+Arquivos em perfis/jotafit/09-site/apresentacao/ (index.html, fonts/, img/). Estático, mobile first, grafite + amarelo + Poppins, sem dependência externa. Hero com foto do Jota em P&B, faixa amarela, 6 "se reconhece", 4 passos, 3 dados de ciência com fonte, 3 espaços de depoimento (aguardando autorização), "quem sou eu" com CREF, FAQ, CTA final e botão fixo de WhatsApp. Pendente: retrato do Jota (fundo amarelo), depoimentos autorizados, nome na página (Jota ou Júlio Cezar), domínio/hospedagem, link da página de venda.
