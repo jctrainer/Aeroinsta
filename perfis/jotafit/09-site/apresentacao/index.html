@@ -372,6 +372,26 @@ body.hc .cring.big{width:70px;height:70px;background:#F5C51826}
 @media(max-width:860px){.evo{grid-template-columns:1fr}}
 html,body{overflow-x:clip;max-width:100%}
 .flips .face .n{font-size:clamp(1.25rem,1.9vw,1.75rem);overflow-wrap:anywhere}
+
+/* ===== avaliação inicial ===== */
+.wiz{max-width:720px;background:linear-gradient(155deg,#1c1c20,#121214);border:1px solid var(--line);border-radius:30px;padding:clamp(1.3rem,3.5vw,2.4rem);margin-top:1.8rem;position:relative}
+.wsteps{display:flex;gap:.5rem;margin-bottom:.8rem}.wsteps i{flex:1;height:6px;border-radius:6px;background:#2A2A30;transition:.5s var(--ease)}.wsteps i.on{background:var(--y)}
+.wbar{display:none}
+.wp{display:none;border:0;padding:0;margin:0;min-width:0;animation:paneIn .5s var(--ease)}.wp.on{display:block}
+.wp legend{font-weight:800;font-size:1.25rem;color:var(--y);margin-bottom:1.1rem;padding:0;text-transform:uppercase;letter-spacing:.04em}
+.wiz label{display:block;font-size:.82rem;font-weight:600;color:var(--mut);margin-bottom:1rem}
+.wiz input[type=text],.wiz input[type=number],.wiz select{display:block;width:100%;margin-top:.35rem;background:#0C0C0C;border:1.5px solid var(--line);border-radius:14px;color:#fff;font:600 1rem Poppins,system-ui,sans-serif;padding:.85rem 1rem;transition:.25s}
+.wiz input:focus,.wiz select:focus{outline:none;border-color:var(--y);box-shadow:0 0 0 4px #F5C51826}
+.wiz input.bad,.wiz select.bad{border-color:#ff6b6b}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.row3{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.wiz .chk{display:flex;gap:.7rem;align-items:flex-start;color:#DADBDF;font-size:.85rem;font-weight:500;line-height:1.5;margin-top:.4rem}
+.wiz .chk input{flex:none;width:20px;height:20px;margin-top:.15rem;accent-color:#F5C518}
+.wtip{color:var(--mut);font-size:.82rem;line-height:1.6;margin:.2rem 0 0}ul.wtip{list-style:none;display:grid;gap:.35rem;padding:0}ul.wtip b{color:#fff}
+.werr{color:#ff8a8a;font-size:.85rem;font-weight:600;min-height:1.2em;margin:.6rem 0 0}
+.wnav{display:flex;gap:.8rem;margin-top:1.4rem;flex-wrap:wrap}.wnav .btn{flex:1 1 180px;justify-content:center;text-align:center}
+.wprev{white-space:pre-line;background:#0C0C0C;border:1px dashed #F5C51866;border-radius:16px;padding:1rem 1.1rem;color:#DADBDF;font-size:.84rem;line-height:1.6;margin:1rem 0}
+.wprev:empty{display:none}
+@media(max-width:560px){.row3{grid-template-columns:1fr 1fr}.row3 label:last-child{grid-column:1/-1}}
 </style>
 </head>
 <body>
@@ -381,7 +401,7 @@ html,body{overflow-x:clip;max-width:100%}
 
 <header id="hd"><div class="wrap hd">
  <a class="logo" href="#topo"><img src="img/marca-simbolo.png" alt="Logo JF" width="46" height="46"><span>JOTA FIT</span></a>
- <nav id="nav"><a href="#para-quem">Para quem é</a><a href="#metodo">Método Jota Fit</a><a href="#ciencia">Ciência</a><a href="#sobre">Quem sou</a><a href="#duvidas">Dúvidas</a></nav>
+ <nav id="nav"><a href="#para-quem">Para quem é</a><a href="#metodo">Método Jota Fit</a><a href="#avaliacao">Avaliação</a><a href="#ciencia">Ciência</a><a href="#sobre">Quem sou</a><a href="#duvidas">Dúvidas</a></nav>
  <a class="btn btn-y mag" href="https://wa.me/5511989195208?text=Oi%2C%20Jota!%20Vim%20pelo%20site%20e%20quero%20saber%20mais%20da%20consultoria." target="_blank" rel="noopener">WhatsApp</a>
 </div></header>
 
@@ -448,7 +468,7 @@ html,body{overflow-x:clip;max-width:100%}
    <div class="bar"><i id="bar"></i></div>
   </div>
  </div>
- <div class="cta rv" style="margin-top:2.2rem"><a class="btn btn-y mag" href="https://wa.me/5511989195208?text=Oi%2C%20Jota!%20Quero%20come%C3%A7ar%20pela%20avalia%C3%A7%C3%A3o." target="_blank" rel="noopener">Quero fazer minha avaliação</a></div>
+ <div class="cta rv" style="margin-top:2.2rem"><a class="btn btn-y mag" href="#avaliacao">Quero fazer minha avaliação</a></div>
 </div></section>
 
 <section id="evolucao"><div class="wrap">
@@ -476,6 +496,37 @@ html,body{overflow-x:clip;max-width:100%}
   </ul>
  </div>
  <p class="note rv">O gráfico mostra a ideia do acompanhamento, não um resultado individual. Cada pessoa evolui no seu ritmo.</p>
+</div></section>
+
+<section id="avaliacao" class="alt"><div class="wrap">
+ <div class="kick rv">Avaliação inicial</div><h2 class="rv">Comece pela sua <em>avaliação</em></h2>
+ <p class="sub rv">Leva 2 minutos. Você preenche as suas medidas e envia para o meu WhatsApp. Eu analiso e te respondo com uma conversa pessoal, não com um número solto.</p>
+ <form class="wiz rv" id="wiz" novalidate autocomplete="off">
+  <div class="wsteps" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
+  <div class="wbar"><b id="wbar"></b></div>
+  <fieldset class="wp on" data-s="0"><legend>1. Sobre você</legend>
+   <label>Seu nome<input id="w_nome" type="text" maxlength="60" placeholder="Como posso te chamar?"></label>
+   <div class="row2"><label>Idade<input id="w_idade" type="number" inputmode="numeric" min="18" max="90" placeholder="anos"></label>
+   <label>Sexo<select id="w_sexo"><option value="F">Feminino</option><option value="M">Masculino</option></select></label></div>
+   <label class="chk"><input id="w_gravida" type="checkbox"> Estou grávida ou amamentando</label>
+   <p class="werr" id="e0"></p></fieldset>
+  <fieldset class="wp" data-s="1"><legend>2. Altura e peso</legend>
+   <div class="row2"><label>Altura<input id="w_alt" type="number" inputmode="decimal" min="120" max="220" placeholder="cm"></label>
+   <label>Peso<input id="w_peso" type="number" inputmode="decimal" min="30" max="250" placeholder="kg"></label></div>
+   <p class="wtip">Pese-se de manhã, sem roupa pesada, se puder.</p><p class="werr" id="e1"></p></fieldset>
+  <fieldset class="wp" data-s="2"><legend>3. Medidas</legend>
+   <div class="row3"><label>Pescoço<input id="w_pesc" type="number" inputmode="decimal" min="20" max="60" placeholder="cm"></label>
+   <label>Cintura<input id="w_cint" type="number" inputmode="decimal" min="40" max="200" placeholder="cm"></label>
+   <label id="lq">Quadril<input id="w_quad" type="number" inputmode="decimal" min="60" max="200" placeholder="cm"></label></div>
+   <ul class="wtip"><li><b>Pescoço:</b> logo abaixo do pomo de adão ou da garganta.</li><li><b>Cintura:</b> na parte mais estreita do tronco, ou na altura do umbigo.</li><li><b>Quadril:</b> na parte mais larga.</li><li>Fita métrica rente à pele, sem apertar, após expirar normalmente.</li></ul><p class="werr" id="e2"></p></fieldset>
+  <fieldset class="wp" data-s="3"><legend>4. Seu objetivo</legend>
+   <div class="chips" id="wobj"><button type="button" class="chip" aria-pressed="false">Firmar o corpo</button><button type="button" class="chip" aria-pressed="false">Ganhar força e músculo</button><button type="button" class="chip" aria-pressed="false">Cuidar do corpo na menopausa</button><button type="button" class="chip" aria-pressed="false">Voltar a treinar com segurança</button><button type="button" class="chip" aria-pressed="false">Outro</button></div>
+   <div class="wprev" id="wprev"></div>
+   <label class="chk"><input id="w_ok" type="checkbox"> Autorizo enviar estes dados ao Jota pelo WhatsApp para receber minha análise. Este site não guarda nenhuma informação.</label>
+   <p class="werr" id="e3"></p></fieldset>
+  <div class="wnav"><button type="button" class="btn btn-o" id="wback" hidden>Voltar</button><button type="button" class="btn btn-y mag" id="wnext">Continuar</button><a class="btn btn-y mag" id="wsend" href="#" target="_blank" rel="noopener" hidden>Enviar para o Jota no WhatsApp</a></div>
+ </form>
+ <p class="note rv">É uma avaliação inicial, uma estimativa a partir de medidas. Não é diagnóstico e não substitui avaliação médica ou física completa.</p>
 </div></section>
 
 <section id="ciencia"><div class="wrap">
@@ -667,6 +718,36 @@ const hr=document.querySelector('.hero');if(hr){hr.insertAdjacentHTML('beforeend
   cs.forEach((c,i)=>setTimeout(()=>{c.classList.add('on');if(i===cs.length-1)rs[i].classList.add('on');tone(392*Math.pow(1.122,i*1.6),.16,'triangle',.07,392*Math.pow(1.122,i*1.6)*1.5)},350+i*560));
   setTimeout(()=>{tone(784,.35,'sine',.08);setTimeout(()=>tone(1046,.5,'sine',.07),140)},350+cs.length*560)},{threshold:.4});
  io2.observe(evo)})();
+
+/* avaliação inicial (tudo no navegador; nada é guardado) */
+(function(){const f=$('#wiz');if(!f)return;let st=0;const P=$$('.wp'),dots=$$('.wsteps i'),next=$('#wnext'),back=$('#wback'),send=$('#wsend');
+ const v=id=>$(id).value.trim(),n=id=>parseFloat(String($(id).value).replace(',','.'));
+ let obj='';const objs=$$('#wobj .chip');objs.forEach(c=>c.onclick=()=>{objs.forEach(x=>x.setAttribute('aria-pressed','false'));c.setAttribute('aria-pressed','true');obj=c.textContent;build()});
+ const fem=()=>$('#w_sexo').value==='F';
+ $('#w_sexo').onchange=()=>{$('#lq').style.display=fem()?'':'none'};
+ function err(i,m,ids){$('#e'+i).textContent=m;(ids||[]).forEach(x=>$(x).classList.add('bad'));return false}
+ function clear(){$$('.wiz .bad').forEach(e=>e.classList.remove('bad'));$$('.werr').forEach(e=>e.textContent='')}
+ function ok(i){clear();
+  if(i===0){if(v('#w_nome').length<2)return err(0,'Me diga o seu nome.',['#w_nome']);const a=n('#w_idade');if(!(a>=18&&a<=90))return err(0,'Esta avaliação é para maiores de 18 anos (informe entre 18 e 90).',['#w_idade']);return true}
+  if(i===1){const h=n('#w_alt'),p=n('#w_peso');if(!(h>=120&&h<=220))return err(1,'Altura em centímetros, entre 120 e 220. Ex.: 162.',['#w_alt']);if(!(p>=30&&p<=250))return err(1,'Peso em quilos, entre 30 e 250.',['#w_peso']);return true}
+  if(i===2){const a=n('#w_pesc'),c=n('#w_cint'),q=n('#w_quad');if(!(a>=20&&a<=60))return err(2,'Pescoço em centímetros, entre 20 e 60.',['#w_pesc']);if(!(c>=40&&c<=200))return err(2,'Cintura em centímetros, entre 40 e 200.',['#w_cint']);if(fem()&&!(q>=60&&q<=200))return err(2,'Quadril em centímetros, entre 60 e 200.',['#w_quad']);return true}
+  if(i===3){if(!obj)return err(3,'Escolha o seu objetivo.');if(!$('#w_ok').checked)return err(3,'Marque a autorização para enviar.',[]);return true}
+ }
+ function text(){const g=$('#w_gravida').checked;let t='Oi, Jota! Fiz a avaliação inicial no site.\n\n';
+  t+='Nome: '+v('#w_nome')+'\nIdade: '+n('#w_idade')+' anos | Sexo: '+(fem()?'feminino':'masculino')+'\n';
+  if(g)t+='Observação: estou grávida ou amamentando.\n';
+  t+='Altura: '+n('#w_alt')+' cm | Peso: '+n('#w_peso')+' kg\nPescoço: '+n('#w_pesc')+' cm | Cintura: '+n('#w_cint')+' cm';
+  if(fem())t+=' | Quadril: '+n('#w_quad')+' cm';
+  t+='\nObjetivo: '+(obj||'—')+'\n\nPode me responder com a análise?';return t}
+ function build(){if(st!==3)return;const t=text();$('#wprev').textContent='O que vai para o seu WhatsApp:\n\n'+t;send.href='https://wa.me/5511989195208?text='+encodeURIComponent(t)}
+ function show(i){st=i;P.forEach((p,k)=>p.classList.toggle('on',k===i));dots.forEach((d,k)=>d.classList.toggle('on',k<=i));back.hidden=i===0;next.hidden=i===3;send.hidden=i!==3;if(i===3){build()}clear()}
+ next.onclick=()=>{if(!ok(st)){if(typeof tone==='function')tone(180,.15,'sawtooth',.04);return}
+  if(st===0&&$('#w_gravida').checked){ $('#e0').innerHTML='Na gravidez e na amamentação as medidas mudam e esta estimativa não vale. <a href="https://wa.me/5511989195208?text=Oi%2C%20Jota!%20Estou%20gr%C3%A1vida%20ou%20amamentando%20e%20quero%20saber%20como%20treinar." target="_blank" rel="noopener" style="color:#F5C518;text-decoration:underline">Fale direto comigo no WhatsApp</a>.';return}
+  if(typeof sfx!=='undefined')sfx.tick();show(st+1)};
+ back.onclick=()=>{if(typeof sfx!=='undefined')sfx.tick();show(st-1)};
+ send.addEventListener('click',e=>{if(!ok(3)){e.preventDefault();return}build()});
+ f.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.tagName!=='BUTTON'){e.preventDefault();if(st<3)next.click()}});
+ show(0)})();
 })();
 </script>
 </body>
