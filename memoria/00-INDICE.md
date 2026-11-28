@@ -15,6 +15,7 @@ Memória do Jota dividida por assunto. Para cada tarefa, leia **só** os arquivo
 | Site jotafitpersonal.com.br | 09-site.md |
 | Usar ferramentas e conexões (Windsor, PubMed, ElevenLabs, Treinei...) | 10-ferramentas.md |
 | Saber o que já foi feito e o que falta | 11-andamento.md |
+| Processo da consultoria (treino, alimentação, alunas, renovação) | perfis/jotafit/10-consultoria/README.md + 08-vendas-consultoria.md |
 | Agentes e comandos da equipe | ../agentes/PROMPT-MASTER.md |
 
 Arquivo-fonte antigo (tudo junto, só consulta): ../docs/MEMORIA-COMPLETA.md

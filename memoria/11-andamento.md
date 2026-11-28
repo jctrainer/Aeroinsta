@@ -23,3 +23,4 @@
 - Pendente: trocar o link do site no Google Meu Negócio; links na bio do Instagram/TikTok; Search Console; site de venda (preço, planos, link de pagamento); 4 decisões de design (efeitos x "reduzir movimento", % na tela da mulher, palavra "bunda" no depoimento da Suni, som ligado).
 
 - 28/11/2026: regra "conectores sob demanda" criada (CLAUDE.md + memoria/10-ferramentas.md). O Jota desliga o que não usa; eu aviso ao fim de cada entrega.
+- 28/11/2026: criada a estrutura perfis/jotafit/10-consultoria/ (processo, treinos, alimentação, alunas, renovações). Conversas separadas criadas: Site, Vídeos, Postagens, Redes Sociais, Consultoria, Nerdzoid, Razec Ezar. Pendente: escopo da orientação alimentar (A/B), instituição da pós, dia/hora do aviso semanal de planos vencendo.

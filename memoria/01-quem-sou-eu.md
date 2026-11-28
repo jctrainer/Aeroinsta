@@ -31,3 +31,4 @@
 
 ## Pendências do Jota
 Preço da consultoria; onde o domínio/hospedagem estão; fotos e depoimentos autorizados; esclarecer "fecha" do PR #1 (não agir sem confirmação).
+- Formação (informada pelo Jota em 28/11/2026): pós-graduado em **nutrição esportiva** e **treinamento personalizado**. Falta instituição/ano. Escopo de orientação alimentar a confirmar (A: orientação geral; B: plano individual). Não afirmar nada além disso no site até ele passar o diploma.
