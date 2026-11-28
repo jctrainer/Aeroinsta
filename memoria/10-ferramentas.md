@@ -57,3 +57,4 @@ Conectores e plugins só são lidos quando a conversa começa: depois de ligar, 
 | Vídeo feito como site em código (não é o nosso método) | Remotion | Plugins > Skills |
 
 Nossos vídeos NÃO usam nenhum dos dois últimos: são Python + ffmpeg.
+- Estado após a limpeza (foto do Jota, 28/11/2026): Ativos = Canva (conector e plugin), Claude in Chrome (incluído), ElevenLabs, GitHub nativo, Hostinger (conector e plugin), MT, PubMed, Windsor.ai, Social Media Skills + skills incluídas do Claude. Faltava desligar: Claude Academy, feature-dev, frontend-design e, se quiser economizar mais, os duplicados (plugin Hostinger, plugin Canva). Inativos (já fora): AI Logo Maker, github (plugin), gitlab.
