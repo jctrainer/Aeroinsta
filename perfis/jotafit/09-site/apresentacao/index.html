@@ -275,7 +275,7 @@ h1,h2{-webkit-user-select:none;user-select:none}
 @keyframes spk{to{transform:translate(var(--dx),var(--dy)) rotate(var(--r)) scale(.2);opacity:0}}
 .snd{position:fixed;left:18px;bottom:74px;z-index:80;width:46px;height:46px;border-radius:50%;background:#18181bee;border:1px solid var(--line);color:var(--y);display:grid;place-items:center;font-size:1.1rem;transition:.3s}
 .snd:hover{border-color:var(--y);transform:scale(1.1)}
-.snd[aria-pressed=false]{color:#666;opacity:.7}
+.snd[aria-pressed=false]{color:#666;opacity:.7;text-decoration:line-through}
 .dots{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
 .dots i{position:absolute;bottom:-20px;width:6px;height:6px;border-radius:50%;background:var(--y);opacity:0;animation:rise var(--t) linear infinite;animation-delay:var(--dl)}
 @keyframes rise{0%{transform:translateY(0);opacity:0}15%{opacity:.5}100%{transform:translateY(-110vh) translateX(var(--x));opacity:0}}
@@ -343,6 +343,26 @@ body.hc .cring.big{width:70px;height:70px;background:#F5C51826}
 .note{margin-top:1.4rem;color:var(--mut);font-size:.82rem;max-width:40rem}
 .q{justify-content:flex-start!important;min-height:0}
 .flip .face.b{font-size:.9rem}.flip .face.b p{line-height:1.5}.flip .face.b small{word-break:break-word;line-height:1.4}
+
+.evo{display:grid;grid-template-columns:1.5fr 1fr;gap:2rem;align-items:center;background:linear-gradient(155deg,#1c1c20,#121214);border:1px solid var(--line);border-radius:30px;padding:clamp(1.2rem,3vw,2.2rem)}
+.chart svg{width:100%;height:auto;display:block;overflow:visible}
+.axis{display:grid;grid-template-columns:repeat(5,1fr);font-size:.72rem;font-weight:600;color:var(--mut);text-align:center;margin-top:.3rem;padding:0 .2rem}
+#line{stroke-dasharray:var(--len,900);stroke-dashoffset:var(--len,900)}
+.evo.go #line{animation:draw 2.6s var(--ease) forwards}
+.evo.go #area{animation:fadeA 1.2s 1.8s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}@keyframes fadeA{to{opacity:1}}
+#nodes circle{fill:#111;stroke:var(--y);stroke-width:4;transform-box:fill-box;transform-origin:center;transform:scale(0)}
+#nodes circle.on{animation:pop .5s var(--ease) forwards}
+#nodes .ring{fill:none;stroke:var(--y);stroke-width:2;transform:scale(1);opacity:0}
+#nodes .ring.on{animation:ringp 1.8s ease-out infinite}
+@keyframes pop{0%{transform:scale(0)}70%{transform:scale(1.35)}100%{transform:scale(1)}}
+@keyframes ringp{0%{transform:scale(1);opacity:.7}100%{transform:scale(3);opacity:0}}
+.cmp{list-style:none;display:grid;gap:.9rem}
+.cmp li{display:flex;gap:.8rem;align-items:center;padding:.9rem 1rem;border:1px solid var(--line);border-radius:16px;background:#ffffff05;opacity:0;transform:translateX(24px);transition:.6s var(--ease)}
+.cmp li::before{content:"";flex:none;width:22px;height:22px;border-radius:50%;background:var(--y) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5 10.5l3.2 3.2L15 6.8' fill='none' stroke='%23111' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/100%}
+.evo.go .cmp li{opacity:1;transform:none}.evo.go .cmp li:nth-child(1){transition-delay:.4s}.evo.go .cmp li:nth-child(2){transition-delay:1s}.evo.go .cmp li:nth-child(3){transition-delay:1.6s}.evo.go .cmp li:nth-child(4){transition-delay:2.2s}
+.cmp b{color:var(--y)}
+@media(max-width:860px){.evo{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -422,14 +442,41 @@ body.hc .cring.big{width:70px;height:70px;background:#F5C51826}
  <div class="cta rv" style="margin-top:2.2rem"><a class="btn btn-y mag" href="https://wa.me/5511989195208?text=Oi%2C%20Jota!%20Quero%20come%C3%A7ar%20pela%20avalia%C3%A7%C3%A3o." target="_blank" rel="noopener">Quero fazer minha avaliação</a></div>
 </div></section>
 
+<section id="evolucao"><div class="wrap">
+ <div class="kick rv">Evolução</div><h2 class="rv">Você enxerga a <em>evolução</em></h2>
+ <p class="sub rv">A cada 15 dias eu comparo o seu ponto de partida com o agora. Assim a gente ajusta o treino com base no que mudou de verdade.</p>
+ <div class="evo rv" id="evo">
+  <div class="chart">
+   <svg viewBox="0 0 640 300" role="img" aria-label="Linha de evolução ao longo das reavaliações">
+    <defs><linearGradient id="lg" x1="0" x2="1"><stop offset="0" stop-color="#F5C518"/><stop offset="1" stop-color="#FFB400"/></linearGradient>
+     <linearGradient id="ar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F5C518" stop-opacity=".28"/><stop offset="1" stop-color="#F5C518" stop-opacity="0"/></linearGradient></defs>
+    <g stroke="#2A2A30" stroke-width="1"><line x1="40" y1="40" x2="620" y2="40"/><line x1="40" y1="110" x2="620" y2="110"/><line x1="40" y1="180" x2="620" y2="180"/><line x1="40" y1="250" x2="620" y2="250"/></g>
+    <line x1="40" y1="230" x2="620" y2="230" stroke="#A7AAB1" stroke-width="1.5" stroke-dasharray="5 6"/>
+    <text x="620" y="222" text-anchor="end" fill="#A7AAB1" font-size="12" font-weight="600">ponto de partida</text>
+    <path id="area" d="M60 230 L170 205 L290 160 L420 110 L560 60 L560 230 Z" fill="url(#ar)" opacity="0"/>
+    <path id="line" d="M60 230 L170 205 L290 160 L420 110 L560 60" fill="none" stroke="url(#lg)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <g id="nodes"></g>
+   </svg>
+   <div class="axis"><span>Avaliação</span><span>15 dias</span><span>30 dias</span><span>45 dias</span><span>60 dias</span></div>
+  </div>
+  <ul class="cmp">
+   <li><b>Fotos</b> de frente, de lado e de costas</li>
+   <li><b>Medidas</b> como cintura e quadril</li>
+   <li><b>Cargas e repetições</b> dos seus treinos</li>
+   <li><b>Como você se sente</b> na rotina e no corpo</li>
+  </ul>
+ </div>
+ <p class="note rv">O gráfico mostra a ideia do acompanhamento, não um resultado individual. Cada pessoa evolui no seu ritmo.</p>
+</div></section>
+
 <section id="ciencia"><div class="wrap">
  <div class="kick rv">Treino com ciência</div><h2 class="rv">Aqui não tem <em>achismo</em></h2>
  <p class="sub rv">Tudo que eu ensino vem de estudo conferido. Toque em cada cartão para ver o que a pesquisa diz.</p>
  <div class="flips">
-  <button class="flip rv" aria-label="Menopausa e musculação"><div><div class="face f"><span class="n">Menopausa</span><p><b>Musculação na menopausa: o que a pesquisa mostra.</b></p><span class="hint">VER ESTUDO ↻</span></div><div class="face b"><span class="n">O que a pesquisa diz</span><p>Em 12 estudos com mulheres na pós-menopausa, treinar com carga por até 16 semanas melhorou a capacidade funcional e aparentou reduzir as ondas de calor, sem eventos adversos graves. A confiança nessa evidência é baixa: são poucos estudos pequenos.</p><small>Revisão sistemática, <i>Menopause</i>, 2023 · DOI 10.1097/GME.0000000000002079</small></div></div></button>
-  <button class="flip rv" style="--d:.08s" aria-label="Ossos"><div><div class="face f"><span class="n">Ossos</span><p><b>Treinar com carga cuida dos ossos depois da menopausa.</b></p><span class="hint">VER ESTUDO ↻</span></div><div class="face b"><span class="n">O que a pesquisa diz</span><p>Em 17 estudos (690 mulheres), a musculação melhorou a densidade óssea na coluna, no colo do fêmur e no quadril. O efeito foi melhor com carga mais alta, 3 vezes por semana e treino de longa duração. Os estudos variaram bastante entre si.</p><small>Meta-análise, <i>J Orthop Surg Res</i>, 2025 · DOI 10.1186/s13018-025-05890-1</small></div></div></button>
-  <button class="flip rv" style="--d:.16s" aria-label="Força e condicionamento"><div><div class="face f"><span class="n">Força</span><p><b>Força de pernas, de braços e fôlego, tudo junto.</b></p><span class="hint">VER ESTUDO ↻</span></div><div class="face b"><span class="n">O que a pesquisa diz</span><p>Em 12 estudos randomizados, a musculação melhorou a força de braços e pernas e o consumo máximo de oxigênio na pós-menopausa. Os autores sugerem 3 dias por semana, 60 minutos, como ponto de partida. Sobre ossos e medidas do corpo, ainda há debate.</p><small>Meta-análise, <i>Climacteric</i>, 2024 · DOI 10.1080/13697137.2024.2310521</small></div></div></button>
-  <button class="flip rv" style="--d:.24s" aria-label="Força e vida longa"><div><div class="face f"><span class="n">Longevidade</span><p><b>Mais força, menos risco de morrer cedo.</b></p><span class="hint">VER ESTUDO ↻</span></div><div class="face b"><span class="n">O que a pesquisa diz</span><p>Em 38 estudos com cerca de 1,9 milhão de pessoas, quem tinha mais força de preensão teve menos risco de morte por qualquer causa. Nas mulheres, a associação foi ainda maior (HR 0,60). É uma associação, não prova de que treinar cause isso.</p><small>Meta-análise, <i>Arch Phys Med Rehabil</i>, 2018 · DOI 10.1016/j.apmr.2018.01.008</small></div></div></button>
+  <button class="flip rv" aria-label="Mounjaro e menopausa"><div><div class="face f"><span class="n">Mounjaro</span><p><b>Mounjaro, GLP-1 e menopausa: o que já se sabe.</b></p><span class="hint">VER ESTUDO ↻</span></div><div class="face b"><span class="n">O que a pesquisa diz</span><p>Uma revisão de 2026 diz que, na menopausa, a perda de peso com GLP-1 e tirzepatida (Mounjaro) foi parecida com a da pré-menopausa. A perda de massa magra acompanha o peso perdido, mas poucos estudos mediram a força. Uso de remédio é decisão com o seu médico.</p><small>Revisão, <i>Maturitas</i>, 2026 · DOI 10.1016/j.maturitas.2026.109159</small></div></div></button>
+  <button class="flip rv" style="--d:.08s" aria-label="Ciclo menstrual"><div><div class="face f"><span class="n">Ciclo</span><p><b>O ciclo não manda no seu treino.</b></p><span class="hint">VER ESTUDO ↻</span></div><div class="face b"><span class="n">O que a pesquisa diz</span><p>Em dois estudos de 2026 com mulheres mais jovens, a progesterona não mudou a síntese de proteína do músculo e a fase do ciclo teve efeito mínimo no desempenho. A motivação pesou mais. Ou seja: dá para treinar com constância o mês todo.</p><small><i>J Physiol</i> e <i>Sports Med</i>, 2026 · DOI 10.1113/JP292285 e 10.1007/s40279-026-02459-8</small></div></div></button>
+  <button class="flip rv" style="--d:.16s" aria-label="Perimenopausa"><div><div class="face f"><span class="n">Perimenopausa</span><p><b>O corpo muda mesmo quando a balança não muda.</b></p><span class="hint">VER ESTUDO ↻</span></div><div class="face b"><span class="n">O que a pesquisa diz</span><p>Uma revisão de 2026 (56 estudos) aponta que, na perimenopausa, podem subir a gordura da barriga e cair a massa magra mesmo sem mudança no peso. Treino de força e dieta mediterrânea aparecem como as estratégias com mais potencial.</p><small>Revisão, <i>Climacteric</i>, 2026 · DOI 10.1080/13697137.2026.2713394</small></div></div></button>
+  <button class="flip rv" style="--d:.24s" aria-label="Força e função"><div><div class="face f"><span class="n">Força</span><p><b>Mais importante que o peso: manter a sua força.</b></p><span class="hint">VER ESTUDO ↻</span></div><div class="face b"><span class="n">O que a pesquisa diz</span><p>Uma revisão de 2026 explica que, em idosos, a força cai cerca de 3 vezes mais rápido que a massa magra e se liga à mortalidade, enquanto a massa magra não. Por isso eu acompanho carga e função, não só o número da balança.</p><small>Revisão, <i>Diabetes Obes Metab</i>, 2026 · DOI 10.1111/dom.71542</small></div></div></button>
  </div>
  <p class="note rv">Estudos conferidos no PubMed. Isto é informação, não é indicação médica: converse com seu médico antes de começar a treinar, principalmente se tiver alguma condição de saúde.</p>
 </div></section>
@@ -507,7 +554,7 @@ body.hc .cring.big{width:70px;height:70px;background:#F5C51826}
 </div></footer>
 <a class="float" href="https://wa.me/5511989195208" target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg class="wa" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.2 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.4.7-2 .9-2.3.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5.2.6.8 2 .9 2.2.1.2.1.3 0 .5-.1.2-.2.3-.4.5l-.5.6c-.2.2-.4.4-.2.8.2.4.9 1.5 2 2.4 1.4 1.2 2.5 1.6 2.9 1.8.4.2.6.1.8-.1.2-.3.9-1 1.1-1.4.2-.4.5-.3.8-.2.3.1 1.9.9 2.2 1.1.3.1.5.2.6.3.1.2.1.8-.1 1.5Z"/></svg></a>
 <div class="seclab" id="seclab" aria-hidden="true"></div>
-<button class="snd" id="snd" aria-pressed="false" aria-label="Som dos cliques" title="Som dos cliques">♪</button>
+<button class="snd" id="snd" aria-pressed="true" aria-label="Som dos cliques" title="Som dos cliques">♪</button>
 <button class="top" id="top" aria-label="Voltar ao topo">↑</button>
 
 <script>
@@ -566,7 +613,7 @@ const sl=$('#seclab');secs.forEach(x=>{const h=x.querySelector('.kick');const a=
 const dots=$$('#seclab a');addEventListener('scroll',()=>{const y=document.documentElement.scrollTop;let c=0;secs.forEach((x,i)=>{if(y+220>=x.offsetTop)c=i});dots.forEach((d,i)=>d.classList.toggle('on',i===c))},{passive:true});
 
 /* v4: letras, faíscas, som */
-const AC=window.AudioContext||window.webkitAudioContext;let ac=null,soundOn=false;
+const AC=window.AudioContext||window.webkitAudioContext;let ac=null,soundOn=true;
 function tone(f,d,t='sine',v=.07,f2){if(!soundOn||!AC)return;try{ac=ac||new AC();if(ac.state==='suspended')ac.resume();const o=ac.createOscillator(),g=ac.createGain(),n=ac.currentTime;o.type=t;o.frequency.setValueAtTime(f,n);if(f2)o.frequency.exponentialRampToValueAtTime(f2,n+d);g.gain.setValueAtTime(v,n);g.gain.exponentialRampToValueAtTime(.0001,n+d);o.connect(g).connect(ac.destination);o.start(n);o.stop(n+d)}catch(e){}}
 const sfx={tick:()=>tone(520,.08,'triangle',.06,780),pop:()=>{tone(300,.12,'sine',.09,700);setTimeout(()=>tone(900,.1,'sine',.05),70)},open:()=>tone(440,.18,'triangle',.06,660),letter:()=>tone(660+Math.random()*240,.07,'sine',.04)};
 const snd=$('#snd');snd.onclick=()=>{soundOn=!soundOn;snd.setAttribute('aria-pressed',soundOn);if(soundOn)sfx.pop()};
@@ -601,6 +648,16 @@ addEventListener('scroll',trainBar,{passive:true});
 $$('.dots i').forEach(i=>i.style.setProperty('--rt',(Math.random()*60-30)+'deg'));
 $$('.num').forEach(n=>n.addEventListener('mouseenter',()=>{n.classList.remove('lift');void n.offsetWidth;n.classList.add('lift')}));
 const hr=document.querySelector('.hero');if(hr){hr.insertAdjacentHTML('beforeend','<svg class="ecg" viewBox="0 0 1200 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40 H220 L240 40 L255 12 L275 62 L292 28 L305 40 H620 L640 40 L655 8 L678 64 L696 26 L710 40 H1200"/></svg>')}
+
+/* evolução: linha desenha, pontos acendem com som */
+(function(){const evo=$('#evo');if(!evo)return;const L=$('#line');const len=L.getTotalLength();evo.style.setProperty('--len',len);L.style.strokeDasharray=len;L.style.strokeDashoffset=len;
+ const pts=[[60,230],[170,205],[290,160],[420,110],[560,60]],g=$('#nodes');
+ pts.forEach((p,i)=>{const r=document.createElementNS('http://www.w3.org/2000/svg','circle');r.setAttribute('class','ring');r.setAttribute('cx',p[0]);r.setAttribute('cy',p[1]);r.setAttribute('r',9);const c=document.createElementNS('http://www.w3.org/2000/svg','circle');c.setAttribute('cx',p[0]);c.setAttribute('cy',p[1]);c.setAttribute('r',9);g.append(r,c)});
+ const cs=[...g.querySelectorAll('circle:not(.ring)')],rs=[...g.querySelectorAll('.ring')];
+ const io2=new IntersectionObserver(es=>{if(!es[0].isIntersecting)return;io2.disconnect();evo.classList.add('go');
+  cs.forEach((c,i)=>setTimeout(()=>{c.classList.add('on');if(i===cs.length-1)rs[i].classList.add('on');tone(392*Math.pow(1.122,i*1.6),.16,'triangle',.07,392*Math.pow(1.122,i*1.6)*1.5)},350+i*560));
+  setTimeout(()=>{tone(784,.35,'sine',.08);setTimeout(()=>tone(1046,.5,'sine',.07),140)},350+cs.length*560)},{threshold:.4});
+ io2.observe(evo)})();
 })();
 </script>
 </body>
