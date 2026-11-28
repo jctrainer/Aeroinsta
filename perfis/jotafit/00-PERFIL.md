@@ -48,10 +48,10 @@ Instagram · Facebook · TikTok · YouTube
 Personal Trainer | Guarulhos e online
 Mulheres 35+: menos barriga, corpo firme
 e saúde na menopausa 💪
-+10 anos | CREF 000000-G/SP
++10 anos | CREF 162847-G/SP
 👇 Chama no WhatsApp
 ```
-(Troque 000000-G pelo seu número de CREF.)
+
 
 ### TikTok
 ```

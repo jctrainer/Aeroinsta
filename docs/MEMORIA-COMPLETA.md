@@ -173,7 +173,7 @@ Prescrever dieta é atividade privativa do nutricionista (Lei 8.234/1991, art. 3
 
 ## 7. Bio e perfis
 - **Nome no Instagram (campo pesquisável):** "Jota | Personal Trainer Guarulhos".
-- **Bio:** "Personal Trainer | Guarulhos e online / Mulheres 35+: menos barriga, corpo firme / e saúde na menopausa 💪 / +10 anos | CREF 000000-G/SP / 👇 Chama no WhatsApp". **O número do CREF ainda é provisório.**
+- **Bio:** "Personal Trainer | Guarulhos e online / Mulheres 35+: menos barriga, corpo firme / e saúde na menopausa 💪 / +10 anos | CREF 162847-G/SP / 👇 Chama no WhatsApp". **O número do CREF ainda é provisório.**
 - **Destaques:** CONSULTORIA · RESULTADOS (só com autorização) · JOTA RESPONDE · MENOPAUSA · GUARULHOS.
 - **Atenção:** no Google Meu Negócio o nome do perfil continua "JOTA FIT". Colocar palavra-chave no nome do Google viola as regras e pode suspender o perfil.
 
@@ -698,7 +698,7 @@ Instagram · Facebook · TikTok · YouTube
 Personal Trainer | Guarulhos e online
 Mulheres 35+: menos barriga, corpo firme
 e saúde na menopausa 💪
-+10 anos | CREF 000000-G/SP
++10 anos | CREF 162847-G/SP
 👇 Chama no WhatsApp
 ```
 (Troque 000000-G pelo seu número de CREF.)

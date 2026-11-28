@@ -11,7 +11,7 @@
 - Gravar o Reels da gestante (roteiro em perfis/jotafit/03-saude-da-mulher/gestante-treino-de-forca/roteiro-reels.md) e clipes de B-roll.
 - Escolher o react de notícia (sugestão: canetas/semaglutida e perda de músculo, ou treino da Samira do BBB).
 - Pedir avaliações no Google às alunas (meta 10 em 30 dias).
-- Enviar CREF, fotos, depoimentos autorizados, domínio/hospedagem para o site; liberar a criação da 1ª versão.
+- CREF recebido (162847-G/SP). Faltam fotos, depoimentos autorizados e domínio/hospedagem para o site; liberar a criação da 1ª versão.
 - Definir preço e capacidade da consultoria.
 - Enviar de 3 a 5 textos dele para completar 03-minha-voz.md.
 - Revisar na ficha jotafit a frase "app de treino e dieta".

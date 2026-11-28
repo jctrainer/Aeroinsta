@@ -8,7 +8,7 @@ Fichas completas: perfis/jotafit/00-PERFIL.md, perfis/nerdzoid/00-PERFIL.md, per
 - Tom: professor próximo, direto, irônico quando cabe, firme contra mitos sem desmerecer pessoas; ciência em linguagem simples para mulheres leigas; autonomia e saúde, não só estética; exemplos com mulheres, inclusive 40+ e menopausa.
 - Pilares: 01 biomecânica e técnica · 02 ciência e mitos · 03 saúde da mulher · 04 resultados e prova social · 05 bastidores e humor · 06 nutrição e receitas · 07 JOTA RESPONDE · 08 SEO local.
 - Slogan nas legendas: "Jota Fit: treino com ciência para mulheres 35+." + "📍 Personal trainer em Guarulhos e online".
-- Bio Instagram: nome "Jota | Personal Trainer Guarulhos"; "Personal Trainer | Guarulhos e online / Mulheres 35+: menos barriga, corpo firme / e saúde na menopausa 💪 / +10 anos | CREF 000000-G/SP / 👇 Chama no WhatsApp". Destaques: CONSULTORIA, RESULTADOS (só com autorização), JOTA RESPONDE, MENOPAUSA, GUARULHOS.
+- Bio Instagram: nome "Jota | Personal Trainer Guarulhos"; "Personal Trainer | Guarulhos e online / Mulheres 35+: menos barriga, corpo firme / e saúde na menopausa 💪 / +10 anos | CREF 162847-G/SP / 👇 Chama no WhatsApp". Destaques: CONSULTORIA, RESULTADOS (só com autorização), JOTA RESPONDE, MENOPAUSA, GUARULHOS.
 - No Google Meu Negócio o nome fica "JOTA FIT" (palavra-chave no nome viola as regras e pode suspender).
 
 ## NerdZoid (@nerd.zoid)

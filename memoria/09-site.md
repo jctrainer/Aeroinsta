@@ -6,4 +6,4 @@ SEO local: "personal trainer Guarulhos", dados do negócio iguais aos do Google 
 Chat com agente de IA no site: só depois que o site estiver no ar e com roteiro de perguntas; nunca prescrever treino ou dieta, só informar e encaminhar.
 
 ## Pendências
-Onde o domínio está registrado e onde hospedar (se Hostinger, o Jota precisa autorizar o conector nas configurações do claude.ai); CREF; 3 a 5 fotos do Jota; depoimentos autorizados. O link "Site" do Google hoje aponta para o WhatsApp; trocar quando o site entrar no ar.
+Onde o domínio está registrado e onde hospedar (se Hostinger, o Jota precisa autorizar o conector nas configurações do claude.ai); 3 a 5 fotos do Jota; depoimentos autorizados. **CREF já informado: 162847-G/SP** (entra em "Quem é o Jota" e no rodapé). O link "Site" do Google hoje aponta para o WhatsApp; trocar quando o site entrar no ar.

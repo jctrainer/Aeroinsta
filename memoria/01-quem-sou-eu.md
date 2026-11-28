@@ -5,7 +5,7 @@
 - Produto: **Consultoria Jota Fit**: avaliação completa, treino sob medida no app (Treinei), **reavaliação a cada 15 dias** com fotos e medidas, suporte direto.
 - **Objetivo nº 1:** vender mais consultoria para **mulheres de 35 a 54 anos, principalmente de Guarulhos e região**.
 - CTA fixo: **"Comenta CONSULTORIA que eu te chamo no direct"**.
-- Contato: WhatsApp (11) 98919-5208 (também telefone do Google). Instagram @jotafit.personaltrainer. Site oficial: jotafitpersonal.com.br (a construir). CREF: número ainda não informado (placeholder 000000-G/SP).
+- Contato: WhatsApp (11) 98919-5208 (também telefone do Google). Instagram @jotafit.personaltrainer. Site oficial: jotafitpersonal.com.br (a construir). CREF: 162847-G/SP (informado em 28/11/2026).
 - Preço da consultoria: **ainda não definido**. Faltam: preço atual, quantas alunas consegue atender, meta de faturamento e o que entra (sem prescrição de dieta).
 
 ## Público (Instagram, via Windsor, 24 e 25/11/2026)
@@ -25,4 +25,4 @@
 - Não gosta de resultado "feio": recusou ilustração simples demais; prefere imagem real/bonita.
 
 ## Pendências do Jota
-CREF; preço da consultoria; onde o domínio/hospedagem estão; fotos e depoimentos autorizados; esclarecer "fecha" do PR #1 (não agir sem confirmação).
+Preço da consultoria; onde o domínio/hospedagem estão; fotos e depoimentos autorizados; esclarecer "fecha" do PR #1 (não agir sem confirmação).
