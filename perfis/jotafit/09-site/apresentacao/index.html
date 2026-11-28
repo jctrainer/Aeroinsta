@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Jota Fit | Personal Trainer em Guarulhos e online para mulheres 35+</title>
-<meta name="description" content="Personal trainer em Guarulhos (SP) e consultoria online para todo o Brasil. Método JFit: avaliação, treino sob medida e reavaliação a cada 15 dias. Treino com ciência para mulheres 35+. CREF 162847-G/SP.">
+<meta name="description" content="Personal trainer em Guarulhos (SP) e consultoria online para todo o Brasil. Método Jota Fit: avaliação, treino sob medida e reavaliação a cada 15 dias. Treino com ciência para mulheres 35+. CREF 162847-G/SP.">
 <link rel="canonical" href="https://jotafitpersonal.com.br/">
 <link rel="icon" href="img/favicon.png">
 <meta property="og:title" content="Jota Fit | Treino com ciência para mulheres 35+">
-<meta property="og:description" content="Personal trainer em Guarulhos e online. Método JFit: avaliação, treino sob medida e reavaliação a cada 15 dias.">
+<meta property="og:description" content="Personal trainer em Guarulhos e online. Método Jota Fit: avaliação, treino sob medida e reavaliação a cada 15 dias.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#0C0C0C">
 <script type="application/ld+json">
@@ -63,8 +63,8 @@ nav a:hover,nav a.on{color:#111;background:var(--y)}
 @keyframes float{50%{transform:translate(-30px,30px)}}
 .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;align-items:center;position:relative;z-index:1}
 .hero h1{font-size:clamp(2.4rem,5.6vw,4.4rem);line-height:1.1;text-transform:uppercase;margin:1.2rem 0 1.5rem}
-.hero h1 span{color:var(--y);position:relative;white-space:nowrap;display:inline-block;padding-bottom:.1em}
-.hero h1 span::after{content:"";position:absolute;left:0;right:0;bottom:0;height:.07em;background:var(--y);transform:scaleX(0);transform-origin:left;animation:ul 1s .8s var(--ease) forwards}
+.hero h1 .hl{color:var(--y);position:relative;white-space:nowrap;display:inline-block;padding-bottom:.1em}
+.hero h1 .hl::after{content:"";position:absolute;left:0;right:0;bottom:0;height:.07em;background:var(--y);transform:scaleX(0);transform-origin:left;animation:ul 1s .8s var(--ease) forwards}
 @keyframes ul{to{transform:scaleX(1)}}
 .lead{font-size:clamp(1rem,1.9vw,1.2rem);color:#D6D7DB;max-width:34rem;margin-bottom:2rem}
 .cta{display:flex;flex-wrap:wrap;gap:.9rem}
@@ -191,7 +191,7 @@ section{padding:clamp(4rem,8vw,7rem) 0}
 .fq .a p{padding:0 1.5rem 1.3rem;color:var(--mut)}
 /* final */
 .final{position:relative;background:var(--y);color:#111;text-align:center;border-radius:38px;padding:clamp(3rem,8vw,5.5rem) 1.5rem;overflow:hidden}
-.final::after{content:"";position:absolute;right:-60px;bottom:-60px;width:300px;height:300px;background:url(img/logo.png) center/contain no-repeat;opacity:.08;border-radius:50%;filter:invert(1)}
+.final::after{content:"";position:absolute;right:-60px;bottom:-60px;width:300px;height:300px;background:url(img/logo-marca.png) center/contain no-repeat;opacity:.12;border-radius:50%}
 .final .kick{color:#111}.final .kick::before{background:#111}
 .final h2{color:#111;margin:1rem 0}.final h2 em{color:#111;text-decoration:underline;text-decoration-thickness:6px;text-underline-offset:7px}
 .final p{max-width:34rem;margin:0 auto 1.8rem;font-weight:500;position:relative}
@@ -230,15 +230,47 @@ nav{display:none}
 h2{font-size:clamp(1.7rem,8vw,2.2rem)}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+
+/* ===== v3: efeitos modernos ===== */
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+.intro{position:fixed;inset:0;z-index:300;background:#0C0C0C;display:grid;place-items:center;transition:transform .9s var(--ease),opacity .4s .6s;}
+.intro img{width:96px;height:96px;border-radius:50%;animation:introlg 1.1s var(--ease) both}
+.intro::after{content:"";position:absolute;left:50%;top:calc(50% + 78px);width:120px;height:3px;margin-left:-60px;background:linear-gradient(90deg,var(--y) 50%,#2A2A30 50%) 0 0/200% 100%;animation:introbar 1s .1s linear forwards;border-radius:3px}
+.intro.out{transform:translateY(-100%);opacity:0;pointer-events:none}
+@keyframes introlg{from{transform:scale(.5) rotate(-180deg);opacity:0}to{transform:none;opacity:1}}
+@keyframes introbar{from{background-position:100% 0}to{background-position:0 0}}
+.w{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.08em}
+.w>i{display:inline-block;font-style:normal;transform:translateY(110%);animation:wup .9s var(--ease) forwards;animation-delay:calc(var(--k)*.07s + 1.1s)}
+@keyframes wup{to{transform:none}}
+.rv.l{transform:translateX(-50px)}.rv.r{transform:translateX(50px)}.rv.z{transform:scale(.92)}
+.rv.in.l,.rv.in.r,.rv.in.z{transform:none}
+h2.rv{clip-path:inset(0 100% 0 0);transform:none;transition:clip-path 1s var(--ease),opacity .6s}
+h2.rv.in{clip-path:inset(0 0 -20% 0)}
+.pane.on>*{animation:paneIn .6s var(--ease) both}.pane.on>*:nth-child(2){animation-delay:.07s}.pane.on>*:nth-child(3){animation-delay:.14s}.pane.on>*:nth-child(4){animation-delay:.21s}
+.pane.on li{animation:paneIn .6s var(--ease) both}.pane.on li:nth-child(1){animation-delay:.2s}.pane.on li:nth-child(2){animation-delay:.3s}.pane.on li:nth-child(3){animation-delay:.4s}
+@keyframes paneIn{from{opacity:0;transform:translateX(26px)}to{opacity:1;transform:none}}
+.btn{position:relative;overflow:hidden}
+.rip{position:absolute;border-radius:50%;background:#fff6;transform:scale(0);animation:rip .7s ease-out forwards;pointer-events:none}
+@keyframes rip{to{transform:scale(4);opacity:0}}
+.btn-y::before{content:"";position:absolute;top:0;left:-80%;width:50%;height:100%;background:linear-gradient(100deg,transparent,#fff7,transparent);transform:skewX(-20deg);transition:left .7s}
+.btn-y:hover::before{left:130%}
+.card,.flip,.ens a,.chip,.fq{will-change:transform}
+.seclab{position:fixed;right:16px;top:50%;translate:0 -50%;z-index:70;display:none;gap:12px;flex-direction:column}
+.seclab a{display:block;flex:none;width:10px;height:10px;aspect-ratio:1;border-radius:50%;background:#ffffff35;transition:.3s;position:relative}
+.seclab a.on{background:var(--y);transform:scale(1.5)}
+.seclab a:hover::after{content:attr(data-t);position:absolute;right:20px;top:50%;translate:0 -50%;background:#111;border:1px solid var(--line);color:#fff;font-size:.7rem;font-weight:600;padding:.25rem .6rem;border-radius:8px;white-space:nowrap}
+@media(min-width:1100px){.seclab{display:flex}}
+@media(prefers-reduced-motion:reduce){.intro{display:none}.w>i{transform:none}h2.rv{clip-path:none}}
 </style>
 </head>
 <body>
+<div class="intro" id="intro"><img src="img/logo-marca.png" alt=""></div>
 <div class="prog" id="prog"></div>
 <div class="glowcur" id="cur"></div>
 
 <header id="hd"><div class="wrap hd">
- <a class="logo" href="#topo"><img src="img/logo.png" alt="Logo JF" width="46" height="46"><span>JOTA FIT</span></a>
- <nav id="nav"><a href="#para-quem">Para quem é</a><a href="#metodo">Método JFit</a><a href="#ciencia">Ciência</a><a href="#sobre">Quem sou</a><a href="#duvidas">Dúvidas</a></nav>
+ <a class="logo" href="#topo"><img src="img/logo-marca.png" alt="Logo JF" width="46" height="46"><span>JOTA FIT</span></a>
+ <nav id="nav"><a href="#para-quem">Para quem é</a><a href="#metodo">Método Jota Fit</a><a href="#ciencia">Ciência</a><a href="#sobre">Quem sou</a><a href="#duvidas">Dúvidas</a></nav>
  <a class="btn btn-y mag" href="https://wa.me/5511989195208?text=Oi%2C%20Jota!%20Vim%20pelo%20site%20e%20quero%20saber%20mais%20da%20consultoria." target="_blank" rel="noopener">WhatsApp</a>
 </div></header>
 
@@ -246,8 +278,8 @@ h2{font-size:clamp(1.7rem,8vw,2.2rem)}
 <section class="hero"><div class="glow"></div><div class="ring"></div><div class="wrap">
  <div>
   <div class="kick rv">Personal trainer · Guarulhos e online</div>
-  <h1 class="rv" style="--d:.08s">Menos achismo.<br>Mais <span>resultado</span> no seu corpo.</h1>
-  <p class="lead rv" style="--d:.16s">Consultoria de treino para mulheres 35+, com o <b>Método JFit</b>: avaliação completa, treino sob medida e reavaliação a cada 15 dias. Presencial em Guarulhos e online para todo o Brasil.</p>
+  <h1 class="rv in" id="h1"><span class="w"><i style="--k:0">Menos</i></span> <span class="w"><i style="--k:1">achismo.</i></span><br><span class="w"><i style="--k:2">Mais</i></span> <span class="w"><i style="--k:3"><span class="hl">resultado</span></i></span> <span class="w"><i style="--k:4">no</i></span> <span class="w"><i style="--k:5">seu</i></span> <span class="w"><i style="--k:6">corpo.</i></span></h1>
+  <p class="lead rv" style="--d:.16s">Consultoria de treino para mulheres 35+, com o <b>Método Jota Fit</b>: avaliação completa, treino sob medida e reavaliação a cada 15 dias. Presencial em Guarulhos e online para todo o Brasil.</p>
   <div class="cta rv" style="--d:.24s">
    <a class="btn btn-y mag" href="https://wa.me/5511989195208?text=Oi%2C%20Jota!%20Vim%20pelo%20site%20e%20quero%20saber%20mais%20da%20consultoria." target="_blank" rel="noopener"><svg class="wa" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.2 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.4.7-2 .9-2.3.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5.2.6.8 2 .9 2.2.1.2.1.3 0 .5-.1.2-.2.3-.4.5l-.5.6c-.2.2-.4.4-.2.8.2.4.9 1.5 2 2.4 1.4 1.2 2.5 1.6 2.9 1.8.4.2.6.1.8-.1.2-.3.9-1 1.1-1.4.2-.4.5-.3.8-.2.3.1 1.9.9 2.2 1.1.3.1.5.2.6.3.1.2.1.8-.1 1.5Z"/></svg>Falar no WhatsApp</a>
    <a class="btn btn-o" href="#metodo">Conhecer o método</a>
@@ -259,9 +291,9 @@ h2{font-size:clamp(1.7rem,8vw,2.2rem)}
   <img class="main" src="img/jota-hero.jpg" alt="Jota, personal trainer em Guarulhos, treinando com halteres">
   <div class="badge-logo"><div class="disc"></div>
    <svg viewBox="0 0 128 128"><defs><path id="c" d="M64 64m-52 0a52 52 0 1 1 104 0a52 52 0 1 1-104 0"/></defs><text><textPath href="#c">TREINO COM CIÊNCIA • GUARULHOS • ONLINE • </textPath></text></svg>
-   <img src="img/logo.png" alt="">
+   <img src="img/logo-marca.png" alt="">
   </div>
-  <div class="tag"><small>MÉTODO JFIT</small>Avalia · Planeja<br>Executa · Ajusta</div>
+  <div class="tag"><small>MÉTODO JOTA FIT</small>Avalia · Planeja<br>Executa · Ajusta</div>
  </div></div>
 </div></section>
 
@@ -287,7 +319,7 @@ h2{font-size:clamp(1.7rem,8vw,2.2rem)}
 </div></section>
 
 <section id="metodo" class="alt"><div class="wrap">
- <div class="kick rv">Método JFit</div><h2 class="rv">Como eu <em>trabalho</em></h2>
+ <div class="kick rv">Método Jota Fit</div><h2 class="rv">Como eu <em>trabalho</em></h2>
  <p class="sub rv">Um ciclo simples e repetido: avaliar, planejar, executar e ajustar. Clique em cada etapa para ver o que acontece.</p>
  <div class="metodo rv">
   <div class="tabs" role="tablist" id="tabs">
@@ -335,7 +367,7 @@ h2{font-size:clamp(1.7rem,8vw,2.2rem)}
 </div></section>
 
 <section id="sobre"><div class="wrap about">
- <div class="box rv"><img src="img/logo.png" alt=""><strong>+10<br>anos</strong><p>de profissão em Guarulhos<br>CREF 162847-G/SP</p></div>
+ <div class="box rv"><img src="img/logo-marca.png" alt=""><strong>+10<br>anos</strong><p>de profissão em Guarulhos<br>CREF 162847-G/SP</p></div>
  <div class="rv" style="--d:.1s">
   <div class="kick">Quem sou eu</div><h2>Oi, eu sou o <em>Jota</em></h2>
   <p style="color:#DADBDF">Sou personal trainer e acredito que treino bom é o que você entende. Por isso eu explico o porquê de cada exercício, ajusto o plano a cada fase e acompanho de perto.</p>
@@ -389,11 +421,12 @@ h2{font-size:clamp(1.7rem,8vw,2.2rem)}
 </main>
 
 <footer><div class="wrap ft">
- <div><a class="logo" href="#topo"><img src="img/logo.png" alt="Logo JF" width="46" height="46"><span>JOTA FIT</span></a>Personal trainer · CREF 162847-G/SP<br>Guarulhos (SP) e online</div>
+ <div><a class="logo" href="#topo"><img src="img/logo-marca.png" alt="Logo JF" width="46" height="46"><span>JOTA FIT</span></a>Personal trainer · CREF 162847-G/SP<br>Guarulhos (SP) e online</div>
  <div class="soc"><a href="https://www.instagram.com/jotafit.personaltrainer" target="_blank" rel="noopener">Instagram</a><a href="https://www.tiktok.com/@jotafit" target="_blank" rel="noopener">TikTok</a><a href="https://wa.me/5511989195208" target="_blank" rel="noopener">WhatsApp</a></div>
  <div>Conteúdo educativo. Não substitui avaliação médica. Seus dados são usados apenas para o atendimento, quando você fala comigo.</div>
 </div></footer>
 <a class="float" href="https://wa.me/5511989195208" target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg class="wa" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.2 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.4.7-2 .9-2.3.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5.2.6.8 2 .9 2.2.1.2.1.3 0 .5-.1.2-.2.3-.4.5l-.5.6c-.2.2-.4.4-.2.8.2.4.9 1.5 2 2.4 1.4 1.2 2.5 1.6 2.9 1.8.4.2.6.1.8-.1.2-.3.9-1 1.1-1.4.2-.4.5-.3.8-.2.3.1 1.9.9 2.2 1.1.3.1.5.2.6.3.1.2.1.8-.1 1.5Z"/></svg></a>
+<nav class="seclab" id="seclab" aria-hidden="true"></nav>
 <button class="top" id="top" aria-label="Voltar ao topo">↑</button>
 
 <script>
@@ -443,6 +476,15 @@ const chips=$$('.chip'),qwa=$('#qwa'),msg=$('#msg');
 chips.forEach(c=>c.onclick=()=>{chips.forEach(x=>x.setAttribute('aria-pressed','false'));c.setAttribute('aria-pressed','true');
  const t='Oi, Jota! Vim pelo site. Meu objetivo é: '+c.textContent.toLowerCase()+'. Pode me explicar como funciona a consultoria?';
  qwa.href='https://wa.me/5511989195208?text='+encodeURIComponent(t);msg.textContent='Pronto! Ao clicar, a conversa abre com o seu objetivo já escrito.'});
+
+/* v3 */
+const intro=$('#intro');const hide=()=>intro&&intro.classList.add('out');
+if(reduce){hide()}else{addEventListener('load',()=>setTimeout(hide,900));setTimeout(hide,2200)}
+$$('.btn').forEach(b=>b.addEventListener('click',e=>{if(reduce)return;const r=b.getBoundingClientRect(),d=Math.max(r.width,r.height),s=document.createElement('span');s.className='rip';s.style.cssText=`width:${d}px;height:${d}px;left:${e.clientX-r.left-d/2}px;top:${e.clientY-r.top-d/2}px`;b.appendChild(s);setTimeout(()=>s.remove(),700)}));
+$$('.card').forEach((c,i)=>c.classList.add(i%2?'r':'l'));
+$$('.flip,.ens a').forEach(c=>c.classList.add('z'));
+const sl=$('#seclab');secs.forEach(x=>{const h=x.querySelector('.kick');const a=document.createElement('a');a.href='#'+x.id;a.dataset.t=h?h.textContent:x.id;sl.appendChild(a)});
+const dots=$$('#seclab a');addEventListener('scroll',()=>{const y=document.documentElement.scrollTop;let c=0;secs.forEach((x,i)=>{if(y+220>=x.offsetTop)c=i});dots.forEach((d,i)=>d.classList.toggle('on',i===c))},{passive:true});
 })();
 </script>
 </body>
