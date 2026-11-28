@@ -20,3 +20,7 @@ Arquivos em perfis/jotafit/09-site/apresentacao/ (index.html, fonts/, img/). Est
 
 ## Versão 2 do site de apresentação (28/11/2026)
 Pedidos do Jota: sem posts embutidos, falar de como ele trabalha (Método Jota Fit, avaliação, acompanhamento), manter a ciência, colocar a logo JF, arrumar sobreposições e deixar mais profissional e interativo. Feito: logo JF real (ferramentas/brand/logo.png) no cabeçalho, hero, rodapé e favicon; seção **Método Jota Fit** em 4 etapas clicáveis (Avaliar, Planejar, Executar, Ajustar); cartões de ciência que viram ao clique, com a fonte; seção "Como eu ensino" (4 pilares do Instagram, sem posts); escolha de objetivo que abre o WhatsApp já com o assunto; contadores, barra de progresso de leitura, botões magnéticos, cartões com brilho e inclinação, FAQ animado, botão de voltar ao topo; respeita "reduzir movimento". A confirmar com o Jota: se a avaliação registra fotos e medidas já no início (está escrito assim).
+
+## v4 (site de apresentação): efeitos pedidos pelo Jota
+- Sem selo/círculo da logo sobre a foto; logo pequena no cartão "MÉTODO JFIT" (só isso, sem frase de efeito). Sem "menopausa" na faixa; faixa: FORÇA, TREINO, CONSTÂNCIA, EVOLUÇÃO, DISCIPLINA, RESULTADO.
+- Animações sempre ativas (sem trava de reduzir-movimento, a pedido). Letras dos títulos saltam no mouse e giram no clique; faíscas e som nos cliques (botão ♪ liga/desliga); bolinhas subindo no topo.
