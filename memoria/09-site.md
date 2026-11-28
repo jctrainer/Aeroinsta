@@ -44,3 +44,5 @@ Pedidos do Jota: sem posts embutidos, falar de como ele trabalha (Método Jota F
 - Já no ar com os depoimentos de Suni, Lívia e Preta (autorização por escrito ainda pendente: se alguma pedir, remover a seção #resultados).
 - Subdomínio do site de venda (consultoria.jotafitpersonal.com.br): ainda não criado (falta preço, planos e link de pagamento).
 - CONFIRMADO PELO JOTA (28/11/2026): o site de apresentação jotafitpersonal.com.br está NO AR e abrindo. Próximos passos combinados: link do site no Google Meu Negócio, bio do Instagram e do TikTok; Search Console; depois o site de venda (consultoria.jotafitpersonal.com.br) quando houver preço, planos e link de pagamento.
+- AUTORIZAÇÃO CONFIRMADA PELO JOTA (28/11/2026): os depoimentos da Suni, Lívia e Preta TÊM autorização. Pode manter no site.
+- Calculadora privada do Jota (cola a mensagem do WhatsApp e mostra % de gordura, massa magra/gorda, IMC, cintura/altura + sugestão de resposta): perfis/jotafit/09-site/calculadora-jota/calculadora.html; publicada como página privada na conta dele: https://claude.ai/artifact/7v4JFL591zWEp4iti3sB72 (não fica no site público).

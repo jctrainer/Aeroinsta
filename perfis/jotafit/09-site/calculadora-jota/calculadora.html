@@ -1,0 +1,92 @@
+<title>Calculadora Jota Fit</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: duas colunas no computador (entrada à esquerda, resultado à direita); uma coluna no celular. */
+:root{--bg:#F4F4F1;--card:#fff;--fg:#17171A;--mut:#6a6c73;--line:#dcdcd6;--y:#F5C518;--yd:#8a6a00;--ink:#111;--field:#fafaf8;--bad:#c0392b}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0C0C0C;--card:#17171A;--fg:#fff;--mut:#A7AAB1;--line:#2A2A30;--yd:#F5C518;--field:#0C0C0C;--bad:#ff8a8a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0C0C0C;--card:#17171A;--fg:#fff;--mut:#A7AAB1;--line:#2A2A30;--yd:#F5C518;--field:#0C0C0C;--bad:#ff8a8a;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:Poppins,system-ui,sans-serif;line-height:1.55;padding-block:1.5rem 3rem;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1040px;margin:0 auto}
+header{display:flex;align-items:center;gap:.8rem;margin-bottom:1.4rem}
+header b{display:grid;place-items:center;width:42px;height:42px;border-radius:10px;background:var(--y);color:var(--ink);font-weight:800}
+h1{font-size:1.35rem;margin:0;letter-spacing:-.01em}header p{margin:0;color:var(--mut);font-size:.85rem}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.3rem;min-width:0}
+h2{font-size:.78rem;text-transform:uppercase;letter-spacing:.14em;color:var(--yd);margin:0 0 .8rem}
+textarea,input,select{width:100%;font:500 .95rem Poppins,system-ui,sans-serif;color:var(--fg);background:var(--field);border:1.5px solid var(--line);border-radius:10px;padding:.7rem .8rem}
+textarea{min-height:150px;resize:vertical}
+textarea:focus,input:focus,select:focus{outline:2px solid var(--y);outline-offset:1px;border-color:var(--y)}
+label{display:block;font-size:.75rem;font-weight:600;color:var(--mut)}label input,label select{margin-top:.3rem}
+.row{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;margin-top:.8rem}
+.hint{color:var(--mut);font-size:.8rem;margin:.5rem 0 0}
+button{font:700 .9rem Poppins,system-ui,sans-serif;border:0;border-radius:10px;padding:.75rem 1.1rem;cursor:pointer}
+.go{background:var(--y);color:var(--ink);margin-top:.9rem;width:100%}.go:hover{filter:brightness(1.06)}
+.ghost{background:transparent;color:var(--fg);border:1.5px solid var(--line)}.ghost:hover{border-color:var(--y)}
+.big{font-size:3.4rem;font-weight:800;line-height:1;color:var(--yd)}.big small{font-size:1rem;font-weight:600;color:var(--mut);margin-left:.3rem}
+.bar{display:flex;height:34px;border-radius:9px;overflow:hidden;background:var(--line);margin:.9rem 0 .4rem}
+.bar i{display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:800;font-size:.8rem;transition:width .9s cubic-bezier(.2,.8,.2,1);width:0}
+.m{background:var(--y);color:var(--ink)}.g{background:#6b6b74;color:#fff}
+.leg{display:flex;gap:1rem;flex-wrap:wrap;font-size:.8rem;color:var(--mut)}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem;margin-top:1rem}
+.stats div{border:1px solid var(--line);border-radius:10px;padding:.6rem .8rem}.stats b{display:block;font-size:1.1rem}.stats span{font-size:.72rem;color:var(--mut)}
+.err{color:var(--bad);font-weight:600;font-size:.85rem;min-height:1.2em;margin:.6rem 0 0}
+.reply{white-space:pre-wrap;background:var(--field);border:1px dashed var(--line);border-radius:10px;padding:.9rem;font-size:.88rem;margin-top:1rem}
+.empty{color:var(--mut);padding:1.6rem .5rem;text-align:center;font-size:.9rem}
+@media(max-width:760px){.grid{grid-template-columns:1fr}.big{font-size:2.8rem}}
+</style>
+<div class="wrap">
+ <header><b>JF</b><div><h1>Calculadora Jota Fit</h1><p>Só para você. Nada é salvo: tudo fica na sua tela.</p></div></header>
+ <div class="grid">
+  <section class="card">
+   <h2>1. Cole a mensagem do WhatsApp</h2>
+   <textarea id="msg" placeholder="Cole aqui a mensagem que a aluna enviou pelo site (Nome, Idade, Altura, Peso, Pescoço, Cintura, Quadril...)"></textarea>
+   <button class="go" id="read">Ler a mensagem e calcular</button>
+   <p class="hint">Ou preencha à mão:</p>
+   <div class="row"><label>Sexo<select id="sx"><option value="F">Feminino</option><option value="M">Masculino</option></select></label><label>Altura (cm)<input id="al" type="number" inputmode="decimal"></label><label>Peso (kg)<input id="pe" type="number" inputmode="decimal"></label></div>
+   <div class="row"><label>Pescoço (cm)<input id="pc" type="number" inputmode="decimal"></label><label>Cintura (cm)<input id="ci" type="number" inputmode="decimal"></label><label>Quadril (cm)<input id="qu" type="number" inputmode="decimal"></label></div>
+   <div class="row"><label style="grid-column:1/3">Nome<input id="nm" type="text"></label><label>Idade<input id="id" type="number"></label></div>
+   <button class="go ghost" id="calc" style="margin-top:.7rem">Calcular com estes números</button>
+   <p class="err" id="err"></p>
+  </section>
+  <section class="card">
+   <h2>2. Resultado (estimativa)</h2>
+   <div id="out"><div class="empty">Cole a mensagem ou preencha os números para ver o resultado.</div></div>
+  </section>
+ </div>
+</div>
+<script>
+(function(){
+const $=s=>document.querySelector(s),f1=x=>x.toFixed(1).replace('.',','),f2=x=>x.toFixed(2).replace('.',',');
+function num(s){const m=String(s).match(/-?\d+(?:[.,]\d+)?/);return m?parseFloat(m[0].replace(',','.')):NaN}
+function pick(t,label){const r=new RegExp('(?:'+label+')\\s*[:：]\\s*([^|\\n]*)','i');const m=t.match(r);return m?m[1].trim():''}
+function parse(t){
+ const sx=/fem/i.test(pick(t,'Sexo'))?'F':(/masc/i.test(pick(t,'Sexo'))?'M':'');
+ const o={nm:pick(t,'Nome'),id:num(pick(t,'Idade')),al:num(pick(t,'Altura')),pe:num(pick(t,'Peso')),pc:num(pick(t,'Pescoço|Pescoco')),ci:num(pick(t,'Cintura')),qu:num(pick(t,'Quadril')),obj:pick(t,'Objetivo'),nivel:pick(t,'Nível|Nivel'),sx};
+ return o}
+function fill(o){if(o.sx)$('#sx').value=o.sx;$('#nm').value=o.nm||'';['id','al','pe','pc','ci','qu'].forEach(k=>$('#'+k).value=isNaN(o[k])?'':o[k])}
+function calc(o){const h=o.al,p=o.pe,pe=o.pc,c=o.ci,q=o.qu,F=o.sx==='F';
+ if(![h,p,pe,c].every(x=>x>0))return {e:'Faltam números: altura, peso, pescoço e cintura são obrigatórios.'};
+ if(F&&!(q>0))return {e:'Para mulher, o quadril é obrigatório.'};
+ if(!F&&c<=pe)return {e:'A cintura precisa ser maior que o pescoço.'};
+ const d=F?1.29579-0.35004*Math.log10(c+q-pe)+0.22100*Math.log10(h):1.0324-0.19077*Math.log10(c-pe)+0.15456*Math.log10(h);
+ const bf=495/d-450;if(!isFinite(bf)||bf<3||bf>60)return {e:'Medidas fora do esperado (resultado impossível). Peça para ela conferir.'};
+ const gm=p*bf/100;return{bf,gm,mm:p-gm,imc:p/Math.pow(h/100,2),wht:c/h}}
+function show(o){const r=calc(o);$('#err').textContent=r.e||'';if(r.e){return}
+ const tot=r.gm+r.mm;
+ const nome=(o.nm||'').split(' ')[0];
+ const reply='Oi'+(nome?', '+nome:'')+'! Aqui é o Jota. Recebi a sua avaliação inicial.\n\nPelas suas medidas, a estimativa é de cerca de '+f1(r.bf)+'% de gordura corporal. É uma estimativa feita só com fita métrica: ela pode errar bastante e serve como ponto de partida, não como nota.'+(o.obj?'\n\nVi que o seu objetivo é: '+o.obj+'.':'')+'\n\nPara eu te indicar o melhor caminho, me conta: você já treina? Tem alguma dor ou condição de saúde que eu deva saber?\n\nSe quiser, posso te explicar como funciona a consultoria.';
+ $('#out').innerHTML='<div class="big">'+f1(r.bf)+'<small>% de gordura corporal</small></div>'+
+ '<div class="bar"><i class="m" id="bm">'+Math.round(r.mm/tot*100)+'%</i><i class="g" id="bg">'+Math.round(r.gm/tot*100)+'%</i></div>'+
+ '<div class="leg"><span>■ Massa magra '+f1(r.mm)+' kg</span><span>■ Massa gorda '+f1(r.gm)+' kg</span></div>'+
+ '<div class="stats"><div><b>'+f1(r.imc)+'</b><span>IMC</span></div><div><b>'+f2(r.wht)+'</b><span>Cintura ÷ altura</span></div></div>'+
+ '<h2 style="margin-top:1.3rem">Sugestão de resposta</h2><div class="reply" id="rp"></div><button class="go" id="cp">Copiar resposta</button>'+
+ '<p class="hint">Método da Marinha dos EUA (estimativa por circunferências). Pode errar bastante de pessoa para pessoa e não é diagnóstico. Não prescreva dieta pela conversa.</p>';
+ $('#rp').textContent=reply;
+ requestAnimationFrame(()=>{$('#bm').style.width=(r.mm/tot*100)+'%';$('#bg').style.width=(r.gm/tot*100)+'%'});
+ $('#cp').onclick=()=>{const b=$('#cp');const ok=()=>{b.textContent='Copiado!';setTimeout(()=>b.textContent='Copiar resposta',1500)};try{navigator.clipboard.writeText(reply).then(ok,()=>{sel()})}catch(e){sel()}function sel(){const rg=document.createRange();rg.selectNodeContents($('#rp'));const s=getSelection();s.removeAllRanges();s.addRange(rg);b.textContent='Selecionado: copie'}}}
+$('#read').onclick=()=>{const o=parse($('#msg').value);fill(o);show(Object.assign(o,{sx:$('#sx').value}))};
+$('#calc').onclick=()=>{const g=k=>parseFloat($('#'+k).value);show({nm:$('#nm').value,id:g('id'),al:g('al'),pe:g('pe'),pc:g('pc'),ci:g('ci'),qu:g('qu'),sx:$('#sx').value,obj:''})};
+})();
+</script>
