@@ -17,3 +17,7 @@
 - Revisar na ficha jotafit a frase "app de treino e dieta".
 - Esclarecer o "fecha" do PR #1 (sem agir).
 - Trocar o link do Google para o site quando ele entrar no ar; remedir o Google em 25/12/2026.
+
+## 28/11/2026 — Site de apresentação no ar
+- jotafitpersonal.com.br publicado na Hostinger e confirmado pelo Jota. Inclui avaliação inicial online (cálculo no navegador, envio por WhatsApp), estudos de 2026, depoimentos (autorização escrita pendente), marca oficial, efeitos e som.
+- Pendente: trocar o link do site no Google Meu Negócio; links na bio do Instagram/TikTok; Search Console; site de venda (preço, planos, link de pagamento); 4 decisões de design (efeitos x "reduzir movimento", % na tela da mulher, palavra "bunda" no depoimento da Suni, som ligado).
