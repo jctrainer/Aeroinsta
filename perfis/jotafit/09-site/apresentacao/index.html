@@ -488,6 +488,10 @@ section.alt{border-top:1px solid #ffffff0d;border-bottom:1px solid #ffffff0d}
 .ic{border-radius:12px}
 .logo img{border-radius:0}
 .float::before{display:none}
+
+:focus-visible{outline:2px solid var(--y);outline-offset:3px;border-radius:6px}
+.soc a{display:inline-block;padding:.75rem .2rem}
+.seclab a{position:relative}.seclab a::before{content:"";position:absolute;inset:-8px -10px}
 </style>
 </head>
 <body>
@@ -509,7 +513,6 @@ section.alt{border-top:1px solid #ffffff0d;border-bottom:1px solid #ffffff0d}
   <p class="lead rv" style="--d:.16s">Consultoria de treino para mulheres 35+, com o <b>Método Jota Fit</b>: avaliação, treino sob medida e acompanhamento direto. Presencial em Guarulhos e online para todo o Brasil.</p>
   <div class="cta rv" style="--d:.24s">
    <a class="btn btn-y mag heroavl" href="#avaliacao"><span>Fazer minha avaliação</span><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-   <span class="avlnote">Leva 2 minutos. Você envia as medidas direto para o meu WhatsApp.</span>
   </div>
  </div>
  <div class="photo rv" style="--d:.2s" id="photo"><div class="frame" id="frame">
@@ -633,7 +636,7 @@ section.alt{border-top:1px solid #ffffff0d;border-bottom:1px solid #ffffff0d}
  <div class="kick rv">Treino com ciência</div><h2 class="rv">Aqui não tem <em>achismo</em></h2>
  <p class="sub rv">Tudo que eu ensino vem de estudo conferido. Toque em cada cartão para ver o que a pesquisa diz.</p>
  <div class="flips">
-  <button class="flip rv" aria-label="Canetas emagrecedoras e menopausa"><div><div class="face f"><span class="n">Canetas</span><p><b>Canetas emagrecedoras e menopausa: o que já se sabe.</b></p><span class="hint">VER ESTUDO ↻</span></div><div class="face b"><span class="n">O que a pesquisa diz</span><p>Uma revisão de 2026 diz que, na menopausa, a perda de peso com GLP-1 e tirzepatida foi parecida com a da pré-menopausa. A perda de massa magra acompanha o peso perdido, mas poucos estudos mediram a força. Uso de remédio é decisão com o seu médico.</p><small>Revisão, <i>Maturitas</i>, 2026 · DOI 10.1016/j.maturitas.2026.109159</small></div></div></button>
+  <button class="flip rv" aria-label="Canetas emagrecedoras e menopausa"><div><div class="face f"><span class="n">Canetas</span><p><b>Canetas emagrecedoras e menopausa: o que já se sabe.</b></p><span class="hint">VER ESTUDO ↻</span></div><div class="face b"><span class="n">O que a pesquisa diz</span><p>Uma revisão de 2026 sugere que, na menopausa, a perda de peso com GLP-1 e tirzepatida é parecida com a da pré-menopausa. A perda de massa magra acompanha o peso perdido, mas poucos estudos mediram a força. Uso de remédio é decisão com o seu médico.</p><small>Revisão, <i>Maturitas</i>, 2026 · DOI 10.1016/j.maturitas.2026.109159</small></div></div></button>
   <button class="flip rv" style="--d:.08s" aria-label="Ciclo menstrual"><div><div class="face f"><span class="n">Ciclo</span><p><b>O ciclo não manda no seu treino.</b></p><span class="hint">VER ESTUDO ↻</span></div><div class="face b"><span class="n">O que a pesquisa diz</span><p>Em dois estudos de 2026 com mulheres mais jovens, a progesterona não mudou a síntese de proteína do músculo e a fase do ciclo teve efeito mínimo no desempenho. A motivação pesou mais. Ou seja: dá para treinar com constância o mês todo.</p><small><i>J Physiol</i> e <i>Sports Med</i>, 2026 · DOI 10.1113/JP292285 e 10.1007/s40279-026-02459-8</small></div></div></button>
   <button class="flip rv" style="--d:.16s" aria-label="Perimenopausa"><div><div class="face f"><span class="n">Perimenopausa</span><p><b>O corpo muda mesmo quando a balança não muda.</b></p><span class="hint">VER ESTUDO ↻</span></div><div class="face b"><span class="n">O que a pesquisa diz</span><p>Uma revisão de 2026 (56 estudos) aponta que, na perimenopausa, podem subir a gordura da barriga e cair a massa magra mesmo sem mudança no peso. Treino de força e dieta mediterrânea aparecem como as estratégias com mais potencial.</p><small>Revisão, <i>Climacteric</i>, 2026 · DOI 10.1080/13697137.2026.2713394</small></div></div></button>
   <button class="flip rv" style="--d:.24s" aria-label="Força e função"><div><div class="face f"><span class="n">Força</span><p><b>Mais importante que o peso: manter a sua força.</b></p><span class="hint">VER ESTUDO ↻</span></div><div class="face b"><span class="n">O que a pesquisa diz</span><p>Uma revisão de 2026 explica que, em idosos, a força cai cerca de 3 vezes mais rápido que a massa magra e se liga à mortalidade, enquanto a massa magra não. Por isso eu acompanho carga e função, não só o número da balança.</p><small>Revisão, <i>Diabetes Obes Metab</i>, 2026 · DOI 10.1111/dom.71542</small></div></div></button>
@@ -653,7 +656,7 @@ section.alt{border-top:1px solid #ffffff0d;border-bottom:1px solid #ffffff0d}
 </div></section>
 
 <section id="sobre"><div class="wrap about">
- <div class="box rv"><img src="img/marca-simbolo.png" alt=""><strong>+10<br>anos</strong><p>de profissão em Guarulhos<br>CREF 162847-G/SP</p></div>
+ <div class="box rv"><img src="img/marca-simbolo.png" alt=""><strong>+10<br>anos</strong><p>de profissão<br>CREF 162847-G/SP</p></div>
  <div class="rv" style="--d:.1s">
   <div class="kick">Quem sou eu</div><h2>Oi, eu sou o <em>Jota</em></h2>
   <p style="color:#DADBDF">Sou personal trainer e acredito que treino bom é o que você entende. Por isso eu explico o porquê de cada exercício, ajusto o plano a cada fase e acompanho de perto.</p>
@@ -699,10 +702,10 @@ section.alt{border-top:1px solid #ffffff0d;border-bottom:1px solid #ffffff0d}
  <div class="soc"><a href="https://www.instagram.com/jotafit.personaltrainer" target="_blank" rel="noopener">Instagram</a><a href="https://www.tiktok.com/@jotafit.personaltrainer" target="_blank" rel="noopener">TikTok</a><a href="https://wa.me/5511989195208" target="_blank" rel="noopener">WhatsApp</a></div>
  <div>Conteúdo educativo. Não substitui avaliação médica. Seus dados são usados apenas para o atendimento, quando você fala comigo.</div>
 </div></footer>
-<a class="float" href="https://wa.me/5511989195208" target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg class="wa" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.2 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.4.7-2 .9-2.3.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5.2.6.8 2 .9 2.2.1.2.1.3 0 .5-.1.2-.2.3-.4.5l-.5.6c-.2.2-.4.4-.2.8.2.4.9 1.5 2 2.4 1.4 1.2 2.5 1.6 2.9 1.8.4.2.6.1.8-.1.2-.3.9-1 1.1-1.4.2-.4.5-.3.8-.2.3.1 1.9.9 2.2 1.1.3.1.5.2.6.3.1.2.1.8-.1 1.5Z"/></svg></a>
-<div class="seclab" id="seclab" aria-hidden="true"></div>
+<aside aria-label="Atalhos"><a class="float" href="https://wa.me/5511989195208" target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg class="wa" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.2 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.4.7-2 .9-2.3.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5.2.6.8 2 .9 2.2.1.2.1.3 0 .5-.1.2-.2.3-.4.5l-.5.6c-.2.2-.4.4-.2.8.2.4.9 1.5 2 2.4 1.4 1.2 2.5 1.6 2.9 1.8.4.2.6.1.8-.1.2-.3.9-1 1.1-1.4.2-.4.5-.3.8-.2.3.1 1.9.9 2.2 1.1.3.1.5.2.6.3.1.2.1.8-.1 1.5Z"/></svg></a>
+<nav class="seclab" id="seclab" aria-label="Seções da página"></nav>
 <button class="snd" id="snd" aria-pressed="true" aria-label="Som dos cliques" title="Som dos cliques">♪</button>
-<button class="top" id="top" aria-label="Voltar ao topo">↑</button>
+<button class="top" id="top" aria-label="Voltar ao topo">↑</button></aside>
 
 <script>
 (function(){
@@ -752,7 +755,7 @@ $$('.fq button').forEach(b=>b.onclick=()=>{const f=b.parentElement,on=f.classLis
 $$('.btn').forEach(b=>b.addEventListener('click',e=>{if(reduce)return;const r=b.getBoundingClientRect(),d=Math.max(r.width,r.height),s=document.createElement('span');s.className='rip';s.style.cssText=`width:${d}px;height:${d}px;left:${e.clientX-r.left-d/2}px;top:${e.clientY-r.top-d/2}px`;b.appendChild(s);setTimeout(()=>s.remove(),700)}));
 $$('.card').forEach((c,i)=>c.classList.add(i%2?'r':'l'));
 $$('.flip,.ens a').forEach(c=>c.classList.add('z'));
-const sl=$('#seclab');secs.forEach(x=>{const h=x.querySelector('.kick');const a=document.createElement('a');a.href='#'+x.id;a.dataset.t=h?h.textContent:x.id;sl.appendChild(a)});
+const sl=$('#seclab');secs.forEach(x=>{const h=x.querySelector('.kick');const a=document.createElement('a');a.href='#'+x.id;a.dataset.t=h?h.textContent:x.id;a.setAttribute('aria-label',a.dataset.t);sl.appendChild(a)});
 const dots=$$('#seclab a');addEventListener('scroll',()=>{const y=document.documentElement.scrollTop;let c=0;secs.forEach((x,i)=>{if(y+220>=x.offsetTop)c=i});dots.forEach((d,i)=>d.classList.toggle('on',i===c))},{passive:true});
 
 /* v4: letras, faíscas, som */
@@ -799,7 +802,7 @@ const hr=document.querySelector('.hero');if(hr){hr.insertAdjacentHTML('beforeend
  const cs=[...g.querySelectorAll('circle:not(.ring)')],rs=[...g.querySelectorAll('.ring')];
  const io2=new IntersectionObserver(es=>{if(!es[0].isIntersecting)return;io2.disconnect();evo.classList.add('go');
   cs.forEach((c,i)=>setTimeout(()=>{c.classList.add('on');if(i===cs.length-1)rs[i].classList.add('on');tone(392*Math.pow(1.122,i*1.6),.16,'triangle',.07,392*Math.pow(1.122,i*1.6)*1.5)},350+i*560));
-  setTimeout(()=>{tone(784,.35,'sine',.08);setTimeout(()=>tone(1046,.5,'sine',.07),140)},350+cs.length*560)},{threshold:.4});
+  setTimeout(()=>{tone(784,.35,'sine',.08);setTimeout(()=>tone(1046,.5,'sine',.07),140)},350+cs.length*560)},{threshold:.2});
  io2.observe(evo)})();
 
 /* avaliação inicial: duas abas, cálculo no navegador, nada é guardado */
