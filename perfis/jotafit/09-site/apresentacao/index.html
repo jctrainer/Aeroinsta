@@ -259,12 +259,13 @@ h2.rv.in{clip-path:inset(0 0 -20% 0)}
 .seclab a.on{background:var(--y);transform:scale(1.5)}
 .seclab a:hover::after{content:attr(data-t);position:absolute;right:20px;top:50%;translate:0 -50%;background:#111;border:1px solid var(--line);color:#fff;font-size:.7rem;font-weight:600;padding:.25rem .6rem;border-radius:8px;white-space:nowrap}
 @media(min-width:1100px){.seclab{display:flex}}
+.photo .tag{display:flex;align-items:center;gap:.8rem}.photo .tag .tl{width:38px;height:38px;border-radius:50%;flex:none}
 </style>
 </head>
 <body>
 <div class="intro" id="intro"><img src="img/logo-marca.png" alt=""></div>
 <div class="prog" id="prog"></div>
-<div class="glowcur" id="cur"></div>
+
 
 <header id="hd"><div class="wrap hd">
  <a class="logo" href="#topo"><img src="img/logo-marca.png" alt="Logo JF" width="46" height="46"><span>JOTA FIT</span></a>
@@ -287,7 +288,7 @@ h2.rv.in{clip-path:inset(0 0 -20% 0)}
  <div class="photo rv" style="--d:.2s" id="photo"><div class="frame" id="frame">
   <div class="back"></div>
   <img class="main" src="img/jota-hero.jpg" alt="Jota, personal trainer em Guarulhos, treinando com halteres">
-  <div class="tag"><small>MÉTODO JOTA FIT</small>Avalia · Planeja<br>Executa · Ajusta</div>
+  <div class="tag"><img src="img/logo-marca.png" alt="" class="tl"><div><small>MÉTODO JOTA FIT</small>Avalia · Planeja<br>Executa · Ajusta</div></div>
  </div></div>
 </div></section>
 
@@ -453,7 +454,7 @@ if(!reduce&&matchMedia('(hover:hover)').matches){
  /* foto inclina com o mouse */
  const ph=$('#photo'),fr=$('#frame');ph.addEventListener('mousemove',e=>{const r=ph.getBoundingClientRect();fr.style.transform=`rotateY(${((e.clientX-r.left)/r.width-.5)*10}deg) rotateX(${(.5-(e.clientY-r.top)/r.height)*8}deg)`});ph.addEventListener('mouseleave',()=>fr.style.transform='');
  /* luz que segue o mouse */
- const cur=$('#cur');addEventListener('mousemove',e=>{cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px'},{passive:true});
+ 
 }
 /* método (abas) */
 const tabs=$$('.tab'),panes=$$('.pane'),panel=$('#panel'),bar=$('#bar');
