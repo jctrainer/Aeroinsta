@@ -1,75 +1,24 @@
-# Jota Fit: padrões de conteúdo
+# Jota Fit: memória e regras
 
-Personal trainer, público majoritariamente feminino. Marca: amarelo sobre grafite, logo JF.
-Todo conteúdo termina com o CTA da consultoria: **"Comenta CONSULTORIA que eu te chamo no direct"**.
+Personal trainer em Guarulhos, público majoritariamente feminino (mulheres 35–54). Marca: amarelo sobre grafite, logo JF.
+Todo conteúdo Jota Fit termina com o CTA: **"Comenta CONSULTORIA que eu te chamo no direct"**.
 
-## Organização do projeto
-- `perfis/<perfil>/<nn-pilar>/<conteúdo>/`: todo conteúdo fica no perfil e no pilar certo (jotafit, nerdzoid, razec-ezar). Cada perfil tem `00-PERFIL.md` com a ficha da marca.
-- `agentes/`: prompt master + fichas de cada agente por squad.
-- `ferramentas/`: motores reutilizáveis (carrossel, capas).
+## Como usar a memória (faça sempre)
+1. **No início de toda tarefa, leia `memoria/00-INDICE.md`** e abra só os arquivos que a tarefa pede (carrossel → 05; vídeo → 04; post/rede → 06; ciência → 07; vendas → 08; site → 09...).
+2. Antes de escrever texto do Jota, leia `memoria/03-minha-voz.md`.
+3. Ao terminar uma entrega, atualize `memoria/11-andamento.md` (e o arquivo do assunto, se surgiu regra nova).
+4. A equipe de agentes está em `agentes/PROMPT-MASTER.md` (siga em toda tarefa de conteúdo, marketing, vendas, site ou ciência). Conteúdo fica em `perfis/<perfil>/<nn-pilar>/<conteúdo>/`; motores em `ferramentas/`.
 
-## Equipe de agentes
-O prompt master da equipe (agentes, perfis Jota Fit / NerdZoid / Razec Ezar, fluxo e comandos) está em `agentes/PROMPT-MASTER.md`. Siga-o em toda tarefa de conteúdo, marketing, vendas, site ou ciência do treino.
+## Regras que valem SEMPRE (detalhes em memoria/07-ciencia-e-regras.md)
+- **REGRA Nº 0:** antes de editar vídeo, gerar mídia, alterar arquivos entregues, mexer em perfil externo ou gastar créditos, apresentar análise + plano e **esperar o "ok"**. Análises, PubMed e prévias baratas podem ser feitas sem pedir. Nada é publicado ou respondido em nome do Jota sem ok.
+- **REGRA Nº 1:** todo dado conferido no **PubMed**; só entra o que a fonte diz; não confirmou, sai ou suaviza; nunca inventar estudo/DOI; ler população do estudo antes de generalizar; revisão dupla (ciência + conteúdo); fontes em `fontes.md`; **toda legenda termina com "📚 Referências:"** antes das hashtags; ao entregar, informar o que foi conferido, corrigido e deixado de fora.
+- **Sem as marcas "ilustrativo" / "ilustração educativa"** (decisão do Jota). Nunca chamar imagem montada/IA de "imagem real". Temas clínicos: "converse com seu médico".
+- **Dieta:** não prescrever (privativa do nutricionista); falar em hábitos saudáveis e indicar nutricionista.
+- **Aluna:** imagem só com autorização por escrito; foto de aluna e antes/depois não vão para o repositório. Sem deepfake nem imitar voz de pessoas reais.
+- **Custo:** o Jota é sensível a tokens e créditos; preferir soluções locais e baratas e avisar antes de gastar.
 
-## REGRA Nº 0: aprovação antes de executar
-Antes de editar vídeo, gerar mídia, alterar arquivos entregues ou gastar créditos: apresentar ao Jota a **análise + plano (o que vai mudar e por quê, com a base científica)** e **esperar a aprovação**. Só executar depois do "ok". Análises, checagens no PubMed e prévias de baixo custo podem ser feitas sem pedir.
-
-## REGRA Nº 1: base científica, sem erro, sempre revisada
-
-Vale para TUDO: vídeos, legendas, títulos, capas, carrosséis, stories, roteiros, respostas e análises de treino.
-
-1. **Buscar a base científica antes de escrever.** Todo dado, número, percentual, mecanismo ou recomendação de biomecânica, cinesiologia, fisiologia do exercício, nutrição esportiva ou saúde da mulher deve ser conferido no **PubMed** (ferramenta PubMed). Preferir meta-análises, revisões sistemáticas, ensaios randomizados e posicionamentos oficiais (ACSM, ISSN, PROT-AGE etc.).
-2. **Sem erro.** Só entra o que a fonte realmente diz. Não confirmou? Sai do conteúdo ou é suavizado ("pode", "em média", "a pesquisa sugere"). Nunca inventar número, estudo, autor ou DOI. Não exagerar ("nunca", "sempre", "é genético/não é") além do que o estudo mostra.
-3. **Revisão dupla obrigatória antes de entregar:**
-   - Revisão 1, ciência: cada afirmação confrontada com a fonte (população do estudo, protocolo, tamanho do efeito, limites). Conferir se o estudo era com mulheres, idosos, treinadas etc. antes de generalizar.
-   - Revisão 2, conteúdo: português correto, números consistentes entre slide/vídeo/legenda, textos dentro da área segura, nada cortado ou sobreposto, CTA presente.
-4. **Registrar as fontes:** autor, ano, revista e DOI em `fontes.md` na pasta do projeto; no slide ou vídeo, citar no rodapé quando for o argumento central.
-   **Toda legenda (Instagram, TikTok, Shorts) termina com "📚 Referências:"** em formato curto (Autor et al., ano, revista), antes das hashtags.
-5. **Transparência:** imagens de IA ou montadas são "ilustração educativa"; gráficos esquemáticos são "ilustrativo"; temas clínicos levam "converse com seu médico".
-   **Decisão do Jota (27/11/2026): não usar as marcas "ilustrativo" / "ilustração educativa" nem na legenda nem na imagem/vídeo** (fica feio). Na imagem vai só o rodapé com a referência do estudo; na legenda, só o bloco "📚 Referências". Limite que continua: nunca afirmar que uma imagem montada ou de IA é "imagem real" ou "exame real", e "converse com seu médico" segue nos temas clínicos.
-6. **Ao entregar**, informar ao Jota o que foi conferido, o que foi corrigido e o que ficou de fora por falta de comprovação.
-7. **Conteúdo de terceiros** (posts de referência, vídeos de outras professoras): analisar criticamente e apontar erros ou exageros com base na literatura, sem ataque pessoal.
-
-## Carrossel JOTA FIT (padrão fixo)
-
-Quando o Jota pedir "carrossel" (ou "carrossel JOTA FIT"), use SEMPRE este padrão, sem perguntar.
-
-**Motor pronto:** `ferramentas/carrossel/scripts/carrossel.py` (fontes em `ferramentas/carrossel/fonts/`, imagens base em `ferramentas/carrossel/imagens/`).
-Exemplos completos: `scripts/c1.py` (músculo e longevidade) e `scripts/c2.py` (menopausa).
-Copie um deles, troque o conteúdo e rode `python3 cX.py <pasta_saida>`.
-
-**Visual**
-- 1080×1350 (4:5), **7 slides** por padrão (capa, 4–5 de conteúdo, CTA).
-- Fundo grafite `#0C0C0C` com leve brilho central e o **arco do "J"** em marca d'água à direita (`base()`); letra gigante opcional (`mark=`).
-- Fonte **Poppins**: cabeçalho Bold com espaçamento largo, cinza `#9A9DA3`, no topo esquerdo (ex.: "CIÊNCIA JOTA FIT", "MÉTODO JOTA FIT", "TEMA · JOTA FIT"), e `n/7` à direita.
-- **Kicker** amarelo `#F5C518` em caixa alta espaçada → **título** grande branco Poppins Bold (2 linhas) → **bullets com check amarelo** (`bullets()`, aceita `('Negrito:', 'resto')`) → **frase de impacto** amarela (`statement()`).
-- Rodapé: **linha de progresso** amarela com círculo numerado no centro e o nome da etapa embaixo (`progress()`).
-- Recursos: `chart()` (gráfico de linha em painel), `put_slice()` (imagem recortada com brilho), `tag()` (pílulas), `callout()` (setas com rótulo), `swipe()` ("Arrasta" + seta), `foot()` (fonte/citação pequena).
-- Slide 7 = CTA: painel com "Comenta / **CONSULTORIA** / que eu te chamo no direct".
-- Sem emoji dentro dos slides (Poppins não tem glifo de seta/emoji; desenhe setas).
-
-**Conteúdo: base científica obrigatória**
-- Fundamentar em **cinesiologia/biomecânica, fisiologia do exercício e educação física**, com linguagem simples para mulheres leigas.
-- Todo número ou afirmação forte precisa ter base na literatura; citar o estudo no slide com `foot()` (autor, ano, revista) quando for o argumento central.
-- **Checar cada dado no PubMed antes de entregar** (ferramenta PubMed): registrar autor, ano, revista e DOI em `fontes.md` da pasta do carrossel; o que não for confirmado sai do post ou é suavizado.
-- Nunca inventar dado. (Sem marca "ilustrativo" nos slides: decisão do Jota de 27/11/2026.)
-- Imagens geradas por IA ou montadas: nunca apresentar como "imagem real" (sem marca "ilustração educativa": decisão do Jota de 27/11/2026).
-- Corrigir mitos com contraponto (slide "Mito × Verdade" quando couber).
-- Público feminino: priorizar exemplos de mulheres (inclusive 40+, menopausa) e linguagem de autonomia/saúde, não só estética.
-- Para temas clínicos (osteoporose, menopausa, doenças), incluir "converse com seu médico".
-
-**Entrega**
-- Salvar em `perfis/<perfil>/<pilar>/carrossel-<tema>/` (slides + .zip em ordem) + `legendas.md` + `fontes.md` (legenda Instagram com hashtags, comentário fixado e ordem de postagem).
-- Commit e push no branch de trabalho; enviar os PNGs ao Jota.
-
-## Edição de vídeo: A-roll + B-roll (padrão pedido pelo Jota)
-- **A-roll** = Jota falando para a câmera (gancho, opinião, ironia, CTA). Sempre no 1º segundo e no final.
-- **B-roll** = imagens de apoio por cima da voz dele: **prioridade para filmagem real** (treino dele, alunas com autorização escrita, execução de exercícios, tela do app, comida/prato, academia, rua de Guarulhos). Imagem de IA só em exceção (marcada "ilustração educativa"); motion/gráfico para dados científicos.
-- Ritmo: troca de plano a cada 2–4 s; B-roll cobre a explicação, A-roll volta nas frases-chave.
-- Banco de B-roll em `ferramentas/broll/` (clipes organizados por tema); cada edição informa quais clipes usou.
-- Edição leve (dados do público, 24/11/2026) = sem efeito gratuito (transição chamativa, IA, enfeite). **Não vale para as animações de biomecânica/anatomia/fisiologia**: o Jota considera essas animações boas e necessárias (25/11/2026); usar sempre que ajudarem a explicar, sem limite fixo de quantidade.
-- **Animações = mesma linguagem dos vídeos da passada, búlgaro, supino e stiff** (referência principal: `perfis/jotafit/01-biomecanica-tecnica/passada-personal/`: pontos de pose sobre o corpo, linha quadril–joelho–pé, câmera lenta no erro, medida em tempo real, erros numerados, "como foi × como deveria" lado a lado, "o que eu faria" em checklist, rosto de terceiros desfocado; também `01-biomecanica-tecnica/`, `02-ciencia-e-mitos/supino-progressao-reps/scripts/`): esqueleto/linhas sobre o corpo, arco de ângulo articular, músculo acendendo (glow), contador de reps, zoom no detalhe, certo × errado, cards de dado/comparação/checklist, gráfico. Entram sempre que biomecânica, anatomia ou fisiologia ajudarem a entender; sem estilo novo, sem IA paga sem aprovação.
-
-## Outros padrões já estabelecidos
-- Capas de Reels/vídeo: `ferramentas/capas/covers.py` (título sem caixa, branco + amarelo, espaço entre palavras e linhas; versão TikTok/Shorts com área segura).
-- Vídeos: legendas sincronizadas palavra a palavra, círculo de rosto estilo react sem cobrir legenda/conteúdo, CTA da consultoria no fim, versões TikTok/Shorts com área segura.
+## Padrões fixos (detalhes nos arquivos)
+- **Carrossel Jota Fit:** 1080×1350, 7 slides, grafite + amarelo, Poppins (memoria/05).
+- **Vídeo:** A-roll + B-roll, animações de biomecânica boas e necessárias, legenda palavra a palavra, área segura TikTok/Shorts (memoria/04).
+- **Social media:** localização "Guarulhos, SP", sem etiqueta de produto, comentário fixado, story compartilhando o post (memoria/06).
+- **Entrega:** salvar na pasta certa com `fontes.md` e `legenda.md`; commit e push no branch de trabalho; enviar os arquivos ao Jota. PR só se ele pedir.
