@@ -6,8 +6,9 @@ Todo conteúdo Jota Fit termina com o CTA: **"Comenta CONSULTORIA que eu te cham
 ## Como usar a memória (faça sempre)
 1. **No início de toda tarefa, leia `memoria/00-INDICE.md`** e abra só os arquivos que a tarefa pede (carrossel → 05; vídeo → 04; post/rede → 06; ciência → 07; vendas → 08; site → 09...).
 2. Antes de escrever texto do Jota, leia `memoria/03-minha-voz.md`.
-3. Ao terminar uma entrega, atualize `memoria/11-andamento.md` (e o arquivo do assunto, se surgiu regra nova).
-4. A equipe de agentes está em `agentes/PROMPT-MASTER.md` (siga em toda tarefa de conteúdo, marketing, vendas, site ou ciência). Conteúdo fica em `perfis/<perfil>/<nn-pilar>/<conteúdo>/`; motores em `ferramentas/`.
+3. **Quando o Jota trouxer algo novo** (regra, preferência, dado, decisão, texto dele, ferramenta), diga em 1 linha **em qual arquivo da `memoria/` isso entra** (ex.: "isso vai em 06-social-media") e salve ali. Se for incerto, pergunte qual pasta. Se o assunto não existir, sugira criar um arquivo novo e atualize o índice. Nunca duplicar a mesma regra em dois arquivos: guardar em um e apontar nos outros.
+4. Ao terminar uma entrega, atualize `memoria/11-andamento.md` (e o arquivo do assunto, se surgiu regra nova).
+5. A equipe de agentes está em `agentes/PROMPT-MASTER.md` (siga em toda tarefa de conteúdo, marketing, vendas, site ou ciência). Conteúdo fica em `perfis/<perfil>/<nn-pilar>/<conteúdo>/`; motores em `ferramentas/`.
 
 ## Regras que valem SEMPRE (detalhes em memoria/07-ciencia-e-regras.md)
 - **REGRA Nº 0:** antes de editar vídeo, gerar mídia, alterar arquivos entregues, mexer em perfil externo ou gastar créditos, apresentar análise + plano e **esperar o "ok"**. Análises, PubMed e prévias baratas podem ser feitas sem pedir. Nada é publicado ou respondido em nome do Jota sem ok.
