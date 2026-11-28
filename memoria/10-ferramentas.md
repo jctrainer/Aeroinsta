@@ -34,3 +34,26 @@ Objetivo: economizar tokens, créditos e ruído. Cada conector/plugin ligado aum
 | **Plugins sem relação com o negócio** | manufacturing, finance, carta-crm, product-management, marketing (Ahrefs, HubSpot, Klaviyo...), productivity (Slack, Notion...), animatedwebs, logo-maker, iMessage, Telegram, GitLab, BigQuery | Desligar |
 
 - 28/11/2026: Jota desligou na conta os conectores/plugins sem uso (Clinical Trials, Gmail, Google Docs/Drive/Sheets/Slides, HyperFrames, OpusClip, TikTok for Business, GitLab e a maioria dos plugins). Mantidos: PubMed, GitHub nativo, Hostinger, Windsor.ai, MT, ElevenLabs, Canva (conferir se ficou ligado), social-media-skills, anthropic-skills.
+
+
+## Quando ligar o que está desligado (eu aviso o Jota antes de começar a tarefa)
+Formato do aviso: "Para isso precisa ligar **X** em Plugins > [aba]. Serve para ___. Depois de usar, pode desligar."
+Conectores e plugins só são lidos quando a conversa começa: depois de ligar, **começar conversa nova** (a memória vai junto).
+
+| Quando a tarefa for... | Ligar | Onde |
+|---|---|---|
+| Publicar/atualizar o site no domínio | Hostinger (conector) | Plugins > Conectores |
+| Ler métricas de Instagram/TikTok/Google Meu Negócio | Windsor.ai | Conectores |
+| Ver alunas/treinos no app | MT (Treinei) | Conectores |
+| Gerar voz, imagem ou vídeo IA (gasta crédito) | ElevenLabs | Conectores |
+| Checar estudo científico | PubMed | Conectores |
+| Artes e designs do Canva | Canva | Plugins (conector e skills) |
+| Roteiro, legenda, carrossel, hooks, calendário | social-media-skills | Plugins > Skills |
+| Vídeo longo cortado em vários cortes curtos | OpusClip | Conectores (hoje desvinculado) |
+| Vídeo em projeto da HeyGen (hospedado) | HyperFrames | Conectores (hoje desvinculado) |
+| Ler e-mail ou planilha do Google | Gmail / Google Sheets / Drive | Conectores (hoje desvinculados) |
+| Anúncios pagos no TikTok | TikTok for Business | Conectores (hoje desvinculado) |
+| Pesquisa de SEO do site em profundidade | SEO-AEO-GEO Ultimate | Plugins > Skills |
+| Vídeo feito como site em código (não é o nosso método) | Remotion | Plugins > Skills |
+
+Nossos vídeos NÃO usam nenhum dos dois últimos: são Python + ffmpeg.
