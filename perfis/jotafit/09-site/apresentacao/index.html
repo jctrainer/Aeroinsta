@@ -229,7 +229,6 @@ nav{display:none}
 .panel{min-height:0}.panel::after{font-size:8rem}
 h2{font-size:clamp(1.7rem,8vw,2.2rem)}
 }
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
 
 /* ===== v3: efeitos modernos ===== */
 html{scroll-behavior:smooth;scroll-padding-top:84px}
@@ -260,7 +259,6 @@ h2.rv.in{clip-path:inset(0 0 -20% 0)}
 .seclab a.on{background:var(--y);transform:scale(1.5)}
 .seclab a:hover::after{content:attr(data-t);position:absolute;right:20px;top:50%;translate:0 -50%;background:#111;border:1px solid var(--line);color:#fff;font-size:.7rem;font-weight:600;padding:.25rem .6rem;border-radius:8px;white-space:nowrap}
 @media(min-width:1100px){.seclab{display:flex}}
-@media(prefers-reduced-motion:reduce){.intro{display:none}.w>i{transform:none}h2.rv{clip-path:none}}
 </style>
 </head>
 <body>
@@ -289,15 +287,11 @@ h2.rv.in{clip-path:inset(0 0 -20% 0)}
  <div class="photo rv" style="--d:.2s" id="photo"><div class="frame" id="frame">
   <div class="back"></div>
   <img class="main" src="img/jota-hero.jpg" alt="Jota, personal trainer em Guarulhos, treinando com halteres">
-  <div class="badge-logo"><div class="disc"></div>
-   <svg viewBox="0 0 128 128"><defs><path id="c" d="M64 64m-52 0a52 52 0 1 1 104 0a52 52 0 1 1-104 0"/></defs><text><textPath href="#c">TREINO COM CIÊNCIA • GUARULHOS • ONLINE • </textPath></text></svg>
-   <img src="img/logo-marca.png" alt="">
-  </div>
   <div class="tag"><small>MÉTODO JOTA FIT</small>Avalia · Planeja<br>Executa · Ajusta</div>
  </div></div>
 </div></section>
 
-<div class="stripwrap" aria-hidden="true"><div class="strip"><div><span>FORÇA</span>★<span>SAÚDE</span>★<span>MENOPAUSA</span>★<span>CIÊNCIA</span>★<span>CONSTÂNCIA</span>★<span>FORÇA</span>★<span>SAÚDE</span>★<span>MENOPAUSA</span>★<span>CIÊNCIA</span>★<span>CONSTÂNCIA</span>★<span>FORÇA</span>★<span>SAÚDE</span>★<span>MENOPAUSA</span>★<span>CIÊNCIA</span>★<span>CONSTÂNCIA</span>★</div></div></div>
+<div class="stripwrap" aria-hidden="true"><div class="strip"><div><span><span><span><span></div></div></div>
 
 <section style="padding-bottom:0"><div class="wrap nums">
  <div class="num rv"><b>+<span data-to="10">10</span></b><span>anos de profissão</span></div>
@@ -432,7 +426,7 @@ h2.rv.in{clip-path:inset(0 0 -20% 0)}
 <script>
 (function(){
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const reduce=false;
 /* progresso, header, voltar ao topo, menu ativo */
 const prog=$('#prog'),hd=$('#hd'),top=$('#top');
 const secs=$$('main section[id]'),links=$$('#nav a');
