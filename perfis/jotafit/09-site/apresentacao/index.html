@@ -136,7 +136,7 @@ section{padding:clamp(4rem,8vw,7rem) 0}
 .where span{font-size:.78rem;font-weight:600;border:1px solid #F5C51866;color:var(--y);padding:.4rem .9rem;border-radius:999px}
 /* CIÊNCIA (flip) */
 .flips{display:grid;gap:1.1rem;grid-template-columns:repeat(4,1fr)}
-.flip{perspective:1100px;height:330px;cursor:pointer;text-align:left;display:block;width:100%}
+.flip{perspective:1100px;height:440px;cursor:pointer;text-align:left;display:block;width:100%}
 .flip>div{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .8s var(--ease)}
 .flip.on>div{transform:rotateY(180deg)}
 .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:var(--r);padding:1.6rem;border:1px solid var(--line);display:flex;flex-direction:column;justify-content:space-between}
@@ -225,7 +225,7 @@ nav{display:none}
 .hero h1{font-size:clamp(2.1rem,10.5vw,3rem)}.hero h1 span{white-space:normal}
 .btn{width:100%}.hd .btn{width:auto}
 .cta .btn{width:100%}
-.flip{height:300px}
+.flip{height:400px}
 .panel{min-height:0}.panel::after{font-size:8rem}
 h2{font-size:clamp(1.7rem,8vw,2.2rem)}
 }
@@ -342,6 +342,7 @@ body.hc .cring.big{width:70px;height:70px;background:#F5C51826}
 .q figcaption b{font-size:1rem;color:#fff}.q figcaption span{letter-spacing:.14em;font-size:.7rem}
 .note{margin-top:1.4rem;color:var(--mut);font-size:.82rem;max-width:40rem}
 .q{justify-content:flex-start!important;min-height:0}
+.flip .face.b{font-size:.9rem}.flip .face.b p{line-height:1.5}.flip .face.b small{word-break:break-word;line-height:1.4}
 </style>
 </head>
 <body>
@@ -425,11 +426,12 @@ body.hc .cring.big{width:70px;height:70px;background:#F5C51826}
  <div class="kick rv">Treino com ciência</div><h2 class="rv">Aqui não tem <em>achismo</em></h2>
  <p class="sub rv">Tudo que eu ensino vem de estudo conferido. Toque em cada cartão para ver o que a pesquisa diz.</p>
  <div class="flips">
-  <button class="flip rv" aria-label="Metabolismo e idade"><div><div class="face f"><span class="n">20–60</span><p><b>O metabolismo não "quebra" aos 40.</b></p><span class="hint">VER ESTUDO ↻</span></div><div class="face b"><span class="n">O que a pesquisa diz</span><p>Dos 20 aos 60 anos, o gasto de energia fica estável. O que muda é o músculo e o quanto a gente se mexe.</p><small>Pontzer et al., 2021, Science</small></div></div></button>
-  <button class="flip rv" style="--d:.08s" aria-label="Recomposição corporal"><div><div class="face f"><span class="n">70 anos</span><p><b>Dá para ganhar músculo e perder gordura ao mesmo tempo.</b></p><span class="hint">VER ESTUDO ↻</span></div><div class="face b"><span class="n">O que a pesquisa diz</span><p>Mulheres de ~69 anos, iniciantes, em 24 semanas de musculação ganharam músculo e perderam gordura.</p><small>Ribeiro et al., 2022, Med Sci Sports Exerc</small></div></div></button>
-  <button class="flip rv" style="--d:.16s" aria-label="Treino na gestação"><div><div class="face f"><span class="n">50 estudos</span><p><b>Treino de força na gestação, com liberação do obstetra.</b></p><span class="hint">VER ESTUDO ↻</span></div><div class="face b"><span class="n">O que a pesquisa diz</span><p>Esteve associado a menos pressão alta e diabetes gestacional. A maioria dos programas misturava força e aeróbico.</p><small>Prevett et al., 2025, Br J Sports Med</small></div></div></button>
-  <button class="flip rv" style="--d:.24s" aria-label="Cintura"><div><div class="face f"><span class="n">Cintura</span><p><b>A balança não conta tudo.</b></p><span class="hint">VER ESTUDO ↻</span></div><div class="face b"><span class="n">O que a pesquisa diz</span><p>A cintura é considerada um "sinal vital" da saúde. Por isso medimos e comparamos fotos a cada 15 dias.</p><small>Ross et al., 2020, Nat Rev Endocrinol</small></div></div></button>
+  <button class="flip rv" aria-label="Menopausa e musculação"><div><div class="face f"><span class="n">Menopausa</span><p><b>Musculação na menopausa: o que a pesquisa mostra.</b></p><span class="hint">VER ESTUDO ↻</span></div><div class="face b"><span class="n">O que a pesquisa diz</span><p>Em 12 estudos com mulheres na pós-menopausa, treinar com carga por até 16 semanas melhorou a capacidade funcional e aparentou reduzir as ondas de calor, sem eventos adversos graves. A confiança nessa evidência é baixa: são poucos estudos pequenos.</p><small>Revisão sistemática, <i>Menopause</i>, 2023 · DOI 10.1097/GME.0000000000002079</small></div></div></button>
+  <button class="flip rv" style="--d:.08s" aria-label="Ossos"><div><div class="face f"><span class="n">Ossos</span><p><b>Treinar com carga cuida dos ossos depois da menopausa.</b></p><span class="hint">VER ESTUDO ↻</span></div><div class="face b"><span class="n">O que a pesquisa diz</span><p>Em 17 estudos (690 mulheres), a musculação melhorou a densidade óssea na coluna, no colo do fêmur e no quadril. O efeito foi melhor com carga mais alta, 3 vezes por semana e treino de longa duração. Os estudos variaram bastante entre si.</p><small>Meta-análise, <i>J Orthop Surg Res</i>, 2025 · DOI 10.1186/s13018-025-05890-1</small></div></div></button>
+  <button class="flip rv" style="--d:.16s" aria-label="Força e condicionamento"><div><div class="face f"><span class="n">Força</span><p><b>Força de pernas, de braços e fôlego, tudo junto.</b></p><span class="hint">VER ESTUDO ↻</span></div><div class="face b"><span class="n">O que a pesquisa diz</span><p>Em 12 estudos randomizados, a musculação melhorou a força de braços e pernas e o consumo máximo de oxigênio na pós-menopausa. Os autores sugerem 3 dias por semana, 60 minutos, como ponto de partida. Sobre ossos e medidas do corpo, ainda há debate.</p><small>Meta-análise, <i>Climacteric</i>, 2024 · DOI 10.1080/13697137.2024.2310521</small></div></div></button>
+  <button class="flip rv" style="--d:.24s" aria-label="Força e vida longa"><div><div class="face f"><span class="n">Longevidade</span><p><b>Mais força, menos risco de morrer cedo.</b></p><span class="hint">VER ESTUDO ↻</span></div><div class="face b"><span class="n">O que a pesquisa diz</span><p>Em 38 estudos com cerca de 1,9 milhão de pessoas, quem tinha mais força de preensão teve menos risco de morte por qualquer causa. Nas mulheres, a associação foi ainda maior (HR 0,60). É uma associação, não prova de que treinar cause isso.</p><small>Meta-análise, <i>Arch Phys Med Rehabil</i>, 2018 · DOI 10.1016/j.apmr.2018.01.008</small></div></div></button>
  </div>
+ <p class="note rv">Estudos conferidos no PubMed. Isto é informação, não é indicação médica: converse com seu médico antes de começar a treinar, principalmente se tiver alguma condição de saúde.</p>
 </div></section>
 
 <section class="alt"><div class="wrap">
