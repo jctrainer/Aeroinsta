@@ -392,6 +392,13 @@ html,body{overflow-x:clip;max-width:100%}
 .wprev{white-space:pre-line;background:#0C0C0C;border:1px dashed #F5C51866;border-radius:16px;padding:1rem 1.1rem;color:#DADBDF;font-size:.84rem;line-height:1.6;margin:1rem 0}
 .wprev:empty{display:none}
 @media(max-width:560px){.row3{grid-template-columns:1fr 1fr}.row3 label:last-child{grid-column:1/-1}}
+
+.ava{background:linear-gradient(180deg,#15150f 0,#0C0C0C 60%);border-top:1px solid #F5C51833;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+.ava::before{content:"";position:absolute;right:-120px;top:-120px;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,#F5C51822,transparent 65%);pointer-events:none}
+nav#nav a[href="#avaliacao"]{color:var(--y);font-weight:700}
+nav#nav a[href="#avaliacao"]::after{content:"";display:inline-block;width:7px;height:7px;margin-left:.45rem;border-radius:50%;background:var(--y);vertical-align:middle;animation:pulse 2s infinite}
+.hero .btn-o{border-color:#ffffff40}
+.final .fbtns{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}.final .btn-line{background:transparent;color:#111;border:2px solid #111;box-shadow:none}.final .btn-line:hover{background:#111;color:var(--y)}
 </style>
 </head>
 <body>
@@ -412,8 +419,8 @@ html,body{overflow-x:clip;max-width:100%}
   <h1 class="rv in" id="h1"><span class="w"><i style="--k:0">Menos</i></span> <span class="w"><i style="--k:1">achismo.</i></span><br><span class="w"><i style="--k:2">Mais</i></span> <span class="w"><i style="--k:3"><span class="hl">resultado</span></i></span> <span class="w"><i style="--k:4">no</i></span> <span class="w"><i style="--k:5">seu</i></span> <span class="w"><i style="--k:6">corpo.</i></span></h1>
   <p class="lead rv" style="--d:.16s">Consultoria de treino para mulheres 35+, com o <b>Método Jota Fit</b>: avaliação completa, treino sob medida e reavaliação a cada 15 dias. Presencial em Guarulhos e online para todo o Brasil.</p>
   <div class="cta rv" style="--d:.24s">
-   <a class="btn btn-y mag" href="https://wa.me/5511989195208?text=Oi%2C%20Jota!%20Vim%20pelo%20site%20e%20quero%20saber%20mais%20da%20consultoria." target="_blank" rel="noopener"><svg class="wa" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.2 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.4.7-2 .9-2.3.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5.2.6.8 2 .9 2.2.1.2.1.3 0 .5-.1.2-.2.3-.4.5l-.5.6c-.2.2-.4.4-.2.8.2.4.9 1.5 2 2.4 1.4 1.2 2.5 1.6 2.9 1.8.4.2.6.1.8-.1.2-.3.9-1 1.1-1.4.2-.4.5-.3.8-.2.3.1 1.9.9 2.2 1.1.3.1.5.2.6.3.1.2.1.8-.1 1.5Z"/></svg>Falar no WhatsApp</a>
-   <a class="btn btn-o" href="#metodo">Conhecer o método</a>
+   <a class="btn btn-y mag" href="#avaliacao">Fazer minha avaliação</a>
+   <a class="btn btn-o" href="https://wa.me/5511989195208?text=Oi%2C%20Jota!%20Vim%20pelo%20site%20e%20quero%20saber%20mais%20da%20consultoria." target="_blank" rel="noopener">Falar no WhatsApp</a>
   </div>
   <div class="badges rv" style="--d:.32s"><span><i></i>CREF 162847-G/SP</span><span><i></i>+10 anos de profissão</span><span><i></i>Reavaliação a cada 15 dias</span></div>
  </div>
@@ -443,6 +450,37 @@ html,body{overflow-x:clip;max-width:100%}
   <div class="card rv tilt" style="--d:.08s"><div class="ic">05</div><h3>Vive uma rotina corrida</h3><p>Treino que cabe no seu dia e acompanhamento direto, para você não largar no meio do caminho.</p></div>
   <div class="card rv tilt" style="--d:.16s"><div class="ic">06</div><h3>Está grávida ou voltando do pós-parto</h3><p>Treino de força é possível e útil, sempre com a liberação do seu obstetra e carga ajustada a você.</p></div>
  </div>
+</div></section>
+
+<section id="avaliacao" class="ava"><div class="wrap">
+ <div class="kick rv">Avaliação inicial</div><h2 class="rv">Comece pela sua <em>avaliação</em></h2>
+ <p class="sub rv">Leva 2 minutos. Você preenche as suas medidas e envia para o meu WhatsApp. Eu analiso e te respondo com uma conversa pessoal, não com um número solto.</p>
+ <form class="wiz rv" id="wiz" novalidate autocomplete="off">
+  <div class="wsteps" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
+  <div class="wbar"><b id="wbar"></b></div>
+  <fieldset class="wp on" data-s="0"><legend>1. Sobre você</legend>
+   <label>Seu nome<input id="w_nome" type="text" maxlength="60" placeholder="Como posso te chamar?"></label>
+   <div class="row2"><label>Idade<input id="w_idade" type="number" inputmode="numeric" min="18" max="90" placeholder="anos"></label>
+   <label>Sexo<select id="w_sexo"><option value="F">Feminino</option><option value="M">Masculino</option></select></label></div>
+   <label class="chk"><input id="w_gravida" type="checkbox"> Estou grávida ou amamentando</label>
+   <p class="werr" id="e0"></p></fieldset>
+  <fieldset class="wp" data-s="1"><legend>2. Altura e peso</legend>
+   <div class="row2"><label>Altura<input id="w_alt" type="number" inputmode="decimal" min="120" max="220" placeholder="cm"></label>
+   <label>Peso<input id="w_peso" type="number" inputmode="decimal" min="30" max="250" placeholder="kg"></label></div>
+   <p class="wtip">Pese-se de manhã, sem roupa pesada, se puder.</p><p class="werr" id="e1"></p></fieldset>
+  <fieldset class="wp" data-s="2"><legend>3. Medidas</legend>
+   <div class="row3"><label>Pescoço<input id="w_pesc" type="number" inputmode="decimal" min="20" max="60" placeholder="cm"></label>
+   <label>Cintura<input id="w_cint" type="number" inputmode="decimal" min="40" max="200" placeholder="cm"></label>
+   <label id="lq">Quadril<input id="w_quad" type="number" inputmode="decimal" min="60" max="200" placeholder="cm"></label></div>
+   <ul class="wtip"><li><b>Pescoço:</b> logo abaixo do pomo de adão ou da garganta.</li><li><b>Cintura:</b> na parte mais estreita do tronco, ou na altura do umbigo.</li><li><b>Quadril:</b> na parte mais larga.</li><li>Fita métrica rente à pele, sem apertar, após expirar normalmente.</li></ul><p class="werr" id="e2"></p></fieldset>
+  <fieldset class="wp" data-s="3"><legend>4. Seu objetivo</legend>
+   <div class="chips" id="wobj"><button type="button" class="chip" aria-pressed="false">Firmar o corpo</button><button type="button" class="chip" aria-pressed="false">Ganhar força e músculo</button><button type="button" class="chip" aria-pressed="false">Cuidar do corpo na menopausa</button><button type="button" class="chip" aria-pressed="false">Voltar a treinar com segurança</button><button type="button" class="chip" aria-pressed="false">Outro</button></div>
+   <div class="wprev" id="wprev"></div>
+   <label class="chk"><input id="w_ok" type="checkbox"> Autorizo enviar estes dados ao Jota pelo WhatsApp para receber minha análise. Este site não guarda nenhuma informação.</label>
+   <p class="werr" id="e3"></p></fieldset>
+  <div class="wnav"><button type="button" class="btn btn-o" id="wback" hidden>Voltar</button><button type="button" class="btn btn-y mag" id="wnext">Continuar</button><a class="btn btn-y mag" id="wsend" href="#" target="_blank" rel="noopener" hidden>Enviar para o Jota no WhatsApp</a></div>
+ </form>
+ <p class="note rv">É uma avaliação inicial, uma estimativa a partir de medidas. Não é diagnóstico e não substitui avaliação médica ou física completa.</p>
 </div></section>
 
 <section id="metodo" class="alt"><div class="wrap">
@@ -496,37 +534,6 @@ html,body{overflow-x:clip;max-width:100%}
   </ul>
  </div>
  <p class="note rv">O gráfico mostra a ideia do acompanhamento, não um resultado individual. Cada pessoa evolui no seu ritmo.</p>
-</div></section>
-
-<section id="avaliacao" class="alt"><div class="wrap">
- <div class="kick rv">Avaliação inicial</div><h2 class="rv">Comece pela sua <em>avaliação</em></h2>
- <p class="sub rv">Leva 2 minutos. Você preenche as suas medidas e envia para o meu WhatsApp. Eu analiso e te respondo com uma conversa pessoal, não com um número solto.</p>
- <form class="wiz rv" id="wiz" novalidate autocomplete="off">
-  <div class="wsteps" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
-  <div class="wbar"><b id="wbar"></b></div>
-  <fieldset class="wp on" data-s="0"><legend>1. Sobre você</legend>
-   <label>Seu nome<input id="w_nome" type="text" maxlength="60" placeholder="Como posso te chamar?"></label>
-   <div class="row2"><label>Idade<input id="w_idade" type="number" inputmode="numeric" min="18" max="90" placeholder="anos"></label>
-   <label>Sexo<select id="w_sexo"><option value="F">Feminino</option><option value="M">Masculino</option></select></label></div>
-   <label class="chk"><input id="w_gravida" type="checkbox"> Estou grávida ou amamentando</label>
-   <p class="werr" id="e0"></p></fieldset>
-  <fieldset class="wp" data-s="1"><legend>2. Altura e peso</legend>
-   <div class="row2"><label>Altura<input id="w_alt" type="number" inputmode="decimal" min="120" max="220" placeholder="cm"></label>
-   <label>Peso<input id="w_peso" type="number" inputmode="decimal" min="30" max="250" placeholder="kg"></label></div>
-   <p class="wtip">Pese-se de manhã, sem roupa pesada, se puder.</p><p class="werr" id="e1"></p></fieldset>
-  <fieldset class="wp" data-s="2"><legend>3. Medidas</legend>
-   <div class="row3"><label>Pescoço<input id="w_pesc" type="number" inputmode="decimal" min="20" max="60" placeholder="cm"></label>
-   <label>Cintura<input id="w_cint" type="number" inputmode="decimal" min="40" max="200" placeholder="cm"></label>
-   <label id="lq">Quadril<input id="w_quad" type="number" inputmode="decimal" min="60" max="200" placeholder="cm"></label></div>
-   <ul class="wtip"><li><b>Pescoço:</b> logo abaixo do pomo de adão ou da garganta.</li><li><b>Cintura:</b> na parte mais estreita do tronco, ou na altura do umbigo.</li><li><b>Quadril:</b> na parte mais larga.</li><li>Fita métrica rente à pele, sem apertar, após expirar normalmente.</li></ul><p class="werr" id="e2"></p></fieldset>
-  <fieldset class="wp" data-s="3"><legend>4. Seu objetivo</legend>
-   <div class="chips" id="wobj"><button type="button" class="chip" aria-pressed="false">Firmar o corpo</button><button type="button" class="chip" aria-pressed="false">Ganhar força e músculo</button><button type="button" class="chip" aria-pressed="false">Cuidar do corpo na menopausa</button><button type="button" class="chip" aria-pressed="false">Voltar a treinar com segurança</button><button type="button" class="chip" aria-pressed="false">Outro</button></div>
-   <div class="wprev" id="wprev"></div>
-   <label class="chk"><input id="w_ok" type="checkbox"> Autorizo enviar estes dados ao Jota pelo WhatsApp para receber minha análise. Este site não guarda nenhuma informação.</label>
-   <p class="werr" id="e3"></p></fieldset>
-  <div class="wnav"><button type="button" class="btn btn-o" id="wback" hidden>Voltar</button><button type="button" class="btn btn-y mag" id="wnext">Continuar</button><a class="btn btn-y mag" id="wsend" href="#" target="_blank" rel="noopener" hidden>Enviar para o Jota no WhatsApp</a></div>
- </form>
- <p class="note rv">É uma avaliação inicial, uma estimativa a partir de medidas. Não é diagnóstico e não substitui avaliação médica ou física completa.</p>
 </div></section>
 
 <section id="ciencia"><div class="wrap">
@@ -595,15 +602,15 @@ html,body{overflow-x:clip;max-width:100%}
   <div class="fq rv"><button>E se eu estiver grávida?<i>+</i></button><div class="a"><div><p>Treino de força pode fazer parte da gestação, com liberação do obstetra e carga ajustada a você e ao seu histórico.</p></div></div></div>
   <div class="fq rv"><button>A consultoria inclui dieta?<i>+</i></button><div class="a"><div><p>Não. Eu passo orientações gerais de hábitos saudáveis e, quando for preciso um plano alimentar, indico um nutricionista.</p></div></div></div>
   <div class="fq rv"><button>Moro fora de Guarulhos. Posso fazer?<i>+</i></button><div class="a"><div><p>Pode. A consultoria online funciona para todo o Brasil e também para o exterior.</p></div></div></div>
-  <div class="fq rv"><button>Como faço para começar?<i>+</i></button><div class="a"><div><p>Chame no WhatsApp. A gente conversa, eu entendo o seu objetivo e apresento como funciona e os planos.</p></div></div></div>
+  <div class="fq rv"><button>Como faço para começar?<i>+</i></button><div class="a"><div><p>Comece pela avaliação inicial aqui no site: você preenche as suas medidas e envia para o meu WhatsApp. Ou me chame direto. A gente conversa, eu entendo o seu objetivo e apresento como funciona e os planos.</p></div></div></div>
  </div>
 </div></section>
 
 <section><div class="wrap"><div class="final rv">
  <div class="kick">Vamos conversar?</div>
  <h2>Seu próximo treino começa <em>aqui</em></h2>
- <p>Me chama no WhatsApp, conta o seu objetivo e eu te explico como a consultoria funciona.</p>
- <a class="btn mag" href="https://wa.me/5511989195208?text=Oi%2C%20Jota!%20Vim%20pelo%20site%20e%20quero%20saber%20mais%20da%20consultoria." target="_blank" rel="noopener">Falar no WhatsApp</a>
+ <p>Comece pela avaliação inicial ou me chame no WhatsApp. Eu te explico como a consultoria funciona.</p>
+ <div class="fbtns"><a class="btn mag" href="#avaliacao">Fazer minha avaliação</a> <a class="btn mag btn-line" href="https://wa.me/5511989195208?text=Oi%2C%20Jota!%20Vim%20pelo%20site%20e%20quero%20saber%20mais%20da%20consultoria." target="_blank" rel="noopener">Falar no WhatsApp</a></div>
 </div></div></section>
 </main>
 
