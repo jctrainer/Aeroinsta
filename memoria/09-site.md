@@ -5,5 +5,9 @@ Seções: topo ("Personal trainer para mulheres 35+ em Guarulhos e online") · p
 SEO local: "personal trainer Guarulhos", dados do negócio iguais aos do Google Meu Negócio. Sem preço, sem prescrição de dieta, sem promessa de resultado.
 Chat com agente de IA no site: só depois que o site estiver no ar e com roteiro de perguntas; nunca prescrever treino ou dieta, só informar e encaminhar.
 
+## Botões do site
+1. Principal: **Falar no WhatsApp** (11 98919-5208).
+2. Secundário (para quem já conversou com o Jota): **Fazer meu cadastro** → link do app em memoria/08-vendas-consultoria.md. Como o cadastro coleta dados pessoais, o site precisa de uma linha de privacidade (LGPD) e de aviso de que o contato começa pelo WhatsApp.
+
 ## Pendências
 Onde o domínio está registrado e onde hospedar (se Hostinger, o Jota precisa autorizar o conector nas configurações do claude.ai); 3 a 5 fotos do Jota; depoimentos autorizados. **CREF já informado: 162847-G/SP** (entra em "Quem é o Jota" e no rodapé). O link "Site" do Google hoje aponta para o WhatsApp; trocar quando o site entrar no ar.

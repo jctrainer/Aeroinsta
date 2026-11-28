@@ -8,6 +8,10 @@ Dieta: **não prescrever**; orientações gerais de hábitos e indicação de nu
 Conteúdo útil → comentário "CONSULTORIA" → direct (entender a dor) → WhatsApp (11) 98919-5208 → proposta → renovação.
 Regra dos dados: venda dentro do conteúdo útil, nunca post só de anúncio; o app aparece "em uso".
 
+## Link de cadastro de aluna no app (Treinei / MT)
+https://mtapp.com.br/customer-register/cm8v1ur6x0ovnwsn6ovd5671k
+É a página pública onde a aluna se cadastra para virar cliente. Não preencher nem enviar nada por ela. Uso planejado: depois da conversa no direct/WhatsApp (passo "cadastro"), e como botão secundário no site. A conversa continua começando no WhatsApp.
+
 ## Pendências para fechar a oferta
 Preço, capacidade (quantas alunas), meta de faturamento, o que entra no pacote. Enquanto não definir: **não pôr preço** no site ou nos posts.
 
