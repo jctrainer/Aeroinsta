@@ -17,3 +17,18 @@
 - Área temporária da sessão (scratchpad) pode ser apagada; o que vale fica no repositório. Fotos de aluna e antes/depois **não** vão para o repositório.
 - Repositório: jctrainer/aeroinsta, branch de trabalho `claude/analise-video-passada-040h9r`. Commit e push ao final de cada entrega; PR só se o Jota pedir.
 - Skills úteis instaladas: social-media-skills (reels-script, hook-writer, caption-writer, content-calendar, instagram-seo, social-selling-and-dm, analytics-and-reporting), seo-local, remotion, motion-reel.
+
+
+## Regra: conectores sob demanda (decisão do Jota, 28/11/2026; vale para TODOS os projetos)
+Objetivo: economizar tokens, créditos e ruído. Cada conector/plugin ligado aumenta a lista de ferramentas e de skills que eu carrego a cada conversa.
+- **Padrão:** só fica ligado o que a tarefa atual usa. Ao fim de cada entrega, eu aviso o que ficou sem uso.
+- **Quem desliga:** o Jota, em claude.ai/customize/connectors (conectores) e nas configurações de plugins. Eu não consigo desligar daqui.
+- **Para usar de novo:** leitura ou custo zero, eu conecto sozinho; gasta crédito (ElevenLabs, vídeo IA) ou mexe em conta externa (Google Meu Negócio, Instagram, site no ar), eu **peço permissão antes**.
+- **Dica de economia:** nova conversa só com o necessário; conectores são lidos quando a conversa começa.
+
+| Uso neste projeto | Conectores / plugins | O que fazer |
+|---|---|---|
+| **Usa sempre** | PubMed (ciência), GitHub (repositório), Playwright (local, já incluso) | Manter |
+| **Usa de vez em quando** | Hostinger (site), Windsor.ai (Instagram, TikTok, Google Meu Negócio), Treinei/MT (alunas, só leitura), ElevenLabs (voz/imagem, gasta crédito), Canva | Ligar só no dia; pedir permissão se gastar ou editar conta |
+| **Não usou até hoje** | Gmail, Google Docs/Sheets/Slides/Drive, HeyGen HyperFrames, OpusClip, TikTok for Business (anúncios), Clinical Trials, Claude Docs, Claude Academy, Desktop Commander | Candidatos a desligar |
+| **Plugins sem relação com o negócio** | manufacturing, finance, carta-crm, product-management, marketing (Ahrefs, HubSpot, Klaviyo...), productivity (Slack, Notion...), animatedwebs, logo-maker, iMessage, Telegram, GitLab, BigQuery | Desligar |

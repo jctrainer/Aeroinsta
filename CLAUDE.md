@@ -17,6 +17,7 @@ Todo conteúdo Jota Fit termina com o CTA: **"Comenta CONSULTORIA que eu te cham
 - **Dieta:** não prescrever (privativa do nutricionista); falar em hábitos saudáveis e indicar nutricionista.
 - **Aluna:** imagem só com autorização por escrito; foto de aluna e antes/depois não vão para o repositório. Sem deepfake nem imitar voz de pessoas reais.
 - **Custo:** o Jota é sensível a tokens e créditos; preferir soluções locais e baratas e avisar antes de gastar.
+- **Conectores sob demanda (regra do Jota, vale para todos os projetos):** manter conectado só o que a tarefa em curso usa. Ao terminar um assunto, listar o que ficou sem uso e orientar o Jota a desligar (eu não consigo desligar conector da conta daqui). Para usar algo desligado: conectar sozinho se for leitura/baixo custo; **pedir permissão** se gastar crédito ou mexer em conta externa. Tabela de uso em memoria/10-ferramentas.md.
 
 ## Padrões fixos (detalhes nos arquivos)
 - **Carrossel Jota Fit:** 1080×1350, 7 slides, grafite + amarelo, Poppins (memoria/05).

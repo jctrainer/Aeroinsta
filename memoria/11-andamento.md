@@ -21,3 +21,5 @@
 ## 28/11/2026 — Site de apresentação no ar
 - jotafitpersonal.com.br publicado na Hostinger e confirmado pelo Jota. Inclui avaliação inicial online (cálculo no navegador, envio por WhatsApp), estudos de 2026, depoimentos (autorização escrita pendente), marca oficial, efeitos e som.
 - Pendente: trocar o link do site no Google Meu Negócio; links na bio do Instagram/TikTok; Search Console; site de venda (preço, planos, link de pagamento); 4 decisões de design (efeitos x "reduzir movimento", % na tela da mulher, palavra "bunda" no depoimento da Suni, som ligado).
+
+- 28/11/2026: regra "conectores sob demanda" criada (CLAUDE.md + memoria/10-ferramentas.md). O Jota desliga o que não usa; eu aviso ao fim de cada entrega.
