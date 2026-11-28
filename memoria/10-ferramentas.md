@@ -16,7 +16,7 @@
 - Rede com proxy: alguns sites/serviços são bloqueados (o site jotafitpersonal.com.br não abre daqui).
 - Área temporária da sessão (scratchpad) pode ser apagada; o que vale fica no repositório. Fotos de aluna e antes/depois **não** vão para o repositório.
 - Repositório: jctrainer/aeroinsta, branch de trabalho `claude/analise-video-passada-040h9r`. Commit e push ao final de cada entrega; PR só se o Jota pedir.
-- Skills úteis instaladas: social-media-skills (reels-script, hook-writer, caption-writer, content-calendar, instagram-seo, social-selling-and-dm, analytics-and-reporting), seo-local, remotion, motion-reel.
+- Skills úteis instaladas: social-media-skills (reels-script, hook-writer, caption-writer, content-calendar, instagram-seo, social-selling-and-dm, analytics-and-reporting), seo-local. Vídeos do Jota são feitos em CÓDIGO (Python + PIL/OpenCV + ffmpeg, scripts reels_v2.py etc.): Remotion e Motion Reel NUNCA foram usados e podem ficar desligados.
 
 
 ## Regra: conectores sob demanda (decisão do Jota, 28/11/2026; vale para TODOS os projetos)
@@ -32,3 +32,5 @@ Objetivo: economizar tokens, créditos e ruído. Cada conector/plugin ligado aum
 | **Usa de vez em quando** | Hostinger (site), Windsor.ai (Instagram, TikTok, Google Meu Negócio), Treinei/MT (alunas, só leitura), ElevenLabs (voz/imagem, gasta crédito), Canva | Ligar só no dia; pedir permissão se gastar ou editar conta |
 | **Não usou até hoje** | Gmail, Google Docs/Sheets/Slides/Drive, HeyGen HyperFrames, OpusClip, TikTok for Business (anúncios), Clinical Trials, Claude Docs, Claude Academy, Desktop Commander | Candidatos a desligar |
 | **Plugins sem relação com o negócio** | manufacturing, finance, carta-crm, product-management, marketing (Ahrefs, HubSpot, Klaviyo...), productivity (Slack, Notion...), animatedwebs, logo-maker, iMessage, Telegram, GitLab, BigQuery | Desligar |
+
+- 28/11/2026: Jota desligou na conta os conectores/plugins sem uso (Clinical Trials, Gmail, Google Docs/Drive/Sheets/Slides, HyperFrames, OpusClip, TikTok for Business, GitLab e a maioria dos plugins). Mantidos: PubMed, GitHub nativo, Hostinger, Windsor.ai, MT, ElevenLabs, Canva (conferir se ficou ligado), social-media-skills, anthropic-skills.
