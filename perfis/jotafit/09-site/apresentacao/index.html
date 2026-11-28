@@ -298,12 +298,39 @@ body.hc .cring.big{width:70px;height:70px;background:#F5C51826}
 .bar i{position:relative;overflow:hidden}
 .tab[aria-selected=true] b{animation:beat 1.4s infinite}
 @keyframes beat{50%{transform:scale(1.18)}}
+
+/* ===== v6: efeitos de treino ===== */
+.dots i{width:38px;height:17px;border-radius:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 18'%3E%3Cg fill='%23F5C518'%3E%3Crect x='1' y='4' width='5' height='10' rx='1.5'/%3E%3Crect x='6' y='1' width='5' height='16' rx='1.5'/%3E%3Crect x='11' y='7.5' width='18' height='3'/%3E%3Crect x='29' y='1' width='5' height='16' rx='1.5'/%3E%3Crect x='34' y='4' width='5' height='10' rx='1.5'/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat;rotate:var(--rt,-20deg)}
+.plate{position:fixed;top:-9px;left:0;z-index:101;width:22px;height:22px;translate:-11px 0;pointer-events:none;filter:drop-shadow(0 0 6px #F5C518aa)}
+.plate svg{width:100%;height:100%}
+.kg{position:fixed;top:14px;left:0;z-index:101;font-weight:800;font-size:.7rem;letter-spacing:.12em;color:#111;background:var(--y);padding:.15rem .5rem;border-radius:6px;translate:-50% 0;pointer-events:none;opacity:0;transition:opacity .3s}
+.kg.v{opacity:1}
+.rep{position:fixed;z-index:450;pointer-events:none;font-weight:800;font-size:1.05rem;color:var(--y);text-shadow:0 2px 8px #000;animation:repup 1s ease-out forwards}
+@keyframes repup{to{transform:translateY(-60px) scale(1.3);opacity:0}}
+.reps{position:fixed;left:18px;bottom:130px;z-index:80;background:#18181bee;border:1px solid var(--line);border-radius:14px;padding:.35rem .7rem;font-size:.68rem;font-weight:700;letter-spacing:.1em;color:#A7AAB1;text-align:center;line-height:1.2}
+.reps b{display:block;font-size:1.25rem;color:var(--y);transition:transform .2s}
+.reps.bump b{transform:scale(1.4)}
+.ecg{position:absolute;left:0;right:0;bottom:1.2rem;height:70px;opacity:.5;pointer-events:none;z-index:0}
+.ecg path{fill:none;stroke:var(--y);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:420 1200;animation:ecg 3.2s linear infinite;filter:drop-shadow(0 0 5px var(--y))}
+@keyframes ecg{from{stroke-dashoffset:420}to{stroke-dashoffset:-1200}}
+.float{animation:hb 1.6s infinite}
+@keyframes hb{0%,40%,100%{transform:scale(1)}10%{transform:scale(1.16)}20%{transform:scale(1)}30%{transform:scale(1.1)}}
+.intro .bell{position:absolute;top:calc(50% + 100px);left:50%;translate:-50% 0;display:flex;align-items:center}
+.intro .bell i{display:block;background:var(--y);border-radius:3px;transform:scaleY(0);animation:pl .35s var(--ease) forwards}
+.intro .bell .b{width:96px;height:6px;border-radius:3px;background:#6a6a70;transform:none;animation:none}
+.intro .bell .p1{width:12px;height:44px;animation-delay:.2s}.intro .bell .p2{width:12px;height:30px;animation-delay:.4s;opacity:.85}
+.intro .bell .l{display:flex;align-items:center;gap:3px;order:-1}.intro .bell .r{display:flex;align-items:center;gap:3px}
+@keyframes pl{to{transform:scaleY(1)}}
+.intro::after{display:none}
+
+.num.lift{animation:lift .8s var(--ease)}
+@keyframes lift{0%{transform:translateY(0)}35%{transform:translateY(-14px) scale(1.06)}100%{transform:none}}
 </style>
 </head>
 <body>
 <div class="cdot" id="cdot"></div><div class="cring" id="cring"></div>
-<div class="intro" id="intro"><img src="img/logo-marca.png" alt=""></div>
-<div class="prog" id="prog"></div>
+<div class="intro" id="intro"><img src="img/logo-marca.png" alt=""><div class="bell"><span class="l"><i class="p1"></i><i class="p2"></i></span><i class="b"></i><span class="r"><i class="p2"></i><i class="p1"></i></span></div></div>
+<div class="prog" id="prog"></div><div class="plate" id="plate"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#F5C518"/><circle cx="12" cy="12" r="7.5" fill="none" stroke="#111" stroke-width="1.5"/><circle cx="12" cy="12" r="2.5" fill="#111"/><path d="M12 4.5v3M12 16.5v3M4.5 12h3M16.5 12h3" stroke="#111" stroke-width="1.5"/></svg></div><div class="kg" id="kg">0 kg</div>
 
 
 <header id="hd"><div class="wrap hd">
@@ -461,6 +488,7 @@ body.hc .cring.big{width:70px;height:70px;background:#F5C51826}
 </div></footer>
 <a class="float" href="https://wa.me/5511989195208" target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg class="wa" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.2 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.4.7-2 .9-2.3.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5.2.6.8 2 .9 2.2.1.2.1.3 0 .5-.1.2-.2.3-.4.5l-.5.6c-.2.2-.4.4-.2.8.2.4.9 1.5 2 2.4 1.4 1.2 2.5 1.6 2.9 1.8.4.2.6.1.8-.1.2-.3.9-1 1.1-1.4.2-.4.5-.3.8-.2.3.1 1.9.9 2.2 1.1.3.1.5.2.6.3.1.2.1.8-.1 1.5Z"/></svg></a>
 <div class="seclab" id="seclab" aria-hidden="true"></div>
+<div class="reps" id="reps">REPS<b id="rc">0</b></div>
 <button class="snd" id="snd" aria-pressed="true" aria-label="Som dos cliques" title="Som dos cliques">♪</button>
 <button class="top" id="top" aria-label="Voltar ao topo">↑</button>
 
@@ -548,6 +576,19 @@ let auto=true,vis=false,cur=0;$('#tabs').addEventListener('click',()=>auto=false
 new IntersectionObserver(e=>vis=e[0].isIntersecting).observe($('#panel'));
 setInterval(()=>{if(auto&&vis){cur=(cur+1)%4;go(cur)}},4500);
 tabs.forEach((t,i)=>t.addEventListener('click',()=>cur=i));
+
+/* v6: treino */
+const plate=$('#plate'),kg=$('#kg');
+function trainBar(){const h=document.documentElement,y=h.scrollTop,m=h.scrollHeight-h.clientHeight,p=y/m,x=p*innerWidth;
+ plate.style.left=x+'px';plate.style.transform='rotate('+(y*.6)+'deg)';kg.style.left=Math.min(Math.max(x,30),innerWidth-30)+'px';kg.textContent=Math.round(p*100)+' kg';kg.classList.add('v');clearTimeout(window.__kt);window.__kt=setTimeout(()=>kg.classList.remove('v'),900)}
+addEventListener('scroll',trainBar,{passive:true});
+let reps=0;const rc=$('#rc'),rp=$('#reps');
+document.addEventListener('click',e=>{if(e.target.closest('#snd'))return;reps++;rc.textContent=reps;rp.classList.add('bump');setTimeout(()=>rp.classList.remove('bump'),200);
+ const t=document.createElement('div');t.className='rep';t.textContent='+1 REP';t.style.left=(e.clientX+8)+'px';t.style.top=(e.clientY-10)+'px';document.body.appendChild(t);setTimeout(()=>t.remove(),1000);
+ if(reps%12===0){const m=document.createElement('div');m.className='rep';m.textContent='SÉRIE COMPLETA! 💪';m.style.cssText=`left:${e.clientX-60}px;top:${e.clientY-40}px;font-size:1.3rem`;document.body.appendChild(m);setTimeout(()=>m.remove(),1000);sparks(e.clientX,e.clientY,26)}});
+$$('.dots i').forEach(i=>i.style.setProperty('--rt',(Math.random()*60-30)+'deg'));
+$$('.num').forEach(n=>n.addEventListener('mouseenter',()=>{n.classList.remove('lift');void n.offsetWidth;n.classList.add('lift')}));
+const hr=document.querySelector('.hero');if(hr){hr.insertAdjacentHTML('beforeend','<svg class="ecg" viewBox="0 0 1200 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40 H220 L240 40 L255 12 L275 62 L292 28 L305 40 H620 L640 40 L655 8 L678 64 L696 26 L710 40 H1200"/></svg>')}
 })();
 </script>
 </body>

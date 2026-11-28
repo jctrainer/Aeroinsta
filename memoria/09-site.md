@@ -24,3 +24,4 @@ Pedidos do Jota: sem posts embutidos, falar de como ele trabalha (Método Jota F
 ## v4 (site de apresentação): efeitos pedidos pelo Jota
 - Sem selo, sem cartão e sem frase sobre a foto do topo (Jota pediu tirar tudo). Sem "menopausa" na faixa; faixa: FORÇA, TREINO, CONSTÂNCIA, EVOLUÇÃO, DISCIPLINA, RESULTADO.
 - Animações sempre ativas (sem trava de reduzir-movimento, a pedido). Letras dos títulos saltam no mouse e giram no clique; faíscas e som nos cliques (botão ♪ liga/desliga); bolinhas subindo no topo.
+- v6 (efeitos de treino, pedido do Jota): anilha rolando na barra de progresso com "kg" (0–100), contador de REPS nos cliques ("+1 REP", "SÉRIE COMPLETA" a cada 12), halteres subindo no topo, linha de batimento (ECG), WhatsApp pulsando como batimento, abertura com barra de anilhas, números levantam ao passar o mouse.
