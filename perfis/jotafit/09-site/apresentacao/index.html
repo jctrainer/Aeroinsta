@@ -415,6 +415,79 @@ nav#nav a[href="#avaliacao"]::after{content:"";display:inline-block;width:7px;he
 .wnote{color:var(--mut);font-size:.8rem;line-height:1.6;margin:.9rem 0 0}
 @media(max-width:560px){.rgrid{grid-template-columns:1fr 1fr}}
 [hidden]{display:none!important}
+
+/* ===== v17: avaliação em 2 abas + gráficos ===== */
+.wiz{max-width:980px;border-radius:22px;padding:clamp(1.1rem,3vw,2rem)}
+.wtabs{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:1.6rem}
+.wtab{display:flex;align-items:center;gap:.8rem;padding:.9rem 1.1rem;border:1.5px solid var(--line);border-radius:14px;background:#ffffff05;color:var(--mut);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.82rem;transition:.3s var(--ease)}
+.wtab b{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:#ffffff10;color:#fff;font-size:.9rem;transition:.3s}
+.wtab.on{background:var(--y);border-color:var(--y);color:#111}.wtab.on b{background:#111;color:var(--y)}
+.wview{display:none;animation:paneIn .5s var(--ease)}.wview.on{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem 2rem}
+#v2.on{display:block}
+.wgrp h3{font-size:.95rem;text-transform:uppercase;letter-spacing:.12em;color:var(--y);margin:0 0 .9rem;font-weight:800;display:flex;gap:.6rem;align-items:baseline;flex-wrap:wrap}
+.wgrp h3 small{font-size:.7rem;letter-spacing:.05em;color:var(--mut);font-weight:600;text-transform:none}
+.wfull,#v1 .werr,#v1 .wnav{grid-column:1/-1}
+.opts{display:grid;gap:.6rem}.opts.c3{grid-template-columns:repeat(3,1fr)}.opts.c2{grid-template-columns:repeat(2,1fr)}.opts.c1{grid-template-columns:1fr}
+.opt{position:relative;display:flex;align-items:center;gap:.7rem;text-align:left;padding:.85rem .9rem;border:1.5px solid var(--line);border-radius:14px;background:#ffffff05;color:#e8e8ec;font-weight:600;font-size:.88rem;line-height:1.25;transition:.25s var(--ease);overflow:hidden}
+.opt i{flex:none;width:34px;height:34px;border-radius:10px;background:#ffffff0d;display:grid;place-items:center;color:var(--y);transition:.25s}
+.opt i svg{width:19px;height:19px}
+.opt u{position:absolute;right:.6rem;top:.6rem;width:16px;height:16px;border-radius:5px;border:1.5px solid #ffffff30;transition:.25s}
+.opt:hover{border-color:#F5C51877;transform:translateY(-2px)}
+.opt[aria-pressed=true]{border-color:var(--y);background:#F5C5181a;color:#fff}
+.opt[aria-pressed=true] i{background:var(--y);color:#111}
+.opt[aria-pressed=true] u{background:var(--y) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5 10.5l3.2 3.2L15 6.8' fill='none' stroke='%23111' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/100%;border-color:var(--y)}
+.wiz input[type=text],.wiz input[type=number],.wiz select{border-radius:12px}
+/* resultado */
+.rtop{display:grid;grid-template-columns:230px 1fr;gap:1.6rem;align-items:center;margin-bottom:1.4rem}
+.gauge{position:relative;width:210px;height:210px;margin:auto}.gauge svg{width:100%;height:100%}
+.gbg{fill:none;stroke:#2A2A30;stroke-width:12}.gfg{fill:none;stroke:url(#gradg);stroke:var(--y);stroke-width:12;stroke-linecap:round;filter:drop-shadow(0 0 8px #F5C51877)}
+.gnum{position:absolute;inset:0;display:grid;place-content:center;text-align:center}.gnum span{font-size:3rem;font-weight:800;color:#fff;line-height:1}.gnum small{color:var(--mut);font-size:.72rem;font-weight:600;line-height:1.3;margin-top:.3rem}
+.rcomp h4{margin:0 0 .9rem;font-size:.85rem;text-transform:uppercase;letter-spacing:.12em;color:var(--mut)}
+.cbar{display:flex;height:46px;border-radius:12px;overflow:hidden;background:#2A2A30}
+.cbar i{display:flex;align-items:center;justify-content:center;height:100%;transition:width 1.4s var(--ease);font-style:normal;overflow:hidden}.cbar em{font-style:normal;font-weight:800;font-size:.9rem}
+.cm{background:var(--y);color:#111}.cg{background:#5a5a62;color:#fff}
+.clg{display:flex;gap:1.2rem;flex-wrap:wrap;margin-top:.8rem;font-size:.82rem;color:#dadbdf;font-weight:600}.clg b{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:.5rem}.d1{background:var(--y)}.d2{background:#5a5a62}
+.meters{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-bottom:.4rem}
+.mt{background:#ffffff06;border:1px solid var(--line);border-radius:14px;padding:1rem}
+.mh{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.9rem}.mh b{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--mut)}.mh span{font-size:1.4rem;font-weight:800;color:#fff}
+.trk{position:relative;height:8px;border-radius:8px;background:linear-gradient(90deg,#3a3a42,#6b6b74 50%,#3a3a42)}
+.mk{position:absolute;top:50%;left:0;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;background:var(--y);border:3px solid #0C0C0C;box-shadow:0 0 0 2px var(--y),0 0 14px #F5C518aa;transition:left 1.6s var(--ease)}
+.mtk{display:flex;justify-content:space-between;margin-top:.6rem;font-size:.7rem;color:var(--mut);font-weight:600}
+#v2 .wnav{margin-top:1.2rem}
+@media(max-width:760px){.wview.on{grid-template-columns:1fr}.opts.c3{grid-template-columns:1fr 1fr}.rtop{grid-template-columns:1fr}.meters{grid-template-columns:1fr}.wtab span{font-size:.72rem}}
+@media(max-width:420px){.opts.c3,.opts.c2{grid-template-columns:1fr}}
+nav#nav a[href="#avaliacao"].on{color:#111}nav#nav a[href="#avaliacao"].on::after{background:#111}
+.wiz{max-width:none}
+.wdet{margin:1rem 0}.wdet summary{cursor:pointer;color:var(--y);font-weight:700;font-size:.85rem;padding:.4rem 0}.wdet .wprev{margin:.6rem 0 0}
+
+/* ===== v18: acabamento premium (menos "balões", mais linhas retas e precisão) ===== */
+::selection{background:var(--y);color:#111}
+.btn{border-radius:14px;letter-spacing:.02em;text-transform:none}
+.btn-y{background:linear-gradient(135deg,#FFD23F,#F5C518 55%,#E5B100)}
+.btn-o{border-radius:14px}
+nav a{border-radius:10px}
+.where span{border-radius:8px;text-transform:uppercase;letter-spacing:.08em;font-size:.7rem}
+.fq button i{border-radius:9px;width:32px;height:32px}
+.photo .back{border-radius:26px}.photo .frame .main,.photo .main{border-radius:26px}
+.card,.q,.flip .face,.panel,.wiz,.final,.about .box{border-radius:20px}
+.card{border:1px solid var(--line);transition:border-color .3s,transform .4s var(--ease),box-shadow .4s}
+.card:hover{border-color:#F5C51888;box-shadow:0 22px 60px -28px #F5C518aa}
+.kick{letter-spacing:.3em}.kick::before{width:36px}
+h2{letter-spacing:-.015em}
+/* docas: quadrados em vez de bolas */
+.snd,.top{width:42px;height:42px;border-radius:12px;left:16px;background:#141416f2;border:1px solid #ffffff1c}
+.snd{bottom:64px}.top{bottom:16px}
+.float{width:auto;height:54px;border-radius:14px;padding:0 1.2rem;gap:.6rem;display:flex;align-items:center;right:16px;bottom:16px}
+.float::before{border-radius:14px}
+.float::after{content:"WhatsApp";font-weight:800;font-size:.9rem;letter-spacing:.02em}
+@media(max-width:640px){.float::after{content:"Chamar";}}
+.seclab a{border-radius:3px;width:6px;height:18px;aspect-ratio:auto}.seclab a.on{height:30px;transform:none}
+/* linhas finas de acabamento */
+section{position:relative}
+section.alt{border-top:1px solid #ffffff0d;border-bottom:1px solid #ffffff0d}
+.ic{border-radius:12px}
+.logo img{border-radius:0}
+.float::before{display:none}
 </style>
 </head>
 <body>
@@ -468,35 +541,37 @@ nav#nav a[href="#avaliacao"]::after{content:"";display:inline-block;width:7px;he
 
 <section id="avaliacao" class="ava"><div class="wrap">
  <div class="kick rv">Avaliação inicial</div><h2 class="rv">Comece pela sua <em>avaliação</em></h2>
- <p class="sub rv">Leva 2 minutos. Você preenche as suas medidas, vê a estimativa na hora e envia tudo para o meu WhatsApp. Eu analiso e te respondo pessoalmente.</p>
+ <p class="sub rv">Leva 2 minutos. Você preenche, vê o resultado com gráfico na hora e envia tudo para o meu WhatsApp. Eu analiso e te respondo pessoalmente.</p>
  <form class="wiz rv" id="wiz" novalidate autocomplete="off">
-  <div class="wsteps" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i></div>
-  <fieldset class="wp on" data-s="0"><legend>1. Sobre você</legend>
-   <label>Seu nome<input id="w_nome" type="text" maxlength="60" placeholder="Como posso te chamar?"></label>
-   <div class="row2"><label>Idade<input id="w_idade" type="number" inputmode="numeric" min="18" max="90" placeholder="anos"></label>
-   <label>Sexo<select id="w_sexo"><option value="F">Feminino</option><option value="M">Masculino</option></select></label></div>
-   <label class="chk"><input id="w_gravida" type="checkbox"> Estou grávida ou amamentando</label>
-   <p class="werr" id="e0"></p></fieldset>
-  <fieldset class="wp" data-s="1"><legend>2. Altura e peso</legend>
-   <div class="row2"><label>Altura<input id="w_alt" type="number" inputmode="decimal" min="120" max="220" placeholder="cm"></label>
-   <label>Peso<input id="w_peso" type="number" inputmode="decimal" min="30" max="250" placeholder="kg"></label></div>
-   <p class="wtip">Pese-se de manhã, sem roupa pesada, se puder.</p><p class="werr" id="e1"></p></fieldset>
-  <fieldset class="wp" data-s="2"><legend>3. Medidas</legend>
-   <div class="row3"><label>Pescoço<input id="w_pesc" type="number" inputmode="decimal" min="20" max="60" placeholder="cm"></label>
-   <label>Cintura<input id="w_cint" type="number" inputmode="decimal" min="40" max="200" placeholder="cm"></label>
-   <label id="lq">Quadril<input id="w_quad" type="number" inputmode="decimal" min="60" max="200" placeholder="cm"></label></div>
-   <ul class="wtip"><li><b>Pescoço:</b> logo abaixo do pomo de adão ou da garganta.</li><li><b>Cintura:</b> na parte mais estreita do tronco, ou na altura do umbigo.</li><li><b>Quadril:</b> na parte mais larga.</li><li>Fita métrica rente à pele, sem apertar, após expirar normalmente.</li></ul><p class="werr" id="e2"></p></fieldset>
-  <fieldset class="wp" data-s="3"><legend>4. Qual é o seu objetivo?</legend>
-   <p class="wtip" style="margin-bottom:.9rem">Escolha o que mais combina com você agora.</p>
-   <div class="chips" id="wobj"><button type="button" class="chip" aria-pressed="false">Firmar o corpo</button><button type="button" class="chip" aria-pressed="false">Ganhar força e músculo</button><button type="button" class="chip" aria-pressed="false">Cuidar do corpo na menopausa</button><button type="button" class="chip" aria-pressed="false">Voltar a treinar com segurança</button><button type="button" class="chip" aria-pressed="false">Outro</button></div>
-   <label style="margin-top:1.2rem">Quer contar mais? (opcional)<textarea id="w_obs" maxlength="200" rows="3" placeholder="Ex.: treino há pouco tempo, tenho dor no joelho, quero treinar em casa..."></textarea></label>
-   <p class="werr" id="e3"></p></fieldset>
-  <fieldset class="wp" data-s="4"><legend>5. Seu resultado</legend>
+  <div class="wtabs" role="tablist"><button type="button" class="wtab on" id="tab1" role="tab" aria-selected="true"><b>1</b><span>Preencher</span></button><button type="button" class="wtab" id="tab2" role="tab" aria-selected="false"><b>2</b><span>Resultado</span></button></div>
+  <div class="wview on" id="v1">
+   <div class="wgrp"><h3>Sobre você</h3>
+    <label>Seu nome<input id="w_nome" type="text" maxlength="60" placeholder="Como posso te chamar?"></label>
+    <div class="row3"><label>Idade<input id="w_idade" type="number" inputmode="numeric" min="18" max="90" placeholder="anos"></label>
+    <label>Altura<input id="w_alt" type="number" inputmode="decimal" min="120" max="220" placeholder="cm"></label>
+    <label>Peso<input id="w_peso" type="number" inputmode="decimal" min="30" max="250" placeholder="kg"></label></div>
+    <div class="row2"><label>Sexo<select id="w_sexo"><option value="F">Feminino</option><option value="M">Masculino</option></select></label><span></span></div>
+    <label class="chk"><input id="w_gravida" type="checkbox"> Estou grávida ou amamentando</label></div>
+   <div class="wgrp"><h3>Medidas</h3>
+    <div class="row3"><label>Pescoço<input id="w_pesc" type="number" inputmode="decimal" min="20" max="60" placeholder="cm"></label>
+    <label>Cintura<input id="w_cint" type="number" inputmode="decimal" min="40" max="200" placeholder="cm"></label>
+    <label id="lq">Quadril<input id="w_quad" type="number" inputmode="decimal" min="60" max="200" placeholder="cm"></label></div>
+    <ul class="wtip"><li><b>Pescoço:</b> logo abaixo do pomo de adão ou da garganta.</li><li><b>Cintura:</b> na parte mais estreita do tronco, ou na altura do umbigo.</li><li><b>Quadril:</b> na parte mais larga.</li><li>Fita métrica rente à pele, sem apertar, após expirar normalmente.</li></ul></div>
+   <div class="wgrp wfull"><h3>Qual é o seu objetivo? <small>escolha até 3</small></h3>
+    <div class="opts c3" data-g="obj" data-multi="1"><button type="button" class="opt" aria-pressed="false" data-v="Emagrecimento"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v14M6 12l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span>Emagrecimento</span><u></u></button><button type="button" class="opt" aria-pressed="false" data-v="Hipertrofia"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6M6 6v12M18 6v12M21 9v6M6 12h12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></i><span>Hipertrofia</span><u></u></button><button type="button" class="opt" aria-pressed="false" data-v="Definição e firmeza"><i><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="2.2" fill="currentColor"/><path d="M7 21l2-8-2-3h10l-2 3 2 8M9 13h6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span>Definição e firmeza</span><u></u></button><button type="button" class="opt" aria-pressed="false" data-v="Saúde e bem-estar"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.6-7-10a4 4 0 0 1 7-2.4A4 4 0 0 1 19 10c0 5.4-7 10-7 10z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg></i><span>Saúde e bem-estar</span><u></u></button><button type="button" class="opt" aria-pressed="false" data-v="Condicionamento"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3L5 14h6l-1 7 8-11h-6z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg></i><span>Condicionamento</span><u></u></button><button type="button" class="opt" aria-pressed="false" data-v="Menopausa e longevidade"><i><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="2.4" fill="currentColor"/><path d="M12 9.6V4M12 14.4V20M9.6 12H4M14.4 12H20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></i><span>Menopausa e longevidade</span><u></u></button></div></div>
+   <div class="wgrp"><h3>Seu nível</h3><div class="opts c1" data-g="nivel" data-multi="0"><button type="button" class="opt" aria-pressed="false" data-v="Iniciante"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h5v-5h5v-5h6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span>Iniciante</span><u></u></button><button type="button" class="opt" aria-pressed="false" data-v="Intermediário"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h5v-5h5v-5h6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span>Intermediário</span><u></u></button><button type="button" class="opt" aria-pressed="false" data-v="Avançado"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h5v-5h5v-5h6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span>Avançado</span><u></u></button></div></div>
+   <div class="wgrp"><h3>Dias de treino por semana</h3><div class="opts c2" data-g="dias" data-multi="0"><button type="button" class="opt" aria-pressed="false" data-v="2 dias"><i><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M4 10h16M9 3v4M15 3v4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></i><span>2 dias</span><u></u></button><button type="button" class="opt" aria-pressed="false" data-v="3 dias"><i><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M4 10h16M9 3v4M15 3v4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></i><span>3 dias</span><u></u></button><button type="button" class="opt" aria-pressed="false" data-v="4 dias"><i><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M4 10h16M9 3v4M15 3v4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></i><span>4 dias</span><u></u></button><button type="button" class="opt" aria-pressed="false" data-v="5 ou mais"><i><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M4 10h16M9 3v4M15 3v4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></i><span>5 ou mais</span><u></u></button></div></div>
+   <div class="wgrp wfull"><h3>Onde você treina?</h3><div class="opts c3" data-g="local" data-multi="0"><button type="button" class="opt" aria-pressed="false" data-v="Academia"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6 7-11a7 7 0 0 0-14 0c0 5 7 11 7 11z" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="12" cy="10" r="2.4" fill="currentColor"/></svg></i><span>Academia</span><u></u></button><button type="button" class="opt" aria-pressed="false" data-v="Em casa"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6 7-11a7 7 0 0 0-14 0c0 5 7 11 7 11z" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="12" cy="10" r="2.4" fill="currentColor"/></svg></i><span>Em casa</span><u></u></button><button type="button" class="opt" aria-pressed="false" data-v="Ainda não treino"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6 7-11a7 7 0 0 0-14 0c0 5 7 11 7 11z" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="12" cy="10" r="2.4" fill="currentColor"/></svg></i><span>Ainda não treino</span><u></u></button></div></div>
+   <p class="werr" id="e1"></p>
+   <div class="wnav"><button type="button" class="btn btn-y mag" id="wcalc">Calcular minha avaliação</button></div>
+  </div>
+  <div class="wview" id="v2">
    <div class="wres" id="wres"></div>
-   <div class="wprev" id="wprev"></div>
+   <details class="wdet"><summary>Ver o que será enviado</summary><div class="wprev" id="wprev"></div></details>
    <label class="chk"><input id="w_ok" type="checkbox"> Autorizo enviar estes dados e o resultado ao Jota pelo WhatsApp para receber minha análise. Este site não guarda nenhuma informação.</label>
-   <p class="werr" id="e4"></p></fieldset>
-  <div class="wnav"><button type="button" class="btn btn-o" id="wback" hidden>Voltar</button><button type="button" class="btn btn-y mag" id="wnext">Continuar</button><a class="btn btn-y mag" id="wsend" href="#" target="_blank" rel="noopener" hidden>Enviar para o Jota no WhatsApp</a></div>
+   <p class="werr" id="e2"></p>
+   <div class="wnav"><button type="button" class="btn btn-o" id="wedit">Editar medidas</button><a class="btn btn-y mag" id="wsend" href="#" target="_blank" rel="noopener">Enviar resultado para o Jota</a></div>
+  </div>
  </form>
  <p class="note rv">É uma avaliação inicial, uma estimativa a partir de medidas. Não é diagnóstico e não substitui avaliação médica ou física completa.</p>
 </div></section>
@@ -596,20 +671,7 @@ nav#nav a[href="#avaliacao"]::after{content:"";display:inline-block;width:7px;he
  <p class="note rv">Relatos de alunas, trechos de mensagens enviadas ao Jota. Cada pessoa responde de um jeito: os resultados variam.</p>
 </div></section>
 
-<section><div class="wrap"><div class="quiz rv">
- <div class="kick" style="justify-content:center">Comece por aqui</div>
- <h2 style="margin-top:.8rem">Qual é o seu <span style="white-space:nowrap"><em>objetivo</em>?</span></h2>
- <div class="chips" id="chips">
-  <button class="chip" aria-pressed="false">Firmar o corpo e mudar as medidas</button>
-  <button class="chip" aria-pressed="false">Cuidar do corpo na menopausa</button>
-  <button class="chip" aria-pressed="false">Ganhar força e músculo</button>
-  <button class="chip" aria-pressed="false">Voltar a treinar com segurança</button>
-  <button class="chip" aria-pressed="false">Treinar na gestação</button>
-  <button class="chip" aria-pressed="false">Ainda não sei</button>
- </div>
- <a class="btn btn-y mag" id="qwa" href="https://wa.me/5511989195208" target="_blank" rel="noopener"><svg class="wa" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.2 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.4.7-2 .9-2.3.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5.2.6.8 2 .9 2.2.1.2.1.3 0 .5-.1.2-.2.3-.4.5l-.5.6c-.2.2-.4.4-.2.8.2.4.9 1.5 2 2.4 1.4 1.2 2.5 1.6 2.9 1.8.4.2.6.1.8-.1.2-.3.9-1 1.1-1.4.2-.4.5-.3.8-.2.3.1 1.9.9 2.2 1.1.3.1.5.2.6.3.1.2.1.8-.1 1.5Z"/></svg>Chamar no WhatsApp</a>
- <div class="msg" id="msg">Escolha uma opção e eu já abro a conversa com o seu assunto.</div>
-</div></div></section>
+
 
 <section id="duvidas" class="alt"><div class="wrap">
  <div class="kick rv">Dúvidas</div><h2 class="rv">Perguntas <em>frequentes</em></h2>
@@ -684,11 +746,7 @@ $('#tabs').addEventListener('keydown',e=>{const i=tabs.findIndex(t=>t.getAttribu
 $$('.flip').forEach(f=>f.onclick=()=>f.classList.toggle('on'));
 /* FAQ */
 $$('.fq button').forEach(b=>b.onclick=()=>{const f=b.parentElement,on=f.classList.contains('on');$$('.fq').forEach(x=>x.classList.remove('on'));if(!on)f.classList.add('on')});
-/* objetivo -> WhatsApp */
-const chips=$$('.chip'),qwa=$('#qwa'),msg=$('#msg');
-chips.forEach(c=>c.onclick=()=>{chips.forEach(x=>x.setAttribute('aria-pressed','false'));c.setAttribute('aria-pressed','true');
- const t='Oi, Jota! Vim pelo site. Meu objetivo é: '+c.textContent.toLowerCase()+'. Pode me explicar como funciona a consultoria?';
- qwa.href='https://wa.me/5511989195208?text='+encodeURIComponent(t);msg.textContent='Pronto! Ao clicar, a conversa abre com o seu objetivo já escrito.'});
+
 
 /* v3 */
 $$('.btn').forEach(b=>b.addEventListener('click',e=>{if(reduce)return;const r=b.getBoundingClientRect(),d=Math.max(r.width,r.height),s=document.createElement('span');s.className='rip';s.style.cssText=`width:${d}px;height:${d}px;left:${e.clientX-r.left-d/2}px;top:${e.clientY-r.top-d/2}px`;b.appendChild(s);setTimeout(()=>s.remove(),700)}));
@@ -744,52 +802,54 @@ const hr=document.querySelector('.hero');if(hr){hr.insertAdjacentHTML('beforeend
   setTimeout(()=>{tone(784,.35,'sine',.08);setTimeout(()=>tone(1046,.5,'sine',.07),140)},350+cs.length*560)},{threshold:.4});
  io2.observe(evo)})();
 
-/* avaliação inicial: cálculo no navegador, nada é guardado */
-(function(){const f=$('#wiz');if(!f)return;let st=0,R=null;const P=$$('.wp'),dots=$$('.wsteps i'),next=$('#wnext'),back=$('#wback'),send=$('#wsend');
- const v=id=>$(id).value.trim(),n=id=>parseFloat(String($(id).value).replace(',','.'));
- let obj='';const objs=$$('#wobj .chip');objs.forEach(c=>c.onclick=()=>{objs.forEach(x=>x.setAttribute('aria-pressed','false'));c.setAttribute('aria-pressed','true');obj=c.textContent});
- const fem=()=>$('#w_sexo').value==='F';
- $('#w_sexo').onchange=()=>{$('#lq').style.display=fem()?'':'none'};
+/* avaliação inicial: duas abas, cálculo no navegador, nada é guardado */
+(function(){const f=$('#wiz');if(!f)return;let R=null;const v=id=>$(id).value.trim(),n=id=>parseFloat(String($(id).value).replace(',','.'));
+ const fem=()=>$('#w_sexo').value==='F';$('#w_sexo').onchange=()=>{$('#lq').style.display=fem()?'':'none'};
  const f1=x=>x.toFixed(1).replace('.',','),f2=x=>x.toFixed(2).replace('.',',');
- function err(i,m,ids){$('#e'+i).textContent=m;(ids||[]).forEach(x=>$(x).classList.add('bad'));return false}
- function clear(){$$('.wiz .bad').forEach(e=>e.classList.remove('bad'));$$('.werr').forEach(e=>e.textContent='')}
+ const sel={obj:[],nivel:[],dias:[],local:[]};
+ $$('.opts').forEach(g=>{const k=g.dataset.g,multi=g.dataset.multi==='1';g.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{const val=b.dataset.v,on=b.getAttribute('aria-pressed')==='true';
+  if(multi){if(on){sel[k]=sel[k].filter(x=>x!==val);b.setAttribute('aria-pressed','false')}else{if(sel[k].length>=3){$('#e1').textContent='Escolha no máximo 3 objetivos.';return}sel[k].push(val);b.setAttribute('aria-pressed','true')}}
+  else{g.querySelectorAll('.opt').forEach(x=>x.setAttribute('aria-pressed','false'));sel[k]=[val];b.setAttribute('aria-pressed','true')}
+  $('#e1').textContent='';if(typeof sfx!=='undefined')sfx.tick()})});
+ function err(m,ids){$('#e1').textContent=m;(ids||[]).forEach(x=>$(x).classList.add('bad'));$('#e1').scrollIntoView({block:'center',behavior:'smooth'});if(typeof tone==='function')tone(180,.15,'sawtooth',.04);return false}
+ function clear(){$$('.wiz .bad').forEach(e=>e.classList.remove('bad'));$('#e1').textContent=''}
+ function validate(){clear();
+  if(v('#w_nome').length<2)return err('Me diga o seu nome.',['#w_nome']);
+  const a=n('#w_idade');if(!(a>=18&&a<=90))return err('Esta avaliação é para maiores de 18 anos (informe entre 18 e 90).',['#w_idade']);
+  if($('#w_gravida').checked){$('#e1').innerHTML='Na gravidez e na amamentação as medidas mudam e esta estimativa não vale. <a href="https://wa.me/5511989195208?text=Oi%2C%20Jota!%20Estou%20gr%C3%A1vida%20ou%20amamentando%20e%20quero%20saber%20como%20treinar." target="_blank" rel="noopener" style="color:#F5C518;text-decoration:underline">Fale direto comigo no WhatsApp</a>.';return false}
+  const h=n('#w_alt'),p=n('#w_peso');if(!(h>=120&&h<=220))return err('Altura em centímetros, entre 120 e 220. Ex.: 162.',['#w_alt']);if(!(p>=30&&p<=250))return err('Peso em quilos, entre 30 e 250.',['#w_peso']);
+  const pe=n('#w_pesc'),c=n('#w_cint'),q=n('#w_quad');if(!(pe>=20&&pe<=60))return err('Pescoço em centímetros, entre 20 e 60.',['#w_pesc']);if(!(c>=40&&c<=200))return err('Cintura em centímetros, entre 40 e 200.',['#w_cint']);if(fem()&&!(q>=60&&q<=200))return err('Quadril em centímetros, entre 60 e 200.',['#w_quad']);if(!fem()&&c<=pe)return err('A cintura precisa ser maior que o pescoço. Confira as medidas.',['#w_cint','#w_pesc']);
+  if(!sel.obj.length)return err('Escolha pelo menos um objetivo.');if(!sel.nivel.length)return err('Escolha o seu nível.');if(!sel.dias.length)return err('Escolha quantos dias por semana você treina.');if(!sel.local.length)return err('Escolha onde você treina.');
+  return true}
  function calc(){const h=n('#w_alt'),p=n('#w_peso'),pe=n('#w_pesc'),c=n('#w_cint'),q=n('#w_quad');let d;
-  if(fem()){if(c+q-pe<=0)return null;d=1.29579-0.35004*Math.log10(c+q-pe)+0.22100*Math.log10(h)}
-  else{if(c-pe<=0)return null;d=1.0324-0.19077*Math.log10(c-pe)+0.15456*Math.log10(h)}
-  const bf=495/d-450;if(!isFinite(bf)||bf<3||bf>60)return null;
-  const gm=p*bf/100;return{bf,gm,mm:p-gm,imc:p/Math.pow(h/100,2),wht:c/h}}
- function ok(i){clear();
-  if(i===0){if(v('#w_nome').length<2)return err(0,'Me diga o seu nome.',['#w_nome']);const a=n('#w_idade');if(!(a>=18&&a<=90))return err(0,'Esta avaliação é para maiores de 18 anos (informe entre 18 e 90).',['#w_idade']);return true}
-  if(i===1){const h=n('#w_alt'),p=n('#w_peso');if(!(h>=120&&h<=220))return err(1,'Altura em centímetros, entre 120 e 220. Ex.: 162.',['#w_alt']);if(!(p>=30&&p<=250))return err(1,'Peso em quilos, entre 30 e 250.',['#w_peso']);return true}
-  if(i===2){const a=n('#w_pesc'),c=n('#w_cint'),q=n('#w_quad');if(!(a>=20&&a<=60))return err(2,'Pescoço em centímetros, entre 20 e 60.',['#w_pesc']);if(!(c>=40&&c<=200))return err(2,'Cintura em centímetros, entre 40 e 200.',['#w_cint']);if(fem()&&!(q>=60&&q<=200))return err(2,'Quadril em centímetros, entre 60 e 200.',['#w_quad']);if(!fem()&&c<=a)return err(2,'A cintura precisa ser maior que o pescoço. Confira as medidas.',['#w_cint','#w_pesc']);return true}
-  if(i===3){if(!obj)return err(3,'Escolha o seu objetivo.');return true}
-  if(i===4){if(!$('#w_ok').checked)return err(4,'Marque a autorização para enviar.');return true}
- }
- function text(){const g=$('#w_gravida').checked;let t='Oi, Jota! Fiz a avaliação inicial no site.\n\n';
-  t+='Nome: '+v('#w_nome')+'\nIdade: '+n('#w_idade')+' anos | Sexo: '+(fem()?'feminino':'masculino')+'\n';
-  t+='Altura: '+n('#w_alt')+' cm | Peso: '+n('#w_peso')+' kg\nPescoço: '+n('#w_pesc')+' cm | Cintura: '+n('#w_cint')+' cm';
-  if(fem())t+=' | Quadril: '+n('#w_quad')+' cm';
-  t+='\n\nObjetivo: '+obj;if(v('#w_obs'))t+='\nObservação: '+v('#w_obs');
-  if(R){t+='\n\nResultado da estimativa (método da Marinha dos EUA):\n';t+='Gordura corporal: '+f1(R.bf)+'%\nMassa gorda: '+f1(R.gm)+' kg | Massa magra: '+f1(R.mm)+' kg\nIMC: '+f1(R.imc)+' | Cintura/altura: '+f2(R.wht)}
+  if(fem())d=1.29579-0.35004*Math.log10(c+q-pe)+0.22100*Math.log10(h);else d=1.0324-0.19077*Math.log10(c-pe)+0.15456*Math.log10(h);
+  const bf=495/d-450;if(!isFinite(bf)||bf<3||bf>60)return null;const gm=p*bf/100;return{bf,gm,mm:p-gm,imc:p/Math.pow(h/100,2),wht:c/h,p}}
+ function text(){let t='Oi, Jota! Fiz a avaliação inicial no site.\n\n';
+  t+='Nome: '+v('#w_nome')+'\nIdade: '+n('#w_idade')+' anos | Sexo: '+(fem()?'feminino':'masculino')+'\nAltura: '+n('#w_alt')+' cm | Peso: '+n('#w_peso')+' kg\nPescoço: '+n('#w_pesc')+' cm | Cintura: '+n('#w_cint')+' cm'+(fem()?' | Quadril: '+n('#w_quad')+' cm':'');
+  t+='\n\nObjetivo: '+sel.obj.join(', ')+'\nNível: '+sel.nivel[0]+' | Treino: '+sel.dias[0]+' por semana | Local: '+sel.local[0];
+  if(R)t+='\n\nResultado da estimativa (método da Marinha dos EUA):\nGordura corporal: '+f1(R.bf)+'%\nMassa gorda: '+f1(R.gm)+' kg | Massa magra: '+f1(R.mm)+' kg\nIMC: '+f1(R.imc)+' | Cintura/altura: '+f2(R.wht);
   else t+='\n\nNão consegui estimar a gordura corporal com essas medidas.';
-  t+='\n\nPode me responder com a análise?';return t}
+  return t+'\n\nPode me responder com a análise?'}
+ function build(){const t=text();$('#wprev').textContent='O que vai para o seu WhatsApp:\n\n'+t;$('#wsend').href='https://wa.me/5511989195208?text='+encodeURIComponent(t)}
+ const pos=(x,a,b)=>Math.max(0,Math.min(100,(x-a)/(b-a)*100));
  function showRes(){R=calc();const b=$('#wres');
-  if(!R){b.innerHTML='<p class="wnote">Não consegui estimar com essas medidas. Confira se estão em centímetros e sem apertar a fita. Você pode enviar mesmo assim e eu te ajudo a medir.</p>';return}
-  b.innerHTML='<div class="rbig"><span id="rpct">0,0</span><small>% de gordura corporal (estimativa)</small><div class="rbar"><i id="rfill"></i></div></div>'+
-   '<div class="rgrid"><div><b>'+f1(R.gm)+' kg</b><span>massa gorda estimada</span></div><div><b>'+f1(R.mm)+' kg</b><span>massa magra estimada</span></div><div><b>'+f1(R.imc)+'</b><span>IMC</span></div><div><b>'+f2(R.wht)+'</b><span>cintura ÷ altura</span></div></div>'+
+  if(!R){b.innerHTML='<p class="wnote">Não consegui estimar com essas medidas. Confira se estão em centímetros e sem apertar a fita. Você pode enviar mesmo assim e eu te ajudo a medir.</p>';build();return}
+  const C=2*Math.PI*54;
+  b.innerHTML='<div class="rtop"><div class="gauge"><svg viewBox="0 0 140 140"><circle cx="70" cy="70" r="54" class="gbg"/><circle cx="70" cy="70" r="54" class="gfg" id="gfg" stroke-dasharray="'+C+'" stroke-dashoffset="'+C+'" transform="rotate(-90 70 70)"/></svg><div class="gnum"><span id="rpct">0,0</span><small>% de gordura<br>corporal</small></div></div>'+
+   '<div class="rcomp"><h4>Composição estimada</h4><div class="cbar"><i class="cm" id="cm" style="width:0"><em id="cmt"></em></i><i class="cg" id="cg" style="width:0"><em id="cgt"></em></i></div><div class="clg"><span><b class="d1"></b>Massa magra '+f1(R.mm)+' kg</span><span><b class="d2"></b>Massa gorda '+f1(R.gm)+' kg</span></div></div></div>'+
+   '<div class="meters"><div class="mt"><div class="mh"><b>IMC</b><span>'+f1(R.imc)+'</span></div><div class="trk"><i class="mk" data-p="'+pos(R.imc,15,40)+'"></i></div><div class="mtk"><span>15</span><span>40</span></div></div>'+
+   '<div class="mt"><div class="mh"><b>Cintura ÷ altura</b><span>'+f2(R.wht)+'</span></div><div class="trk"><i class="mk" data-p="'+pos(R.wht,0.3,0.7)+'"></i></div><div class="mtk"><span>0,30</span><span>0,70</span></div></div></div>'+
    '<p class="wnote">Isto é uma estimativa feita só com fita métrica (método da Marinha dos EUA). Ela pode errar bastante de pessoa para pessoa e não é diagnóstico. Use como ponto de partida: eu interpreto com você na conversa.</p>';
-  const t0=performance.now(),to=R.bf;(function an(t){const k=Math.min((t-t0)/1300,1),e=1-Math.pow(1-k,3);$('#rpct').textContent=f1(to*e);$('#rfill').style.width=Math.min(to*e/50*100,100)+'%';if(k<1)requestAnimationFrame(an)})(t0);
-  if(typeof tone==='function'){tone(523,.15,'triangle',.07);setTimeout(()=>tone(784,.25,'triangle',.07),150)}}
- function build(){const t=text();$('#wprev').textContent='O que vai para o seu WhatsApp:\n\n'+t;send.href='https://wa.me/5511989195208?text='+encodeURIComponent(t)}
- function show(i){st=i;P.forEach((p,k)=>p.classList.toggle('on',k===i));dots.forEach((d,k)=>d.classList.toggle('on',k<=i));back.hidden=i===0;next.hidden=i===4;send.hidden=i!==4;if(i===4){showRes();build()}clear()}
- next.onclick=()=>{if(!ok(st)){if(typeof tone==='function')tone(180,.15,'sawtooth',.04);return}
-  if(st===0&&$('#w_gravida').checked){ $('#e0').innerHTML='Na gravidez e na amamentação as medidas mudam e esta estimativa não vale. <a href="https://wa.me/5511989195208?text=Oi%2C%20Jota!%20Estou%20gr%C3%A1vida%20ou%20amamentando%20e%20quero%20saber%20como%20treinar." target="_blank" rel="noopener" style="color:#F5C518;text-decoration:underline">Fale direto comigo no WhatsApp</a>.';return}
-  if(typeof sfx!=='undefined')sfx.tick();show(st+1)};
- back.onclick=()=>{if(typeof sfx!=='undefined')sfx.tick();show(st-1)};
- f.addEventListener('input',()=>{if(st===4)build()});
- send.addEventListener('click',e=>{if(!ok(4)){e.preventDefault();return}build()});
- f.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.tagName!=='BUTTON'&&e.target.tagName!=='TEXTAREA'){e.preventDefault();if(st<4)next.click()}});
- show(0)})();
+  build();
+  const t0=performance.now()+250,to=R.bf;(function an(t){const k=Math.max(0,Math.min((t-t0)/1500,1)),e=1-Math.pow(1-k,3);$('#rpct').textContent=f1(to*e);$('#gfg').style.strokeDashoffset=C*(1-Math.min(to*e/60,1));if(k<1)requestAnimationFrame(an)})(t0);
+  setTimeout(()=>{const tot=R.mm+R.gm;$('#cm').style.width=(R.mm/tot*100)+'%';$('#cg').style.width=(R.gm/tot*100)+'%';$('#cmt').textContent=Math.round(R.mm/tot*100)+'%';$('#cgt').textContent=Math.round(R.gm/tot*100)+'%'},300);
+  setTimeout(()=>$$('.mk').forEach(m=>m.style.left=m.dataset.p+'%'),700);
+  if(typeof tone==='function'){[523,659,784].forEach((q,i)=>setTimeout(()=>tone(q,.2,'triangle',.07),250+i*260));setTimeout(()=>{tone(1046,.45,'sine',.07)},1250)}}
+ function tab(i){$('#tab1').classList.toggle('on',i===1);$('#tab2').classList.toggle('on',i===2);$('#tab1').setAttribute('aria-selected',i===1);$('#tab2').setAttribute('aria-selected',i===2);$('#v1').classList.toggle('on',i===1);$('#v2').classList.toggle('on',i===2);f.scrollIntoView({block:'start',behavior:'smooth'})}
+ $('#wcalc').onclick=()=>{if(!validate())return;showRes();tab(2)};
+ $('#tab2').onclick=()=>{if(validate()){showRes();tab(2)}};$('#tab1').onclick=()=>tab(1);$('#wedit').onclick=()=>tab(1);
+ $('#wsend').addEventListener('click',e=>{if(!$('#w_ok').checked){e.preventDefault();$('#e2').textContent='Marque a autorização para enviar.';if(typeof tone==='function')tone(180,.15,'sawtooth',.04);return}$('#e2').textContent='';build()});
+ f.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.tagName==='INPUT'&&e.target.type!=='checkbox'){e.preventDefault()}})})();
 })();
 </script>
 </body>
