@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://jotafitpersonal.com.br/sitemap.xml
