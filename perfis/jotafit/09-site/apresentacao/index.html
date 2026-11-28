@@ -283,9 +283,25 @@ h1,h2{cursor:pointer;-webkit-user-select:none;user-select:none}
 .btn:hover{animation:wig .5s}
 @keyframes wig{25%{transform:rotate(-2deg) scale(1.03)}75%{transform:rotate(2deg) scale(1.03)}}
 .photo .tag{background:none!important;border:0!important;box-shadow:none!important;padding:0!important;left:22px!important;bottom:26px!important}.photo .tag .tt{font-size:1.15rem;letter-spacing:.14em;color:#F5C518;text-shadow:0 2px 14px #000,0 0 4px #000}
+
+/* ===== v5 ===== */
+.cdot,.cring{position:fixed;left:0;top:0;pointer-events:none;z-index:500;border-radius:50%;translate:-50% -50%;opacity:0;transition:opacity .3s,width .25s,height .25s,background .25s,border-color .25s}
+.cdot{width:8px;height:8px;background:var(--y)}
+.cring{width:38px;height:38px;border:2px solid var(--y)}
+body.hc .cdot,body.hc .cring{opacity:1}
+body.hc .cring.big{width:70px;height:70px;background:#F5C51826}
+@media(hover:hover) and (pointer:fine){body.hc,body.hc a,body.hc button{cursor:none}}
+.photo .main{clip-path:inset(0 0 100% 0);animation:phr 1.2s 1.2s var(--ease) forwards}
+@keyframes phr{to{clip-path:inset(0)}}
+.photo .back{animation:floaty 7s ease-in-out infinite}
+@keyframes floaty{50%{transform:rotate(-2deg) translate(8px,-10px)}}
+.bar i{position:relative;overflow:hidden}
+.tab[aria-selected=true] b{animation:beat 1.4s infinite}
+@keyframes beat{50%{transform:scale(1.18)}}
 </style>
 </head>
 <body>
+<div class="cdot" id="cdot"></div><div class="cring" id="cring"></div>
 <div class="intro" id="intro"><img src="img/logo-marca.png" alt=""></div>
 <div class="prog" id="prog"></div>
 
@@ -311,7 +327,7 @@ h1,h2{cursor:pointer;-webkit-user-select:none;user-select:none}
  <div class="photo rv" style="--d:.2s" id="photo"><div class="frame" id="frame">
   <div class="back"></div>
   <img class="main" src="img/jota-hero.jpg" alt="Jota, personal trainer em Guarulhos, treinando com halteres">
-  <div class="tag"><div class="tt">Método Jota Fit</div></div>
+  
  </div></div>
 </div></section>
 
@@ -522,6 +538,16 @@ $$('h1,h2').forEach(h=>{split(h);
  h.addEventListener('click',()=>{const cs=h.querySelectorAll('.ch');cs.forEach(c=>{c.classList.remove('spin');void c.offsetWidth;c.classList.add('spin')});sfx.pop();setTimeout(()=>cs.forEach(c=>c.classList.remove('spin')),1400+cs.length*35)})});
 /* bolinhas subindo no topo */
 const hero=document.querySelector('.hero');if(hero){const d=document.createElement('div');d.className='dots';for(let k=0;k<16;k++){const i=document.createElement('i');i.style.cssText=`left:${Math.random()*100}%;--t:${8+Math.random()*8}s;--dl:${-Math.random()*12}s;--x:${(Math.random()-.5)*120}px`;d.appendChild(i)}hero.prepend(d)}
+
+/* v5: cursor, método automático */
+if(matchMedia('(hover:hover) and (pointer:fine)').matches){const cd=$('#cdot'),cr=$('#cring');let x=0,y=0,rx=0,ry=0;
+ addEventListener('mousemove',e=>{x=e.clientX;y=e.clientY;document.body.classList.add('hc');cd.style.left=x+'px';cd.style.top=y+'px';cr.classList.toggle('big',!!e.target.closest('a,button,h1,h2,.card,.flip'))},{passive:true});
+ document.addEventListener('mouseleave',()=>document.body.classList.remove('hc'));
+ (function l(){rx+=(x-rx)*.18;ry+=(y-ry)*.18;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(l)})()}
+let auto=true,vis=false,cur=0;$('#tabs').addEventListener('click',()=>auto=false);
+new IntersectionObserver(e=>vis=e[0].isIntersecting).observe($('#panel'));
+setInterval(()=>{if(auto&&vis){cur=(cur+1)%4;go(cur)}},4500);
+tabs.forEach((t,i)=>t.addEventListener('click',()=>cur=i));
 })();
 </script>
 </body>
