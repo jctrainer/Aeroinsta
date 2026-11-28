@@ -492,6 +492,58 @@ section.alt{border-top:1px solid #ffffff0d;border-bottom:1px solid #ffffff0d}
 :focus-visible{outline:2px solid var(--y);outline-offset:3px;border-radius:6px}
 .soc a{display:inline-block;padding:.75rem .2rem}
 .seclab a{position:relative}.seclab a::before{content:"";position:absolute;inset:-8px -10px}
+
+/* quem pede "reduzir movimento" no aparelho: sem efeitos fortes (o conteúdo aparece igual) */
+@media(prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}
+ .strip div{animation:none}
+ .w>i{animation:none;transform:none}
+ .rv,.rv.l,.rv.r,.rv.z{transform:none!important;transition:opacity .4s}
+ h2.rv{clip-path:none!important}
+ .photo .main{animation:none;clip-path:none}.photo .back{animation:none}
+ .ch.hop,.ch.spin{animation:none}
+ .btn:hover{animation:none}.btn-y::before{display:none}
+ .ecg path{animation:none;stroke-dasharray:none}.float{animation:none}
+ #line{stroke-dasharray:none!important;stroke-dashoffset:0!important;animation:none!important}
+ #area{opacity:1!important;animation:none!important}
+ #nodes circle{transform:none!important;animation:none!important}#nodes .ring{display:none}
+ .cmp li{opacity:1!important;transform:none!important}
+ .pane.on>*,.pane.on li,.wview{animation:none}
+ .mk,.cbar i,.rbar i,.gfg{transition:none}
+ .pulse,.badges i{animation:none}
+}
+
+/* ===== v19: acabamento editorial (menos "template", mais marca esportiva) ===== */
+body::after{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.06;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");mix-blend-mode:overlay}
+.hero .glow,.hero .ring{display:none}
+.hero::before{content:"";position:absolute;right:0;top:0;bottom:0;width:46%;background:linear-gradient(180deg,#F5C51812,#F5C5180a);clip-path:polygon(24% 0,100% 0,100% 100%,0 100%);pointer-events:none}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,transparent,#F5C51855,transparent)}
+.ava::before,.final::after{display:none}
+.ava{background:linear-gradient(180deg,#14140f,#0C0C0C 70%)}
+/* palavras gigantes vazadas ao fundo (parallax suave) */
+section[id]{position:relative;overflow:hidden}
+section[id]::before{position:absolute;right:-1rem;top:.4rem;z-index:0;font-weight:800;font-size:clamp(5rem,17vw,15rem);line-height:.9;letter-spacing:-.03em;color:transparent;-webkit-text-stroke:1px #ffffff14;pointer-events:none;white-space:nowrap;transform:translateX(var(--px,0px))}
+#para-quem::before{content:"PARA QUEM"}#avaliacao::before{content:"AVALIAÇÃO";-webkit-text-stroke-color:#F5C51820}#metodo::before{content:"MÉTODO"}#evolucao::before{content:"EVOLUÇÃO"}#ciencia::before{content:"CIÊNCIA"}#sobre::before{content:"JOTA FIT"}#resultados::before{content:"RESULTADOS"}#duvidas::before{content:"DÚVIDAS"}
+section[id]>.wrap{position:relative;z-index:2}
+/* "Para quem é": lista editorial em vez de cartões numerados */
+#para-quem .grid{display:block;border-bottom:1px solid var(--line)}
+#para-quem .card{background:none;border:0;border-top:1px solid var(--line);border-radius:0;padding:1.5rem 0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:1.6rem;align-items:baseline;transform:none!important;box-shadow:none;position:relative;transition:padding .4s var(--ease),background .4s}
+#para-quem .card::before{content:"";position:absolute;left:0;top:-1px;height:1px;width:0;background:var(--y);transition:width .6s var(--ease)}
+#para-quem .card:hover::before{width:100%}#para-quem .card:hover{padding-left:1rem;background:linear-gradient(90deg,#F5C5180d,transparent)}
+#para-quem .card .ic{display:none}
+#para-quem .card h3{font-size:clamp(1.15rem,2.3vw,1.75rem);line-height:1.15;margin:0;text-transform:uppercase;letter-spacing:-.005em}
+#para-quem .card p{margin:0;color:var(--mut)}
+@media(max-width:700px){#para-quem .card{grid-template-columns:1fr;gap:.5rem;padding:1.2rem 0}}
+/* "Como eu ensino": sem numeração decorativa */
+.ens b{display:none}
+.ens a h3{margin-top:.2rem}
+/* detalhes de acabamento */
+.photo .back{border-radius:0;clip-path:polygon(0 8%,100% 0,100% 100%,0 100%)}
+.photo .main{border-radius:6px}
+.final{border-radius:6px}.about .box{border-radius:6px}
+.card,.q,.flip .face,.panel,.wiz,.opt,.mt,.wtab,.btn,.tab,.fq{border-radius:8px}
+.btn{border-radius:8px}.heroavl{border-radius:8px}
+.kick::before{height:3px;width:30px}
 </style>
 </head>
 <body>
@@ -533,7 +585,7 @@ section.alt{border-top:1px solid #ffffff0d;border-bottom:1px solid #ffffff0d}
 <section id="para-quem"><div class="wrap">
  <div class="kick rv">Para quem é</div><h2 class="rv">Você se <em>reconhece</em> aqui?</h2>
  <div class="grid">
-  <div class="card rv tilt"><div class="ic">01</div><h3>Quer firmar o corpo e mudar suas medidas</h3><p>Treino de força bem feito, com progressão, e não treino aleatório que não leva a lugar nenhum.</p></div>
+  <div class="card rv tilt"><div class="ic">01</div><h3>Quer ganhar definição e mudar suas medidas</h3><p>Treino de força bem feito, com progressão, e não treino aleatório que não leva a lugar nenhum.</p></div>
   <div class="card rv tilt" style="--d:.08s"><div class="ic">02</div><h3>Está na menopausa ou perto dela</h3><p>O músculo é um grande aliado nessa fase. Treino pensado para cuidar da força, dos ossos e da disposição.</p></div>
   <div class="card rv tilt" style="--d:.16s"><div class="ic">03</div><h3>Tem medo ou dor ao treinar</h3><p>Eu explico cada exercício, adapto o que for preciso e peço liberação do seu médico quando houver condição clínica.</p></div>
   <div class="card rv tilt"><div class="ic">04</div><h3>Nunca sabe por onde começar</h3><p>Do zero ao treino montado para a sua rotina, o seu nível e o equipamento que você tem.</p></div>
@@ -561,7 +613,7 @@ section.alt{border-top:1px solid #ffffff0d;border-bottom:1px solid #ffffff0d}
     <label id="lq">Quadril<input id="w_quad" type="number" inputmode="decimal" min="60" max="200" placeholder="cm"></label></div>
     <ul class="wtip"><li><b>Pescoço:</b> logo abaixo do pomo de adão ou da garganta.</li><li><b>Cintura:</b> na parte mais estreita do tronco, ou na altura do umbigo.</li><li><b>Quadril:</b> na parte mais larga.</li><li>Fita métrica rente à pele, sem apertar, após expirar normalmente.</li></ul></div>
    <div class="wgrp wfull"><h3>Qual é o seu objetivo? <small>escolha até 3</small></h3>
-    <div class="opts c3" data-g="obj" data-multi="1"><button type="button" class="opt" aria-pressed="false" data-v="Emagrecimento"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v14M6 12l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span>Emagrecimento</span><u></u></button><button type="button" class="opt" aria-pressed="false" data-v="Hipertrofia"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6M6 6v12M18 6v12M21 9v6M6 12h12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></i><span>Hipertrofia</span><u></u></button><button type="button" class="opt" aria-pressed="false" data-v="Definição e firmeza"><i><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="2.2" fill="currentColor"/><path d="M7 21l2-8-2-3h10l-2 3 2 8M9 13h6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span>Definição e firmeza</span><u></u></button><button type="button" class="opt" aria-pressed="false" data-v="Saúde e bem-estar"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.6-7-10a4 4 0 0 1 7-2.4A4 4 0 0 1 19 10c0 5.4-7 10-7 10z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg></i><span>Saúde e bem-estar</span><u></u></button><button type="button" class="opt" aria-pressed="false" data-v="Condicionamento"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3L5 14h6l-1 7 8-11h-6z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg></i><span>Condicionamento</span><u></u></button><button type="button" class="opt" aria-pressed="false" data-v="Menopausa e longevidade"><i><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="2.4" fill="currentColor"/><path d="M12 9.6V4M12 14.4V20M9.6 12H4M14.4 12H20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></i><span>Menopausa e longevidade</span><u></u></button></div></div>
+    <div class="opts c3" data-g="obj" data-multi="1"><button type="button" class="opt" aria-pressed="false" data-v="Emagrecimento"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v14M6 12l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span>Emagrecimento</span><u></u></button><button type="button" class="opt" aria-pressed="false" data-v="Hipertrofia"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6M6 6v12M18 6v12M21 9v6M6 12h12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></i><span>Hipertrofia</span><u></u></button><button type="button" class="opt" aria-pressed="false" data-v="Definição muscular"><i><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="2.2" fill="currentColor"/><path d="M7 21l2-8-2-3h10l-2 3 2 8M9 13h6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span>Definição muscular</span><u></u></button><button type="button" class="opt" aria-pressed="false" data-v="Saúde e bem-estar"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.6-7-10a4 4 0 0 1 7-2.4A4 4 0 0 1 19 10c0 5.4-7 10-7 10z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg></i><span>Saúde e bem-estar</span><u></u></button><button type="button" class="opt" aria-pressed="false" data-v="Condicionamento"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3L5 14h6l-1 7 8-11h-6z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg></i><span>Condicionamento</span><u></u></button><button type="button" class="opt" aria-pressed="false" data-v="Menopausa e longevidade"><i><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="2.4" fill="currentColor"/><path d="M12 9.6V4M12 14.4V20M9.6 12H4M14.4 12H20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></i><span>Menopausa e longevidade</span><u></u></button></div></div>
    <div class="wgrp"><h3>Seu nível</h3><div class="opts c1" data-g="nivel" data-multi="0"><button type="button" class="opt" aria-pressed="false" data-v="Iniciante"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h5v-5h5v-5h6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span>Iniciante</span><u></u></button><button type="button" class="opt" aria-pressed="false" data-v="Intermediário"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h5v-5h5v-5h6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span>Intermediário</span><u></u></button><button type="button" class="opt" aria-pressed="false" data-v="Avançado"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h5v-5h5v-5h6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span>Avançado</span><u></u></button></div></div>
    <div class="wgrp"><h3>Dias de treino por semana</h3><div class="opts c2" data-g="dias" data-multi="0"><button type="button" class="opt" aria-pressed="false" data-v="2 dias"><i><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M4 10h16M9 3v4M15 3v4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></i><span>2 dias</span><u></u></button><button type="button" class="opt" aria-pressed="false" data-v="3 dias"><i><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M4 10h16M9 3v4M15 3v4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></i><span>3 dias</span><u></u></button><button type="button" class="opt" aria-pressed="false" data-v="4 dias"><i><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M4 10h16M9 3v4M15 3v4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></i><span>4 dias</span><u></u></button><button type="button" class="opt" aria-pressed="false" data-v="5 ou mais"><i><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M4 10h16M9 3v4M15 3v4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></i><span>5 ou mais</span><u></u></button></div></div>
    <div class="wgrp wfull"><h3>Onde você treina?</h3><div class="opts c3" data-g="local" data-multi="0"><button type="button" class="opt" aria-pressed="false" data-v="Academia"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6 7-11a7 7 0 0 0-14 0c0 5 7 11 7 11z" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="12" cy="10" r="2.4" fill="currentColor"/></svg></i><span>Academia</span><u></u></button><button type="button" class="opt" aria-pressed="false" data-v="Em casa"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6 7-11a7 7 0 0 0-14 0c0 5 7 11 7 11z" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="12" cy="10" r="2.4" fill="currentColor"/></svg></i><span>Em casa</span><u></u></button><button type="button" class="opt" aria-pressed="false" data-v="Ainda não treino"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6 7-11a7 7 0 0 0-14 0c0 5 7 11 7 11z" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="12" cy="10" r="2.4" fill="currentColor"/></svg></i><span>Ainda não treino</span><u></u></button></div></div>
@@ -710,7 +762,7 @@ section.alt{border-top:1px solid #ffffff0d;border-bottom:1px solid #ffffff0d}
 <script>
 (function(){
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-const reduce=false;
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
 /* progresso, header, voltar ao topo, menu ativo */
 const prog=$('#prog'),hd=$('#hd'),top=$('#top');
 const secs=$$('main section[id]'),links=$$('#nav a');
@@ -853,6 +905,10 @@ const hr=document.querySelector('.hero');if(hr){hr.insertAdjacentHTML('beforeend
  $('#tab2').onclick=()=>{if(validate()){showRes();tab(2)}};$('#tab1').onclick=()=>tab(1);$('#wedit').onclick=()=>tab(1);
  $('#wsend').addEventListener('click',e=>{if(!$('#w_ok').checked){e.preventDefault();$('#e2').textContent='Marque a autorização para enviar.';if(typeof tone==='function')tone(180,.15,'sawtooth',.04);return}$('#e2').textContent='';build()});
  f.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.tagName==='INPUT'&&e.target.type!=='checkbox'){e.preventDefault()}})})();
+
+/* palavras de fundo andam devagar com a rolagem */
+(function(){if(reduce)return;const ss=$$('section[id]');let tk=false;function up(){tk=false;const vh=innerHeight;ss.forEach(x=>{const r=x.getBoundingClientRect();if(r.bottom<0||r.top>vh)return;x.style.setProperty('--px',((r.top-vh/2)*-0.12)+'px')})}
+ addEventListener('scroll',()=>{if(!tk){tk=true;requestAnimationFrame(up)}},{passive:true});up()})();
 })();
 </script>
 </body>
