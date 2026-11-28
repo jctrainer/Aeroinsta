@@ -24,5 +24,10 @@
 - Ética: sem deepfake nem imitar voz/rosto de pessoas reais (voz do Arnold foi recusada); aluna só com autorização escrita.
 - Não gosta de resultado "feio": recusou ilustração simples demais; prefere imagem real/bonita.
 
+## Redes (confirmado pelo Jota)
+- TikTok: @jotafit.personaltrainer (https://www.tiktok.com/@jotafit.personaltrainer), 2.312 seguidores. Nome: "JOTA FIT | Personal Trainer".
+- Instagram: @jotafit.personaltrainer.
+- A bio do TikTok hoje diz "Mulheres 35+: menos barriga, corpo firme e saúde na menopausa" (revisar: "menos barriga" promete resultado).
+
 ## Pendências do Jota
 Preço da consultoria; onde o domínio/hospedagem estão; fotos e depoimentos autorizados; esclarecer "fecha" do PR #1 (não agir sem confirmação).
