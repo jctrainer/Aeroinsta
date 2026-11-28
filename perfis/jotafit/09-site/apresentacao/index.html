@@ -406,6 +406,15 @@ nav#nav a[href="#avaliacao"]::after{content:"";display:inline-block;width:7px;he
 .hero .cta{display:block}
 .nums{grid-template-columns:repeat(3,1fr)!important}
 @media(max-width:640px){.nums{grid-template-columns:1fr!important}.heroavl{width:100%;justify-content:center}}
+
+.wiz textarea{display:block;width:100%;margin-top:.35rem;background:#0C0C0C;border:1.5px solid var(--line);border-radius:14px;color:#fff;font:500 .95rem Poppins,system-ui,sans-serif;padding:.8rem 1rem;resize:vertical;transition:.25s}.wiz textarea:focus{outline:none;border-color:var(--y);box-shadow:0 0 0 4px #F5C51826}
+.rbig{text-align:center;padding:1.2rem 1rem 1.4rem;background:#0C0C0C;border:1px solid #F5C51844;border-radius:20px}
+.rbig span{display:block;font-size:clamp(3rem,10vw,4.6rem);font-weight:800;color:var(--y);line-height:1}.rbig small{display:block;margin-top:.5rem;color:var(--mut);font-size:.82rem;font-weight:600}
+.rbar{height:10px;border-radius:10px;background:#2A2A30;margin-top:1rem;overflow:hidden}.rbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--y),var(--y2));border-radius:10px}
+.rgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:.7rem;margin-top:.9rem}.rgrid div{background:#ffffff08;border:1px solid var(--line);border-radius:16px;padding:.8rem .6rem;text-align:center}.rgrid b{display:block;font-size:1.1rem}.rgrid span{display:block;font-size:.7rem;color:var(--mut);margin-top:.15rem;line-height:1.3}
+.wnote{color:var(--mut);font-size:.8rem;line-height:1.6;margin:.9rem 0 0}
+@media(max-width:560px){.rgrid{grid-template-columns:1fr 1fr}}
+[hidden]{display:none!important}
 </style>
 </head>
 <body>
@@ -459,10 +468,9 @@ nav#nav a[href="#avaliacao"]::after{content:"";display:inline-block;width:7px;he
 
 <section id="avaliacao" class="ava"><div class="wrap">
  <div class="kick rv">Avaliação inicial</div><h2 class="rv">Comece pela sua <em>avaliação</em></h2>
- <p class="sub rv">Leva 2 minutos. Você preenche as suas medidas e envia para o meu WhatsApp. Eu analiso e te respondo com uma conversa pessoal, não com um número solto.</p>
+ <p class="sub rv">Leva 2 minutos. Você preenche as suas medidas, vê a estimativa na hora e envia tudo para o meu WhatsApp. Eu analiso e te respondo pessoalmente.</p>
  <form class="wiz rv" id="wiz" novalidate autocomplete="off">
-  <div class="wsteps" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
-  <div class="wbar"><b id="wbar"></b></div>
+  <div class="wsteps" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i></div>
   <fieldset class="wp on" data-s="0"><legend>1. Sobre você</legend>
    <label>Seu nome<input id="w_nome" type="text" maxlength="60" placeholder="Como posso te chamar?"></label>
    <div class="row2"><label>Idade<input id="w_idade" type="number" inputmode="numeric" min="18" max="90" placeholder="anos"></label>
@@ -478,11 +486,16 @@ nav#nav a[href="#avaliacao"]::after{content:"";display:inline-block;width:7px;he
    <label>Cintura<input id="w_cint" type="number" inputmode="decimal" min="40" max="200" placeholder="cm"></label>
    <label id="lq">Quadril<input id="w_quad" type="number" inputmode="decimal" min="60" max="200" placeholder="cm"></label></div>
    <ul class="wtip"><li><b>Pescoço:</b> logo abaixo do pomo de adão ou da garganta.</li><li><b>Cintura:</b> na parte mais estreita do tronco, ou na altura do umbigo.</li><li><b>Quadril:</b> na parte mais larga.</li><li>Fita métrica rente à pele, sem apertar, após expirar normalmente.</li></ul><p class="werr" id="e2"></p></fieldset>
-  <fieldset class="wp" data-s="3"><legend>4. Seu objetivo</legend>
+  <fieldset class="wp" data-s="3"><legend>4. Qual é o seu objetivo?</legend>
+   <p class="wtip" style="margin-bottom:.9rem">Escolha o que mais combina com você agora.</p>
    <div class="chips" id="wobj"><button type="button" class="chip" aria-pressed="false">Firmar o corpo</button><button type="button" class="chip" aria-pressed="false">Ganhar força e músculo</button><button type="button" class="chip" aria-pressed="false">Cuidar do corpo na menopausa</button><button type="button" class="chip" aria-pressed="false">Voltar a treinar com segurança</button><button type="button" class="chip" aria-pressed="false">Outro</button></div>
-   <div class="wprev" id="wprev"></div>
-   <label class="chk"><input id="w_ok" type="checkbox"> Autorizo enviar estes dados ao Jota pelo WhatsApp para receber minha análise. Este site não guarda nenhuma informação.</label>
+   <label style="margin-top:1.2rem">Quer contar mais? (opcional)<textarea id="w_obs" maxlength="200" rows="3" placeholder="Ex.: treino há pouco tempo, tenho dor no joelho, quero treinar em casa..."></textarea></label>
    <p class="werr" id="e3"></p></fieldset>
+  <fieldset class="wp" data-s="4"><legend>5. Seu resultado</legend>
+   <div class="wres" id="wres"></div>
+   <div class="wprev" id="wprev"></div>
+   <label class="chk"><input id="w_ok" type="checkbox"> Autorizo enviar estes dados e o resultado ao Jota pelo WhatsApp para receber minha análise. Este site não guarda nenhuma informação.</label>
+   <p class="werr" id="e4"></p></fieldset>
   <div class="wnav"><button type="button" class="btn btn-o" id="wback" hidden>Voltar</button><button type="button" class="btn btn-y mag" id="wnext">Continuar</button><a class="btn btn-y mag" id="wsend" href="#" target="_blank" rel="noopener" hidden>Enviar para o Jota no WhatsApp</a></div>
  </form>
  <p class="note rv">É uma avaliação inicial, uma estimativa a partir de medidas. Não é diagnóstico e não substitui avaliação médica ou física completa.</p>
@@ -731,34 +744,51 @@ const hr=document.querySelector('.hero');if(hr){hr.insertAdjacentHTML('beforeend
   setTimeout(()=>{tone(784,.35,'sine',.08);setTimeout(()=>tone(1046,.5,'sine',.07),140)},350+cs.length*560)},{threshold:.4});
  io2.observe(evo)})();
 
-/* avaliação inicial (tudo no navegador; nada é guardado) */
-(function(){const f=$('#wiz');if(!f)return;let st=0;const P=$$('.wp'),dots=$$('.wsteps i'),next=$('#wnext'),back=$('#wback'),send=$('#wsend');
+/* avaliação inicial: cálculo no navegador, nada é guardado */
+(function(){const f=$('#wiz');if(!f)return;let st=0,R=null;const P=$$('.wp'),dots=$$('.wsteps i'),next=$('#wnext'),back=$('#wback'),send=$('#wsend');
  const v=id=>$(id).value.trim(),n=id=>parseFloat(String($(id).value).replace(',','.'));
- let obj='';const objs=$$('#wobj .chip');objs.forEach(c=>c.onclick=()=>{objs.forEach(x=>x.setAttribute('aria-pressed','false'));c.setAttribute('aria-pressed','true');obj=c.textContent;build()});
+ let obj='';const objs=$$('#wobj .chip');objs.forEach(c=>c.onclick=()=>{objs.forEach(x=>x.setAttribute('aria-pressed','false'));c.setAttribute('aria-pressed','true');obj=c.textContent});
  const fem=()=>$('#w_sexo').value==='F';
  $('#w_sexo').onchange=()=>{$('#lq').style.display=fem()?'':'none'};
+ const f1=x=>x.toFixed(1).replace('.',','),f2=x=>x.toFixed(2).replace('.',',');
  function err(i,m,ids){$('#e'+i).textContent=m;(ids||[]).forEach(x=>$(x).classList.add('bad'));return false}
  function clear(){$$('.wiz .bad').forEach(e=>e.classList.remove('bad'));$$('.werr').forEach(e=>e.textContent='')}
+ function calc(){const h=n('#w_alt'),p=n('#w_peso'),pe=n('#w_pesc'),c=n('#w_cint'),q=n('#w_quad');let d;
+  if(fem()){if(c+q-pe<=0)return null;d=1.29579-0.35004*Math.log10(c+q-pe)+0.22100*Math.log10(h)}
+  else{if(c-pe<=0)return null;d=1.0324-0.19077*Math.log10(c-pe)+0.15456*Math.log10(h)}
+  const bf=495/d-450;if(!isFinite(bf)||bf<3||bf>60)return null;
+  const gm=p*bf/100;return{bf,gm,mm:p-gm,imc:p/Math.pow(h/100,2),wht:c/h}}
  function ok(i){clear();
   if(i===0){if(v('#w_nome').length<2)return err(0,'Me diga o seu nome.',['#w_nome']);const a=n('#w_idade');if(!(a>=18&&a<=90))return err(0,'Esta avaliação é para maiores de 18 anos (informe entre 18 e 90).',['#w_idade']);return true}
   if(i===1){const h=n('#w_alt'),p=n('#w_peso');if(!(h>=120&&h<=220))return err(1,'Altura em centímetros, entre 120 e 220. Ex.: 162.',['#w_alt']);if(!(p>=30&&p<=250))return err(1,'Peso em quilos, entre 30 e 250.',['#w_peso']);return true}
-  if(i===2){const a=n('#w_pesc'),c=n('#w_cint'),q=n('#w_quad');if(!(a>=20&&a<=60))return err(2,'Pescoço em centímetros, entre 20 e 60.',['#w_pesc']);if(!(c>=40&&c<=200))return err(2,'Cintura em centímetros, entre 40 e 200.',['#w_cint']);if(fem()&&!(q>=60&&q<=200))return err(2,'Quadril em centímetros, entre 60 e 200.',['#w_quad']);return true}
-  if(i===3){if(!obj)return err(3,'Escolha o seu objetivo.');if(!$('#w_ok').checked)return err(3,'Marque a autorização para enviar.',[]);return true}
+  if(i===2){const a=n('#w_pesc'),c=n('#w_cint'),q=n('#w_quad');if(!(a>=20&&a<=60))return err(2,'Pescoço em centímetros, entre 20 e 60.',['#w_pesc']);if(!(c>=40&&c<=200))return err(2,'Cintura em centímetros, entre 40 e 200.',['#w_cint']);if(fem()&&!(q>=60&&q<=200))return err(2,'Quadril em centímetros, entre 60 e 200.',['#w_quad']);if(!fem()&&c<=a)return err(2,'A cintura precisa ser maior que o pescoço. Confira as medidas.',['#w_cint','#w_pesc']);return true}
+  if(i===3){if(!obj)return err(3,'Escolha o seu objetivo.');return true}
+  if(i===4){if(!$('#w_ok').checked)return err(4,'Marque a autorização para enviar.');return true}
  }
  function text(){const g=$('#w_gravida').checked;let t='Oi, Jota! Fiz a avaliação inicial no site.\n\n';
   t+='Nome: '+v('#w_nome')+'\nIdade: '+n('#w_idade')+' anos | Sexo: '+(fem()?'feminino':'masculino')+'\n';
-  if(g)t+='Observação: estou grávida ou amamentando.\n';
   t+='Altura: '+n('#w_alt')+' cm | Peso: '+n('#w_peso')+' kg\nPescoço: '+n('#w_pesc')+' cm | Cintura: '+n('#w_cint')+' cm';
   if(fem())t+=' | Quadril: '+n('#w_quad')+' cm';
-  t+='\nObjetivo: '+(obj||'—')+'\n\nPode me responder com a análise?';return t}
- function build(){if(st!==3)return;const t=text();$('#wprev').textContent='O que vai para o seu WhatsApp:\n\n'+t;send.href='https://wa.me/5511989195208?text='+encodeURIComponent(t)}
- function show(i){st=i;P.forEach((p,k)=>p.classList.toggle('on',k===i));dots.forEach((d,k)=>d.classList.toggle('on',k<=i));back.hidden=i===0;next.hidden=i===3;send.hidden=i!==3;if(i===3){build()}clear()}
+  t+='\n\nObjetivo: '+obj;if(v('#w_obs'))t+='\nObservação: '+v('#w_obs');
+  if(R){t+='\n\nResultado da estimativa (método da Marinha dos EUA):\n';t+='Gordura corporal: '+f1(R.bf)+'%\nMassa gorda: '+f1(R.gm)+' kg | Massa magra: '+f1(R.mm)+' kg\nIMC: '+f1(R.imc)+' | Cintura/altura: '+f2(R.wht)}
+  else t+='\n\nNão consegui estimar a gordura corporal com essas medidas.';
+  t+='\n\nPode me responder com a análise?';return t}
+ function showRes(){R=calc();const b=$('#wres');
+  if(!R){b.innerHTML='<p class="wnote">Não consegui estimar com essas medidas. Confira se estão em centímetros e sem apertar a fita. Você pode enviar mesmo assim e eu te ajudo a medir.</p>';return}
+  b.innerHTML='<div class="rbig"><span id="rpct">0,0</span><small>% de gordura corporal (estimativa)</small><div class="rbar"><i id="rfill"></i></div></div>'+
+   '<div class="rgrid"><div><b>'+f1(R.gm)+' kg</b><span>massa gorda estimada</span></div><div><b>'+f1(R.mm)+' kg</b><span>massa magra estimada</span></div><div><b>'+f1(R.imc)+'</b><span>IMC</span></div><div><b>'+f2(R.wht)+'</b><span>cintura ÷ altura</span></div></div>'+
+   '<p class="wnote">Isto é uma estimativa feita só com fita métrica (método da Marinha dos EUA). Ela pode errar bastante de pessoa para pessoa e não é diagnóstico. Use como ponto de partida: eu interpreto com você na conversa.</p>';
+  const t0=performance.now(),to=R.bf;(function an(t){const k=Math.min((t-t0)/1300,1),e=1-Math.pow(1-k,3);$('#rpct').textContent=f1(to*e);$('#rfill').style.width=Math.min(to*e/50*100,100)+'%';if(k<1)requestAnimationFrame(an)})(t0);
+  if(typeof tone==='function'){tone(523,.15,'triangle',.07);setTimeout(()=>tone(784,.25,'triangle',.07),150)}}
+ function build(){const t=text();$('#wprev').textContent='O que vai para o seu WhatsApp:\n\n'+t;send.href='https://wa.me/5511989195208?text='+encodeURIComponent(t)}
+ function show(i){st=i;P.forEach((p,k)=>p.classList.toggle('on',k===i));dots.forEach((d,k)=>d.classList.toggle('on',k<=i));back.hidden=i===0;next.hidden=i===4;send.hidden=i!==4;if(i===4){showRes();build()}clear()}
  next.onclick=()=>{if(!ok(st)){if(typeof tone==='function')tone(180,.15,'sawtooth',.04);return}
   if(st===0&&$('#w_gravida').checked){ $('#e0').innerHTML='Na gravidez e na amamentação as medidas mudam e esta estimativa não vale. <a href="https://wa.me/5511989195208?text=Oi%2C%20Jota!%20Estou%20gr%C3%A1vida%20ou%20amamentando%20e%20quero%20saber%20como%20treinar." target="_blank" rel="noopener" style="color:#F5C518;text-decoration:underline">Fale direto comigo no WhatsApp</a>.';return}
   if(typeof sfx!=='undefined')sfx.tick();show(st+1)};
  back.onclick=()=>{if(typeof sfx!=='undefined')sfx.tick();show(st-1)};
- send.addEventListener('click',e=>{if(!ok(3)){e.preventDefault();return}build()});
- f.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.tagName!=='BUTTON'){e.preventDefault();if(st<3)next.click()}});
+ f.addEventListener('input',()=>{if(st===4)build()});
+ send.addEventListener('click',e=>{if(!ok(4)){e.preventDefault();return}build()});
+ f.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.tagName!=='BUTTON'&&e.target.tagName!=='TEXTAREA'){e.preventDefault();if(st<4)next.click()}});
  show(0)})();
 })();
 </script>
