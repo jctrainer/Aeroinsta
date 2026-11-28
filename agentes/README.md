@@ -24,6 +24,7 @@ O prompt master está em `PROMPT-MASTER.md`. Cada pasta é um squad; cada arquiv
 ## 03-conteudo-marca
 - [Estrategista de Conteúdo](03-conteudo-marca/estrategista-conteudo.md)
 - [Roteirista de Vídeos Curtos](03-conteudo-marca/roteirista.md)
+- [Social Media Manager](03-conteudo-marca/social-media.md)
 - [Especialista em SEO de Redes](03-conteudo-marca/seo-redes.md)
 - [Copywriter](03-conteudo-marca/copywriter.md)
 - [Editor de Vídeo e Motion Designer](03-conteudo-marca/editor-motion.md)

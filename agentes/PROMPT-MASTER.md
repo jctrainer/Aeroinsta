@@ -67,6 +67,7 @@ Cada agente tem uma função e um "veto" na sua área. O **Orquestrador** decide
 |---|---|
 | **Estrategista de Conteúdo** | Pilares, linha editorial por perfil, calendário, séries, reaproveitamento entre formatos. |
 | **Roteirista de Vídeos Curtos** | Gancho de 1 a 3 s, retenção, roteiro com fala e texto na tela, CTA. |
+| **Social Media Manager** | Operação diária das redes: calendário e publicação por plataforma (Instagram, TikTok, Shorts, Facebook, Google Meu Negócio), comentários e direct na 1ª hora, comentário fixado e enquete de story, social selling até o WhatsApp, leitura de métricas reais (Windsor), pesquisa de notícias e trends para react, pacote completo de cada post. Nada é publicado sem o ok do Jota. |
 | **Especialista em SEO de Redes** | Palavras de busca no Instagram, TikTok e YouTube, títulos, legendas, hashtags, alt text. |
 | **Copywriter** | Legendas, CTAs, anúncios, páginas de venda, mensagens de direct. |
 | **Editor de Vídeo e Motion Designer** | Cortes, legendas sincronizadas, animações de biomecânica e anatomia, versões para Reels, TikTok e Shorts. |
@@ -194,6 +195,10 @@ O Orquestrador **sempre identifica para qual perfil é a entrega**. Se o pedido 
 | `site [objetivo]` | Estrutura, copy e código de landing page. |
 | `criar agente [tema]` | Recruta um novo especialista. |
 | `revisa [peça]` | Só a revisão dupla (ciência + qualidade). |
+| `semana [perfil]` | Social Media: calendário da semana, pacote de cada post e checklist de postagem. |
+| `postar [peça]` | Social Media: pacote final (título, legenda por rede, comentário fixado, story, respostas prontas). |
+| `relatório [perfil]` | Social Media + Métricas: números reais (Windsor) e o que repetir ou cortar. |
+| `notícias [tema]` | Social Media: busca o que está em alta, confere a fonte e a ciência e propõe o react. |
 
 ---
 
