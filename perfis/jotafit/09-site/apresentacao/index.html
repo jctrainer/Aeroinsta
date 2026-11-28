@@ -399,6 +399,13 @@ nav#nav a[href="#avaliacao"]{color:var(--y);font-weight:700}
 nav#nav a[href="#avaliacao"]::after{content:"";display:inline-block;width:7px;height:7px;margin-left:.45rem;border-radius:50%;background:var(--y);vertical-align:middle;animation:pulse 2s infinite}
 .hero .btn-o{border-color:#ffffff40}
 .final .fbtns{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}.final .btn-line{background:transparent;color:#111;border:2px solid #111;box-shadow:none}.final .btn-line:hover{background:#111;color:var(--y)}
+
+.heroavl{padding:1.15rem 2.1rem;font-size:1.05rem;gap:.8rem;display:inline-flex;align-items:center}
+.heroavl svg{transition:transform .3s var(--ease)}.heroavl:hover svg{transform:translateX(5px)}
+.avlnote{display:block;margin-top:.9rem;color:var(--mut);font-size:.85rem}
+.hero .cta{display:block}
+.nums{grid-template-columns:repeat(3,1fr)!important}
+@media(max-width:640px){.nums{grid-template-columns:1fr!important}.heroavl{width:100%;justify-content:center}}
 </style>
 </head>
 <body>
@@ -417,12 +424,11 @@ nav#nav a[href="#avaliacao"]::after{content:"";display:inline-block;width:7px;he
  <div>
   <div class="brand rv in"><img class="bm" src="img/marca-horizontal.png" alt="Jota Fit" width="1891" height="662"></div>
   <h1 class="rv in" id="h1"><span class="w"><i style="--k:0">Menos</i></span> <span class="w"><i style="--k:1">achismo.</i></span><br><span class="w"><i style="--k:2">Mais</i></span> <span class="w"><i style="--k:3"><span class="hl">resultado</span></i></span> <span class="w"><i style="--k:4">no</i></span> <span class="w"><i style="--k:5">seu</i></span> <span class="w"><i style="--k:6">corpo.</i></span></h1>
-  <p class="lead rv" style="--d:.16s">Consultoria de treino para mulheres 35+, com o <b>Método Jota Fit</b>: avaliação completa, treino sob medida e reavaliação a cada 15 dias. Presencial em Guarulhos e online para todo o Brasil.</p>
+  <p class="lead rv" style="--d:.16s">Consultoria de treino para mulheres 35+, com o <b>Método Jota Fit</b>: avaliação, treino sob medida e acompanhamento direto. Presencial em Guarulhos e online para todo o Brasil.</p>
   <div class="cta rv" style="--d:.24s">
-   <a class="btn btn-y mag" href="#avaliacao">Fazer minha avaliação</a>
-   <a class="btn btn-o" href="https://wa.me/5511989195208?text=Oi%2C%20Jota!%20Vim%20pelo%20site%20e%20quero%20saber%20mais%20da%20consultoria." target="_blank" rel="noopener">Falar no WhatsApp</a>
+   <a class="btn btn-y mag heroavl" href="#avaliacao"><span>Fazer minha avaliação</span><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+   <span class="avlnote">Leva 2 minutos. Você envia as medidas direto para o meu WhatsApp.</span>
   </div>
-  <div class="badges rv" style="--d:.32s"><span><i></i>CREF 162847-G/SP</span><span><i></i>+10 anos de profissão</span><span><i></i>Reavaliação a cada 15 dias</span></div>
  </div>
  <div class="photo rv" style="--d:.2s" id="photo"><div class="frame" id="frame">
   <div class="back"></div>
@@ -434,10 +440,9 @@ nav#nav a[href="#avaliacao"]::after{content:"";display:inline-block;width:7px;he
 <div class="stripwrap" aria-hidden="true"><div class="strip"><div><span>FORÇA</span>★<span>TREINO</span>★<span>CONSTÂNCIA</span>★<span>EVOLUÇÃO</span>★<span>DISCIPLINA</span>★<span>RESULTADO</span>★<span>FORÇA</span>★<span>TREINO</span>★<span>CONSTÂNCIA</span>★<span>EVOLUÇÃO</span>★<span>DISCIPLINA</span>★<span>RESULTADO</span>★<span>FORÇA</span>★<span>TREINO</span>★<span>CONSTÂNCIA</span>★<span>EVOLUÇÃO</span>★<span>DISCIPLINA</span>★<span>RESULTADO</span>★<span>FORÇA</span>★<span>TREINO</span>★<span>CONSTÂNCIA</span>★<span>EVOLUÇÃO</span>★<span>DISCIPLINA</span>★<span>RESULTADO</span>★</div></div></div>
 
 <section style="padding-bottom:0"><div class="wrap nums">
- <div class="num rv"><b>+<span data-to="10">10</span></b><span>anos de profissão</span></div>
- <div class="num rv" style="--d:.08s"><b><span data-to="15">15</span> dias</b><span>entre cada reavaliação</span></div>
- <div class="num rv" style="--d:.16s"><b>1 a 1</b><span>treino montado só para você</span></div>
- <div class="num rv" style="--d:.24s"><b>Brasil</b><span>online também para o exterior</span></div>
+ <div class="num rv"><b>1 a 1</b><span>treino montado só para você</span></div>
+ <div class="num rv" style="--d:.08s"><b>Guarulhos</b><span>atendimento presencial</span></div>
+ <div class="num rv" style="--d:.16s"><b>Online</b><span>para todo o Brasil e exterior</span></div>
 </div></section>
 
 <section id="para-quem"><div class="wrap">
